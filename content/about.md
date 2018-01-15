@@ -1,6 +1,6 @@
 +++
-title = "About me"
-date = "2018-01-16"
+title: "About me"
+date: "2018-01-16"
 menu:
   main:
     name: "关于"
