@@ -1,12 +1,18 @@
 +++
 title = "About me"
 date = "2018-01-16"
-menu = "main"
+menu:
+  main:
+    name: "关于"
+linktitle: "关于"
 +++
 
 
 # 关于
 ---
+
+@visnZ
+
 某在校学生
 
 未婚且星座血型未定
@@ -45,4 +51,9 @@ Bilibili
 
 ## Contact
 
-Telegram: 
+Email: visn0518@gmail.com
+Github: [visnz](https://github.com/visnz)
+GitBook: [visnz](https://www.gitbook.com/@visnz)
+Telegram: [@visnZ](https://t.me/visnZ)
+~~Twitter: [@ZeoVisn](https://twitter.com/ZeoVisn)~~
+
