@@ -8,6 +8,6 @@ deploy:
             packages: git ssh-client
         - lukevivier/gh-pages@0.2.1:
             token: $GITHUB_TOKEN
-            domain: visn.github.io
+            domain: visnz.github.io
             basedir: public
-            repo: visnz/visn.github.io
+            repo: visnz/visnz.github.io
