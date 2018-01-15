@@ -1,7 +1,6 @@
 ---
 title: "First Update"
 date: 2018-01-16
-weight: 10
 thumbnail: "img/first.png"
 ---
 
