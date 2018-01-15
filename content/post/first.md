@@ -1,6 +1,8 @@
 ---
-title: "First Update & About"
-date: 2018-01-16
+title: "First Update & 关于"
+date: 2018-01-15T23:47:44+08:00
+type: ["about"]
+weight: 10
 thumbnail: "img/first.png"
 ---
 
