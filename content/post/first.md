@@ -14,6 +14,7 @@ thumbnail: "img/first.png"
 
 通常习惯把笔记、解决方案之类的放在逃生舱里，方便一键弹出一把梭
 
+系列笔记存放GitBook 
 
 # 关于
 ---
@@ -44,23 +45,27 @@ thumbnail: "img/first.png"
 
 闲置上万条tg信息的忍耐能力
 
-## Follow
+## Keep Follow
 
-Neo龙
+- Neo龙
 
-REOL
+- REOL
 
-Bilibili
+- Bilibili
 
-崩崩崩
+- 崩崩崩
 
-粿条青年
+- 粿条青年
 
 ## Contact
 
 Email: visn0518@gmail.com
+
 Github: [visnz](https://github.com/visnz)
+
 GitBook: [visnz](https://www.gitbook.com/@visnz)
+
 Telegram: [@visnZ](https://t.me/visnZ)
+
 ~~Twitter: [@ZeoVisn](https://twitter.com/ZeoVisn)~~
 
