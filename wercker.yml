@@ -1,0 +1,13 @@
+box: debian
+build:
+    steps:
+        - arjen/hugo-build
+deploy:
+    steps:
+        - install-packages:
+            packages: git ssh-client
+        - lukevivier/gh-pages:
+            token: $GITHUB_TOKEN
+            domain: visn.github.io
+            basedir: public
+            repo: visnz/visn.github.io
