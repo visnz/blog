@@ -6,7 +6,7 @@ deploy:
     steps:
         - install-packages:
             packages: git ssh-client
-        - lukevivier/gh-pages:
+        - lukevivier/gh-pages@0.2.1:
             token: $GITHUB_TOKEN
             domain: visn.github.io
             basedir: public
