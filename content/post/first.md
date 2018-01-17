@@ -1,6 +1,6 @@
 ---
 title: "First Update & 关于"
-date: 2018-01-15T23:47:44+08:00
+date: 2018-01-15
 type: ["about"]
 weight: 10
 thumbnail: "img/first.png"
@@ -14,7 +14,7 @@ thumbnail: "img/first.png"
 
 通常习惯把笔记、解决方案之类的放在逃生舱里，方便一键弹出一把梭
 
-系列笔记存放GitBook 
+系列笔记存放GitBook
 
 # 关于
 ---
@@ -68,4 +68,3 @@ GitBook: [visnz](https://www.gitbook.com/@visnz)
 Telegram: [@visnZ](https://t.me/visnZ)
 
 ~~Twitter: [@ZeoVisn](https://twitter.com/ZeoVisn)~~
-

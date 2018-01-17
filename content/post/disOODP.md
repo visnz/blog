@@ -3,6 +3,7 @@ title: "跳出OO思想与OODP 杂记"
 date: 2018-01-18
 type: ["计算机"]
 weight: 10
+thumbnail: "http://www.expertphp.in/images/articles/ArtImgKPTPrr_OOP4.jpg"
 ---
 # 跳出面向对象思想
 

@@ -2,11 +2,12 @@
 title: "关于"
 date: 2018-01-15
 type: ["about"]
+menu:
+  main:
+    name: "关于"
 weight: 10
 ---
 
-# 关于
----
 
 @visnZ
 
