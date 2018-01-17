@@ -1,9 +1,9 @@
 ---
 title: "Archlinux 一把梭"
 date: 2018-01-16
-weight: 10
+weight: 1
 draft: true
-thumbnail: img/arch.jpg"
+thumbnail: img/arch.png"
 ---
 
 记录下平时可能会用到的（反正也是查阅用的）一把锁指令
