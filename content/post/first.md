@@ -1,5 +1,5 @@
 ---
-title: "First Update & 关于"
+title: "First Update"
 date: 2018-01-15
 type: ["about"]
 weight: 10

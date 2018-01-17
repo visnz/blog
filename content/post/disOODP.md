@@ -3,8 +3,9 @@ title: "跳出OO思想与OODP 杂记"
 date: 2018-01-18
 type: ["计算机"]
 weight: 10
-thumbnail: "http://www.expertphp.in/images/articles/ArtImgKPTPrr_OOP4.jpg"
+thumbnail: "img/oodp.jpg"
 ---
+
 # 跳出面向对象思想
 
 整理了一遍自己的笔记，里面有不少关于面向对象设计的内容，整理完放到了[Gitbook](https://visnz.gitbooks.io/ood-oodp/content/)，里面包括了**OO原则、二十三设计模式、跳出面向对象思想**三个部分。其中相对来说较为具有启发性的是第三部分的[跳出面向对象思想](https://visnz.gitbooks.io/ood-oodp/content/tiao-chu-mian-xiang-dui-xiang-si-xiang.html)，引用了来自大佬[Casa Taloyum博客](https://casatwy.com/)的三篇**跳出面向对象思想**。
