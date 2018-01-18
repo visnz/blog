@@ -8,11 +8,11 @@ googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 
 [Author] # Used in authorbox
     name = "visn Z"
-    bio = "As all you see in shadow"
+    bio = ""
     avatar = "img/avatar.png"
 
 [Params]
-    subtitle = "所见皆影" # Subtitle of your site. Used in site header
+    subtitle = "" # Subtitle of your site. Used in site header
     description = "visn`s Personal blog about fucking daily chaos :L " # Description of your site. Used in meta description
     opengraph = true # Enable OpenGraph if true
     readmore = false # Show "Read more" button in list if true
@@ -38,4 +38,6 @@ googleAnalytics = "" # Enable Google Analytics by entering your tracking id
     social_github = "visnz"
     social_email = "visn0518@gmail.com"
     #social_google_plus = "profileid"
-	
+
+    links=true
+    link=["axionl.github.io","blog.csdn.net/overload1997"]

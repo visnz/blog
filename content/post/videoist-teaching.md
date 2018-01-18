@@ -124,7 +124,7 @@ One Way for Everything
 
 do only one thing by many way
 
-
+讲解复杂的知识，也不仅仅要教授学生一些高效率的学习方法，还要学会激励学生主动学习，产生学习兴趣，对自己的学习能力建立起充足的自信
 
 
 
