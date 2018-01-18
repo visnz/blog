@@ -720,6 +720,7 @@ select {
 
 .list__excerpt {
 	overflow: hidden;
+	height: 86px;
 }
 
 .list__thumbnail {
