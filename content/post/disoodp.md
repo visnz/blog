@@ -26,6 +26,7 @@ thumbnail: "img/oodp.jpg"
 > 本书中涉及的设计模式并不描述新的或未经证实的设计，我们只收录那些**在不同系统中多次使用过的成功设计**。这些设计的绝大部分以往并无文本记录，它们或是来源于**面向对象设计者圈子里的非正式交流**，或是来源于某些成功的面向对象系统的某些部分，但对设计新手来说，这些东西是很难学得到的。尽管这些设计不包括新的思路，但我们**用一种新的、便于理解的方式将其展现给读者**，即：具有统一格式的、已分类编目的若干组设计模式。
 
 而我们可能更需要注意的是避免一些问题，如
+
 1. 只了解模式、不了解原因、场景
 2. 过度设计、使用，忘记初衷问题
 
@@ -36,8 +37,9 @@ thumbnail: "img/oodp.jpg"
 
 ---
 相关链接
+
 1. [面向对象程序设计 - wiki](https://www.wikiwand.com/zh-hans/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1)
-1. [知乎 - 面向对象编程的弊端是什么？](https://www.zhihu.com/question/20275578)
-1. [知乎 - 设计模式有何不妥，所谓的荼毒体现在哪？](https://www.zhihu.com/question/23757237)
-2. [知乎 - 如何正确地使用设计模式？](https://www.zhihu.com/question/23757906)
+2. [知乎 - 面向对象编程的弊端是什么？](https://www.zhihu.com/question/20275578)
+3. [知乎 - 设计模式有何不妥，所谓的荼毒体现在哪？](https://www.zhihu.com/question/23757237)
+4. [知乎 - 如何正确地使用设计模式？](https://www.zhihu.com/question/23757906)
 5. [Arch Linux 哲学](https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
