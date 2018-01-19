@@ -25,14 +25,16 @@ sudo create_ap <无线网卡>[<有线网卡>][<SSID>[<passwd>]]
 
 ## Unreal Engine 4
 
-虚幻引擎在Windows上直接有引擎管理器，Linux上目前只能从github下载源码自己编译。（官方有贴[build on liunx](https://wiki.unrealengine.com/Building_On_Linux)的）
+虚幻引擎在Windows上直接有引擎管理器，Linux上目前只能从github下载源码自己编译。（官方有贴[build on liunx](https://wiki.unrealengine.com/Building_On_Linux)的）。
+
+感谢axionl大佬提醒**yaourt仓库里面有**，也是gitclone，只是文件太大自己网络状况也不是很理想（手动gitclone断流有点吃不消），可以直接下载zip
 
 一些基础工具如``git etc.``自行安装，补安装``mono clang35 dos2unix cmake``
 
 1. [UnrealEngine4](https://github.com/EpicGames/UnrealEngine)是隶属组织没有公开，加入组织fork一下
 2. clone最新/**稳定**的版本`` git clone https://github.com/EpicGames/UnrealEngine.git``,大小接近两个G（后面放着没看了忘记具体多大了），也可以[指定版本](https://wiki.unrealengine.com/Building_On_Linux#Building)
 3. 进入目录，依次执行``Setup.sh``，``GenerateProjectFiles.sh``检查构建环境
-4. ``make UE4Editor-Linux-Debug``或直接``make``一把锁（睡觉去
+4. ``make UE4Editor-Linux-Debug``或直接``make``（睡觉去
 5. 启动器位置：``./Engine/Binaries/Linux/UE4Editor``（如果刚刚执行``UE4Editor-Linux-Debug``的话是运行``UE4Editor-Linux-Debug``，其他类似）
 6. 玩得开心
 

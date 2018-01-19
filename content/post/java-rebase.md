@@ -105,6 +105,8 @@ POJO(Plain Ordinary Java Object)
 
 2. [Core Java™ Volume II Fundamentals. (Ninth Edition)](https://www.amazon.com/Core-Java-II-Advanced-Features-9th/dp/013708160X)
 
+3. [疯狂JAVA讲义]()
+
 3. [Thinking in Java (4th Edition)](https://www.amazon.com/Thinking-Java-4th-Bruce-Eckel/dp/0131872486)
 
 4. [Github: jobbole/awesome-java-cn](https://github.com/jobbole/awesome-java-cn)
