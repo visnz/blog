@@ -186,8 +186,6 @@ spring cloud
 
 ### JavaBean
 
-JavaBean
-
 EJB(Enterprise JavaBean)
 
 POJO(Plain Ordinary Java Object)
@@ -272,17 +270,30 @@ volatile是轻量级的同步锁，不提供原子性但保证可见性，在每
 ## 流
 字符设备提供数据流，以顺序按需读取（如调制解调器、键鼠），块设备提供随机访问，以块为单位反馈（如磁盘）。以类似字符设备的读取方式去读文件被形容为流。
 
-缓冲流``Buffered[In/Out]putStream``：维护一个缓冲区，可以分别指派读取和使用，规定大小、清空流等功能（满的时候则清空、输出）
-[随机访问流](http://www.cnblogs.com/ysocean/p/6870250.html)``RandomAccessFile``：以字符为单位的游标指针，表名权限后对其进行随机读写（多线程、断点下载可用）
-Closeable接口：源自忘记关流程序员们的疏忽，特设置AutoClosable交给系统管理，底层或管理器可以对流进行检查与关闭，以确保系统安全性
-[装饰流](http://www.codeceo.com/article/java-io-stream-decorators.html)：运用[装饰器模式](https://visnz.gitbooks.io/ood-oodp/content/jie-gou-xing-mo-shi/zhuang-shi-mo-shi.html)，允许向一个现有的对象添加新的功能，同时又不改变其接口结构。用一个新的装饰对象来囊括一个被装饰对象，且实现同样的接口（如``Buffered[In/Out]putStream``只是``[In/Out]putStream``的一个加了缓冲模块的装饰流）
+- 缓冲流``Buffered[In/Out]putStream``：维护一个缓冲区，可以分别指派读取和使用，规定大小、清空流等功能（满的时候则清空、输出）
+- [随机访问流](http://www.cnblogs.com/ysocean/p/6870250.html)``RandomAccessFile``：以字符为单位的游标指针，表名权限后对其进行随机读写（多线程、断点下载可用）
+- Closeable接口：源自忘记关流程序员们的疏忽，特设置AutoClosable交给系统管理，底层或管理器可以对流进行检查与关闭，以确保系统安全性。使用try-with-resource语法糖，将会在try块结束的时候自动关闭（通常关闭动作在finally里执行）
+  ```java
+  try( someObj which implements AutoClosable )
+  { ...dosomething }
+  ```
 
-缓冲区结构：0...标记...位置...界限...容量，标记表示当前已读数据的位置，位置来区分是否已读，界限表示所有已读取但未被读写的部分，界限以外的区域上限到容量
+- [装饰流](http://www.codeceo.com/article/java-io-stream-decorators.html)：运用[装饰器模式](https://visnz.gitbooks.io/ood-oodp/content/jie-gou-xing-mo-shi/zhuang-shi-mo-shi.html)，允许向一个现有的对象添加新的功能，同时又不改变其接口结构。用一个新的装饰对象来囊括一个被装饰对象，且实现同样的接口（如``Buffered[In/Out]putStream``只是``[In/Out]putStream``的一个加了缓冲模块的装饰流）
+
+- 缓冲区结构：0...标记...位置...界限...容量，标记表示当前已读数据的位置，位置来区分是否已读，界限表示所有已读取但未被读写的部分，界限以外的区域上限到容量
 
 ### 对象流与序列化
 将对象以特定（可自定义）的格式完成**对一系列对象的编码**，可以实现对象的存储（实现如运行状态暂存和持久化、远程对象交流、版本管理等功能）。Serializable接口是一个没有方法的标志接口，表示这个类可以被序列化，底层也会自动遍历类对象的所有属性并进行序列化。jvm有指定默认的编码方式（推荐）。
-RMI（Remote Method Invocation）Java中的远程调用，可以跨越不同平台，把对象以流的方式传输（如在本地调用云端的方法，云端返回对象回到本地，实现的框架比如Netty）。多端需要有相同的类或接口，版本控制也是一个较大的问题。通常为明文编码，有特定编解码规范，自行造个加密轮子（雾）
 使用序列化进行克隆：在完成序列化编码的时候，Serializable接口会具体到每一个对象都拔出他的根本引用，作为参考写入。可以以此作为一个迭代的克隆（卧槽代码瞬间就少了（不过涉及寻址、取值、记录装载和编码，这样克隆会相对慢很多
+
+### RMI
+RMI（Remote Method Invocation）Java中的远程调用，可以跨越不同平台，把对象以流的方式传输（如在本地调用云端的方法，云端返回对象回到本地，实现的框架比如Netty）。多端需要有相同的类或接口，版本控制也是一个较大的问题。通常为明文编码，有特定编解码规范，自行造个加密轮子（雾）
+
+网络通信代理模型
+1. CORBA（通用对象请求代理），支持任何语言的对象之间的通信，使用IIOP协议
+2. web服务架构（WS-\*），基于xml文件，传输简单对象的访问协议（SOAP）
+
+rmi属于定制版的对象传输，针对java对象进行编码。rmi也可以进行分布式的部署任务
 
 ### 读写文件
 随机访问流可以访问文件、复制移动和删除文件，Java有自带的包API（不劳烦您解决生产者消费者问题了）、也包含创建目录、递归创建，获取文件具体信息等基本功能。
@@ -292,12 +303,59 @@ RMI（Remote Method Invocation）Java中的远程调用，可以跨越不同平�
 文件通道：对外设文件的一种抽象，交付给内核以完成文件管理（加锁、传输、读写、内存映射等）
 
 
+### xml
+java提供了两种xml解析器，DOM支持将xml解析为树形结构，SAX解析成字符流。``DocumentBuilder``实现生成器模式，``DocumentBuilderFactory``实现工厂模式，后者生成前者，前者构建解析器，支持传入文档、url或一个输入流，由根结点开始向内遍历（会把空白包含在内）
+
+dtd文档类型定义，通常在文档头、xsd文件具体描述dtd内容
+
+蜜汁使用xml构建凭空生成svg图像
+
+## socket
+半关闭：比如http接受到请求，客户端发出请求后即可关闭输出流
+套接字中断：socketchannel
+URI统一资源标识符（提供语法结构），在库里主要做解析工作，URL实现对资源的连接。
+
+## JDBC
+jdbc使用标准SQL语句+sql自选扩展+db提供商与中间件开发的驱动
+JDBC规范的驱动分类：
+1. jdbc翻译到odbc，使用odbc驱动去驱动数据库（早期java）
+2. java代码+平台代码+数据库api，需要安装平台相关性代码+类库
+3. 纯java驱动，由服务器构件（中间件）完成JDBC请求匹配到指定数据库的API
+4. 纯java驱动，由jdbc直接翻译成数据库协议api（高可靠）
+
+## 国际化&多语言
+Locale对象表达，可定制格式化内容，就是代码要麻烦一点。formatter格式器系列以工厂方法接受一个locale对象生成格式器。
+
+字符串格式化通过properties属性文件的键值对映射来完成管理（ResourceBundle），编程的时候使用键映射，在properties里完成映射内容。
+
+## 窗口
+
+窗口开发使用JOptionPane提供了几个模板式窗口，确认信息窗口、要求输入窗口、选择窗口，还有三合一的窗口。
+
+## 安全
+java.security包中有加密相关工具，sha1、md5之类的在MessageDigest类的静态工厂实现
+权限集合分割访问
+对称密码流
+JNI（java本地接口），用于在java中融合其他语言或本地bash等协同工作。（因为管理机制，java并不推荐使用）
+### 类加载器
+编译器将java文件转换为虚拟机指令（.class），类加载器即用来在虚拟机运行时加载这些class文件（关联式、运行时加载），协同安全管理器类工作。有引导类、扩展类和系统类三种加载器。父类加载器优先加载，每个线程拥有一个上下文类加载器。可以自己编写加密的类加载器。
+
+加载器将字节码传递给虚拟机的时候会经过**校验器**的一系列检查（如变量初始化、访问规则违反与否、类型匹配等）@编译器检查+数字签名。经过校验器后再送入安全管理器。安全管理器（将检查：创建or销毁虚拟机、访问本地文件socket剪贴板，还有反射再创建等等。默认不开启）
+
+## 杂项
+虚拟机提供脚本引擎，得以使用js、ruby等语言对虚拟机和执行程序进行控制（当然脚本是写在外面的）
+编译器提供api可以手写动态编译检查和连接
+@interface 注释类，提供在编译器检查时候的多分支功能
 
 
 
 rmi：
 rest （一种软件架构风格）
 Apache MINA或是Netty
+
+netbeans
+流式编程
+jsp
 
 thread：
 - thread group
