@@ -1,7 +1,6 @@
 ---
 title: "Java Rebase"
-date: 2018-01-18
-draft: true
+date: 2018-01-26
 type: ["计算机"]
 menu:
   main:
@@ -13,6 +12,8 @@ thumbnail: "http://blog.experts-exchange.com/wp-content/uploads/2012/02/java1.jp
 
 # 写在前面
 ---
+
+~~文章创建较早，所以比first update还要前（雾~~
 
 ## Java囧境
 
@@ -32,6 +33,8 @@ thumbnail: "http://blog.experts-exchange.com/wp-content/uploads/2012/02/java1.jp
 （其实感觉有点像[Apache与Nginx port80之争](https://linux.cn/article-8292-1.html)那份漫画，老一辈与晚辈各自的优势）
 
 **所提的点不是贬低Java，是较理性地描述目前的问题**
+
+
 
 ## 个人发展瓶颈
 
@@ -75,15 +78,15 @@ JDK(Java Development Kit) 程序开发库，包含了接口等一系列开发必
 
 JDK的实体文件结构
 
-|目录|描述|
-|-|-|
-| \bin| 编译器、测试与调用等工具|
-| \demo| 代码示例|
-| \docs| html的类库文档|
-| \include| 用于编译本地库、本地方法的文件|
-| \jre|运行环境所需的文件|
-| \lib|类库文件|
-| \src|类库源文件|
+目录        |描述
+---|---
+ \\bin     | 编译器、测试与调用等工具
+ \\demo    | 代码示例
+ \\docs    | html的类库文档
+ \\include | 用于编译本地库、本地方法的文件
+ \\jre     |运行环境所需的文件
+ \\lib     |类库文件
+ \\src     |类库源文件
 
 
 SE、ME、EE Java的三个不同版本，分别对应小型设备、桌面与简单服务器、企业及服务器三种平台
@@ -244,13 +247,14 @@ volatile是轻量级的同步锁，不提供原子性但保证可见性，在每
 线程池里拥有活跃或等待的一定数量的线程，按需选择新增或删除线程，任务对象（Runnable、Callable、Runnable+result）交付过来，线程池接收调度。记得调用shutdown关掉。
 
 执行器提供静态工厂创建
-|方法|描述|
-|-|-|
-|CachedThreadPool|按需创建新线程；线程空闲生命周期为60秒，未被使用则销毁|
-|FixedThreadPool|包含固定数量线程，持续保留|
-|SingleThreadExecutor|单个线程的池，每次顺序执行一个任务（比如责任链事件响应，不允许同时多次触发）|
-|ScheduledThreadPool|预定执行线程池，结合Timer计时器|
-|SingleThreadScheduledExecutor|预定单线程池|
+
+方法|描述
+---|---
+CachedThreadPool|按需创建新线程；线程空闲生命周期为60秒，未被使用则销毁
+FixedThreadPool|包含固定数量线程，持续保留
+SingleThreadExecutor|单个线程的池，每次顺序执行一个任务（比如责任链事件响应，不允许同时多次触发）
+ScheduledThreadPool|预定执行线程池，结合Timer计时器
+SingleThreadScheduledExecutor|预定单线程池
 
 #### 控制任务组
 维护一个任务对象的集合，对其进行管理（
@@ -262,7 +266,9 @@ volatile是轻量级的同步锁，不提供原子性但保证可见性，在每
 #### 同步器
 
 控制障栅：如大量线程必须等待同步又必须在提交之前完成的情况，即设置一个障栅，当指定的一系列线程都到达障栅，障栅撤销，线程继续。比如游戏资源的后台准备
+
 倒计时门栓：设置倒计时，门栓为1的时候只允许准备线程执行，准备完毕调用计时器，工作进程入场
+
 交换器：生产者消费者问题的经典场景，维护一个交换对象，两个线程都准备好的时候执行交换过程
 
 
@@ -284,22 +290,27 @@ volatile是轻量级的同步锁，不提供原子性但保证可见性，在每
 
 ### 对象流与序列化
 将对象以特定（可自定义）的格式完成**对一系列对象的编码**，可以实现对象的存储（实现如运行状态暂存和持久化、远程对象交流、版本管理等功能）。Serializable接口是一个没有方法的标志接口，表示这个类可以被序列化，底层也会自动遍历类对象的所有属性并进行序列化。jvm有指定默认的编码方式（推荐）。
+
 使用序列化进行克隆：在完成序列化编码的时候，Serializable接口会具体到每一个对象都拔出他的根本引用，作为参考写入。可以以此作为一个迭代的克隆（卧槽代码瞬间就少了（不过涉及寻址、取值、记录装载和编码，这样克隆会相对慢很多
 
 ### RMI
 RMI（Remote Method Invocation）Java中的远程调用，可以跨越不同平台，把对象以流的方式传输（如在本地调用云端的方法，云端返回对象回到本地，实现的框架比如Netty）。多端需要有相同的类或接口，版本控制也是一个较大的问题。通常为明文编码，有特定编解码规范，自行造个加密轮子（雾）
 
 网络通信代理模型
+
 1. CORBA（通用对象请求代理），支持任何语言的对象之间的通信，使用IIOP协议
+
 2. web服务架构（WS-\*），基于xml文件，传输简单对象的访问协议（SOAP）
 
 rmi属于定制版的对象传输，针对java对象进行编码。rmi也可以进行分布式的部署任务
 
 ### 读写文件
 随机访问流可以访问文件、复制移动和删除文件，Java有自带的包API（不劳烦您解决生产者消费者问题了）、也包含创建目录、递归创建，获取文件具体信息等基本功能。
-运用正则表达式+File提供获取整个递归目录的方法=搜索文件
+
+运用正则表达式+File提供获取整个递归目录的方法=搜索文件（使用NIO的FileVisitor进行遍历文件）
 
 内存映射文件：通过虚拟内存来实现，把文件映射到内存地址访问，实现快速的文件读写
+
 文件通道：对外设文件的一种抽象，交付给内核以完成文件管理（加锁、传输、读写、内存映射等）
 
 
@@ -310,17 +321,33 @@ dtd文档类型定义，通常在文档头、xsd文件具体描述dtd内容
 
 蜜汁使用xml构建凭空生成svg图像
 
+### NIO
+非阻塞式，通过映射来处理数据块的io包，channel和buffer是核心对象。buffer作为一个抽象类，本质是一个数组，作为容器使用；创建成本高，用法与传统buffer类没有太大区别。channel的读写交互都经由buffer完成。
+
+提供了FileLock的文件锁功能（lock()阻塞方法、tryLock()非阻塞的尝试方法），锁是虚拟机持有，两个java程序不能对同一文件加两把锁
+
+WatchService创建一个后台线程负责对一些文件进行变化监控
+
+调用java.nio.file.attribute访问文件属性
+
 ## socket
 半关闭：比如http接受到请求，客户端发出请求后即可关闭输出流
+
 套接字中断：socketchannel
-URI统一资源标识符（提供语法结构），在库里主要做解析工作，URL实现对资源的连接。
+
+URI统一资源标识符（提供语法结构），在库里主要做解析工作，URL实现对资源的连接。URL及相关类如URLConnection与URLPermission权限管理
 
 ## JDBC
 jdbc使用标准SQL语句+sql自选扩展+db提供商与中间件开发的驱动
+
 JDBC规范的驱动分类：
+
 1. jdbc翻译到odbc，使用odbc驱动去驱动数据库（早期java）
+
 2. java代码+平台代码+数据库api，需要安装平台相关性代码+类库
+
 3. 纯java驱动，由服务器构件（中间件）完成JDBC请求匹配到指定数据库的API
+
 4. 纯java驱动，由jdbc直接翻译成数据库协议api（高可靠）
 
 ## 国际化&多语言
@@ -334,9 +361,13 @@ Locale对象表达，可定制格式化内容，就是代码要麻烦一点。fo
 
 ## 安全
 java.security包中有加密相关工具，sha1、md5之类的在MessageDigest类的静态工厂实现
+
 权限集合分割访问
+
 对称密码流
+
 JNI（java本地接口），用于在java中融合其他语言或本地bash等协同工作。（因为管理机制，java并不推荐使用）
+
 ### 类加载器
 编译器将java文件转换为虚拟机指令（.class），类加载器即用来在虚拟机运行时加载这些class文件（关联式、运行时加载），协同安全管理器类工作。有引导类、扩展类和系统类三种加载器。父类加载器优先加载，每个线程拥有一个上下文类加载器。可以自己编写加密的类加载器。
 
@@ -344,23 +375,42 @@ JNI（java本地接口），用于在java中融合其他语言或本地bash等�
 
 ## 杂项
 虚拟机提供脚本引擎，得以使用js、ruby等语言对虚拟机和执行程序进行控制（当然脚本是写在外面的）
+
 编译器提供api可以手写动态编译检查和连接
+
 @interface 注释类，提供在编译器检查时候的多分支功能
 
+运用反射创建新对象
+
+高精度：BigInteger（装饰器）
+
+Jenkins：java写成的在线部署工具
+
+高并发与服务器模型（C10K问题）
+
+jsp服务器模型
+
+Junit测试工具（TestNG）
+
+三大框架struts+hibernate+spring
+
+[结构类似生成器模式的流式编程](http://www.cnblogs.com/jun-ma/p/4838260.html)
 
 
-rmi：
-rest （一种软件架构风格）
-Apache MINA或是Netty
 
-netbeans
-流式编程
-jsp
 
-thread：
-- thread group
-- daemon thread
-- 高并发与服务器模型（C10K问题）
+所看的资料参考程度
+
+1. Core Java：外国友人作，首推。思路非常明确：“其他技术→存在问题→众人的解决方法→java的解决方法”来引出java的某项技术，会从较广范围由浅入深（会很深，容易让人放弃），代码示例算比较易懂暴力，**适合对计算机刚入门不久且懵逼的朋友**。有文档摘抄，**适合当工具书**。
+
+2. 疯狂Java讲义：估计是国内少有得几本拿得出手的java教程，比较**符合国人学习状况**，代码会标出重点啥的。文档有摘抄但没有统一归纳出来。内容太过详细容易磨灭新手自信心，**适合有略微java基础的深入或补漏**。
+
+3. Thinking in Java (4th Edition)：非常细节细致入微，以java特性为基础和基本单位进行讲解，**适合理论研究和补漏**，不太适合入门。
+
+4. Effective Java (2nd Edition)：78条经验设计理论，比较形而上，**适合瓶颈期针对问题进行深入研究**。
+
+
+
 ---
 参考资料
 
@@ -368,16 +418,20 @@ thread：
 
 2. [Core Java™ Volume II Fundamentals. (Ninth Edition)](https://www.amazon.com/Core-Java-II-Advanced-Features-9th/dp/013708160X)
 
-3. [疯狂JAVA讲义]()
+3. [疯狂JAVA讲义 (3rd Edition)](https://book.douban.com/subject/3246499/)
 
 3. [Thinking in Java (4th Edition)](https://www.amazon.com/Thinking-Java-4th-Bruce-Eckel/dp/0131872486)
 
-4. [Github: jobbole/awesome-java-cn](https://github.com/jobbole/awesome-java-cn)
+4. [Effective Java  (2nd Edition)](https://book.douban.com/subject/3360807/)
 
-5. [Github: google/guava](https://github.com/google/guava)
+5. [Github: jobbole/awesome-java-cn](https://github.com/jobbole/awesome-java-cn)
 
-6. [google/guava 翻译学习支持](http://ifeve.com/google-guava/)
+6. [Github: google/guava](https://github.com/google/guava)
 
-7. [Gitbook 阿里巴巴Java开发手册](https://goghtsui.gitbooks.io/-java/content/)
+7. [google/guava 翻译学习支持](http://ifeve.com/google-guava/)
 
-8. [如何评价阿里近期发布的Java编码规范？ - 知乎](https://www.zhihu.com/question/55642203)
+8. [Gitbook 阿里巴巴Java开发手册](https://goghtsui.gitbooks.io/-java/content/)
+
+9. [如何评价阿里近期发布的Java编码规范？ - 知乎](https://www.zhihu.com/question/55642203)
+
+10. [Java SE API与文档](http://www.oracle.com/technetwork/cn/java/javase/documentation/api-jsp-136079-zhs.html)

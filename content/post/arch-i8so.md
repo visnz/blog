@@ -3,7 +3,7 @@ title: "Archlinux 一把梭"
 date: 2018-01-16
 type: ["计算机"]
 weight: 1
-thumbnail: "http://img1.cache.netease.com/catchpic/E/E4/E4F18ADC818F7F9F273DDD7E7AD97623.png"
+thumbnail: "pics/arch.png"
 ---
 
 记录下平时可能会用到的（反正也是查阅用的）一把锁指令

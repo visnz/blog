@@ -3,7 +3,7 @@ title: "跳出OO思想与OODP-杂记"
 date: 2018-01-18
 type: ["计算机"]
 weight: 1
-thumbnail: "img/oodp.jpg"
+thumbnail: "pics/oodp.jpg"
 ---
 
 # 跳出面向对象思想
