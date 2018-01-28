@@ -3,6 +3,7 @@ title: "Archlinux 一把梭"
 date: 2018-01-16
 type: ["计算机"]
 weight: 1
+tags: ["Linux","计算机"]
 thumbnail: "pics/arch.png"
 ---
 

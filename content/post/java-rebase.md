@@ -2,18 +2,13 @@
 title: "Java Rebase"
 date: 2018-01-26
 type: ["计算机"]
-menu:
-  main:
-    name: "计算机"
-weight: 10
+weight: 1
 tags: ["Java","计算机"]
 thumbnail: "http://blog.experts-exchange.com/wp-content/uploads/2012/02/java1.jpg"
 ---
 
 # 写在前面
 ---
-
-~~文章创建较早，所以比first update还要前（雾~~
 
 ## Java囧境
 

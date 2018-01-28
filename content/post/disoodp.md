@@ -3,6 +3,7 @@ title: "跳出OO思想与OODP-杂记"
 date: 2018-01-18
 type: ["计算机"]
 weight: 1
+tags: ["编程思维","计算机"]
 thumbnail: "pics/oodp.jpg"
 ---
 
