@@ -7,6 +7,7 @@ menu:
     name: "工作站团队管理"
 weight: 1
 tags: ["工作站","影视"]
+draft: true
 thumbnail: "/pics/workstation.png"
 ---
 ## 写在前面
