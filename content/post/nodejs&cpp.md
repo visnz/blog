@@ -1,6 +1,6 @@
 ---
 title: "c++结合V8模块扩展nodejs功能，用c++处理复杂计算"
-date: 2018-02-18
+date: 2018-02-17
 type: ["计算机"]
 weight: 1
 tags: ["计算机","Nodejs","c++"]
@@ -100,3 +100,7 @@ var test = require('./build/Release/test');
 console.log(test.hello("intTest","23"));
 console.log(test.helloA("intTest","23"));
 ```
+
+## 业务实现
+
+在cc文件与额外关联的h文件中进行所有的游戏的复杂计算，渲染成nodejs模块，由js引入。js自身完成网络服务的工作，也同时完成前台页面到后台数据计算的请求。
