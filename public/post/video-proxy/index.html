@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pr素材代理 =&gt; 大素材打包分发剪辑 &amp;&amp; 高计算量剪辑</title>
+<meta name="description" content="visn`s Personal blog about fucking daily chaos :L ">
+<meta name="generator" content="Hugo 0.37" />
+<meta property="og:title" content="pr素材代理 =&gt; 大素材打包分发剪辑 &amp;&amp; 高计算量剪辑" />
+<meta property="og:description" content="后期剪辑可能会遇到以下问题
+ 素材量巨大或有高解析如4K素材，电脑太烂带不动 需要把视频交付给别人去剪辑，素材很多很大，上传网速太慢  使用pr自带的自动代理功能可以有效解决
+基本思路是，把巨大的素材转换成一个小的，可以完成基础剪辑、音频校验等工作的视频素材，以降低CPU在解析素材的时间和硬盘使用率，从而提高处理速度。缺点在于对画面细节丢失精度，比如在稳定器的计算等等。
+当需要别人参与剪辑的时候，只需要将代理文件打包好，交付给对方即可。
+笔者使用pr版本提供两种代理手段：
+ 手动 创建代理或链接已有代理  收录时 自动 创建代理（下文介绍）
+  代理素材实现高计算量剪辑 首先自然要把素材归类到一个文件夹中，并在旁边新建一个pr工程
+在收录设置中，选择创建代理。当然目录建议是放在同一个文件夹，我新建了一个“素材代理”
+其中的预设建议使用GoPro的方案，体积相对H.264较大，该编码专门针对视频中间代理文件，较大程度保留精度。若没有 稳定、变速光流法 等需要高精度计算的精剪效果的话，建议使用H.264，或者您可以导入其他预设。
+通常到这里应该有三个项目了，这个时候可以将素材文件夹的素材导入pr中，pr收录会自动启动AME(Adobe Media Encoder)，并进行转码和代理连接
+如果收录设置有修改见下图
+到这里基本完成了素材的代理生成，现在要让我们的pr工程启用代理
+在素材查看器(源)和节目预览(节目)中把切换代理按钮拉下来，分别启动素材代理。可以看到素材被替换为一个左右两边有两条小黑边的代理素材，则为启动了素材代理。
+代理素材&#43;工程打包分发 导入&#43;渲染完所有代理素材后，想要把代理素材全部打包交付给(比如手下或外包团队)去做的话
+首先解除原素材和代理素材之间的关系
+选中所有原素材，设为脱机（我是直接归类成一个文件夹）
+如图描述，如果是工作分发，自己按理要保留文件，第二项会删除源文件，看自己需要做选择
+这时候就可以准备打包了，如图↑选择项目管理（打开之前请先创建一条空序列，打包需求）
+随便创建了一个空序列，打包是按序列来打的
+右边记得勾选打包未使用素材，否则是空包。新建工程没有预览文件，路径自定义，下面的估计磁盘空间请按素材代理的总大小来计算（“素材代理”文件夹大小），请确保磁盘上有足够空间进行打包
+可以看到打包之后就只有代理素材和工程文件了，打开照样可以进行剪辑工作
+回链接素材&#43;渲染  代理的素材会在渲染时候默认替换回原来的素材，可以直接渲染
+ 分发返回的剪辑工作，需要重新连接原素材，再读第一点。
+  修订补充 据随机测试，Gopro预设把文件压缩到大约六分之一到三分之一，H.264大约压缩到十二分之一
+因为素材多种且码率参数各有不同，数据仅做概率参考
+（抠鼻）反正可以手动创建预设" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/video-proxy/" />
+
+
+
+<meta property="article:published_time" content="2018-03-13T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-03-13T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700" type="text/css" media="all" />
+<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
+<script type="text/javascript" src="/js/scripts.js"></script>
+<link rel="shortcut icon" href="/favicon.ico">
+
+</head>
+<body class="body body-left-sidebar mobile" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+	<div class="container container-outer">
+		<header class="header" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+			<div class="container container-inner clearfix">
+				<div class="logo" role="banner" itemscope="itemscope" itemtype="http://schema.org/Brand">
+					<a class="logo__link" href="/" title="* IN SHADOW" rel="home">
+						<h1 class="logo__title">* IN SHADOW</h1>
+						
+					</a>
+				</div>
+			</div>
+			
+<nav class="menu" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+	<ul class="menu__list">
+		<li class="menu__item"><a class="menu__link" href="/post/%E6%B8%B8%E8%AE%B0/">浪了个浪</a></li>
+		<li class="menu__item"><a class="menu__link" href="/about/">关于</a></li>
+	</ul>
+</nav>
+
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main-content content" role="main" itemprop="mainContentOfPage">
+	<article class="post">
+		<header class="post__header clearfix">
+			<h1 class="post__title">pr素材代理 =&gt; 大素材打包分发剪辑 &amp;&amp; 高计算量剪辑</h1>
+			<p class="post__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="post__meta-date" datetime="2018-03-13T00:00:00">March 13, 2018</time>
+			</p>
+		</header>
+		<div class="post__content clearfix">
+			<figure class="post__thumbnail">
+				<img src="/pics/pr.png" alt="pr素材代理 =&gt; 大素材打包分发剪辑 &amp;&amp; 高计算量剪辑">
+			</figure>
+			
+
+<p>后期剪辑可能会遇到以下问题</p>
+
+<ul>
+<li>素材量巨大或有高解析如4K素材，电脑太烂带不动</li>
+<li>需要把视频交付给别人去剪辑，素材很多很大，上传网速太慢</li>
+</ul>
+
+<p>使用pr自带的自动代理功能可以有效解决</p>
+
+<p><img src="/pics/proxy/00.png" alt="" /></p>
+
+<p>基本思路是，把巨大的素材转换成一个小的，可以完成基础剪辑、音频校验等工作的视频素材，以降低CPU在解析素材的时间和硬盘使用率，从而提高处理速度。缺点在于对画面细节丢失精度，比如在稳定器的计算等等。</p>
+
+<p>当需要别人参与剪辑的时候，只需要将代理文件打包好，交付给对方即可。</p>
+
+<p>笔者使用pr版本提供两种代理手段：</p>
+
+<ul>
+<li><p><strong>手动</strong> 创建代理或链接已有代理
+<img src="/pics/proxy/01-1.png" alt="" /></p></li>
+
+<li><p>收录时 <strong>自动</strong> 创建代理（下文介绍）</p></li>
+</ul>
+
+<h1 id="代理素材实现高计算量剪辑">代理素材实现高计算量剪辑</h1>
+
+<p><img src="/pics/proxy/01.png" alt="" /></p>
+
+<p><img src="/pics/proxy/02.png" alt="" /></p>
+
+<p>首先自然要把素材归类到一个文件夹中，并在旁边新建一个pr工程</p>
+
+<p><img src="/pics/proxy/03.png" alt="" /></p>
+
+<p>在收录设置中，选择创建代理。当然目录建议是放在同一个文件夹，我新建了一个“素材代理”</p>
+
+<p><img src="/pics/proxy/04.png" alt="" /></p>
+
+<p>其中的预设建议使用GoPro的方案，体积相对H.264较大，该编码专门针对视频中间代理文件，较大程度保留精度。若没有 <strong>稳定、变速光流法</strong> 等需要高精度计算的精剪效果的话，建议使用H.264，或者您可以导入其他预设。</p>
+
+<p><img src="/pics/proxy/05.png" alt="" /></p>
+
+<p>通常到这里应该有三个项目了，这个时候可以将素材文件夹的素材导入pr中，<strong>pr收录会自动启动AME(Adobe Media Encoder)</strong>，并进行转码和代理连接</p>
+
+<p><img src="/pics/proxy/06.png" alt="" /></p>
+
+<p>如果收录设置有修改见下图</p>
+
+<p><img src="/pics/proxy/07.png" alt="" /></p>
+
+<p>到这里基本完成了素材的代理生成，现在要让我们的pr工程启用代理</p>
+
+<p><img src="/pics/proxy/08.png" alt="" /></p>
+
+<p><img src="/pics/proxy/09.png" alt="" /></p>
+
+<p>在素材查看器(源)和节目预览(节目)中把切换代理按钮拉下来，分别启动素材代理。<strong>可以看到素材被替换为一个左右两边有两条小黑边的代理素材，则为启动了素材代理</strong>。</p>
+
+<h1 id="代理素材-工程打包分发">代理素材+工程打包分发</h1>
+
+<p>导入+渲染完所有代理素材后，想要把代理素材全部打包交付给(比如手下或外包团队)去做的话</p>
+
+<p>首先解除原素材和代理素材之间的关系</p>
+
+<p><img src="/pics/proxy/10.png" alt="" /></p>
+
+<p>选中所有原素材，设为脱机（我是直接归类成一个文件夹）</p>
+
+<p><img src="/pics/proxy/11.png" alt="" /></p>
+
+<p>如图描述，如果是工作分发，自己按理要保留文件，第二项会删除源文件，看自己需要做选择</p>
+
+<p><img src="/pics/proxy/12.png" alt="" /></p>
+
+<p>这时候就可以准备打包了，如图↑选择项目管理（打开之前请先创建一条空序列，打包需求）</p>
+
+<p><img src="/pics/proxy/13.png" alt="" /></p>
+
+<p>随便创建了一个空序列，打包是按序列来打的</p>
+
+<p>右边记得勾选打包未使用素材，否则是空包。新建工程没有预览文件，路径自定义，下面的估计磁盘空间请按素材代理的总大小来计算（“素材代理”文件夹大小），请确保磁盘上有足够空间进行打包</p>
+
+<p><img src="/pics/proxy/14.png" alt="" /></p>
+
+<p>可以看到打包之后就只有代理素材和工程文件了，打开照样可以进行剪辑工作</p>
+
+<h1 id="回链接素材-渲染">回链接素材+渲染</h1>
+
+<ol>
+<li><p>代理的素材会在渲染时候默认替换回原来的素材，可以直接渲染</p></li>
+
+<li><p>分发返回的剪辑工作，需要重新连接原素材，再读第一点。</p></li>
+</ol>
+
+<hr />
+
+<h1 id="修订补充">修订补充</h1>
+
+<p>据随机测试，Gopro预设把文件压缩到大约<strong>六分之一到三分之一</strong>，H.264大约压缩到<strong>十二分之一</strong></p>
+
+<p>因为素材多种且码率参数各有不同，数据仅做概率参考</p>
+
+<p>（抠鼻）反正可以手动创建预设</p>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="m4.73135 3.3795002q0-.5597-.39604-.9557-.39604-.3961-.95577-.3961-.55974 0-.95578.3961-.39604.396-.39604.9557 0 .5598.39604.9558.39604.3961.95578.3961.55973 0 .95577-.3961.39604-.396.39604-.9558zm11.26865 6.0832q0 .5596998-.39076.9504998l-5.18548 5.196q-.41188.3908-.9610504.3908-.55974 0-.9505-.3908l-7.5511496-7.5616998q-.40132-.3907-.68119-1.0666-.27987-.6759-.27987-1.2357v-4.3934q0-.54920004.40132-.95050004.40132-.4013.9505-.4013h4.39339q.55974 0 1.23565.2799.67591.2798 1.07723.6812l7.55115 7.54060004q.39076.4118.39076.961z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link" href="/tags/%E5%BD%B1%E8%A7%86%E5%90%8E%E6%9C%9F/" rel="tag">影视后期</a></li>
+		<li class="tags__item"><a class="tags__link" href="/tags/adobe/" rel="tag">Adobe</a></li>
+	</ul>
+</div>
+
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="visn Z avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About visn Z</span>
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/post/%E5%AD%97%E5%B9%95/" rel="prev"><span class="post-nav__caption">«Previous</span><p class="post-nav__post-title">后期字幕制作踩过的坑和比较推荐的做法</p></a>
+	</div>
+</nav>
+
+	
+</main>
+
+<aside class="sidebar" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="//google.com/search">
+		<label>
+			<span class="screen-reader-text">Search for:</span>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/video-proxy/">pr素材代理 =&gt; 大素材打包分发剪辑 &amp;&amp; 高计算量剪辑</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/%E5%AD%97%E5%B9%95/">后期字幕制作踩过的坑和比较推荐的做法</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/nodejscpp/">c&#43;&#43;结合V8模块扩展nodejs功能，用c&#43;&#43;处理复杂计算</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/%E5%9F%BA%E6%9C%AC%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">最基础的个人文件管理（</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/%E6%B8%B8%E8%AE%B0/">GameJam广州站摸鱼组一日游*2 游记</a></li>
+		</ul>
+	</div>
+</div>
+
+	
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Twitter" rel="noopener noreferrer" href="https://twitter.com/@ZeoVisn" target="_blank">
+				<svg class="widget-social__link-icon icon-twitter" viewBox="0 0 384 312" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg>
+				<span>Twitter</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/visnz" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:visn0518@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>visn0518@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget__link widget__link--taglist" href="/tags/adobe" title="adobe">adobe</a>
+		<a class="widget__link widget__link--taglist" href="/tags/c&#43;&#43;" title="c&#43;&#43;">c&#43;&#43;</a>
+		<a class="widget__link widget__link--taglist" href="/tags/gamejam" title="gamejam">gamejam</a>
+		<a class="widget__link widget__link--taglist" href="/tags/java" title="java">java</a>
+		<a class="widget__link widget__link--taglist" href="/tags/linux" title="linux">linux</a>
+		<a class="widget__link widget__link--taglist" href="/tags/nodejs" title="nodejs">nodejs</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e4%ba%92%e8%81%94%e7%bd%91" title="互联网">互联网</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9b%a2%e9%98%9f%e4%b8%9a%e5%8a%a1" title="团队业务">团队业务</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%ad%97%e5%b9%95" title="字幕">字幕</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%bd%b1%e8%a7%86%e5%90%8e%e6%9c%9f" title="影视后期">影视后期</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%96%87%e4%bb%b6" title="文件">文件</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%b5%aa" title="浪">浪</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%ae%a1%e7%90%86" title="管理">管理</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bc%96%e7%a8%8b%e6%80%9d%e7%bb%b4" title="编程思维">编程思维</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%ae%a1%e7%ae%97%e6%9c%ba" title="计算机">计算机</a>
+	</div>
+</div>
+</aside>
+
+	</div>
+		<footer class="footer" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+			<div class="container container-inner">
+				<p class="footer__copyright">&copy; 2018 * IN SHADOW. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad theme</a>.</span></p>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

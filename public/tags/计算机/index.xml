@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>计算机 on * IN SHADOW</title>
+    <link>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/</link>
+    <description>Recent content in 计算机 on * IN SHADOW</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 17 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>c&#43;&#43;结合V8模块扩展nodejs功能，用c&#43;&#43;处理复杂计算</title>
+      <link>/post/nodejscpp/</link>
+      <pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/nodejscpp/</guid>
+      <description>我团队在年底举办的青年实践活动“粿奔计划”中，线下游戏RPG采用Nodejs+cpp+html完成业务逻辑。
+因为V8引擎由c++完成，可以在cpp中直接引入&amp;lt;v8.h&amp;gt;，通过node-gyp与building.gyp结构文件渲染成一个node模块。cpp作为游戏引擎部分，保留可以被调用的js模块接口，在nodejs中引入模块并按平常调用。
+书写cc（cpp）文件 新建一个文件，这里用的是test.cc
+#include &amp;lt;node.h&amp;gt; #include &amp;lt;v8.h&amp;gt; #include &amp;lt;string&amp;gt; using namespace v8; using namespace std; void hello(const FunctionCallbackInfo&amp;lt;Value&amp;gt;&amp;amp; args) { Isolate* isolate = Isolate::GetCurrent(); //统一开头 获取js脚本上下文 int value = args[0]-&amp;gt;NumberValue() + args[1]-&amp;gt;NumberValue(); //将第一二个参数的数值相加 Local&amp;lt;Number&amp;gt; num = Number::New(isolate, value); //将相加的value转化为可返回的数据类型 String::Utf8Value param1(args[0]-&amp;gt;ToString()); String::Utf8Value param2(args[1]-&amp;gt;ToString()); //新建String对象，由参数强制转换为String而填充 string ret=string(*param1).string::append(string(*param2)); //以上完成简单的字符转换和衔接 Handle&amp;lt;Value&amp;gt; str = String::NewFromUtf8(isolate, ret.c_str() ); //通过ret.c_str()转化对象后构建新Handle（handle 是指向对象的指针 Local&amp;lt;String&amp;gt; str2= String::NewFromUtf8(isolate,&amp;quot;sss&amp;quot;); //创建一个可以用于返回的String类型，内容为“sss” args.GetReturnValue().Set(str); //获取传入参数的返回参数，设置str为返回参数 //如果传入的参数携带回调函数，则支持： // callback, 使用Cast方法来转换 Local&amp;lt;Function&amp;gt; callback = Local&amp;lt;Function&amp;gt;::Cast(args[1]); Local&amp;lt;Value&amp;gt; argv[1] = { // 拼接String String::Concat(Local&amp;lt;String&amp;gt;::Cast(args[0]), String::NewFromUtf8(isolate, &amp;quot; world&amp;quot;)) }; // 调用回调, 参数: 当前上下文，参数个数，参数列表 callback-&amp;gt;Call(isolate-&amp;gt;GetCurrentContext()-&amp;gt;Global(), 1, argv); } void helloA(const FunctionCallbackInfo&amp;lt;Value&amp;gt;&amp;amp; args) { //.</description>
+    </item>
+    
+    <item>
+      <title>最基础的个人文件管理（</title>
+      <link>/post/%E5%9F%BA%E6%9C%AC%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/%E5%9F%BA%E6%9C%AC%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</guid>
+      <description>今天又被某计算机道友提到，顺道一把抄过来。
+老问题如：
+ 当年买了1T磁盘，现在文件太多，系统太卡怎么办 文件太多乱七八糟的，重装系统太麻烦了还得重新整理 用了太久磁盘太慢游戏/PR要开半天怎么办  解决问题的方法：从一开始就做好文件管理（甩锅）
+个人文件的管理  从文件访问频度划分，如系统运行的数据和常年不用的冷数据之间的区分，凭个人喜好划分。我是划分成系统盘+热数据盘+冷数据盘（备份区、收藏区、归档区） 从所有权划分，系统的归属系统，用户的归属用户。Windows比如你别把个人文件复制到Program Files里区，类Unix比如/usr/bin/与/bin的划分（当然首先你得直到每个文件夹是做啥用的） 为存储划分功能，如1中提到的备份、收藏、归档。规划一个逃生舱，这部分的数据是需要重点维护的，整个盘坏掉了这部分可以逃生的。 定期整理、归档、清理文件。我是按日期做归档。 备份：使用云备份工具、简单的复制/冗余备份 该用工具的地方就用不要嫌麻烦  工具：Git等版本管理工具、Everything等全盘搜索工具、坚果云等同步工具
+折腾的管理  磁盘冗余阵列RAID牺牲空间保证安全 你可能需要数据库来帮你管理文件 NAS系统（出门右转群晖 手写人工智能算法，分析个人文件特征自动做归类管理（Nice  具体场景的文件管理  程序项目开发，工程文件相对较小（没到G级别）优先使用版本管理器 影视制作，素材库文件大，优先使用素材管理器（Bridge或数据库） 多人共同编辑推荐在线合作编辑软件如石墨文档  使用注意 反正磁盘都是有寿命的，减少擦写/减少磁盘随机访问都算是一种保护了
+在下载/保存文件的时候做好分类，临时使用的用完记得归档或删除
+个人文件不要过度依赖系统（建议定期刷系统
+尝试性修改，使用副本进行
+etc.
+回答一开始的几个问题
+A1: 当年买了1T磁盘，现在文件太多，系统太卡怎么办。
+Q1: 整理，换SSD，重装系统
+A2: 文件太多乱七八糟的，重装系统太麻烦了还得重新整理
+Q2: 整理，换SSD，重装系统
+A3: 用了太久磁盘太慢游戏/PR要开半天怎么办
+Q3: 整理，换SSD，重装系统</description>
+    </item>
+    
+    <item>
+      <title>Java Rebase</title>
+      <link>/post/java-rebase/</link>
+      <pubDate>Fri, 26 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/java-rebase/</guid>
+      <description>写在前面 Java囧境 作为面向对象炒得最火的语言，Java曾依靠虚拟机的跨平台特性撑起计算机半臂江山。
+时至今日，Java已经略显疲惫，有些高不成低不就的感觉。
+ 试图培养成一种面向通用的语言，在py、R、Go等面向专业语言诞生之后，java的通用优势不足。  在安卓领域，第二代第三代JVM语言横空出世，Kotlin快速夺取市场。 在服务器领域，因为历史遗留问题JavaSRE目前依然为主流，但不是长久之计。新的服务器架构快速迭代，后起之秀Py、nodejs也在快速增长。 桌面领域Java一直有力使不出来，底部依赖大、自家GUI又刚不过qt系列 语言语法及其体系相对冗长、功能迭代速度相对较慢，底层相对重量级  甲骨文的收购、商业化与闭源一定程度上延迟了技术层面的增长 曾经的跨平台特性已经不再是其核心竞争力 Java的体系相当庞大，光是服务器框架就可以学完大学四年  （其实感觉有点像Apache与Nginx port80之争那份漫画，老一辈与晚辈各自的优势）
+所提的点不是贬低Java，是较理性地描述目前的问题
+个人发展瓶颈 本身自己是学习Java内容居多的，从高中一本《从如坑到弃疗》，到大学起来接触各种教新的技术。
+大学生迷茫直观上来说，无非分为两种
+ 了解得太少 了解得太多  中学的时候不知道java是什么，一直摇摆不定学不学计算机，特迷茫。报考了志愿进了计算机这一大坑，诶，目标算是定下来了，不会太迷茫，java就继续学下去。直到接触了更多更先进的技术，再次陷入迷茫。
+断舍离提供了一些方法论来解决问题，做出了决定：放弃java，转向其他语言
+上升到另一个层面，变成语言无非只是解决问题的方法而以，所以这个决定并不是什么大事。我现在要做的是把大学这一两年来断断续续学到的Java的内容进行归纳总结，毕竟编程设计语言是具有共性的，在Java学到的解决问题的思路，完全可以应用到其他语言、学科和领域。所以在此开了这篇文章。
+所以标题引用了git中一个专业名词Rebase，更直观的感受是更换基底的意思。
+文所涉及的内容，是个人从Java中学习而来的，并不是Java独有的，请勿混淆
+Java总览 语言特性
+ 面向对象（封装继承多态，不允许多重继承） 跨平台(once code, run debug everywhere) 底层解释型（虚拟机机器码） 安全检查（你可能需要Rust） 强类型、静态语言 内存垃圾gc 大小写严格、默认驼峰命名法  技术与名词 JVM(Java Virtual Machine) Java实体运行软件，通过编程Java代码，编译成class机器码，由JVM适配平台，执行机器码内容（以此实现跨平台）。当然，JVM不一定由Java编写，使用Ruby语言+JRuby编译器等照样可以调用JVM。具体的计算机程序编译过程请自行了解。
+JRE(Java Runtime Environment)Java运行环境，包含一个JVM和一系列标准类库
+JDK(Java Development Kit) 程序开发库，包含了接口等一系列开发必备软件，通过Java语法导入、调用
+JDK的实体文件结构
+   目录 描述     \bin 编译器、测试与调用等工具   \demo 代码示例   \docs html的类库文档   \include 用于编译本地库、本地方法的文件   \jre 运行环境所需的文件   \lib 类库文件   \src 类库源文件    SE、ME、EE Java的三个不同版本，分别对应小型设备、桌面与简单服务器、企业及服务器三种平台</description>
+    </item>
+    
+    <item>
+      <title>跳出OO思想与OODP-杂记</title>
+      <link>/post/disoodp/</link>
+      <pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/disoodp/</guid>
+      <description> 跳出面向对象思想 整理了一遍自己的笔记，里面有不少关于面向对象设计的内容，整理完放到了Gitbook，里面包括了OO原则、二十三设计模式、跳出面向对象思想三个部分。其中相对来说较为具有启发性的是第三部分的跳出面向对象思想，引用了来自大佬Casa Taloyum博客的三篇跳出面向对象思想。
+更具体的关于面向对象思维的局限性可以见 面向对象编程的弊端是什么？ - invalid s的回答 - 知乎。
+其最核心的问题在于，在所有的编程设计都是辅助完成业务的前提下，不同的手段（面向过程、面向对象、面向函数等）能否尽力交付任务。也不能否认面向对象思维给计算机带来的飞跃，在此基础上会有更先进的思维，这是大家愿意看到的。
+关于设计模式 知乎的回答里业界大佬也以相对实际使用的角度提到了设计模式：“一切皆对象实质上是在鼓励堆砌毫无意义的喋喋不休，并且用这种战术层面都蠢的要命的喋喋不休来代替战略层面的考量。大部分人——注意，不是个别人——甚至被这种无意义的喋喋不休搞出了神经质，以至于非要在喋喋不休中找出意义：没错，我说的就是设计模式驱动编程，以及如此理解面向对象编程。”
+承认其所提到的，“大家使用过度，反而忘记了设计的初衷”这一部分内容
+作者原用于纠正“所以用面向对象语言写出来的东西一定更清晰、易懂”的误解（虽然我也比较同意），单独来说更偏向狭义上的设计模式；设计模式并非只存在于面向对象设计之中，广义上是为所有的程序设计提供了解决方案的思路。
+设计模式是一种抽象“抽象”的技术（或是艺术），GoF设计模式一书具有划时代意义也在于它完成了对抽象逻辑的一次抽象，也给软件工程提供了一个不同角度的世界观和方法论。引用书中一段较为中肯的话
+ 本书中涉及的设计模式并不描述新的或未经证实的设计，我们只收录那些在不同系统中多次使用过的成功设计。这些设计的绝大部分以往并无文本记录，它们或是来源于面向对象设计者圈子里的非正式交流，或是来源于某些成功的面向对象系统的某些部分，但对设计新手来说，这些东西是很难学得到的。尽管这些设计不包括新的思路，但我们用一种新的、便于理解的方式将其展现给读者，即：具有统一格式的、已分类编目的若干组设计模式。
+ 而我们可能更需要注意的是避免一些问题，如
+ 只了解模式、不了解原因、场景 过度设计、使用，忘记初衷问题  设计模式应当解决实际的问题，理论辅佐完成实践 设计模式应当变成一种行业内交流的货币，用于沟通交流
+相关链接
+ 面向对象程序设计 - wiki 知乎 - 面向对象编程的弊端是什么？ 知乎 - 设计模式有何不妥，所谓的荼毒体现在哪？ 知乎 - 如何正确地使用设计模式？ Arch Linux 哲学  </description>
+    </item>
+    
+    <item>
+      <title>Archlinux 一把梭</title>
+      <link>/post/arch-i8so/</link>
+      <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/arch-i8so/</guid>
+      <description>记录下平时可能会用到的（反正也是查阅用的）一把锁指令
+里面大多数是简单基础命令各位大神就不用看了
+同学你听过Archlinux吗没有 Wifi热点 软件包：create_ap(community)
+sudo create_ap &amp;lt;无线网卡&amp;gt;[&amp;lt;有线网卡&amp;gt;][&amp;lt;SSID&amp;gt;[&amp;lt;passwd&amp;gt;]]  找不到网卡就ifconfig - 软件包：net-tools(core)
+Unreal Engine 4 虚幻引擎在Windows上直接有引擎管理器，Linux上目前只能从github下载源码自己编译。（官方有贴build on liunx的）。
+感谢axionl大佬提醒yaourt仓库里面有，也是gitclone，只是文件太大自己网络状况也不是很理想（手动gitclone断流有点吃不消），可以直接下载zip
+一些基础工具如git etc.自行安装，补安装mono clang35 dos2unix cmake
+ UnrealEngine4是隶属组织没有公开，加入组织fork一下 clone最新/稳定的版本git clone https://github.com/EpicGames/UnrealEngine.git,大小接近两个G（后面放着没看了忘记具体多大了），也可以指定版本 进入目录，依次执行Setup.sh，GenerateProjectFiles.sh检查构建环境 make UE4Editor-Linux-Debug或直接make（睡觉去 启动器位置：./Engine/Binaries/Linux/UE4Editor（如果刚刚执行UE4Editor-Linux-Debug的话是运行UE4Editor-Linux-Debug，其他类似） 玩得开心  可能出现的问题
+ git clone时候文件过大水管过小，断流会收到github的EOF，请保持网络通畅（为啥不直接打开网页下载呢） 请保持有正确可用的平台环境和足够的计算性能和资源，毕竟需要存储、检查、编译等 之前有一个版本直接就找不到对应库文件，编译时候各种爆炸 有一个版本跑完报ShaderCompileWorker 没有被编译 有些版本跑make UE4Editor-Linux-Debug没问题而make爆炸，也有反过来的。看脸 总之，有问题就把滚包+换版本编译  实在不行的朋友
+ 更换发行版，去debian受气 更换操作系统，Windows老可爱了 放弃使用UE4  NTFS只读系统 软件包：ntfs-3g / ntfs-config(aur)
+然后卸载+挂载 / reboom
+设置开机启动ruijie… ruijie的启动脚本（包括网卡启动）已经写好封装在/usr/bin/goruijie中
+sudo touch /usr/lib/systemd/system/goruijie.service  service配置文件可见鸟哥在gitbook的整理
+[Unit] Description=Ruijie AutoSetup Service After=network.</description>
+    </item>
+    
+  </channel>
+</rss>

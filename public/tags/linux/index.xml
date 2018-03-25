@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on * IN SHADOW</title>
+    <link>/tags/linux/</link>
+    <description>Recent content in Linux on * IN SHADOW</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 16 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Archlinux 一把梭</title>
+      <link>/post/arch-i8so/</link>
+      <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/arch-i8so/</guid>
+      <description>记录下平时可能会用到的（反正也是查阅用的）一把锁指令
+里面大多数是简单基础命令各位大神就不用看了
+同学你听过Archlinux吗没有 Wifi热点 软件包：create_ap(community)
+sudo create_ap &amp;lt;无线网卡&amp;gt;[&amp;lt;有线网卡&amp;gt;][&amp;lt;SSID&amp;gt;[&amp;lt;passwd&amp;gt;]]  找不到网卡就ifconfig - 软件包：net-tools(core)
+Unreal Engine 4 虚幻引擎在Windows上直接有引擎管理器，Linux上目前只能从github下载源码自己编译。（官方有贴build on liunx的）。
+感谢axionl大佬提醒yaourt仓库里面有，也是gitclone，只是文件太大自己网络状况也不是很理想（手动gitclone断流有点吃不消），可以直接下载zip
+一些基础工具如git etc.自行安装，补安装mono clang35 dos2unix cmake
+ UnrealEngine4是隶属组织没有公开，加入组织fork一下 clone最新/稳定的版本git clone https://github.com/EpicGames/UnrealEngine.git,大小接近两个G（后面放着没看了忘记具体多大了），也可以指定版本 进入目录，依次执行Setup.sh，GenerateProjectFiles.sh检查构建环境 make UE4Editor-Linux-Debug或直接make（睡觉去 启动器位置：./Engine/Binaries/Linux/UE4Editor（如果刚刚执行UE4Editor-Linux-Debug的话是运行UE4Editor-Linux-Debug，其他类似） 玩得开心  可能出现的问题
+ git clone时候文件过大水管过小，断流会收到github的EOF，请保持网络通畅（为啥不直接打开网页下载呢） 请保持有正确可用的平台环境和足够的计算性能和资源，毕竟需要存储、检查、编译等 之前有一个版本直接就找不到对应库文件，编译时候各种爆炸 有一个版本跑完报ShaderCompileWorker 没有被编译 有些版本跑make UE4Editor-Linux-Debug没问题而make爆炸，也有反过来的。看脸 总之，有问题就把滚包+换版本编译  实在不行的朋友
+ 更换发行版，去debian受气 更换操作系统，Windows老可爱了 放弃使用UE4  NTFS只读系统 软件包：ntfs-3g / ntfs-config(aur)
+然后卸载+挂载 / reboom
+设置开机启动ruijie… ruijie的启动脚本（包括网卡启动）已经写好封装在/usr/bin/goruijie中
+sudo touch /usr/lib/systemd/system/goruijie.service  service配置文件可见鸟哥在gitbook的整理
+[Unit] Description=Ruijie AutoSetup Service After=network.</description>
+    </item>
+    
+  </channel>
+</rss>
