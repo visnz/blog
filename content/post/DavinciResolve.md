@@ -14,9 +14,9 @@ thumbnail: "pics/davinci/logo.png"
 
 当然，硬件调色台不是必须的，（由于穷~~（其实是装逼）~~）细节辅助调节等小需求基于折腾地去尝试了一下
 
-![效果图](pics/davinci/dvc.jpg)
+![效果图](/pics/davinci/dvc.jpg)
 
-[实现效果视频](pics/davinci/dvc.mp4)
+[实现效果视频](/pics/davinci/dvc.mp4)
 
 1. iPad上安装element-Vs，打开后需要和主机进行连接（主从式WiFi首选，pc上开wifi）
 
