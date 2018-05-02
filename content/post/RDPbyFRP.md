@@ -4,7 +4,7 @@ date: 2018-05-02
 type: ["计算机"]
 weight: 1
 tags: ["Windows","计算机"]
-thumbnail: "pics/RDP.jpg"
+thumbnail: "pics/RDP.png"
 ---
 
 ## 背景
