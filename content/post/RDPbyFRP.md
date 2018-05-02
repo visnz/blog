@@ -4,7 +4,7 @@ date: 2018-05-02
 type: ["计算机"]
 weight: 1
 tags: ["Windows","计算机"]
-thumbnail: "pics/oodp.jpg"
+thumbnail: "pics/RDP.jpg"
 ---
 
 ## 背景
@@ -112,4 +112,4 @@ RDP根据设置可以重定向音频，不过会有折损。色彩只需要考�
 
 - 可以随时随地登录内网工作站，像极了钢铁侠的维罗妮卡？（复联2中反浩克空间补给站）
 
-- [ ] Mac貌似无法连接
+- Mac貌似还无法连接？
