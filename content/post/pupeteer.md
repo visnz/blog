@@ -23,8 +23,9 @@ thumbnail: "pics/pup/title.png"
 （虽然后来发现模拟登陆后更麻烦…索性一个一个自己复制了…）
 
 ## 工具
-[Nodejs](https://nodejs.org/)
-[Puppeteer](https://github.com/GoogleChrome/puppeteer)：无图形化运行chrome的API
+- [Nodejs](https://nodejs.org/)
+
+- [Puppeteer](https://github.com/GoogleChrome/puppeteer)：无图形化运行chrome的API
 
 ## 编码
 ``npm install --save puppeteer``
@@ -73,6 +74,7 @@ require("child_process").exec(`axel -n 10 \"`+result["ad"]+`\" -o ./`+addr["key"
 
 运行结果
 ![](/pics/pup/03.png)
+![](/pics/pup/05.png)
 
 ### 遇到的问题
 
