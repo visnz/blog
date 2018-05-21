@@ -51,7 +51,7 @@ thumbnail: "/pics/prores/ffmpeg.png"
 
 ## 结尾
 
-貌似没有找到直接进行ProRes Decode in PC的方法…？（这就是FCP存在的理由吗？）
+貌似没有找到直接进行ProRes Encode in PC的方法…？（这就是FCP存在的理由吗？）
 
 ## 更多
 
