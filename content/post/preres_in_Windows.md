@@ -4,7 +4,7 @@ date: 2018-05-21
 type: ["影视后期"]
 weight: 1
 tags: ["计算机","影视后期","编码","ProRes"]
-thumbnail: "/prores/ffmpeg.png"
+thumbnail: "/pics/prores/ffmpeg.png"
 ---
 ## 方法来源
 
@@ -24,7 +24,7 @@ thumbnail: "/prores/ffmpeg.png"
 
 ## 过程
 
-- FFmpeg解压，执行文件在``/bin``中
+- FFmpeg解压，执行文件``ffmpeg.exe``在``/bin``中
 ![](/pics/prores/01.png)
 
 - AnotherGUI安装也是一把梭，画面简洁明了，常用英语
@@ -50,3 +50,7 @@ thumbnail: "/prores/ffmpeg.png"
 
 ## 结尾
 貌似没有找到直接进行ProRes Decode in PC的方法…？（这就是FCP存在的理由吗？）
+
+## 更多
+[DaVinci Resolve 穷人低配虚拟工作台](https://visnz.github.io/post/davinciresolve/)
+[pr素材代理 => 大素材打包分发剪辑 && 高计算量剪辑](https://visnz.github.io/post/video-proxy/)
