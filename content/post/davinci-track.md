@@ -55,6 +55,8 @@ thumbnail: "pics/fusion/fusion.png"
 
 ## 结尾
 
+- [视频效果](/pics/fusion/效果.mov)
+
 - 提供了更灵活的调节工具（当然需要你的硬件）
 
 - 提供了更清晰明朗的工程结构
