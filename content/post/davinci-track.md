@@ -21,6 +21,8 @@ thumbnail: "pics/fusion/fusion.png"
 于是随机找了一段电脑里**带有运动趋势的素材**和**一个白条**做尝试
 
 [视频素材](/pics/fusion/原片.mov)
+
+图片素材
 ![素材](/pics/fusion/02.png)
 
 结果视频：
