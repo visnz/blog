@@ -13,31 +13,25 @@ weight: 10
 
 某在校学生
 
-未婚且星座血型未定
+单身
 
 爱好广泛，多愁善感
 
-勤奋好学各大门派内功但无一炼成
-
-~~曾经发誓不回老家发展但是怂了~~
-
-~~gakki不是我老婆，我的心里只有小鱼~~
+~~我的心里只有小鱼~~
 
 ## 擅长
 
-薛定谔式可靠交付工作
+谔式可靠交付工作
 
-游戏的吹拉弹唱
+游戏吹拉弹唱
 
-可能会剪片但不敢拿给大佬看
+可能会剪片
 
-密切关注大陆版图混凝土撑杆跳辅助工具技术
+密切关注大陆版图辅助技术
 
-闲置上万条tg信息的忍耐能力
 
-## Keep Follow
 
-- Neo龙
+## Following
 
 - REOL
 
@@ -49,11 +43,11 @@ weight: 10
 
 ## Contact
 
-Email: visn0518@gmail.com
+Email: visn0518@gmail.com & visnz@guediao.cn
 
 Github: [visnz](https://github.com/visnz)
 
-GitBook: [visnz](https://www.gitbook.com/@visnz)
+~~GitBook: [visnz](https://www.gitbook.com/@visnz)~~
 
 Telegram: [@visnZ](https://t.me/visnZ)
 

@@ -4,6 +4,7 @@ date: 2018-01-15
 type: ["about"]
 weight: 1
 thumbnail: "pics/first.png"
+draft: true
 ---
 
 # First Update
