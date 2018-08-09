@@ -4,7 +4,7 @@ date: 2018-08-09
 type: ["影视后期"]
 weight: 1
 tags: ["影视后期"]
-thumbnail: "pics/fusion/fusion.png"
+thumbnail: "pics/flv/shuoshu.png"
 ---
 
 ## 背景
