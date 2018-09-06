@@ -12,7 +12,7 @@ thumbnail: "pics/tinypng/logo.jpg"
 
 ## TinyPNG
 TinyPNG只是众多png压缩算法中的一种，相对优秀的还有pngquant/pngout
-![QQ音乐技术团队分析](/pics/tinypng/5.png)
+![QQ音乐技术团队分析](/pics/tinypng/5.jpg)
 
 通过取出元数据、将RGB24位色压缩到索引8位色实现尽可能大的色彩保留
 ![](/pics/tinypng/3.png)
