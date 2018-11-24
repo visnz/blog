@@ -43,8 +43,11 @@ thumbnail: "pics/fourier/fourier.webp"
 - numpy (快速運算矩陣)
 
 > opencv 基本使用
+>
 > ``cv2.imshow('imageName1',cv2.imread("./img/cloud.jpg"))``顯示圖像
+>
 > ``cv2.waitKey()``imshow配套使用，阻塞線程
+>
 > ``cv2.imwrite('imageName.png',img)``寫入圖像
 
 導入包：
@@ -109,7 +112,6 @@ def InverseFourier(originImg,complexMartixReal,complexMartixImag):
                     tmp+=int(euler/(width*height))
             newimg[u][v]=abs(tmp)
     return newimg
-
 ```
 
 測試代碼：
