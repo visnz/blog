@@ -31,7 +31,7 @@ thumbnail: "pics/fourier/fourier.webp"
 [更多關於頻譜圖的解讀](https://zhuanlan.zhihu.com/p/29442552)
 
 圖像應用上用於解析、修復條紋：
-![圖像傅里葉應用](https://pic4.zhimg.com/80/feea0733e1b40911bd2a546d97677187_hd.png)[^2]
+![圖像傅里葉應用](/pics/fourier/01.png)[^2]
 
 頻譜圖的亮度分佈越集中，畫面越柔和，則原圖畫面越平緩。若亮點四散分佈，則畫面又較強條幅、亮度差異等情況。
 
