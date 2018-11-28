@@ -51,11 +51,12 @@ then run ``sudo echo "" && rj.sh >/dev/null 2>&1 &``
 3. 重啓PulseAudio server & Bluetooth生效
 ```bash
 killall pulseaudio
-pulseaudo --start
+pulseaudio --start
 systemctl restart bluetooth
 ```
+
 ---
-11月28日後再填大坑
+18年11月28日後再填大坑
 
 ## 免密登陸
 
@@ -64,11 +65,20 @@ systemctl restart bluetooth
 2. 服務器獲取pubkey:
 
 ```bash
-touch ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh
+mkdir ~/.ssh || touch ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh
 echo [key_pub] >> ./authorized_keys
 ```
 
-3. 同時可以用於github、各種遠程服務器實例的免密登陸
+3. 同時可以用於github（需要以ssh方式clone）、各種遠程服務器實例的免密登陸
+
+```bash
+#!/bin/bash
+useradd -m $1 && echo $1":"$1"8875" |chpasswd $1
+mkdir /home/$1/.ssh || touch /home/$1/.ssh/authorized_keys && chmod 600 /home/$1/.ssh/authorized_keys && chmod 700 /home/$1/.ssh
+chown $1:$1 /home/$1/.ssh/authorized_keys
+chown $1:$1 /home/$1/.ssh
+echo $2 >> /home/$1/.ssh/authorized_keys
+```
 
 ## uget
 
