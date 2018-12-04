@@ -5,6 +5,7 @@ type: ["计算机"]
 weight: 1
 tags: ["Linux","计算机","服務器"]
 thumbnail: "pics/arch.png"
+draft: true
 ---
 
 1. git
