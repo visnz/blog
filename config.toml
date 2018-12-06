@@ -9,7 +9,7 @@ googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 
 [Author] # Used in authorbox
     name = "visn Z"
-    bio = "(()=>console.log("hello world!"))()"
+    bio = "(()=>console.log('hello world!'))()"
     avatar = "img/avatar.jpg"
 
 [Params]
