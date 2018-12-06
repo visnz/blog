@@ -9,8 +9,8 @@ googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 
 [Author] # Used in authorbox
     name = "visn Z"
-    bio = ""
-    avatar = "img/avatar.png"
+    bio = "(()=>console.log("hello world!"))()"
+    avatar = "img/avatar.jpg"
 
 [Params]
     subtitle = "" # Subtitle of your site. Used in site header
@@ -34,7 +34,7 @@ googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 
     # Enable "Social" widget, if any of "social_*" set a value
     #social_facebook = "username"
-    social_twitter = "@ZeoVisn"
+    #social_twitter = "@ZeoVisn"
     #social_linkedin = "username"
     social_github = "visnz"
     social_email = "visn0518@gmail.com"
