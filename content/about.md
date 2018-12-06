@@ -11,37 +11,39 @@ weight: 10
 
 @visnZ
 
-某在校学生
+## Tutorial
 
-单身
+22歲，是個綠軍
+
+身居廣州蝸居
 
 爱好广泛，多愁善感
 
-~~我的心里只有小鱼~~
-
-## 擅长
-
-谔式可靠交付工作
-
-游戏吹拉弹唱
-
 可能会剪片
 
-密切关注大陆版图辅助技术
+膚淺地喜歡手沖
 
+語言能力不行但喜歡自由行
 
+買遊戲但不玩
 
-## Following
+畢業設計苦逼中
 
-- REOL
+來人把這口鍋放在桶身上
 
-- Bilibili
+## Keep Following
 
-- 崩崩崩
+- Reol
 
-- 粿条青年
+- Aimer
 
-## Contact
+- SRE
+
+- Google Chrome
+
+- Arch Linux
+
+## Contact Me
 
 Email: visn0518@gmail.com & visnz@guediao.cn
 
