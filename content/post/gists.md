@@ -5,7 +5,6 @@ type: ["計算機"]
 weight: 1
 tags: ["計算機","github","vscode"]
 thumbnail: "/pics/vscode/vscode.png"
-draft: true
 ---
 ## 問題描述
 
