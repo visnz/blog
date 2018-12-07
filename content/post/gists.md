@@ -1,5 +1,5 @@
 ---
-title: "VSCode記 Gists同步部署生產環境"
+title: "VSCode記 Gists同步部署生產環境(Atom&Vim)"
 date: 2018-12-05
 type: ["計算機"]
 weight: 1
@@ -33,14 +33,65 @@ VSCode 中有一個提供 Setting Sync Anywhere 的擴展，使用 Github 提供
 
 [詳細操作步驟參考](https://medium.com/@mvpdw06/%E5%A6%82%E4%BD%95%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E9%9B%BB%E8%85%A6%E4%B8%8A%E5%90%8C%E6%AD%A5-vs-code-%E7%9A%84%E8%A8%AD%E5%AE%9A-82e7cd818ea7)
 
+### Atom
+
+Atom裏也有支持設置同步的``sync-settings``
+
+``apm install sync-setting``
+
+也需要提供gist token 不過需要自己手動在gists上創建一個gist
+
+將gistID在設置中設置
+
 ### vim
 
-vim方面寫了個腳本來完成同步
+vim方面寫了個js腳本來完成下載 上傳就懶得寫了直接webpage edit一下得了（懶
+
+```js
+const https=require("https")
+const fs = require('fs');
+const gistID="------------------------------------"
+const remoteFilename="--------------"
+const filepath="------------------------"
+
+download(gistID,remoteFilename,filepath)
+
+//提供指定gistID，遠程文件名（嗯目前只支持了一個），以及保存的地方
+function download(gistID,remoteFilename,filepath){
+    //調用github api，獲取指定gist的相關信息
+    //需要附上headers
+    https.get("https://api.github.com/gists/"+gistID,{headers:{'User-Agent':'gister'}},function(res){
+        var jsondata="";
+        res.on('data', function(data){
+            jsondata+=data
+            //數據持續讀取，獲取指定gist的動態地址
+        });
+        res.on('end',function(){
+            // 等待全部下載完，獲取gist內容
+            url=JSON.parse(jsondata)['files'][remoteFilename]['raw_url'];
+            https.get(url,{headers:{'User-Agent':'gister'}},function(res){
+                var gistdata="";
+                res.on('data', function(data){
+                    gistdata+=data
+                    //獲取文本
+                });
+                res.on('end',function(){
+                    fs.stat(filepath,function(err,stat) {
+                        //若文件不存在則創建文件
+                        if(!(stat&&stat.isFile())) {fs.open(filepath,'w',(e,fd)=>{console.log(e);})}
+                    });
+                    fs.writeFileSync(filepath,gistdata);
+                    console.log("download finished");
+                });
+            })
+        });
+    })
+}
 ```
 
-```
+[Github API支援](https://segmentfault.com/a/1190000015144126#articleHeader4)
 
-[Github KPI支援](https://segmentfault.com/a/1190000015144126#articleHeader4)
+[Github API v3 手冊](https://developer.github.com/v3/gists/)
 
 ## 寫在最後
 
