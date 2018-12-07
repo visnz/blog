@@ -85,3 +85,24 @@ echo $2 >> /home/$1/.ssh/authorized_keys
 [瀏覽器插件](https://chrome.google.com/webstore/detail/uget-integration/efjgjleilhflffpbnkaofpmdnajdpepi)
 
 ``sudo pacman -S uget uget-integrator-chrome uget-integrator-chromium``
+
+
+## telegram 
+KDE Real Time Chatting
+
+
+
+
+## fcitx in chromium & vscode
+arch只裝了個最小包，安裝上fcitx後，生成配置文件
+
+~/.xprofile
+```bash
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+```
+
+補上安裝：fcitx-qt4 fcitx-gtk3 fcitx-gtk2 
+
+chromium vscode裏可以使用
