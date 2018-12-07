@@ -2,7 +2,7 @@
 title: "修正 达芬奇xml剪辑表 素材出入点错误"
 date: 2018-09-03
 type: ["影视后期"]
-weight: 1
+weight: 10
 tags: ["影视后期","达芬奇"]
 thumbnail: "pics/dvcxmlfix/logo.png"
 ---

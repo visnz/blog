@@ -2,7 +2,7 @@
 title: "修复ae中英版本差异导致js表达式错误"
 date: 2018-11-02
 type: ["影视"]
-weight: 1
+weight: 10
 tags: ["ae","影视","JavaScript"]
 thumbnail: "pics/aeexpfix/ae.png"
 ---

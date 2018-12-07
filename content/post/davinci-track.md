@@ -2,7 +2,7 @@
 title: "DaVinci/Fusion 节点式效果软件初体验:Tracker跟踪效果"
 date: 2018-06-03
 type: ["影视后期"]
-weight: 1
+weight: 10
 tags: ["影视后期","达芬奇"]
 thumbnail: "pics/fusion/fusion.png"
 ---

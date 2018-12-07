@@ -2,7 +2,7 @@
 title: "MAC系统手动挂载读写NTFS文件系统"
 date: 2018-09-02
 type: ["计算机"]
-weight: 1
+weight: 10
 tags: ["计算机","MAC","NTFS"]
 thumbnail: "/pics/mac-ntfs/logo.jpg"
 ---

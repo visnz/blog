@@ -2,7 +2,7 @@
 title: "《崩坏3》浅层分析"
 date: 2018-06-06
 type: ["游戏分析"]
-weight: 1
+weight: 10
 tags: ["崩坏3","游戏分析"]
 thumbnail: "pics/bbb/IMG_0602.jpg"
 ---

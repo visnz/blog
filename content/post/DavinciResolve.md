@@ -2,7 +2,7 @@
 title: "DaVinci Resolve 穷人低配虚拟工作台"
 date: 2018-03-25
 type: ["影视后期"]
-weight: 1
+weight: 10
 tags: ["影视后期","达芬奇"]
 thumbnail: "pics/davinci/logo.png"
 ---

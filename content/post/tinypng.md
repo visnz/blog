@@ -2,7 +2,7 @@
 title: "TinyPNG初体验"
 date: 2018-09-06
 type: ["影视后期"]
-weight: 1
+weight: 10
 tags: ["影视后期","图片"]
 thumbnail: "pics/tinypng/logo.jpg"
 ---

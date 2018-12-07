@@ -2,7 +2,7 @@
 title: "pr素材代理 => 大素材打包分发剪辑 && 高计算量剪辑"
 date: 2018-03-13
 type: ["影视"]
-weight: 1
+weight: 10
 tags: ["影视后期","Adobe"]
 thumbnail: "pics/pr.png"
 ---
