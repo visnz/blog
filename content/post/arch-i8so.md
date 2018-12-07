@@ -90,6 +90,11 @@ echo $2 >> /home/$1/.ssh/authorized_keys
 ## telegram 
 KDE Real Time Chatting
 
+## steam for windows
+
+使用[snap安裝](https://docs.snapcraft.io/installing-snap-on-arch-linux/6758)：A universal app store for Linux
+
+補包：fontconfig lib32-fontconfig
 
 
 
@@ -106,3 +111,10 @@ export XMODIFIERS="@im=fcitx"
 補上安裝：fcitx-qt4 fcitx-gtk3 fcitx-gtk2 
 
 chromium vscode裏可以使用
+
+
+## git GUI
+archlinuxcn/gitkraken
+
+## snap
+
