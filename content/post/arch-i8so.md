@@ -87,9 +87,6 @@ echo $2 >> /home/$1/.ssh/authorized_keys
 ``sudo pacman -S uget uget-integrator-chrome uget-integrator-chromium``
 
 
-## telegram 
-KDE Real Time Chatting
-
 ## steam for windows
 
 使用[snap安裝](https://docs.snapcraft.io/installing-snap-on-arch-linux/6758)：A universal app store for Linux
@@ -115,6 +112,4 @@ chromium vscode裏可以使用
 
 ## git GUI
 archlinuxcn/gitkraken
-
-## snap
 
