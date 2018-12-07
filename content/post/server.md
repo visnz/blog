@@ -8,10 +8,5 @@ thumbnail: "pics/arch.png"
 draft: true
 ---
 
-1. git
-2. calendar轉發服務器
-3. telebot-wechat機器人
-
-## 運維筆記
-1. 用戶登錄信息：``last``
-2. 查看-修改時區：``date -R; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime``
+1. git 服務器
+2. telebot-wechat機器人
