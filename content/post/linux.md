@@ -13,6 +13,12 @@ draft: true
 	Linux: ext3 ext4 xfs
 ## 目录结构
 - 通常/作为根目录，/usr（用户软件库）,/home（用户家目录）,/var（服务目录）会单独规划。
+    - /usr里会有单独的bin sbin lib lib64 share local 
+    - /var里有 log 文件、静态 http 服务的文件地址等
+    - /usr/share/doc 程序文档，man 将访问
+    - /usr/local //软件源码编译安装的附加软件库
+    - /usr/bin   实现系统 扩展功能 的可执行文件
+    - /usr/share 结构独立的数据/文件储存器
 
 - /boot   #系统启动需要的文件（内核）
 
@@ -20,12 +26,25 @@ draft: true
     - 内存<4G，设置二倍。
     - 内存>4G，swap分区大小等于物理内存。
 
+- /bin 系统基本命令 /sbin 系统相关命令 /etc 配置 /lib[64] 库（内核模块在这） /opt 第三方软件 /media  #挂载媒体
+
+- /dev pts 终端 null 空 random 随机
+
+- proc  #伪文件系统，内核参数的映射文件
+- sys   #伪文件系统，系统硬件参数的映射文件
+
 ## 工具使用
 - 备份工具：``dump``备份 ``restore``恢复
 - 打包工具：``tar/gzip/zcat/bzip2/compress/7z``
 - C家工具：``gcc/g++``编译器``gdb``调试器
 
 ## 运维相关
+- 网卡信息：``、etc/sysconfig/network-scripts/``
+
+- ``route -n``   #查看路由表
+
+- ``/etc/resolv.conf``  #dns的全局配置文件
+
 - 例行工作：``crontab``（/etc/crontab）
 
     - 分 时 日 月 周（周和月、日调用有冲突）
@@ -39,6 +58,11 @@ draft: true
     - ``0 0 * * * pacman -Syu``每天自动滚包一次
 
 ## 基础使用
+
+- ``tty``查看当前 tty 终端=>``/dev/pts/*``，可以用于重定向输出
+
+- ``init *`` runlevel
+
 - ``&``丢后台
 
 - ``... >/dev/null 2>&1 `` 丢弃 log 与错误
@@ -49,15 +73,31 @@ draft: true
 
 - 端口占用检查``netstat -anp|grep [port]``
 
+- 变量修改：``export LANG=zh_CN.UTF-8``变量追加：``export LANG=$LANG:en_US.UTF-8``
+
+- sudo组：``echo "%sudoer ALL=(ALL:ALL) ALL">> /etc/sudoers``
+
+- ``dd if=* of=* bs=1M count=200``
+
+- 查看查找：``file``、``type``、``whereis``
+
+- ``locate``：查找，使用 mlocate 包，使用 updatedb 更新数据库
+
 ## 桌面工具
 
 - ``pitivi``：影片编辑软件
+
 - ``shotwell``：图片管理器
+
 - ``gimp``：Linux下的图片编辑工具（PS）
+
 - ``gitkarken``：开源且免费的 git 可视化管理工具（官方推荐）
+
+- ``LibreOffice``：office
 
 ## 等待摸索
 - [ ] vim
+- [ ] dump
 
 ## 摘录
 
@@ -89,3 +129,33 @@ draft: true
   else printf("fork fail\n", );
   ```
  
+ ## 设计原则
+
+ Linux设计原则：
+
+	1. 单一目的的小工具组成
+
+	2. 一切皆文件
+
+	3. 尽量避免与用户交互
+
+	4. 所有的配置文件都保存为纯文本格式
+
+## 网站资源
+  常用的国外Linux资源：
+    lwn.net 来自Linux和开放源代码界的新闻
+    www.freshmeat.net 最齐全的Linux/UNIX软件库
+    www.justlinux.com 信息最全的Linux学习网站
+    www.kernel.org Linux 内核的官方网站
+    www.linux.com 提供全方位的Linux信息
+    www.linuxhq.com 提供内核信息和补丁的汇总
+    www.linuxtoday.com 非常完整的Linux新闻站点
+
+  国内的Linux的资源
+    www.chinaunix.net 国内最大的Linux/UNIX技术社区网站
+    www.linuxeden.com Linux伊甸园，最大的中文开源资讯门户网站
+    www.linuxfans.org 中国Linux公社，拥有自己的Linux发行版本
+    www.linuxsir.org 提供各种Linux资源、包括资讯、软件、手册等
+
+
+[一分大大佬早期的学习笔记](/files/拼客笔记.md)
