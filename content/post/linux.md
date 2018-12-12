@@ -195,13 +195,15 @@ thumbnail: "pics/linux/icon.png"
 
 ### 进程管理
 - ``fork()``创建子进程，0表示当前的子进程，大于0时为父进程PID，-1为创建失败
+
     - 函数调用一次单产生两个返回值，一个返回给子进程一个返回给父进程
-  ```c
-  pid=fork();
-  if(!pid)printf("child process\n");
-  else if(pid>0)printf("parent process\n");
-  else printf("fork fail\n", );
-  ```
+
+        ```c
+            pid=fork();
+            if(!pid)printf("child process\n");
+            else if(pid>0)printf("parent process\n");
+            else printf("fork fail\n", );
+        ```
  
  ## 设计原则
 
@@ -216,20 +218,32 @@ thumbnail: "pics/linux/icon.png"
 	4. 所有的配置文件都保存为纯文本格式
 
 ## 网站资源
-  常用的国外Linux资源：
-    lwn.net 来自Linux和开放源代码界的新闻
-    www.freshmeat.net 最齐全的Linux/UNIX软件库
-    www.justlinux.com 信息最全的Linux学习网站
-    www.kernel.org Linux 内核的官方网站
-    www.linux.com 提供全方位的Linux信息
-    www.linuxhq.com 提供内核信息和补丁的汇总
-    www.linuxtoday.com 非常完整的Linux新闻站点
 
-  国内的Linux的资源
-    www.chinaunix.net 国内最大的Linux/UNIX技术社区网站
-    www.linuxeden.com Linux伊甸园，最大的中文开源资讯门户网站
-    www.linuxfans.org 中国Linux公社，拥有自己的Linux发行版本
-    www.linuxsir.org 提供各种Linux资源、包括资讯、软件、手册等
+常用的国外Linux资源：
+    
+    - [来自Linux和开放源代码界的新闻](lwn.net)
+    
+    - [最齐全的Linux/UNIX软件库](www.freshmeat.net)
+    
+    - [信息最全的Linux学习网站](www.justlinux.com )
+    
+    - [内核的官方网站](www.kernel.org Linux )
+    
+    - [提供全方位的Linux信息](www.linux.com )
+    
+    - [提供内核信息和补丁的汇总](www.linuxhq.com )
+    
+    - [非常完整的Linux新闻站点](www.linuxtoday.com)
+
+国内的Linux的资源：
+    
+    - [国内最大的Linux/UNIX技术社区网站](www.chinaunix.net)
+    
+    - [Linux伊甸园，最大的中文开源资讯门户网站](www.linuxeden.com)
+    
+    - [中国Linux公社，拥有自己的Linux发行版本](www.linuxfans.org)
+    
+    - [提供各种Linux资源、包括资讯、软件、手册等](www.linuxsir.org)
 
 
 [一分大大佬早期的学习笔记](/files/拼客笔记.md)
