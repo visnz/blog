@@ -1,5 +1,5 @@
 ---
-title: "Linux 筆記大整理"
+title: "Linux 筆記大整理 & 工具備忘錄"
 date: 2018-12-07
 type: ["計算機"]
 weight: 1
@@ -18,6 +18,60 @@ thumbnail: "pics/linux/icon.png"
     - ``-Csh``着色、大小顯示
  
     - ``-R``超詳細目錄信息
+
+3. ``tty``查看当前 tty 终端=>``/dev/pts/*``，可以用于重定向输出
+
+4. ``init *`` runlevel
+
+5. ``&``丢后台
+
+6. 后台任务检查``jobs``任务管理器``ps/top/htop``
+
+7. 内存检查``free``
+
+8. 端口占用检查``netstat -anp|grep [port]``
+
+9. 变量修改：``export LANG=zh_CN.UTF-8``变量追加：``export LANG=$LANG:en_US.UTF-8``
+
+10. sudo组：``echo "%sudoer ALL=(ALL:ALL) ALL">> /etc/sudoers``
+
+11. ``dd if=* of=* bs=1M count=200``
+
+12. 查看查找：``file``、``type``、``whereis``
+
+13. ``locate``：查找，使用 mlocate 包，使用 updatedb 更新数据库
+
+### 目录结构
+
+- 通常/作为根目录，/usr（用户软件库）,/home（用户家目录）,/var（服务目录）会单独规划。
+
+    - /usr里会有单独的bin sbin lib lib64 share local 
+
+    - /var里有 log 文件、静态 http 服务的文件地址等
+
+    - /usr/share/doc 程序文档，man 将访问
+
+    - /usr/local //软件源码编译安装的附加软件库
+
+    - /usr/bin   实现系统 扩展功能 的可执行文件
+
+    - /usr/share 结构独立的数据/文件储存器
+
+- /boot   #系统启动需要的文件（内核）
+
+- swap
+
+    - 内存<4G，设置二倍。
+
+    - 内存>4G，swap分区大小等于物理内存。
+
+- /bin 系统基本命令 /sbin 系统相关命令 /etc 配置 /lib[64] 库（内核模块在这） /opt 第三方软件 /media  #挂载媒体
+
+- /dev pts 终端 null 空 random 随机
+
+- proc  #伪文件系统，内核参数的映射文件
+
+- sys   #伪文件系统，系统硬件参数的映射文件
 
 ### 文件操作
 
@@ -43,7 +97,9 @@ thumbnail: "pics/linux/icon.png"
 
     - -perm 模式
 
-## shell腳本
+5. linux文件系統：ext3 ext4 xfs
+
+### shell腳本
 
 1. 判斷文件夾是否存在，若存在並進入``[ $1 ] && cd $1``
 
@@ -65,13 +121,27 @@ thumbnail: "pics/linux/icon.png"
 
     - ``-C``色彩表示
 
-## git
-1. ``git config --global user.`` 設置用戶信息
+2. 备份工具：``dump``备份 ``restore``恢复
 
-## 其他探索
-### 虛擬機
-``qemu``、``xen``、``kvm``
+3. 打包工具：``tar/gzip/zcat/bzip2/compress/7z``
 
+4. C家工具：``gcc/g++``编译器``gdb``调试器
+
+5. git：``git config --global user.`` 設置用戶信息
+
+6. 虛擬機：``qemu``、``xen``、``kvm``
+
+### 桌面工具
+
+- ``pitivi``：影片编辑软件
+
+- ``shotwell``：图片管理器
+
+- ``gimp``：Linux下的图片编辑工具（PS）
+
+- ``gitkarken``：开源且免费的 git 可视化管理工具（官方推荐）
+
+- ``LibreOffice``：office
 
 ## 運維相關
 
@@ -85,4 +155,81 @@ thumbnail: "pics/linux/icon.png"
 
 5. 魂歸垃圾桶：`` >/dev/null 2>&1``
 
+6. 网卡信息：``、etc/sysconfig/network-scripts/``
 
+7. ``route -n``   #查看路由表
+
+8. ``/etc/resolv.conf``  #dns的全局配置文件
+
+9. 例行工作：``crontab``（/etc/crontab）
+
+    - 分 时 日 月 周（周和月、日调用有冲突）
+
+    - ``* * * * * reboot``每分钟重启一次
+
+    - ``*/2 * * * * reboot``每两分钟重启一次
+
+    - ``20,50 9-20/3 * * * reboot``每天9到20点每三小时的20分，50分各执行一次
+
+    - ``0 0 * * * pacman -Syu``每天自动滚包一次
+
+## 摘录
+
+### 后台工作与服务
+- 两种daemon的工作模式
+    - super daemon：一个特殊的daemon，用于管理daemon监听和请求，接受到新请求，会向指定的daemon发起激活。通常用于响应大量的通用服务。
+        - 多线程响应：一个服务对于多个服务进程，同时响应多个服务对象
+        - 单线程响应：服务模型类似一个多路复用器。
+    - stand alone：单独的一个持续运行的daemon，通常用于响应特殊服务。
+        - 信号响应：一旦有信号就立即响应
+        - 间隔响应：每隔一段时间响应。
+- stand alone
+  - ``/etc/services``记录着对大部分接口的服务监听。
+  - ``/etc/init.d/``目录保存daemon启动脚本，stand alone启动
+  - ``/etc/systemd/``各种服务的初始化环境配置文件
+  - ``/etc/``各种服务的配置文件
+  - ``/var/lib/``各服务产生数据的记录目录
+  - service：对服务进行控制，替代对/etc/init.d/的控制
+- super daemon
+  - 该服务由xinetd管理，配置文件位于``/etc/xinetd.conf``（里面也记录面对同一个服务最多提供多少链接、面对同一个来源用户提供多少链接等信息）
+
+### 进程管理
+- ``fork()``创建子进程，0表示当前的子进程，大于0时为父进程PID，-1为创建失败
+    - 函数调用一次单产生两个返回值，一个返回给子进程一个返回给父进程
+  ```c
+  pid=fork();
+  if(!pid)printf("child process\n");
+  else if(pid>0)printf("parent process\n");
+  else printf("fork fail\n", );
+  ```
+ 
+ ## 设计原则
+
+ Linux设计原则：
+
+	1. 单一目的的小工具组成
+
+	2. 一切皆文件
+
+	3. 尽量避免与用户交互
+
+	4. 所有的配置文件都保存为纯文本格式
+
+## 网站资源
+  常用的国外Linux资源：
+    lwn.net 来自Linux和开放源代码界的新闻
+    www.freshmeat.net 最齐全的Linux/UNIX软件库
+    www.justlinux.com 信息最全的Linux学习网站
+    www.kernel.org Linux 内核的官方网站
+    www.linux.com 提供全方位的Linux信息
+    www.linuxhq.com 提供内核信息和补丁的汇总
+    www.linuxtoday.com 非常完整的Linux新闻站点
+
+  国内的Linux的资源
+    www.chinaunix.net 国内最大的Linux/UNIX技术社区网站
+    www.linuxeden.com Linux伊甸园，最大的中文开源资讯门户网站
+    www.linuxfans.org 中国Linux公社，拥有自己的Linux发行版本
+    www.linuxsir.org 提供各种Linux资源、包括资讯、软件、手册等
+
+
+[一分大大佬早期的学习笔记](/files/拼客笔记.md)
