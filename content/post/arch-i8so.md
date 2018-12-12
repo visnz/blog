@@ -15,23 +15,24 @@ thumbnail: "pics/arch.png"
 
 查詢網卡 ifconfig ：net-tools(core)
 
+開關網卡 ``ip link set enp40s0 up``
+
 ``sudo create_ap <无线网卡>[<有线网卡>][<SSID>[<passwd>]]``
 or
 
 config file: /etc/create_ap.conf
-``sudo systemctl enable create_ap``
-``sudo systemctl start create_ap``
+``sudo systemctl enable/start create_ap``
+
+銳捷每一分鐘心跳檢查一次多網卡，``crontab -e``不支持秒級，用了個蠢辦法
 
 ```bash
-#!/bin/bash
-# file in /usr/bin/rj.sh
-while true
-do
-        ~/rjsupplicant/rjsupplicant.sh -d 1 -u [studentID] -p [passwd] -n [nic] &
-        sleep 5
-done
+* * * * * /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
+* * * * * sleep 10; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
+* * * * * sleep 20; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
+* * * * * sleep 30; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
+* * * * * sleep 40; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
+* * * * * sleep 50; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
 ```
-then run ``sudo echo "" && rj.sh >/dev/null 2>&1 &``
 
 ## NTFS只读系统
 
@@ -43,8 +44,7 @@ then run ``sudo echo "" && rj.sh >/dev/null 2>&1 &``
 
 1. 安裝基本藍牙包：bluez 和 bluez-utils
 
-``sudo systemctl enable bluetooth``
-``sudo systemctl start bluetooth``
+``sudo systemctl enable/start bluetooth``
 
 2. 協議無法識別 出現： a2dp-sink profile connect failed  Protocol not available 安裝 pulseaudio-bluetooth
 
@@ -85,3 +85,11 @@ echo $2 >> /home/$1/.ssh/authorized_keys
 [瀏覽器插件](https://chrome.google.com/webstore/detail/uget-integration/efjgjleilhflffpbnkaofpmdnajdpepi)
 
 ``sudo pacman -S uget uget-integrator-chrome uget-integrator-chromium``
+
+## 雜
+
+- archlinux pacman db : ``/var/lib/pacman/db.lck``
+
+- [archlinux 啓動未引導而進入grub解決方法](https://www.openfoundry.org/tw/foss-programs/9267-linux-grub2-fixing)，寫入：`` sudo grub-mkconfig -o /boot/grub/grub.cfg``
+
+- arch 使用 cronie(systemd) 管理計劃任務（disable），可以使用``crontab -e``編輯文件。三連擊``daemon-reload enable restart``
