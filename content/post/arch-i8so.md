@@ -94,3 +94,24 @@ echo $2 >> /home/$1/.ssh/authorized_keys
 
 - arch 使用 cronie(systemd) 管理計劃任務（disable），可以使用``crontab -e``編輯文件。三連擊``daemon-reload enable restart``
 
+## steam for windows
+
+使用[snap安裝](https://docs.snapcraft.io/installing-snap-on-arch-linux/6758)：A universal app store for Linux
+
+補包：fontconfig lib32-fontconfig
+
+## fcitx in chromium & vscode
+arch只裝了個最小包，安裝上fcitx後，生成配置文件
+
+~/.xprofile
+```bash
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+```
+
+補上安裝：fcitx-qt4 fcitx-gtk3 fcitx-gtk2 
+
+chromium vscode裏可以使用
+
+
