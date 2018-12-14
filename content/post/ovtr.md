@@ -2,7 +2,7 @@
 title: "OVTR 視覺化tracert 日好幾把炫酷（然並卵）"
 date: 2018-12-14
 type: ["計算機"]
-weight: 10
+weight: 1
 tags: ["Linux","tracert"]
 thumbnail: "pics/ovtr/04.jpeg"
 ---
