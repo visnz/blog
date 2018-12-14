@@ -206,9 +206,9 @@ thumbnail: "pics/linux/icon.png"
 
 - ``LibreOffice``：office
 
-- ``openvisualtraceroute``^aur^：跨平臺的traceroute視覺化展示（基於java）
+- ``openvisualtraceroute``<sup>aur</sup>：跨平臺的traceroute視覺化展示（基於java）
 
-![](pics/linux/01.png)
+![](/pics/linux/01.png)
 
 ## 運維相關
 
@@ -290,10 +290,10 @@ thumbnail: "pics/linux/icon.png"
 - 函数调用一次单产生两个返回值，一个返回给子进程一个返回给父进程
 
 ```c
-    pid=fork();
-    if(!pid)printf("child process\n");
-    else if(pid>0)printf("parent process\n");
-    else printf("fork fail\n", );
+pid=fork();
+if(!pid)printf("child process\n");
+else if(pid>0)printf("parent process\n");
+else printf("fork fail\n", );
 ```
  
  ## 设计原则
