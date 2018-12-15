@@ -25,11 +25,11 @@ thumbnail: "pics/linux/icon.png"
 
 5. ``&``丢后台
 
-6. 后台任务检查``jobs``任务管理器``ps/top/htop``
+6. 后台任务检查``jobs``任务管理器``top/htop``、``ps -ax``
 
 7. 内存检查``free``
 
-8. 端口占用检查``netstat -anp|grep [port]``
+8. 端口占用检查``netstat -anp|grep [port]``、**``lsof -i``**
 
 9. 变量修改：``export LANG=zh_CN.UTF-8``变量追加：``export LANG=$LANG:en_US.UTF-8``
 
@@ -41,37 +41,83 @@ thumbnail: "pics/linux/icon.png"
 
 13. ``locate``：查找，使用 mlocate 包，使用 updatedb 更新数据库
 
+14. ``chattr``設置文件安全屬性（``lsattr``現實）
+
+    - A atime訪問時間不會因爲訪問而修改（隱藏讀取痕跡）
+
+    - S 數據立即寫入，不參與緩存（適合重要數據寫入，防止斷電丟失）
+
+    - a append追加寫入權限（適用於log、passwd文件）
+
+    - c 壓縮加密文件，以時間換空間（長時間一次的大文件讀寫存儲等）
+
+    - i 文件不能刪改、不能鏈接
+
+    - s 文件徹底刪除（適合重要數據）
+
+    - u 文件刪除的話，只隱藏文件訪問，可以找回
+
+15. ``chsh -s /bin/bash username``切換默認shell
+
+16. ``bc``基本計算器
+
+17. ``time``測試軟件運行時間
+
 ### 目录结构
 
-- 通常/作为根目录，/usr（用户软件库）,/home（用户家目录）,/var（服务目录）会单独规划。
+- 通常/作为根目录，/usr（unix software resource 用户软件库）,/home（用户家目录）,/var（服务目录）会单独规划。
 
     - /usr里会有单独的bin sbin lib lib64 share local 
-
-    - /var里有 log 文件、静态 http 服务的文件地址等
 
     - /usr/share/doc 程序文档，man 将访问
 
     - /usr/local //软件源码编译安装的附加软件库
 
-    - /usr/bin   实现系统 扩展功能 的可执行文件
+    - /usr/bin   实现系统 扩展功能 的可执行文件（应用启动，与开机和内核操作无关）
 
-    - /usr/share 结构独立的数据/文件储存器
+    - /usr/share 结构独立的数据/文件储存器，DE的desktop文件在這裏
 
-- /boot   #系统启动需要的文件（内核）
+    - /usr/include（c/c++中的include文件，以tarball安装时候，会用到不少）
 
-- swap
+    - /usr/lib[64] （应用程序的库文件）
+
+    - /usr/local（本机管理员自己下载的程序）
+
+    - /var/log 里有 log 文件
+
+    - /var/cache 网络访问或本地程序访问产生的暂存文件
+
+    - /var/lib 动态数据相关操作会使用到的库
+
+- /boot   #系统启动需要的文件（内核）,grub信息在這裏
+
+- /swap
 
     - 内存<4G，设置二倍。
 
     - 内存>4G，swap分区大小等于物理内存。
 
-- /bin 系统基本命令 /sbin 系统相关命令 /etc 配置 /lib[64] 库（内核模块在这） /opt 第三方软件 /media  #挂载媒体
+- /bin 系统基本命令 /sbin 系统相关命令 /lib[64] 库（内核模块在这） /media  挂载媒体
+
+- /opt 第三方软件
+
+- /etc 配置文件
+
+    - [/etc/resolv.conf](https://wiki.archlinux.org/index.php/Resolv.conf_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)) 域名服務相關
+
+    - ~~/etc/init.d/ 服务启动/停止的脚本~~Selling my underpants to systemd
+
+    - /etc/X11/ XWindow相关配置
 
 - /dev pts 终端 null 空 random 随机
 
-- proc  #伪文件系统，内核参数的映射文件
+- /proc  #伪文件系统，内核参数的映射文件
 
-- sys   #伪文件系统，系统硬件参数的映射文件
+    - /proc/version 內核版本號
+
+    - /proc/net/dev 查看網卡詳細信息
+
+- /sys   #伪文件系统，系统硬件参数的映射文件
 
 ### 文件操作
 
@@ -83,7 +129,7 @@ thumbnail: "pics/linux/icon.png"
 
     - atime：文件访问时间
 
-2. 命令位置查詢：``whereis``（比find快，比which多）
+2. 命令位置查詢：``whereis``（比find快，比which多）可用locate（mlocate）
 
 3. 文件類型：``file``
 
@@ -109,6 +155,13 @@ thumbnail: "pics/linux/icon.png"
 
 3. 遍歷./文件：``for var in `ls -1` do ... done``
 
+### 旁門
+
+- ``echo {a,b,c}{d,e,f}`` => ``ad ae af bd be bf cd ce cf``
+
+- 图片藏种技术： ``cat file1 file2>file3``
+
+
 ## 雜七雜八工具使用
 
 1. 樹狀圖展示，僅展開1層``tree -L 2``
@@ -121,7 +174,7 @@ thumbnail: "pics/linux/icon.png"
 
     - ``-C``色彩表示
 
-2. 备份工具：``dump``备份 ``restore``恢复
+2. 备份工具：``dump``备份 ``restore``恢复
 
 3. 打包工具：``tar/gzip/zcat/bzip2/compress/7z``
 
@@ -133,15 +186,29 @@ thumbnail: "pics/linux/icon.png"
 
 ### 桌面工具
 
-- ``pitivi``：影片编辑软件
+- ``pitivi``、``shotcut``：影片编辑软件
 
 - ``shotwell``：图片管理器
 
-- ``gimp``：Linux下的图片编辑工具（PS）
+- ``gimp``、``Pixlr``：Linux下的图片编辑工具（PS）
+
+- ``Scribus``：對標Adobe InDesign
+
+- ``Inkscape``：對標Adobe Illustrator
+
+- ``darktable``：對標Adobe Lightroom
+
+- ``Black Magic Fusion``：Nuke 節點式後期效果合成，現已與davinci合併
+
+- ``blender``：3D建模（python腳本）
 
 - ``gitkarken``：开源且免费的 git 可视化管理工具（官方推荐）
 
 - ``LibreOffice``：office
+
+- ``openvisualtraceroute``<sup>aur</sup>：跨平臺的traceroute視覺化展示（基於java）
+
+![](/pics/linux/01.png)
 
 ## 運維相關
 
@@ -149,7 +216,7 @@ thumbnail: "pics/linux/icon.png"
 
 2. 查看-修改時區：``date -R; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime``
 
-3. 查看網卡信息：``cat /proc/net/dev``
+3. 用戶運行狀態：``w``、``uptime``
 
 4. 實時滾動的log：``tail -f [file]`` 
 
@@ -173,77 +240,101 @@ thumbnail: "pics/linux/icon.png"
 
     - ``0 0 * * * pacman -Syu``每天自动滚包一次
 
+10. 權限相關
+
+    - useradd 用戶新增 -m創建家目錄
+
+    - usermod 用戶修改
+
+    - groupadd 組增加
+
+    - groupmod 組修改
+
+    - chmod 改變文件權限
+
+    - chown 改變文件所有者
+
+    - chgrp 改變文件組所有
+
+11. 隨機密碼產生器：``cat /dev/urandom``cat隨機數``od -x``轉換爲十六進制``head -n 20``獲取頭20行``tr -d ' '``去掉空格``md5sum``獲取驗證碼``awk '{print $1}'``獲取校驗和
+
+12. 腳本設密碼：``echo "user:pswd" > tmp && cat tmp | chpasswd``
+
+13. ``echo 'PermitRootLogin without-password' >> /etc/ssh/sshd_config``root免密登陸。通常是``echo 'PermitRootLogin no' >> /etc/ssh/sshd_config``來禁止以root登陸
+
+
 ## 摘录
 
 ### 后台工作与服务
-- 两种daemon的工作模式
-    - super daemon：一个特殊的daemon，用于管理daemon监听和请求，接受到新请求，会向指定的daemon发起激活。通常用于响应大量的通用服务。
-        - 多线程响应：一个服务对于多个服务进程，同时响应多个服务对象
-        - 单线程响应：服务模型类似一个多路复用器。
-    - stand alone：单独的一个持续运行的daemon，通常用于响应特殊服务。
-        - 信号响应：一旦有信号就立即响应
-        - 间隔响应：每隔一段时间响应。
-- stand alone
-  - ``/etc/services``记录着对大部分接口的服务监听。
-  - ``/etc/init.d/``目录保存daemon启动脚本，stand alone启动
-  - ``/etc/systemd/``各种服务的初始化环境配置文件
-  - ``/etc/``各种服务的配置文件
-  - ``/var/lib/``各服务产生数据的记录目录
-  - service：对服务进行控制，替代对/etc/init.d/的控制
-- super daemon
-  - 该服务由xinetd管理，配置文件位于``/etc/xinetd.conf``（里面也记录面对同一个服务最多提供多少链接、面对同一个来源用户提供多少链接等信息）
+
+> - 两种daemon的工作模式
+>     - super daemon：一个特殊的daemon，用于管理daemon监听和请求，接受到新请求，会向指定的daemon发起激活。通常用于响应大量的通用服务。
+>         - 多线程响应：一个服务对于多个服务进程，同时响应多个服务对象
+>         - 单线程响应：服务模型类似一个多路复用器。
+>     - stand alone：单独的一个持续运行的daemon，通常用于响应特殊服务。
+>         - 信号响应：一旦有信号就立即响应
+>         - 间隔响应：每隔一段时间响应。
+> - stand alone
+>     - ``/etc/services``记录着对大部分接口的服务监听。
+>     - ``/etc/init.d/``目录保存daemon启动脚本，stand alone启动
+>     - ``/etc/systemd/``各种服务的初始化环境配置文件
+>     - ``/etc/``各种服务的配置文件
+>     - ``/var/lib/``各服务产生数据的记录目录
+>     - service：对服务进行控制，替代对/etc/init.d/的控制
+> - super daemon
+>   - 该服务由xinetd管理，配置文件位于``/etc/xinetd.conf``（里面也记录面对同一个服务最多提供多少链接、面对同一个来源用户提供多少链接等信息）
 
 ### 进程管理
 - ``fork()``创建子进程，0表示当前的子进程，大于0时为父进程PID，-1为创建失败
 
-    - 函数调用一次单产生两个返回值，一个返回给子进程一个返回给父进程
+- 函数调用一次单产生两个返回值，一个返回给子进程一个返回给父进程
 
-        ```c
-            pid=fork();
-            if(!pid)printf("child process\n");
-            else if(pid>0)printf("parent process\n");
-            else printf("fork fail\n", );
-        ```
+```c
+pid=fork();
+if(!pid)printf("child process\n");
+else if(pid>0)printf("parent process\n");
+else printf("fork fail\n", );
+```
  
  ## 设计原则
 
  Linux设计原则：
 
-	1. 单一目的的小工具组成
+1. 单一目的的小工具组成
 
-	2. 一切皆文件
+2. 一切皆文件
 
-	3. 尽量避免与用户交互
+3. 尽量避免与用户交互
 
-	4. 所有的配置文件都保存为纯文本格式
+4. 所有的配置文件都保存为纯文本格式
 
 ## 网站资源
 
 常用的国外Linux资源：
     
-    - [来自Linux和开放源代码界的新闻](lwn.net)
-    
-    - [最齐全的Linux/UNIX软件库](www.freshmeat.net)
-    
-    - [信息最全的Linux学习网站](www.justlinux.com )
-    
-    - [内核的官方网站](www.kernel.org Linux )
-    
-    - [提供全方位的Linux信息](www.linux.com )
-    
-    - [提供内核信息和补丁的汇总](www.linuxhq.com )
-    
-    - [非常完整的Linux新闻站点](www.linuxtoday.com)
+- [来自Linux和开放源代码界的新闻](lwn.net)
+
+- [最齐全的Linux/UNIX软件库](www.freshmeat.net)
+
+- [信息最全的Linux学习网站](www.justlinux.com )
+
+- [内核的官方网站](www.kernel.org Linux )
+
+- [提供全方位的Linux信息](www.linux.com )
+
+- [提供内核信息和补丁的汇总](www.linuxhq.com )
+
+- [非常完整的Linux新闻站点](www.linuxtoday.com)
 
 国内的Linux的资源：
     
-    - [国内最大的Linux/UNIX技术社区网站](www.chinaunix.net)
-    
-    - [Linux伊甸园，最大的中文开源资讯门户网站](www.linuxeden.com)
-    
-    - [中国Linux公社，拥有自己的Linux发行版本](www.linuxfans.org)
-    
-    - [提供各种Linux资源、包括资讯、软件、手册等](www.linuxsir.org)
+- [国内最大的Linux/UNIX技术社区网站](www.chinaunix.net)
+
+- [Linux伊甸园，最大的中文开源资讯门户网站](www.linuxeden.com)
+
+- [中国Linux公社，拥有自己的Linux发行版本](www.linuxfans.org)
+
+- [提供各种Linux资源、包括资讯、软件、手册等](www.linuxsir.org)
 
 
 [一分大大佬早期的学习笔记](/files/拼客笔记.md)

@@ -65,7 +65,7 @@ systemctl restart bluetooth
 2. 服務器獲取pubkey:
 
 ```bash
-mkdir ~/.ssh || touch ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh
+mkdir ~/.ssh ; touch ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh
 echo [key_pub] >> ./authorized_keys
 ```
 
@@ -74,7 +74,7 @@ echo [key_pub] >> ./authorized_keys
 ```bash
 #!/bin/bash
 useradd -m $1 && echo $1":"$1"8875" |chpasswd $1
-mkdir /home/$1/.ssh || touch /home/$1/.ssh/authorized_keys && chmod 600 /home/$1/.ssh/authorized_keys && chmod 700 /home/$1/.ssh
+mkdir /home/$1/.ssh ; touch /home/$1/.ssh/authorized_keys && chmod 600 /home/$1/.ssh/authorized_keys && chmod 700 /home/$1/.ssh
 chown $1:$1 /home/$1/.ssh/authorized_keys
 chown $1:$1 /home/$1/.ssh
 echo $2 >> /home/$1/.ssh/authorized_keys
@@ -93,3 +93,53 @@ echo $2 >> /home/$1/.ssh/authorized_keys
 - [archlinux 啓動未引導而進入grub解決方法](https://www.openfoundry.org/tw/foss-programs/9267-linux-grub2-fixing)，寫入：`` sudo grub-mkconfig -o /boot/grub/grub.cfg``
 
 - arch 使用 cronie(systemd) 管理計劃任務（disable），可以使用``crontab -e``編輯文件。三連擊``daemon-reload enable restart``
+
+## steam for windows
+
+使用[snap安裝](https://docs.snapcraft.io/installing-snap-on-arch-linux/6758)：A universal app store for Linux
+
+補包：fontconfig lib32-fontconfig
+
+## fcitx in chromium & vscode
+arch只裝了個最小包，安裝上fcitx後，生成配置文件
+
+~/.xprofile
+```bash
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+```
+
+補上安裝：fcitx-qt4 fcitx-qt5 fcitx-gtk3 fcitx-gtk2 
+KDE补上：kcm-fcitx
+
+chromium vscode裏可以使用
+
+---
+18年12月25日
+
+## git 指定密钥登陆
+
+``./.ssh/config``
+
+```bash
+Host github.com
+    HostName github.com
+    IdentityFile ~/.ssh/$priviteKey
+    User git
+
+Host new.visn.online
+    HostName new.visn.online
+    IdentityFile ~/.ssh/archlinux
+    Port 20069
+    User visn
+
+```
+
+其中$priviteKey为登记在github setting中的公密钥对的密钥
+
+## sshd端口修改
+
+指定端口：``echo 'Port=20069' >> /etc/ssh/sshd_config``
+
+``systemctl daemon-reload && sudo systemctl restart sshd``
