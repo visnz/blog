@@ -110,7 +110,8 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 ```
 
-補上安裝：fcitx-qt4 fcitx-gtk3 fcitx-gtk2 
+補上安裝：fcitx-qt4 fcitx-qt5 fcitx-gtk3 fcitx-gtk2 
+KDE补上：kcm-fcitx
 
 chromium vscode裏可以使用
 
