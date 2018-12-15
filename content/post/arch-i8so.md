@@ -65,7 +65,7 @@ systemctl restart bluetooth
 2. 服務器獲取pubkey:
 
 ```bash
-mkdir ~/.ssh || touch ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh
+mkdir ~/.ssh ; touch ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh
 echo [key_pub] >> ./authorized_keys
 ```
 
@@ -114,4 +114,31 @@ export XMODIFIERS="@im=fcitx"
 
 chromium vscode裏可以使用
 
+---
+18年12月25日
 
+## git 指定密钥登陆
+
+``./.ssh/config``
+
+```bash
+Host github.com
+    HostName github.com
+    IdentityFile ~/.ssh/$priviteKey
+    User git
+
+Host new.visn.online
+    HostName new.visn.online
+    IdentityFile ~/.ssh/archlinux
+    Port 20069
+    User visn
+
+```
+
+其中$priviteKey为登记在github setting中的公密钥对的密钥
+
+## sshd端口修改
+
+指定端口：``echo 'Port=20069' >> /etc/ssh/sshd_config``
+
+``systemctl daemon-reload && sudo systemctl restart sshd``
