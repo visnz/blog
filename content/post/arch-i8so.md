@@ -74,7 +74,7 @@ echo [key_pub] >> ./authorized_keys
 ```bash
 #!/bin/bash
 useradd -m $1 && echo $1":"$1"8875" |chpasswd $1
-mkdir /home/$1/.ssh || touch /home/$1/.ssh/authorized_keys && chmod 600 /home/$1/.ssh/authorized_keys && chmod 700 /home/$1/.ssh
+mkdir /home/$1/.ssh ; touch /home/$1/.ssh/authorized_keys && chmod 600 /home/$1/.ssh/authorized_keys && chmod 700 /home/$1/.ssh
 chown $1:$1 /home/$1/.ssh/authorized_keys
 chown $1:$1 /home/$1/.ssh
 echo $2 >> /home/$1/.ssh/authorized_keys
