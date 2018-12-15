@@ -5,7 +5,6 @@ type: ["工具"]
 weight: 1
 tags: ["工具","计算机","Docker"]
 thumbnail: "pics/docker/icon.png"
-draft: true
 ---
 
 ## 起因
