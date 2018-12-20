@@ -34,6 +34,8 @@ lrwxrwxrwx 1 root root 22 Nov 26 21:35 /sbin/init -> ../lib/systemd/systemd
 
 - ``systemctl``：進入主界面
 
+- ``systemctl --failed``查看启动失败的单元
+
 - ``systemctl start/enable/disable/stop/restart/mask/unmask <Unit>``：相應地對一個unit進行操作
 
 - ``systemctl daemon-reload``：掃描新的有變動的單元，通常更新配置後需要使用
@@ -154,6 +156,31 @@ WantedBy=multi-user.target
     - ``OnUnitActiveSec=1w``指定在該事件執行後，間隔一段時間再執行（示例爲一週）
 
     - ``Persistent=true``因爲關機沒有執行的任務，在服務啓動時候立即執行
+
+## journald
+一个接管``syslog``的系统日志管理进程，使用``journalctl``来管理
+
+常用参数：
+
+- ``-b 2`` 查看上上次开机的日志
+
+- ``-f`` 实时更新
+
+- ``-p 3`` 查看0,1,2（紧急、中断、危险级别）[级别](https://wiki.archlinux.org/index.php/systemd_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E6%97%A5%E5%BF%97)日志
+
+- ``--since="20 min ago"``、``--since="2018-12-21 18:30:20"``界定i时间
+
+- ``_PID=1`` 指定PID
+
+- ``-k`` 只输出内核信息
+
+- ``-u v2ray.service`` 查看指定单元的log
+
+- ``--vacuum-time=2days`` 清除日志2天前的日志
+
+日志的文件位置``/var/log/journal``，配置文件在``/etc/systemd/journald.conf``，服务为``systemd-journald.service``
+
+
 
 ## 其他
 

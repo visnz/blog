@@ -1,5 +1,5 @@
 ---
-title: "Archlinux 簡單記錄"
+title: "~~Arch~~ Linux 簡單記錄"
 date: 2018-11-28
 type: ["计算机"]
 weight: 1
@@ -9,54 +9,60 @@ thumbnail: "pics/arch.png"
 
 记录下平时可能会用到的（查阅用）
 
-## hostap+ruijie
+---
+# 18.12.20
 
-软件包：create_ap(community)
+dig所在软件包``dnsutils``
 
-查詢網卡 ifconfig ：net-tools(core)
-
-開關網卡 ``ip link set enp40s0 up``
-
-``sudo create_ap <无线网卡>[<有线网卡>][<SSID>[<passwd>]]``
-or
-
-config file: /etc/create_ap.conf
-``sudo systemctl enable/start create_ap``
-
-銳捷每一分鐘心跳檢查一次多網卡，``crontab -e``不支持秒級，用了個蠢辦法
-
-```bash
-* * * * * /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
-* * * * * sleep 10; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
-* * * * * sleep 20; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
-* * * * * sleep 30; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
-* * * * * sleep 40; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
-* * * * * sleep 50; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
-```
-
-## NTFS只读系统
-
-1. 软件包：ntfs-3g / ntfs-config(aur)
-
-2. 然后卸载+挂载 / logout
-
-## 藍牙音響
-
-1. 安裝基本藍牙包：bluez 和 bluez-utils
-
-``sudo systemctl enable/start bluetooth``
-
-2. 協議無法識別 出現： a2dp-sink profile connect failed  Protocol not available 安裝 pulseaudio-bluetooth
-
-3. 重啓PulseAudio server & Bluetooth生效
-```bash
-killall pulseaudio
-pulseaudio --start
-systemctl restart bluetooth
-```
+systemd图形化界面包``systemd-ui``
 
 ---
-18年11月28日後再填大坑
+# 18.12.17
+
+## libvirt虚拟机
+
+基于[KVM](https://wiki.archlinux.org/index.php/KVM_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))，[libvirt](https://wiki.archlinux.org/index.php/Libvirt_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))提供一系列虚拟机服务的集合（包括virt-manager图形化界面、命令控制工具virsh、守护进程libvirtd）
+
+依赖firewalld、ebtables、dnsmasq
+
+安装后手动启动libvirtd、firewalld守护进程开始使用
+
+libvirt没有载入default网络，位置在/etc/libvirt/qemu/networks/default.xml
+``sudo virsh net-define /etc/libvirt/qemu/networks/default.xml``载入服务并重启守护进程。
+
+``virsh net-autostart default``标记自动启动
+
+---
+# 18.12.15
+
+## git 指定密钥登陆
+
+``./.ssh/config``
+
+```bash
+Host github.com
+    HostName github.com
+    IdentityFile ~/.ssh/$priviteKey
+    User git
+
+Host new.visn.online
+    HostName new.visn.online
+    IdentityFile ~/.ssh/archlinux
+    Port 20069
+    User visn
+
+```
+
+其中$priviteKey为登记在github setting中的公密钥对的密钥
+
+## sshd端口修改
+
+指定端口：``echo 'Port=20069' >> /etc/ssh/sshd_config``
+
+``systemctl daemon-reload && sudo systemctl restart sshd``
+
+---
+# 18.11.31
 
 ## 免密登陸
 
@@ -115,31 +121,54 @@ KDE补上：kcm-fcitx
 
 chromium vscode裏可以使用
 
+
 ---
-18年12月25日
+# 18年11月28日及以前
 
-## git 指定密钥登陆
+## hostap+ruijie
 
-``./.ssh/config``
+软件包：create_ap(community)
+
+查詢網卡 ifconfig ：net-tools(core)
+
+開關網卡 ``ip link set enp40s0 up``
+
+``sudo create_ap <无线网卡>[<有线网卡>][<SSID>[<passwd>]]``
+or
+
+config file: /etc/create_ap.conf
+``sudo systemctl enable/start create_ap``
+
+銳捷每一分鐘心跳檢查一次多網卡，``crontab -e``不支持秒級，用了個蠢辦法
 
 ```bash
-Host github.com
-    HostName github.com
-    IdentityFile ~/.ssh/$priviteKey
-    User git
-
-Host new.visn.online
-    HostName new.visn.online
-    IdentityFile ~/.ssh/archlinux
-    Port 20069
-    User visn
-
+* * * * * /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
+* * * * * sleep 10; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
+* * * * * sleep 20; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
+* * * * * sleep 30; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
+* * * * * sleep 40; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
+* * * * * sleep 50; /home/visn/rjsupplicant/rjsupplicant.sh -d 1 -u 1500000000 -p 123456 -n enp4s0 >> /var/log/rjs.log
 ```
 
-其中$priviteKey为登记在github setting中的公密钥对的密钥
+## NTFS只读系统
 
-## sshd端口修改
+1. 软件包：ntfs-3g（``sudo ntfs-3g /dev/sdb3 /mnt/test``）然后卸载+挂载 / logout
 
-指定端口：``echo 'Port=20069' >> /etc/ssh/sshd_config``
+2. 因为在windows那边读取的时候存在一些失误操作导致无法写入，使用``ntfsfixboot``（aur）
 
-``systemctl daemon-reload && sudo systemctl restart sshd``
+## 藍牙音響
+
+1. 安裝基本藍牙包：bluez 和 bluez-utils
+
+``sudo systemctl enable/start bluetooth``
+
+2. 協議無法識別 出現： a2dp-sink profile connect failed  Protocol not available 安裝 pulseaudio-bluetooth
+
+3. 重啓PulseAudio server & Bluetooth生效
+```bash
+killall pulseaudio
+pulseaudio --start
+systemctl restart bluetooth
+```
+
+
