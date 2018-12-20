@@ -5,6 +5,7 @@ type: ["计算机"]
 weight: 1
 tags: ["计算机","RSS"]
 thumbnail: "pics/rsshub/icon.png"
+draft: "true"
 ---
 
 ## RSS基础
