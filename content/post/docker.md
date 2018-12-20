@@ -79,3 +79,6 @@ sudo docker attach a1d
 # 使用exec进入容器，退出的时候不会结束容器
 sudo docker exec -it a1d bash
 ```
+## 其他
+
+因为拆分了home目录，如果遇上重装系统，大部分个人配置都还在，需要配置的是系统层面的配置，可以stow构建dotfile解决。
