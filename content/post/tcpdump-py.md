@@ -4,7 +4,7 @@ date: 2018-12-22
 type: ["计算机"]
 weight: 1
 tags: ["Linux","计算机","python"]
-thumbnail: "pics/tcpdump-py/icon.png"
+thumbnail: "pics/tcpdump-py/icon.jpg"
 ---
 
 冬至到了先给大家拜个晚年（说完就开起了风扇）
