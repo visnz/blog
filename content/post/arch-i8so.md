@@ -1,6 +1,6 @@
 ---
 title: "~~Arch~~ Linux 簡單記錄"
-date: 2018-11-28
+date: 2018-12-22
 type: ["计算机"]
 weight: 1
 tags: ["Linux","计算机"]
