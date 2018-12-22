@@ -57,8 +57,8 @@ TimeShift支持快照迁移到心的电脑上，在恢复快照之前，TimeShif
 二是有通用的测试平台，有标准衡量与足够的试错机会。
 
 ```bash
-# 换国内源
-sudo echo '{"registry-mirrors": ["https://registry.docker-cn.com"]}'>>/etc/docker/daemon.json
+# 换国内阿里云源
+sudo echo '{"registry-mirrors": ["https://dftbcros.mirror.aliyuncs.com"]}'>>/etc/docker/daemon.json
 
 # 启动服务
 sudo systemctl daemon-reload && sudo systemctl enable docker --now
