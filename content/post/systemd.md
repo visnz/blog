@@ -168,7 +168,7 @@ WantedBy=multi-user.target
 
 - ``-p 3`` 查看0,1,2（紧急、中断、危险级别）[级别](https://wiki.archlinux.org/index.php/systemd_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E6%97%A5%E5%BF%97)日志
 
-- ``--since="20 min ago"``、``--since="2018-12-21 18:30:20"``界定i时间
+- ``--since=today --until="10 min ago"``、``--since="2018-12-21 18:30:20"``界定i时间
 
 - ``_PID=1`` 指定PID
 

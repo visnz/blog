@@ -10,11 +10,35 @@ thumbnail: "pics/arch.png"
 记录下平时可能会用到的（查阅用）
 
 ---
+
+# 18.12.22
+
+[DNSMasq](https://wiki.archlinux.org/index.php/Dnsmasq_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))服务使用本地做DNS缓存：``echo "listen-address=127.0.0.1" >> /etc/dnsmasq.conf``
+
+添加本地解析：``/etc/resolv.conf``在最开头添加本地解析为最先
+
+防止篡改：``sudo chattr +i /etc/resolv.conf``
+
+![](/pics/arch/01.png)
+
 # 18.12.20
 
 dig所在软件包``dnsutils``
 
 systemd图形化界面包``systemd-ui``
+
+## steam 冬季大促销
+
+泼皮买了个linux上能跑的，~~可爱，想玩~~
+
+包名：steam steam-native-runtime(multilib)
+
+报了找不到``~/.local/share/Steam/ubuntu12_32/steam-runtime/run.sh``的错
+
+補了包：fontconfig lib32-fontconfig  nvidia-dkms nvidia-utils lib32-nvidia-utils
+
+（nvidia与nvidia-dkms冲突，慎）
+
 
 ---
 # 18.12.17
@@ -100,11 +124,6 @@ echo $2 >> /home/$1/.ssh/authorized_keys
 
 - arch 使用 cronie(systemd) 管理計劃任務（disable），可以使用``crontab -e``編輯文件。三連擊``daemon-reload enable restart``
 
-## steam for windows
-
-使用[snap安裝](https://docs.snapcraft.io/installing-snap-on-arch-linux/6758)：A universal app store for Linux
-
-補包：fontconfig lib32-fontconfig
 
 ## fcitx in chromium & vscode
 arch只裝了個最小包，安裝上fcitx後，生成配置文件
