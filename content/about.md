@@ -1,10 +1,10 @@
 ---
-title: "关于"
+title: "关于我"
 date: 2018-01-15
 type: ["about"]
 menu:
-  main:
-    name: "关于"
+  main: 
+    name: "关于我"
 weight: 10
 ---
 
@@ -36,8 +36,6 @@ weight: 10
 - Reol
 
 - Aimer
-
-- SRE
 
 - Google Chrome
 
