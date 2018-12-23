@@ -1,9 +1,9 @@
 staticDir = ["static"]
-baseurl = "/"
+baseurl = "https://visnz.github.io/"
 title = "* IN SHADOW"
 languageCode = "en-us"
 paginate = "10" # Number of posts per page
-theme = "mainroad"
+theme = "aether"
 disqusShortname = "" # Enable comments by entering your Disqus shortname
 googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 
@@ -14,8 +14,8 @@ googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 
 [Params]
     subtitle = "" # Subtitle of your site. Used in site header
-    description = "visn`s Personal blog about fucking daily chaos :L " # Description of your site. Used in meta description
-    opengraph = true # Enable OpenGraph if true
+    description = "visn`s Personal blog :L " # Description of your site. Used in meta description
+    opengraph = true # Enable OpenGraph if truemaster
     readmore = false # Show "Read more" button in list if true
     leftsidebar = true # Move sidebar to the left side if true
     authorbox = true # Show authorbox at bottom of pages if true
@@ -25,12 +25,12 @@ googleAnalytics = "" # Enable Google Analytics by entering your tracking id
     #dateformat = "2006-01-02" # change the format of dates
 
 [Params.widgets]
-    search = true # Enable "Search" widget
+    #search = true # Enable "Search" widget
     recent_articles = true # Enable "Recent articles" widget
-    recent_articles_num = 5 # Set the number of articles in the "Recent articles" widget
+    recent_articles_num = 10 # Set the number of articles in the "Recent articles" widget
     categories = true # Enable "Categories" widget
     tags = true # Enable "Tags" widget
-    tags_counter = false # Enable counter for each tag in "Tags" widget (disabled by default)
+    tags_counter = true # Enable counter for each tag in "Tags" widget (disabled by default)
 
     # Enable "Social" widget, if any of "social_*" set a value
     #social_facebook = "username"
