@@ -4,7 +4,9 @@ date: 2018-12-05
 type: ["应用"]
 weight: 2
 tags: ["计算机","GITHUB","VSCODE"]
-thumbnail: "/pics/vscode/vscode.png"
+categories: ["运维"]
+description: "使用gists将生产工具配置进行同步与开发"
+featuredImage: "/pics/vscode/vscode.png"
 ---
 ## 問題描述
 

@@ -4,7 +4,9 @@ date: 2018-05-09
 type: ["应用"]
 weight: 2
 tags: ["计算机","爬虫","NODEJS","PUPPETTEER"]
-thumbnail: "pics/pup/title.png"
+categories: ["运维"]
+description: "nodejs使用headless浏览器爬虫对网络课程资源进行爬取"
+featuredImage: "/pics/pup/title.png"
 ---
 ## 背景
 手痒点了Coursera课程试听，忘了这回事直到PayPal提示我一笔60美元的支出（心如刀割）。想想认真听课要不把它录下来，以后可以看。一个一个抓太麻烦…索性写个爬虫把视频都爬下来好了…

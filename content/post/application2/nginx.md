@@ -3,9 +3,10 @@ title: "nginx配置反向代理公开文件系统"
 date: 2018-12-23
 type: ["应用"]
 weight: 2
-tags: ["计算机","服务器","NGINX"]
-# lastmod: 2015-12-23
-thumbnail: "/pics/nginx/icon.jpg"
+tags:  ["计算机","服务器","NGINX"]
+categories: ["服务器"]
+description: "应对业务需求上手nginx，将机器自身文件系统映射到公开网络"
+featuredImage: "/pics/nginx/icon.jpg"
 ---
 
 # 笔记

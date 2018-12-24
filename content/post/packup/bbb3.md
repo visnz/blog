@@ -4,7 +4,8 @@ date: 2018-06-06
 type: ["娱乐"]
 weight: 7
 tags: ["崩坏3","娱乐"]
-thumbnail: "pics/bbb/IMG_0602.jpg"
+draft: true
+featuredImage: "pics/bbb/IMG_0602.jpg"
 ---
 
 > 全文9000字（更新中），约18分钟。

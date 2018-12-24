@@ -1,10 +1,12 @@
 ---
-title: "docker上手 生产环境大搬家"
+title: "docker上手 生产环境本当大搬家"
 date: 2018-12-16
 type: ["应用"]
 weight: 2
 tags: ["计算机","DOCKER"]
-thumbnail: "pics/docker/icon.png"
+categories: ["运维"]
+description: "拆分目录与备份，为自己创建docker生产环境"
+featuredImage: "/pics/docker/icon.png"
 ---
 
 ## 起因

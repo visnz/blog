@@ -2,12 +2,11 @@
 title: "GameJam广州站摸鱼组一日游*2 游记"
 date: 2018-01-28
 type: ["娱乐"]
-menu:
-  main:
-    name: "浪"
-weight: 7
+weight: 5
 tags: ["GameJam","浪"]
-thumbnail: "/pics/ggj/ggj.png"
+categories: ["游记"]
+description: "第一次亲身参与到独立游戏社群，尽管只是作为观众"
+featuredImage: "/pics/ggj/ggj.png"
 ---
 
 > 两天就能做出一个游戏来？没有奖金、没有奖品，为什么每年近万人参加这个活动？

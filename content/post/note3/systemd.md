@@ -4,7 +4,9 @@ date: 2018-12-15
 type: ["笔记"]
 weight: 3
 tags: ["LINUX","SYSTEMD","笔记"]
-thumbnail: "pics/systemd/icon.png"
+categories: ["笔记"]
+description: "System的一些基础概念、使用与备忘"
+featuredImage: "/pics/systemd/icon.png"
 ---
 
 ## 簡述

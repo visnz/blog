@@ -1,11 +1,11 @@
 staticDir = ["static"]
 baseurl = "https://visnz.github.io/"
-title = "* IN SHADOW"
-languageCode = "en-us"
+title = "* sairen"
+languageCode = "zh-cn"
 paginate = "10" # Number of posts per page
 theme = "aether"
 disqusShortname = "" # Enable comments by entering your Disqus shortname
-googleAnalytics = "" # Enable Google Analytics by entering your tracking id
+# googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 
 [Author] # Used in authorbox
     name = "visn Z"
@@ -23,6 +23,10 @@ googleAnalytics = "" # Enable Google Analytics by entering your tracking id
     postSections = ["post"] # the section pages to show on home page and the "Recent articles" widget
     #postSections = ["blog", "news"] # alternative that shows more than one section's pages
     #dateformat = "2006-01-02" # change the format of dates
+
+[taxonomies]
+  category = "categories"
+  tag = ["服务器","运维","笔记","日常"]
 
 [Params.widgets]
     #search = true # Enable "Search" widget

@@ -4,7 +4,9 @@ date: 2018-12-14
 type: ["日常"]
 weight: 6
 tags: ["LINUX","计算机","tracert"]
-thumbnail: "pics/ovtr/04.jpeg"
+categories: ["日常"]
+description: "尝试一些看起来比较炫酷的工具（虽然并不知道意义何在）"
+featuredImage: "/pics/ovtr/04.jpeg"
 ---
 
 ## 開始
@@ -35,6 +37,8 @@ thumbnail: "pics/ovtr/04.jpeg"
 
 ![](/pics/ovtr/06.png)
 
-Enjoy！
+尽管不知道使用一些可能不是那么实用（也不算不实用吧）的工具问自己偶尔不是很有意义。
+
+除了吃在手里穿在身上，人们还会去追求美感，询问意义。说罢是生活的调节剂也好吧。
 
 [^1]: http://www.mantingfeng.com/?p=618

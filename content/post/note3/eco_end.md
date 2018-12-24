@@ -4,7 +4,9 @@ date: 2018-06-04
 type: ["笔记"]
 weight: 3
 tags: ["经济学"]
-thumbnail: "pics/eco/eco.jpg"
+categories: ["笔记"]
+description: "分支课程学习笔记（兴趣）"
+featuredImage: "/pics/eco/eco.jpg"
 ---
 
 家庭缘故，接触经济与金融较早，耳濡目染中对行业有兴趣，平时会关注国内和世界经济状况，无奈专业能力不足，对许多分析评论只听半懂。半年左右挖坑终于把坑填上了，弥补了多年来对该领域关注但从未学基础的遗憾。
@@ -12,17 +14,17 @@ thumbnail: "pics/eco/eco.jpg"
 ## 教材
 - 早期启蒙读物：《[货币战争](https://book.douban.com/subject/2081876/)》
 
-- 正统入门：格里高利·曼昆的《[经济学原理 第七版 上下两本](https://www.amazon.cn/dp/B00XH8KAQ6)》
+- 正统入门：格里高利·曼昆《[经济学原理 第七版 上下两本](https://www.amazon.cn/dp/B00XH8KAQ6)》
 
 - 网易公开课[可汗学院的经济学视频课](http://open.163.com/khan/)（[可汗学院中文站](https://zh.khanacademy.org/)）
 
-- 辅助浏览的是广东卫视《[财经郎眼](https://www.iqiyi.com/a_19rrgu9qmt.html)》（节目质量一般，郎教授的内容还是值得学习的），以及凤凰卫视《[一虎一席谈](https://www.youtube.com/playlist?list=PLvXvMUSstINfmrcFH0LFBBYW9OcEuA3yx)》的财经话题（推荐）
+- 《[一虎一席谈](https://www.youtube.com/playlist?list=PLvXvMUSstINfmrcFH0LFBBYW9OcEuA3yx)》《[财经郎眼](https://www.iqiyi.com/a_19rrgu9qmt.html)》（质量一般）
 
-- 额外感谢游戏《[城市天际线](https://store.steampowered.com/app/255710/)》在教育与就业的经济学层面带来的启发
+- 感谢《[城市天际线](https://store.steampowered.com/app/255710/)》在教育与就业的经济学层面带来的启发
 
 - 参考资料：[MBA智库](http://wiki.mbalib.com/wiki/%E9%A6%96%E9%A1%B5)、[维基百科](https://www.wikipedia.org/)
 
-- 推荐扩展读物：《[认识商业](https://www.amazon.cn/dp/B019Z2EKKY)》
+- 推荐扩展读物：《[认识商业](https://www.amazon.cn/dp/B019Z2EKKY)》《商业的本质》
 
 ## 原书经典摘抄
 ### 微观经济学

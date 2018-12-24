@@ -5,6 +5,7 @@ type: ["笔记"]
 weight: 3
 tags: ["JAVA","计算机"]
 thumbnail: "http://blog.experts-exchange.com/wp-content/uploads/2012/02/java1.jpg"
+draft: true
 ---
 
 # 写在前面

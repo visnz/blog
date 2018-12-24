@@ -4,7 +4,9 @@ date: 2018-01-18
 type: ["笔记"]
 weight: 3
 tags: ["编程思维","计算机"]
-thumbnail: "/pics/oldicon/oodp.jpg"
+categories: ["笔记"]
+description: "早期学习面向对象设计，不免遇到一些局限，偶然看到关于对OOP的一些反思与突破"
+featuredImage: "/pics/oldicon/oodp.jpg"
 ---
 
 # 跳出面向对象思想

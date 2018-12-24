@@ -4,7 +4,9 @@ date: 2018-12-22
 type: ["应用"]
 weight: 2
 tags: ["LINUX","计算机","PYTHON","TCPDUMP","服务器"]
-thumbnail: "pics/tcpdump-py/icon.jpg"
+categories: ["运维"]
+description: "python与tcpdump配合shell基础文本工具，完成对流量去向的简单监控"
+featuredImage: "/pics/tcpdump-py/icon.jpg"
 ---
 
 冬至到了先给大家拜个晚年（说完就开起了风扇）

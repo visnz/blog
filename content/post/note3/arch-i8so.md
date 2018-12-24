@@ -1,11 +1,13 @@
 ---
-title: "~~Arch~~ Linux 簡單記錄"
+title: "Arch Linux 札记"
 lastmod: 2018-12-22
 date: 2018-01-20
 type: ["笔记"]
 weight: 3
 tags: ["LINUX","计算机"]
-thumbnail: "/pics/oldicon/arch.png"
+categories: ["笔记"]
+description: "18年初入坑arch，当年不懂事又刷了别家。如今长大后悔了，我一定好好对待你"
+featuredImage: "/pics/oldicon/arch.png"
 ---
 
 记录下平时可能会用到的（查阅用）

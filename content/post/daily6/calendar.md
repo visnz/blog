@@ -4,7 +4,9 @@ date: 2018-11-04
 type: ["日常"]
 weight: 6
 tags: ["日常","行程表"]
-thumbnail: "pics/calendar/icon.png"
+categories: ["日常"]
+description: "从markdown的todolist模式转向日程表安排，容纳安排的事情与体验大有不同"
+featuredImage: "/pics/calendar/icon.png"
 ---
 
 ## 緣起

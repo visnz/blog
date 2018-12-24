@@ -2,9 +2,11 @@
 title: "香港XM Anomaly摸魚兩日遊"
 date: 2018-11-17
 type: ["娱乐"]
-weight: 7
+weight: 5
 tags: ["香港","娱乐","INGRESS"]
-thumbnail: "pics/hkxma/icon.png"
+categories: ["游记"]
+description: "第一次参加ingress XMA，带着家属各种吃吃吃的游记"
+featuredImage: "/pics/hkxma/icon.png"
 ---
 
 ![維多利亞港](/pics/hkxma/photo2.jpg)

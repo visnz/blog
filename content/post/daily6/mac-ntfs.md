@@ -4,7 +4,9 @@ date: 2018-09-02
 type: ["日常"]
 weight: 6
 tags: ["计算机","MAC","NTFS"]
-thumbnail: "/pics/mac-ntfs/logo.jpg"
+categories: ["日常"]
+description: "解决MAC系统上自动挂载的NTFS外接磁盘无法写入文件操作的问题"
+featuredImage: "/pics/mac-ntfs/logo.jpg"
 ---
 
 ## 背景

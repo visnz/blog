@@ -4,7 +4,9 @@ date: 2018-12-07
 type: ["笔记"]
 weight: 3
 tags: ["计算机","Linux"]
-thumbnail: "pics/linux/icon.png"
+categories: ["笔记"]
+description: "找了个机会把文件系统里从入门到入坑的大部分可能还能用得上的Linux知识给整理了一下"
+featuredImage: "/pics/linux/icon.png"
 ---
 
 ## 基本工具

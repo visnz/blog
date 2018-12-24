@@ -2,7 +2,7 @@
 title: "生日礼物之 直播非洲人bilibili福袋开箱"
 date: 2018-05-21
 type: ["娱乐"]
-weight: 7
+weight: 6
 tags: ["bilibili","福袋","娱乐"]
 thumbnail: "pics/bili/logo.jpg"
 ---
