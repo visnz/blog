@@ -5,6 +5,7 @@ type: ["影视"]
 weight: 10
 tags: ["影视"]
 thumbnail: "pics/tinypng/logo.jpg"
+draft: true
 ---
 
 ## 背景

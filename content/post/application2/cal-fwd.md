@@ -2,9 +2,9 @@
 title: "Google Calendar nodejs作cal轉發服務器"
 date: 2018-12-07
 type: ["应用"]
-weight: 2
+weight: 1
 tags: ["NODEJS","计算机","服务器"]
-categories: ["服务器"]
+categories: ["服务器","最近"]
 description: "将行程表缓存并映射提供大陆网路访问，同步谷歌行程表"
 featuredImage: "/pics/cal-fwd/icon2.png"
 ---

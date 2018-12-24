@@ -4,11 +4,10 @@ date: 2018-08-09
 type: ["影视"]
 weight: 10
 tags: ["影视"]
-thumbnail: "pics/flv/shuoshu.png"
+categories: ["影视"]
+description: "屡次被问flv跟mkv格式为什么不能导入pr，以及如何解决"
+featuredImage: "/pics/flv/shuoshu.png"
 ---
-
-## 背景
-屡次被问flv跟mkv格式为什么不能导入pr，以及如何解决。
 
 ### FLV
 早期视频导入flash后导出swf体积庞大，flv（Flash Video）格式早期产生用于解决这个问题。flv是**flash文件作为外壳保护（封装）视频**，并转换成串流格式。

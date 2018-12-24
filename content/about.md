@@ -1,5 +1,5 @@
 ---
-title: "About Me"
+title: "关于我"
 date: 2018-01-15
 type: ["about"]
 weight: 1

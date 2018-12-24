@@ -4,7 +4,9 @@ date: 2018-06-03
 type: ["影视"]
 weight: 10
 tags: ["影视","达芬奇"]
-thumbnail: "pics/fusion/fusion.png"
+categories: ["影视"]
+description: "节点式影视效果软件尝试，实现了一个最基础的跟踪效果"
+featuredImage: "/pics/fusion/fusion.png"
 ---
 
 ## 背景
