@@ -26,7 +26,7 @@ disqusShortname = "" # Enable comments by entering your Disqus shortname
 
 [taxonomies]
   category = "categories"
-  tag = ["服务器","运维","笔记","日常"]
+  tag = ["服务器","运维","笔记","日常","游记","影视","最近"]
 
 [Params.widgets]
     #search = true # Enable "Search" widget

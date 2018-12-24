@@ -4,7 +4,9 @@ date: 2018-11-02
 type: ["影视"]
 weight: 10
 tags: ["ADOBE","影视","计算机"]
-thumbnail: "pics/aeexpfix/ae.png"
+categories: ["影视"]
+description: "After Effect顶层使用javascript做脚本，中英模板之前差异常出现引用丢失的问题"
+featuredImage: "/pics/aeexpfix/ae.png"
 ---
 
 # 背景

@@ -1,10 +1,12 @@
 ---
-title: "生日礼物之 直播非洲人bilibili福袋开箱"
+title: "非洲人bilibili福袋开箱"
 date: 2018-05-21
-type: ["娱乐"]
+type: ["日常"]
 weight: 6
 tags: ["bilibili","福袋","娱乐"]
-thumbnail: "pics/bili/logo.jpg"
+categories: ["日常"]
+description: "运气一般般，开出了最爱的33娘抱枕～感谢卢老总送的生日礼物！"
+featuredImage: "/pics/bili/logo.jpg"
 ---
 
 前几天生日，挚友啥都没交代直接给我送了个哔哩哔哩的福袋……

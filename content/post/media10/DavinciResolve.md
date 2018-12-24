@@ -1,10 +1,12 @@
 ---
-title: "DaVinci Resolve 穷人低配虚拟工作台"
+title: "DaVinci Resolve 用iPad低配虚拟工作台"
 date: 2018-03-25
 type: ["影视"]
 weight: 10
 tags: ["影视","达芬奇"]
-thumbnail: "pics/davinci/logo.png"
+categories: ["影视"]
+description: "嗯你其实知道达芬奇实体控制台那种呲溜溜的手感是给土豪体验的"
+featuredImage: "/pics/davinci/logo.png"
 ---
 世界级调色软件Blackmagic公司出品的Davinci，做后期调色的时候通常有软硬件套装，软件是``DaVinci Resolve[ Studio]``，硬件部分如下图：
 

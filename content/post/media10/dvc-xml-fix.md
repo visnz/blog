@@ -1,10 +1,12 @@
 ---
-title: "修正 达芬奇xml剪辑表 素材出入点错误"
+title: "修正达芬奇xml剪辑表素材出入点错误"
 date: 2018-09-03
 type: ["影视"]
 weight: 10
 tags: ["影视","达芬奇","NODEJS"]
-thumbnail: "pics/dvcxmlfix/logo.png"
+categories: ["影视"]
+description: "Davinci 导出剪辑表的时候，存在剪辑表偏差，使用nodejs读取xml修改剪辑表内容"
+featuredImage: "/pics/dvcxmlfix/logo.png"
 ---
 
 ## 背景
