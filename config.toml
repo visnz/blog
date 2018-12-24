@@ -1,6 +1,6 @@
 staticDir = ["static"]
 baseurl = "/"
-title = "* IN SHADOW"
+title = "* sairen"
 languageCode = "en-us"
 paginate = "10" # Number of posts per page
 theme = "mainroad"
