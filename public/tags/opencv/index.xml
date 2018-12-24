@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Opencv on * IN SHADOW</title>
+    <link>/tags/opencv/</link>
+    <description>Recent content in Opencv on * IN SHADOW</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/opencv/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>數字圖像處理結課課題 二維離散傅里葉頻譜（正逆變換）</title>
+      <link>/post/fourier/</link>
+      <pubDate>Fri, 23 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fourier/</guid>
+      <description>相關知識 傅里葉 理論基礎：任何函數都可以表示成正弦函數的線性組合形式。 應用簡介：將信號從時域或空域轉換到頻域，使用頻域關係來保存對信號的描述。音頻應用方面可用於分頻，均衡器、濾波等。二維離散（圖像）引用方面可以用於圖像分析、增強、降噪等。
+簡單的傅里葉音頻解析原理圖
+在圖像應用上，RGB色彩模式下，圖像亮度與數值成正比，通過計算一定範圍內的一系列數值，來計算光暗變化的頻率，進而將全圖的頻率掃描映射到頻域，并將映射的結果保存在頻譜圖像上。
+二維離散傅里葉變換公式
+1
+2
+在變換出來的圖像中，每一個像素點代表一個頻率值（縱橫方向），亮度代表頻率出現的多少。最中間亮點代表直流分量（不隨空間變化的量，頻率為0），可以看到圖像聚焦于中間一橫。其表達意義在於：圖像僅有在橫向上存在變化的變化率，在垂直方向上變化率幾乎為0。
+更多關於頻譜圖的解讀
+圖像應用上用於解析、修復條紋： 3
+頻譜圖的亮度分佈越集中，畫面越柔和，則原圖畫面越平緩。若亮點四散分佈，則畫面又較強條幅、亮度差異等情況。
+工具使用 python  opencv-python (import: cv2)
+ numpy (快速運算矩陣)
+   opencv 基本使用
+cv2.imshow(&#39;imageName1&#39;,cv2.imread(&amp;quot;./img/cloud.jpg&amp;quot;))顯示圖像
+cv2.waitKey()imshow配套使用，阻塞線程
+cv2.imwrite(&#39;imageName.png&#39;,img)寫入圖像
+ 導入包：
+import math import cv2;# package: opencv-python import numpy as np;  傅里葉變換：
+def Fourier(originImg): # this function offer a O(n^4) method to load gray pixel one-by-one # to calculate Fourier image of param image # : param originImg: offer an image read by gray uint8(default) width, height = originImg.</description>
+    </item>
+    
+  </channel>
+</rss>

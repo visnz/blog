@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>计算机 on * IN SHADOW</title>
+    <link>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/</link>
+    <description>Recent content in 计算机 on * IN SHADOW</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python调用tcpdump监管流量去向</title>
+      <link>/post/tcpdump-py/</link>
+      <pubDate>Sat, 22 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/tcpdump-py/</guid>
+      <description>冬至到了先给大家拜个晚年（说完就开起了风扇）
+# 请广东尊重一下冬天
+问题 偶尔会有访问到alphabet系列网站的时候被recaptcha识别为危险链接
+纳了闷儿了平时也没D谷歌啊莫不是流量被什么邪恶势力拦截了。想借个练手的机会试一下python脚本套用tcpdump做一些简单的运维工作。
+分析 tcpdump读取流量 有可能被识别为危险流量大概是过于频繁发送流量。由于使用的流量代理，几个朋友也会同时用这台服务器代理过去访问，而且还有几个是油管通，产生大量流量也正常。
+先使用tcpdump筛选出出口网卡的发包： tcpdump -i ens3 -t -nn &#39;src &amp;lt;server-public-ip-address&amp;gt;&#39;
+其中-i指示网卡，可以通过ifconfig或者cat /proc/net/dev查询。-t去除时间，-nn不显示域名直接显示ip地址
+tcpdump已经给了基础的格式化，使用awk截断可以获取目标地址，并丢到文件里做记录：|awk &#39;{print $4}&#39; 1&amp;gt; /tmp/test.log
+多线程、log截断、计数、保存记录 多线程：因为tcpdump调用是持续占用stdout的，而且包流量也比较大，在python里使用双线程一路调用tcpdump，另一路专门做定时的截断、统计、记录。
+log截断：将文件移动到新的名字（指定）造成记录截断，就可以不用暂停tcpdump的输出结果持续统计无漏
+计数：每间隔一段时间截断刚刚由tcpdump产生的文件，使用collections的Counter对文件里的地址进行统计，以地址为key计数。
+保存记录：毕竟总不能一直盯着terminal看，就保存到文件里以后再统一分析吧，构建了专门用于record的方法，以便统一指定输出方式
+从ip地址到地理地址 geoip-database是一个IP到国家的关系映射数据库，geoip是一套用于查询的库与工具。arch上包为geoip，debian系为geoip-bin
+使用geoiplookup &amp;lt;ip-address&amp;gt;对ip地址进行地理寻址（愣
+python代码 第一部分获取网卡、地址并生成用于并发线程调用的命令
+netdev=os.popen(&amp;quot;cat /proc/net/dev|grep en|awk -F &#39;:&#39; &#39;{print $1}&#39;&amp;quot;).read().split(&#39;\n&#39;)[0] # 指定网卡，可以使用/proc/net/dev与ifconfig查看 src_ban=&amp;quot; src &amp;quot;+os.popen(&amp;quot;ifconfig &amp;quot;+netdev+&amp;quot; |grep inet|grep -v inet6|awk &#39;{print $2}&#39;&amp;quot;).read().split(&#39;\n&#39;)[0] # 获取该网卡使用的地址，在tcpdump中只检查该源地址发出的包 # 函数提供一个对目标地址的过滤参数接口，可以不对某些终点地址进行过滤 def tcpdumppy(*dst_ban): cmd=&amp;quot;sudo tcpdump -i &amp;quot;+netdev+&amp;quot; -t -nn &#39; &amp;quot;+src_ban for i in dst_ban: cmd+=&amp;quot; and !</description>
+    </item>
+    
+    <item>
+      <title>~~Arch~~ Linux 簡單記錄</title>
+      <link>/post/arch-i8so/</link>
+      <pubDate>Sat, 22 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/arch-i8so/</guid>
+      <description>记录下平时可能会用到的（查阅用）
+18.12.22 DNSMasq服务使用本地做DNS缓存：echo &amp;quot;listen-address=127.0.0.1&amp;quot; &amp;gt;&amp;gt; /etc/dnsmasq.conf
+添加本地解析：/etc/resolv.conf在最开头添加本地解析为最先
+防止篡改：sudo chattr +i /etc/resolv.conf
+18.12.20 dig所在软件包dnsutils
+systemd图形化界面包systemd-ui
+steam 冬季大促销 泼皮买了个linux上能跑的，可爱，想玩
+包名：steam steam-native-runtime(multilib)
+报了找不到~/.local/share/Steam/ubuntu12_32/steam-runtime/run.sh的错
+補了包：fontconfig lib32-fontconfig nvidia-dkms nvidia-utils lib32-nvidia-utils
+（nvidia与nvidia-dkms冲突，慎）
+18.12.17 libvirt虚拟机 基于KVM，libvirt提供一系列虚拟机服务的集合（包括virt-manager图形化界面、命令控制工具virsh、守护进程libvirtd）
+依赖firewalld、ebtables、dnsmasq
+安装后手动启动libvirtd、firewalld守护进程开始使用
+libvirt没有载入default网络，位置在/etc/libvirt/qemu/networks/default.xml sudo virsh net-define /etc/libvirt/qemu/networks/default.xml载入服务并重启守护进程。
+virsh net-autostart default标记自动启动
+18.12.15 git 指定密钥登陆 ./.ssh/config
+Host github.com HostName github.com IdentityFile ~/.ssh/$priviteKey User git Host new.visn.online HostName new.visn.online IdentityFile ~/.ssh/archlinux Port 20069 User visn  其中$priviteKey为登记在github setting中的公密钥对的密钥
+sshd端口修改 指定端口：echo &#39;Port=20069&#39; &amp;gt;&amp;gt; /etc/ssh/sshd_config</description>
+    </item>
+    
+    <item>
+      <title>docker上手 生产环境大搬家</title>
+      <link>/post/docker/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/docker/</guid>
+      <description>起因 帮 viktorika的项目 学习打包的时候，写了个脚本手抖把个目录给删了，不得不重装系统，经过深思熟虑之后决定做以下三件事
+ 拆分/home、/
+ timeshift定期备份
+ 使用docker创建测试环境
+  拆分目录 意外怀孕炸机头疼莫过于平时丢在/home/里杂乱的工作文件没有搜集起来（特别是多人用户机系统崩溃时），所以不如直接把根目录拆分出来（根治），如debian安装引导的时候说的“高级玩法”
+至于在/etc下配置文件以及多平台同步生产环境等问题：
+ [ ] dotfile repo of mine ： setup require
+ [x] 多平台生产环境：Chromium+vscode setting sync就是我的生产力
+  在重装系统的时候将原有的/dev/sdd3分割成40G跟175G
+按照原先的顺序先挂根目录到/mnt，再创建/mnt/boot、/mnt/home。
+原本是想/var跟/usr跟/opt也一起拆了的，后来感觉分太多也麻烦没必要，杂乱文件也很多，毕竟每次出问题只格/dev/sdd4一件重装软件效果体验更佳（只要家在就行）
+TimeShift定期备份 用了一把梭打包TimeShift定期备份，还好系统不大，不然得活生生把根目录给吃掉
+TimeShift支持快照迁移到心的电脑上，在恢复快照之前，TimeShift会询问你是不是需要保存现有的应用设置，并且选择保存哪一个。TimeShift需要GRUB 2启动进入快照恢复。
+一分钟不到就备份好了，不过没有尝试做容灾测试（可不敢手贱再把目录删一次了）
+部署本地docker  什么是docker
+ 为什么是docker
+ docker的基本使用
+  一来是不直接在现有的环境上动手，风险也不小。
+二是有通用的测试平台，有标准衡量与足够的试错机会。
+# 换国内阿里云源 sudo echo &#39;{&amp;quot;registry-mirrors&amp;quot;: [&amp;quot;https://dftbcros.mirror.aliyuncs.com&amp;quot;]}&#39;&amp;gt;&amp;gt;/etc/docker/daemon.json # 启动服务 sudo systemctl daemon-reload &amp;amp;&amp;amp; sudo systemctl enable docker --now # 获取镜像 sudo docker pull debian sudo docker pull ubuntu  由镜像创建实例：</description>
+    </item>
+    
+    <item>
+      <title>FFmpeg&#43;AnotherGUI实现Windows上进行ProRes 422编码</title>
+      <link>/post/preres_in_windows/</link>
+      <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/preres_in_windows/</guid>
+      <description> 方法来源 How to Export Apple Pro Res on a PC Using Windows
+材料  FFmpeg（github地址）。官方提供了静态版（Static，无动态链接库）、共享库版（Shared）、构建版（Dev，一堆头文件）。此处下载Static或Shared版本
+ AnotherGUI是一个编码器前端（高效并行处理），支持大量转码工作管理和调度。
+ 一个基于H.264编码的视频，格式MOV、MP4等皆可
+  基本原理 把已经渲染好的基于H.264编码的视频，通过FFmpeg进行转码。AnotherGUI是一个图形界面操作者，协同管理和调度。
+过程  FFmpeg解压，执行文件ffmpeg.exe在/bin中  AnotherGUI安装也是一把梭，画面简洁明了，常用英语  AnotherGUI有指定FFmpeg，会在Path下寻找（但官方没找到Setup for Windows，会找不到），可以直接在Executables里重定向： （注：第一次打开默认Path都是空白的，上图为过程演示）
+ 转码模式选择  添加源文件（可直接拖拽），并在右边的输出文件夹选择  Go  输出文件   直接用QQ影音（自我反省）打开听到一大堆撕裂声音，直接用QuickTime打开 结尾 貌似没有找到直接进行ProRes Encode in PC的方法…？（这就是FCP存在的理由吗？）
+更多  DaVinci Resolve 穷人低配虚拟工作台
+ pr素材代理 =&amp;gt; 大素材打包分发剪辑 &amp;amp;&amp;amp; 高计算量剪辑
+  </description>
+    </item>
+    
+    <item>
+      <title>Puppeteer初体验 &amp; 爬网课视频</title>
+      <link>/post/pupeteer/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/pupeteer/</guid>
+      <description>背景 手痒点了Coursera课程试听，忘了这回事直到PayPal提示我一笔60美元的支出（心如刀割）。想想认真听课要不把它录下来，以后可以看。一个一个抓太麻烦…索性写个爬虫把视频都爬下来好了…
+分析 日常万能抓的Video Downloader professional抓不了 网页源码里却如此露骨，还是静态的 未注册访问Coursera是可以访问到（我所购买课程）的所有课程，视频所在网址如https://www.coursera.org/learn/daoyan-siwei-weiyingren/lecture/0W13U/fen-jing-tou-jiao-ben，中间有一个五位/[A-z0-9]/防爬的文本，禁止爬虫直接根据名字爬到视频页面。
+通过Puppeteer模拟登陆，内部抓取所有视频的网址。再用Puppeteer自动打开网页抓取视频链接，再用下载工具批量下载重命名
+（虽然后来发现模拟登陆后更麻烦…索性一个一个自己复制了…）
+工具  Nodejs
+ Puppeteer：无图形化运行chrome的API
+  编码 npm install --save puppeteer
+不少教程给了截图示例，代码内容也一目了然
+async function getPic() { const browser = await require(&#39;puppeteer&#39;).launch(); const page = await browser.newPage(); await page.goto(&#39;https://google.com&#39;); await page.screenshot({path: &#39;./google.png&#39;}); await browser.close(); }  模拟点击 因为视频页面需要点击播放，视频区域才会被替换成视频链接，所以使用puppeteer本身浏览器模拟点击的API 通过css选择器找到点击的区域，调用page.click(&amp;quot;选择器的复制内容&amp;quot;)即可
+最终 给定一系列键值对（排序编号为键，有视频的网页地址为值）
+var page = await browser.newPage(); //打开新页面 await page.goto(addr[&amp;quot;value&amp;quot;],{ timeout: 50000}); //跳转网页，重订超时时间 await page.waitFor(5000); //等待网页打开 console.log(&amp;quot;in &amp;quot;+addr[&amp;quot;value&amp;quot;]); await page.click(&amp;quot;#rendered-content &amp;gt; div &amp;gt; div &amp;gt; section &amp;gt; div.</description>
+    </item>
+    
+    <item>
+      <title>Windows10工作站远程桌面连接：frp内网穿透映射RDP服务</title>
+      <link>/post/rdpbyfrp/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/rdpbyfrp/</guid>
+      <description>背景 问题  小作坊影视后期，素材量大，传输不方便。
+ 有一台核心工作站，协同工作者不集中，其各自设备不给力
+ 想办法让协同工作者能够远程参与到工作站中
+  构思 开放工作站多用户协作，远程连接端口，允许其他网络协同工作者连接进来
+优点：协同工作者彼此之间不需要复制多份大文件素材，不用过多考虑素材传输 问题、设备负载 问题。整理素材、粗剪、精剪等工作可以同时进行。
+缺点：需要有流畅网速保障（公网服务器、自身分发速度、协同工作者的下载速度），剪辑预览的时候更需要有网速保障（通常本地工作站不需要考虑这些）。
+所需工具  Windows10桌面开放连接：RDP Wrapper
+ 端口映射工具：frp
+ 本地工作站，能负载多用户登录
+ 一台中继服务器，国内外皆可，需要保证其上下行速度流畅（记得打开你阿里的port ban列表）
+  配置 多用户登录 先创建新用户和密码，把用户放入Remote Desktop Users组 允许你的电脑接受远程连接 Windows登录某个用户就会挤下线另一个用户，首先允许你的工作站实现多用户同时登录：RDPWrap-&amp;gt;install.bat（记得关闭你的360、某安全管家）
+后可使用RDPConf.exe配置具体内容 无法[fully supported]的可以尝试update.bat更新
+使用RDPCheck.exe对本地多用户登录进行测试 多会话冲突 测试过程出现过多会话访问，工作站拒绝连接。原因是Windows系统防范过多会话连接。可在cmd-&amp;gt;gpedit.msc-&amp;gt;管理模板- Windows组件-&amp;gt;远程桌面服务-&amp;gt;远程桌面主机会话中，会话时间限制、连接等进行限制。
+自定义最高连接数、设置断开连接后的会话生存时间等等。详细一些操作可自行搜索 配置服务器：frps 服务器上直接下载RDP Wrapper对应版本，修改frps.ini。可以简单按照RDP文档的示例配置一个监听接口，安全一点可以引入stcp等。
+./frps -c ./frps.ini启动
+至于需要配置systemd service和crontab的请自行配置
+配置工作站：frpc 下载RDP Wrapper对应版本修改frpc.ini。
+简单配置做测试
+[common] server_addr = 你服务器地址 server_port = 7000 服务器的穿透端口（frps.ini中指定的端口） [RDP] type = tcp local_ip = 0.</description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43;结合V8模块扩展nodejs功能，用c&#43;&#43;处理复杂计算</title>
+      <link>/post/nodejscpp/</link>
+      <pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/nodejscpp/</guid>
+      <description>我团队在年底举办的青年实践活动“粿奔计划”中，线下游戏RPG采用Nodejs+cpp+html完成业务逻辑。
+因为V8引擎由c++完成，可以在cpp中直接引入&amp;lt;v8.h&amp;gt;，通过node-gyp与building.gyp结构文件渲染成一个node模块。cpp作为游戏引擎部分，保留可以被调用的js模块接口，在nodejs中引入模块并按平常调用。
+书写cc（cpp）文件 新建一个文件，这里用的是test.cc
+#include &amp;lt;node.h&amp;gt; #include &amp;lt;v8.h&amp;gt; #include &amp;lt;string&amp;gt; using namespace v8; using namespace std; void hello(const FunctionCallbackInfo&amp;lt;Value&amp;gt;&amp;amp; args) { Isolate* isolate = Isolate::GetCurrent(); //统一开头 获取js脚本上下文 int value = args[0]-&amp;gt;NumberValue() + args[1]-&amp;gt;NumberValue(); //将第一二个参数的数值相加 Local&amp;lt;Number&amp;gt; num = Number::New(isolate, value); //将相加的value转化为可返回的数据类型 String::Utf8Value param1(args[0]-&amp;gt;ToString()); String::Utf8Value param2(args[1]-&amp;gt;ToString()); //新建String对象，由参数强制转换为String而填充 string ret=string(*param1).string::append(string(*param2)); //以上完成简单的字符转换和衔接 Handle&amp;lt;Value&amp;gt; str = String::NewFromUtf8(isolate, ret.c_str() ); //通过ret.c_str()转化对象后构建新Handle（handle 是指向对象的指针 Local&amp;lt;String&amp;gt; str2= String::NewFromUtf8(isolate,&amp;quot;sss&amp;quot;); //创建一个可以用于返回的String类型，内容为“sss” args.GetReturnValue().Set(str); //获取传入参数的返回参数，设置str为返回参数 //如果传入的参数携带回调函数，则支持： // callback, 使用Cast方法来转换 Local&amp;lt;Function&amp;gt; callback = Local&amp;lt;Function&amp;gt;::Cast(args[1]); Local&amp;lt;Value&amp;gt; argv[1] = { // 拼接String String::Concat(Local&amp;lt;String&amp;gt;::Cast(args[0]), String::NewFromUtf8(isolate, &amp;quot; world&amp;quot;)) }; // 调用回调, 参数: 当前上下文，参数个数，参数列表 callback-&amp;gt;Call(isolate-&amp;gt;GetCurrentContext()-&amp;gt;Global(), 1, argv); } void helloA(const FunctionCallbackInfo&amp;lt;Value&amp;gt;&amp;amp; args) { //.</description>
+    </item>
+    
+    <item>
+      <title>Java Rebase</title>
+      <link>/post/java-rebase/</link>
+      <pubDate>Fri, 26 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/java-rebase/</guid>
+      <description>写在前面 Java囧境 作为面向对象炒得最火的语言，Java曾依靠虚拟机的跨平台特性撑起计算机半臂江山。
+时至今日，Java已经略显疲惫，有些高不成低不就的感觉。
+ 试图培养成一种面向通用的语言，在py、R、Go等面向专业语言诞生之后，java的通用优势不足。  在安卓领域，第二代第三代JVM语言横空出世，Kotlin快速夺取市场。 在服务器领域，因为历史遗留问题JavaSRE目前依然为主流，但不是长久之计。新的服务器架构快速迭代，后起之秀Py、nodejs也在快速增长。 桌面领域Java一直有力使不出来，底部依赖大、自家GUI又刚不过qt系列 语言语法及其体系相对冗长、功能迭代速度相对较慢，底层相对重量级  甲骨文的收购、商业化与闭源一定程度上延迟了技术层面的增长 曾经的跨平台特性已经不再是其核心竞争力 Java的体系相当庞大，光是服务器框架就可以学完大学四年  （其实感觉有点像Apache与Nginx port80之争那份漫画，老一辈与晚辈各自的优势）
+所提的点不是贬低Java，是较理性地描述目前的问题
+个人发展瓶颈 本身自己是学习Java内容居多的，从高中一本《从如坑到弃疗》，到大学起来接触各种教新的技术。
+大学生迷茫直观上来说，无非分为两种
+ 了解得太少 了解得太多  中学的时候不知道java是什么，一直摇摆不定学不学计算机，特迷茫。报考了志愿进了计算机这一大坑，诶，目标算是定下来了，不会太迷茫，java就继续学下去。直到接触了更多更先进的技术，再次陷入迷茫。
+断舍离提供了一些方法论来解决问题，做出了决定：放弃java，转向其他语言
+上升到另一个层面，变成语言无非只是解决问题的方法而以，所以这个决定并不是什么大事。我现在要做的是把大学这一两年来断断续续学到的Java的内容进行归纳总结，毕竟编程设计语言是具有共性的，在Java学到的解决问题的思路，完全可以应用到其他语言、学科和领域。所以在此开了这篇文章。
+所以标题引用了git中一个专业名词Rebase，更直观的感受是更换基底的意思。
+文所涉及的内容，是个人从Java中学习而来的，并不是Java独有的，请勿混淆
+Java总览 语言特性
+ 面向对象（封装继承多态，不允许多重继承） 跨平台(once code, run debug everywhere) 底层解释型（虚拟机机器码） 安全检查（你可能需要Rust） 强类型、静态语言 内存垃圾gc 大小写严格、默认驼峰命名法  技术与名词 JVM(Java Virtual Machine) Java实体运行软件，通过编程Java代码，编译成class机器码，由JVM适配平台，执行机器码内容（以此实现跨平台）。当然，JVM不一定由Java编写，使用Ruby语言+JRuby编译器等照样可以调用JVM。具体的计算机程序编译过程请自行了解。
+JRE(Java Runtime Environment)Java运行环境，包含一个JVM和一系列标准类库
+JDK(Java Development Kit) 程序开发库，包含了接口等一系列开发必备软件，通过Java语法导入、调用
+JDK的实体文件结构
+   目录 描述     \bin 编译器、测试与调用等工具   \demo 代码示例   \docs html的类库文档   \include 用于编译本地库、本地方法的文件   \jre 运行环境所需的文件   \lib 类库文件   \src 类库源文件    SE、ME、EE Java的三个不同版本，分别对应小型设备、桌面与简单服务器、企业及服务器三种平台</description>
+    </item>
+    
+    <item>
+      <title>跳出OO思想与OODP-杂记</title>
+      <link>/post/disoodp/</link>
+      <pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/disoodp/</guid>
+      <description> 跳出面向对象思想 整理了一遍自己的笔记，里面有不少关于面向对象设计的内容，整理完放到了Gitbook，里面包括了OO原则、二十三设计模式、跳出面向对象思想三个部分。其中相对来说较为具有启发性的是第三部分的跳出面向对象思想，引用了来自大佬Casa Taloyum博客的三篇跳出面向对象思想。
+更具体的关于面向对象思维的局限性可以见 面向对象编程的弊端是什么？ - invalid s的回答 - 知乎。
+其最核心的问题在于，在所有的编程设计都是辅助完成业务的前提下，不同的手段（面向过程、面向对象、面向函数等）能否尽力交付任务。也不能否认面向对象思维给计算机带来的飞跃，在此基础上会有更先进的思维，这是大家愿意看到的。
+关于设计模式 知乎的回答里业界大佬也以相对实际使用的角度提到了设计模式：“一切皆对象实质上是在鼓励堆砌毫无意义的喋喋不休，并且用这种战术层面都蠢的要命的喋喋不休来代替战略层面的考量。大部分人——注意，不是个别人——甚至被这种无意义的喋喋不休搞出了神经质，以至于非要在喋喋不休中找出意义：没错，我说的就是设计模式驱动编程，以及如此理解面向对象编程。”
+承认其所提到的，“大家使用过度，反而忘记了设计的初衷”这一部分内容
+作者原用于纠正“所以用面向对象语言写出来的东西一定更清晰、易懂”的误解（虽然我也比较同意），单独来说更偏向狭义上的设计模式；设计模式并非只存在于面向对象设计之中，广义上是为所有的程序设计提供了解决方案的思路。
+设计模式是一种抽象“抽象”的技术（或是艺术），GoF设计模式一书具有划时代意义也在于它完成了对抽象逻辑的一次抽象，也给软件工程提供了一个不同角度的世界观和方法论。引用书中一段较为中肯的话
+ 本书中涉及的设计模式并不描述新的或未经证实的设计，我们只收录那些在不同系统中多次使用过的成功设计。这些设计的绝大部分以往并无文本记录，它们或是来源于面向对象设计者圈子里的非正式交流，或是来源于某些成功的面向对象系统的某些部分，但对设计新手来说，这些东西是很难学得到的。尽管这些设计不包括新的思路，但我们用一种新的、便于理解的方式将其展现给读者，即：具有统一格式的、已分类编目的若干组设计模式。
+ 而我们可能更需要注意的是避免一些问题，如
+ 只了解模式、不了解原因、场景 过度设计、使用，忘记初衷问题  设计模式应当解决实际的问题，理论辅佐完成实践 设计模式应当变成一种行业内交流的货币，用于沟通交流
+相关链接
+ 面向对象程序设计 - wiki 知乎 - 面向对象编程的弊端是什么？ 知乎 - 设计模式有何不妥，所谓的荼毒体现在哪？ 知乎 - 如何正确地使用设计模式？ Arch Linux 哲学  </description>
+    </item>
+    
+    <item>
+      <title>MAC系统手动挂载读写NTFS文件系统</title>
+      <link>/post/mac-ntfs/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/mac-ntfs/</guid>
+      <description>背景 由于一些历史原因，Mac操作系统上插入NTFS（微软开发）的磁盘时，只能读取而不能写入。
+无法新建文件夹、删除等操作
+Paragon等磁盘工具的收费版有提供写入的功能。而实际操作系统并没有这个限制，可以手动开启。
+代码 # 获取传参磁盘的设备文件 devs=`mount|grep $1|awk &#39;{print $1}&#39;` echo &amp;quot;selected hard disk&amp;quot;+${devs} # 指定在卷的挂载点 newdevs=&amp;quot;/Volumes/可写磁盘&amp;quot; echo &amp;quot;new mount point&amp;quot;+${newdevs} # 卸载现有磁盘的挂载点，创建新挂载点 sudo umount /Volumes/$1 sudo mkdir $newdevs # 挂载设备到新挂载点，指明读写权限 sudo mount -t ntfs -o rw,auto,nobrowse $devs $newdevs # 链接到桌面 sudo ln -s $newdevs ~/Desktop/WriteableNTFSDisk  在桌面就出现重新挂载过的硬盘啦 可以读写</description>
+    </item>
+    
+    <item>
+      <title>最基础的个人文件管理（</title>
+      <link>/post/%E5%9F%BA%E6%9C%AC%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/%E5%9F%BA%E6%9C%AC%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</guid>
+      <description>今天又被某计算机道友提到，顺道一把抄过来。
+老问题如：
+ 当年买了1T磁盘，现在文件太多，系统太卡怎么办 文件太多乱七八糟的，重装系统太麻烦了还得重新整理 用了太久磁盘太慢游戏/PR要开半天怎么办  解决问题的方法：从一开始就做好文件管理（甩锅）
+个人文件的管理  从文件访问频度划分，如系统运行的数据和常年不用的冷数据之间的区分，凭个人喜好划分。我是划分成系统盘+热数据盘+冷数据盘（备份区、收藏区、归档区） 从所有权划分，系统的归属系统，用户的归属用户。Windows比如你别把个人文件复制到Program Files里区，类Unix比如/usr/bin/与/bin的划分（当然首先你得直到每个文件夹是做啥用的） 为存储划分功能，如1中提到的备份、收藏、归档。规划一个逃生舱，这部分的数据是需要重点维护的，整个盘坏掉了这部分可以逃生的。 定期整理、归档、清理文件。我是按日期做归档。 备份：使用云备份工具、简单的复制/冗余备份 该用工具的地方就用不要嫌麻烦  工具：Git等版本管理工具、Everything等全盘搜索工具、坚果云等同步工具
+折腾的管理  磁盘冗余阵列RAID牺牲空间保证安全 你可能需要数据库来帮你管理文件 NAS系统（出门右转群晖 手写人工智能算法，分析个人文件特征自动做归类管理（Nice  具体场景的文件管理  程序项目开发，工程文件相对较小（没到G级别）优先使用版本管理器 影视制作，素材库文件大，优先使用素材管理器（Bridge或数据库） 多人共同编辑推荐在线合作编辑软件如石墨文档  使用注意 反正磁盘都是有寿命的，减少擦写/减少磁盘随机访问都算是一种保护了
+在下载/保存文件的时候做好分类，临时使用的用完记得归档或删除
+个人文件不要过度依赖系统（建议定期刷系统
+尝试性修改，使用副本进行
+etc.
+回答一开始的几个问题
+A1: 当年买了1T磁盘，现在文件太多，系统太卡怎么办。
+Q1: 整理，换SSD，重装系统
+A2: 文件太多乱七八糟的，重装系统太麻烦了还得重新整理
+Q2: 整理，换SSD，重装系统
+A3: 用了太久磁盘太慢游戏/PR要开半天怎么办
+Q3: 整理，换SSD，重装系统</description>
+    </item>
+    
+  </channel>
+</rss>

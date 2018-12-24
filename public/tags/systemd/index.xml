@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Systemd on * IN SHADOW</title>
+    <link>/tags/systemd/</link>
+    <description>Recent content in Systemd on * IN SHADOW</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 15 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/systemd/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Systemd 扎記</title>
+      <link>/post/systemd/</link>
+      <pubDate>Sat, 15 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/systemd/</guid>
+      <description>簡述 # sell my underpant to systemd #
+ systemd(System Daemon, 系統守護進程)：是一個Linux的系統與服務管理器，由systemctl進行控制，支援系統快照與回復系統狀態，支持自動掛載等。已完美取代sysvinit
+ 系統啓動過程：
+ BIOS/UEFI啓動 GRUB引導啓動 尋找/boot(GSP分區)並載入內核 CPUIDLE與內核初始化(PID=0) /sbin/init（systemd啓動，PID=1） fork啓動systemd註冊的基層服務  不同進程工具檢出PID=1的進程不一樣，systemd（pstree -Apn檢出結果）或是/sbin/init（ps -aux檢出結果）
+$ ls -al /sbin/init lrwxrwxrwx 1 root root 22 Nov 26 21:35 /sbin/init -&amp;gt; ../lib/systemd/systemd   基本使用  systemctl：進入主界面
+ systemctl --failed查看启动失败的单元
+ systemctl start/enable/disable/stop/restart/mask/unmask &amp;lt;Unit&amp;gt;：相應地對一個unit進行操作
+ systemctl daemon-reload：掃描新的有變動的單元，通常更新配置後需要使用
+ 圖形化管理界面：systemd-ui
+ 遠程管理：systemctl -H root@example
+ systemctl list-unit-files --type=service：列出可用單元及其情況（指定service類型）
+ systemd-*系列也提供了許多方便實用的工具
+ systemd-analyze blame：分析啓動時花費的時間</description>
+    </item>
+    
+  </channel>
+</rss>

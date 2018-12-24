@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nodejs on * IN SHADOW</title>
+    <link>/tags/nodejs/</link>
+    <description>Recent content in Nodejs on * IN SHADOW</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 09 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Puppeteer初体验 &amp; 爬网课视频</title>
+      <link>/post/pupeteer/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/pupeteer/</guid>
+      <description>背景 手痒点了Coursera课程试听，忘了这回事直到PayPal提示我一笔60美元的支出（心如刀割）。想想认真听课要不把它录下来，以后可以看。一个一个抓太麻烦…索性写个爬虫把视频都爬下来好了…
+分析 日常万能抓的Video Downloader professional抓不了 网页源码里却如此露骨，还是静态的 未注册访问Coursera是可以访问到（我所购买课程）的所有课程，视频所在网址如https://www.coursera.org/learn/daoyan-siwei-weiyingren/lecture/0W13U/fen-jing-tou-jiao-ben，中间有一个五位/[A-z0-9]/防爬的文本，禁止爬虫直接根据名字爬到视频页面。
+通过Puppeteer模拟登陆，内部抓取所有视频的网址。再用Puppeteer自动打开网页抓取视频链接，再用下载工具批量下载重命名
+（虽然后来发现模拟登陆后更麻烦…索性一个一个自己复制了…）
+工具  Nodejs
+ Puppeteer：无图形化运行chrome的API
+  编码 npm install --save puppeteer
+不少教程给了截图示例，代码内容也一目了然
+async function getPic() { const browser = await require(&#39;puppeteer&#39;).launch(); const page = await browser.newPage(); await page.goto(&#39;https://google.com&#39;); await page.screenshot({path: &#39;./google.png&#39;}); await browser.close(); }  模拟点击 因为视频页面需要点击播放，视频区域才会被替换成视频链接，所以使用puppeteer本身浏览器模拟点击的API 通过css选择器找到点击的区域，调用page.click(&amp;quot;选择器的复制内容&amp;quot;)即可
+最终 给定一系列键值对（排序编号为键，有视频的网页地址为值）
+var page = await browser.newPage(); //打开新页面 await page.goto(addr[&amp;quot;value&amp;quot;],{ timeout: 50000}); //跳转网页，重订超时时间 await page.waitFor(5000); //等待网页打开 console.log(&amp;quot;in &amp;quot;+addr[&amp;quot;value&amp;quot;]); await page.click(&amp;quot;#rendered-content &amp;gt; div &amp;gt; div &amp;gt; section &amp;gt; div.</description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43;结合V8模块扩展nodejs功能，用c&#43;&#43;处理复杂计算</title>
+      <link>/post/nodejscpp/</link>
+      <pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/nodejscpp/</guid>
+      <description>我团队在年底举办的青年实践活动“粿奔计划”中，线下游戏RPG采用Nodejs+cpp+html完成业务逻辑。
+因为V8引擎由c++完成，可以在cpp中直接引入&amp;lt;v8.h&amp;gt;，通过node-gyp与building.gyp结构文件渲染成一个node模块。cpp作为游戏引擎部分，保留可以被调用的js模块接口，在nodejs中引入模块并按平常调用。
+书写cc（cpp）文件 新建一个文件，这里用的是test.cc
+#include &amp;lt;node.h&amp;gt; #include &amp;lt;v8.h&amp;gt; #include &amp;lt;string&amp;gt; using namespace v8; using namespace std; void hello(const FunctionCallbackInfo&amp;lt;Value&amp;gt;&amp;amp; args) { Isolate* isolate = Isolate::GetCurrent(); //统一开头 获取js脚本上下文 int value = args[0]-&amp;gt;NumberValue() + args[1]-&amp;gt;NumberValue(); //将第一二个参数的数值相加 Local&amp;lt;Number&amp;gt; num = Number::New(isolate, value); //将相加的value转化为可返回的数据类型 String::Utf8Value param1(args[0]-&amp;gt;ToString()); String::Utf8Value param2(args[1]-&amp;gt;ToString()); //新建String对象，由参数强制转换为String而填充 string ret=string(*param1).string::append(string(*param2)); //以上完成简单的字符转换和衔接 Handle&amp;lt;Value&amp;gt; str = String::NewFromUtf8(isolate, ret.c_str() ); //通过ret.c_str()转化对象后构建新Handle（handle 是指向对象的指针 Local&amp;lt;String&amp;gt; str2= String::NewFromUtf8(isolate,&amp;quot;sss&amp;quot;); //创建一个可以用于返回的String类型，内容为“sss” args.GetReturnValue().Set(str); //获取传入参数的返回参数，设置str为返回参数 //如果传入的参数携带回调函数，则支持： // callback, 使用Cast方法来转换 Local&amp;lt;Function&amp;gt; callback = Local&amp;lt;Function&amp;gt;::Cast(args[1]); Local&amp;lt;Value&amp;gt; argv[1] = { // 拼接String String::Concat(Local&amp;lt;String&amp;gt;::Cast(args[0]), String::NewFromUtf8(isolate, &amp;quot; world&amp;quot;)) }; // 调用回调, 参数: 当前上下文，参数个数，参数列表 callback-&amp;gt;Call(isolate-&amp;gt;GetCurrentContext()-&amp;gt;Global(), 1, argv); } void helloA(const FunctionCallbackInfo&amp;lt;Value&amp;gt;&amp;amp; args) { //.</description>
+    </item>
+    
+  </channel>
+</rss>

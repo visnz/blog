@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>游戏分析 on * IN SHADOW</title>
+    <link>/tags/%E6%B8%B8%E6%88%8F%E5%88%86%E6%9E%90/</link>
+    <description>Recent content in 游戏分析 on * IN SHADOW</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 06 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E6%B8%B8%E6%88%8F%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>《崩坏3》浅层分析</title>
+      <link>/post/bbb3/</link>
+      <pubDate>Wed, 06 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/bbb3/</guid>
+      <description>全文9000字（更新中），约18分钟。
+前70%为较为表层分析主要内容
+较为重点为较后部分的 非理性细节引导的分析
+ 架构  陈述性系统结构
+ 主要游戏资源
+ 推进单元与关卡设计
+ 游戏副本
+  改进性系统结构
+ 角色获得
+ 角色养成
+ 武器与圣痕
+ 宿舍与基地
+ 舰团系统
+  核心循环
+ 战斗节奏  运营系统
+ 玩家回归手段
+ 引导消费
+ 奖励模式
+   游戏经济系统  时间入口
+ P&amp;amp;E资源流向
+ P&amp;amp;P交易手段
+ 数值平衡
+  总体体验  题材
+ 世界观
+ 浸入式程度
+ 音乐与视觉
+  其他  战略推测</description>
+    </item>
+    
+  </channel>
+</rss>

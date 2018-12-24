@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>數字圖像處理結課課題 二維離散傅里葉頻譜（正逆變換）</title>
+<meta name="description" content="visn`s Personal blog about fucking daily chaos :L ">
+<meta name="generator" content="Hugo 0.52" />
+<meta property="og:title" content="數字圖像處理結課課題 二維離散傅里葉頻譜（正逆變換）" />
+<meta property="og:description" content="相關知識 傅里葉 理論基礎：任何函數都可以表示成正弦函數的線性組合形式。 應用簡介：將信號從時域或空域轉換到頻域，使用頻域關係來保存對信號的描述。音頻應用方面可用於分頻，均衡器、濾波等。二維離散（圖像）引用方面可以用於圖像分析、增強、降噪等。
+簡單的傅里葉音頻解析原理圖
+在圖像應用上，RGB色彩模式下，圖像亮度與數值成正比，通過計算一定範圍內的一系列數值，來計算光暗變化的頻率，進而將全圖的頻率掃描映射到頻域，并將映射的結果保存在頻譜圖像上。
+二維離散傅里葉變換公式
+1
+2
+在變換出來的圖像中，每一個像素點代表一個頻率值（縱橫方向），亮度代表頻率出現的多少。最中間亮點代表直流分量（不隨空間變化的量，頻率為0），可以看到圖像聚焦于中間一橫。其表達意義在於：圖像僅有在橫向上存在變化的變化率，在垂直方向上變化率幾乎為0。
+更多關於頻譜圖的解讀
+圖像應用上用於解析、修復條紋： 3
+頻譜圖的亮度分佈越集中，畫面越柔和，則原圖畫面越平緩。若亮點四散分佈，則畫面又較強條幅、亮度差異等情況。
+工具使用 python  opencv-python (import: cv2)
+ numpy (快速運算矩陣)
+   opencv 基本使用
+cv2.imshow(&#39;imageName1&#39;,cv2.imread(&quot;./img/cloud.jpg&quot;))顯示圖像
+cv2.waitKey()imshow配套使用，阻塞線程
+cv2.imwrite(&#39;imageName.png&#39;,img)寫入圖像
+ 導入包：
+import math import cv2;# package: opencv-python import numpy as np;  傅里葉變換：
+def Fourier(originImg): # this function offer a O(n^4) method to load gray pixel one-by-one # to calculate Fourier image of param image # : param originImg: offer an image read by gray uint8(default) width, height = originImg." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/fourier/" /><meta property="article:published_time" content="2018-11-23T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-11-23T00:00:00&#43;00:00"/>
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700" type="text/css" media="all" />
+<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
+<script type="text/javascript" src="/js/scripts.js"></script>
+<link rel="shortcut icon" href="/favicon.ico">
+
+</head>
+<body class="body body-left-sidebar mobile" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+	<div class="container container-outer">
+		<header class="header" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+			<div class="container container-inner clearfix">
+				<div class="logo" role="banner" itemscope="itemscope" itemtype="http://schema.org/Brand">
+					<a class="logo__link" href="/" title="* IN SHADOW" rel="home">
+						<h1 class="logo__title">* IN SHADOW</h1>
+						
+					</a>
+				</div>
+			</div>
+			
+<nav class="menu" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+	<ul class="menu__list">
+		<li class="menu__item"><a class="menu__link" href="/post/%E6%B8%B8%E8%AE%B0/">浪了个浪</a></li>
+		<li class="menu__item"><a class="menu__link" href="/about/">关于</a></li>
+	</ul>
+</nav>
+
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main-content content" role="main" itemprop="mainContentOfPage">
+	<article class="post">
+		<header class="post__header clearfix">
+			<h1 class="post__title">數字圖像處理結課課題 二維離散傅里葉頻譜（正逆變換）</h1>
+			<p class="post__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="post__meta-date" datetime="2018-11-23T00:00:00">November 23, 2018</time>
+			</p>
+		</header>
+		<div class="post__content clearfix">
+			<figure class="post__thumbnail">
+				<img src="/pics/fourier/fourier.webp" alt="數字圖像處理結課課題 二維離散傅里葉頻譜（正逆變換）">
+			</figure>
+			
+
+<h1 id="相關知識">相關知識</h1>
+
+<h2 id="傅里葉">傅里葉</h2>
+
+<p>理論基礎：任何函數都可以表示成正弦函數的線性組合形式。
+應用簡介：將信號從時域或空域轉換到頻域，使用頻域關係來保存對信號的描述。音頻應用方面可用於分頻，均衡器、濾波等。二維離散（圖像）引用方面可以用於圖像分析、增強、降噪等。</p>
+
+<p>簡單的傅里葉音頻解析原理圖</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Fourier_transform_time_and_frequency_domains_%28small%29.gif" alt="簡單的傅里葉音頻解析原理圖" /></p>
+
+<p>在圖像應用上，RGB色彩模式下，圖像亮度與數值成正比，通過計算一定範圍內的一系列數值，來計算光暗變化的頻率，進而將全圖的頻率掃描映射到頻域，并將映射的結果保存在頻譜圖像上。</p>
+
+<p>二維離散傅里葉變換公式</p>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/4305587-b722ae259c0016cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="二維離散傅里葉變換公式" /><sup class="footnote-ref" id="fnref:0"><a href="#fn:0">1</a></sup></p>
+
+<p><img src="http://my.csdn.net/uploads/201206/01/1338526304_4991.jpg" alt="引用博客圖" /><sup class="footnote-ref" id="fnref:1"><a href="#fn:1">2</a></sup></p>
+
+<p>在變換出來的圖像中，每一個像素點代表一個頻率值（縱橫方向），亮度代表頻率出現的多少。最中間亮點代表直流分量（不隨空間變化的量，頻率為0），可以看到圖像聚焦于中間一橫。其表達意義在於：圖像僅有在橫向上存在變化的變化率，在垂直方向上變化率幾乎為0。</p>
+
+<p><a href="https://zhuanlan.zhihu.com/p/29442552">更多關於頻譜圖的解讀</a></p>
+
+<p>圖像應用上用於解析、修復條紋：
+<img src="/pics/fourier/01.png" alt="圖像傅里葉應用" /><sup class="footnote-ref" id="fnref:2"><a href="#fn:2">3</a></sup></p>
+
+<p>頻譜圖的亮度分佈越集中，畫面越柔和，則原圖畫面越平緩。若亮點四散分佈，則畫面又較強條幅、亮度差異等情況。</p>
+
+<h1 id="工具使用">工具使用</h1>
+
+<h2 id="python">python</h2>
+
+<ul>
+<li><p>opencv-python (import: cv2)</p></li>
+
+<li><p>numpy (快速運算矩陣)</p></li>
+</ul>
+
+<blockquote>
+<p>opencv 基本使用</p>
+
+<p><code>cv2.imshow('imageName1',cv2.imread(&quot;./img/cloud.jpg&quot;))</code>顯示圖像</p>
+
+<p><code>cv2.waitKey()</code>imshow配套使用，阻塞線程</p>
+
+<p><code>cv2.imwrite('imageName.png',img)</code>寫入圖像</p>
+</blockquote>
+
+<p>導入包：</p>
+
+<pre><code class="language-python">import math
+import cv2;# package: opencv-python
+import numpy as np;
+</code></pre>
+
+<p>傅里葉變換：</p>
+
+<pre><code class="language-python">def Fourier(originImg):
+# this function offer a O(n^4) method to load gray pixel one-by-one
+# to calculate Fourier image of param image
+# : param originImg: offer an image read by gray uint8(default)
+    width, height = originImg.shape
+    # acquire image size
+    complexMartixReal = [[0 for i in range(width)]for i in range(height)]
+    complexMartixImag = [[0 for i in range(width)]for i in range(height)]
+    # create two complex martix to save(real one and imag one)
+    newimg = np.zeros([width, height, 1], np.uint8)
+    # create new image to return
+    for u in range(width):
+        for v in range(height):
+            tmpx = 0;tmpy = 0;
+            for x in range(width):
+                for y in range(height):
+                    arg=-2*math.pi*(u*x/width+v*y/height)
+                    tmpx+=(pow(-1,x+y)*img[x][y]*math.cos(arg))
+                    tmpy+=(pow(-1,x+y)*img[x][y]*math.sin(arg))
+            # save calculation result of complex
+            complexMartixReal[u][v] = tmpx
+            complexMartixImag[u][v] = tmpy
+            newimg[u,v] = np.abs(complex(tmpx, tmpy))/math.sqrt(width*height)
+            # move to new central
+    return complexMartixReal,complexMartixImag,newimg
+</code></pre>
+
+<p>傅里葉逆變換：</p>
+
+<pre><code class="language-python">def InverseFourier(originImg,complexMartixReal,complexMartixImag):
+# this function offer a O(n^4) method to load gray image which had
+# been  returned by Fourier(), to replay origin image
+# : param originImg: offer an image which had been returned by Fourier()
+# : param complexMartixReal: an argument returned by Fourier() loading complex
+#                            martix of real-part while calculating image
+# : param complexMartixImag: an argument returned by Fourier() loading complex
+#                            martix of imag-part while calculating image
+    # acquire image size
+    width, height = originImg.shape
+    newimg = np.zeros([width, height, 1], np.uint8)
+    # create new image to return
+    for u in range(width):
+        for v in range(height):
+            tmp=0
+            for x in range(width):
+                for y in range(height):
+                    arg=2*math.pi*(u*x/width+v*y/height)
+                    euler=complexMartixReal[x][y]* math.cos(arg)
+                    euler-=complexMartixImag[x][y]*math.sin(arg)
+                    # calculate euler result from complex martix
+                    tmp+=int(euler/(width*height))
+            newimg[u][v]=abs(tmp)
+    return newimg
+</code></pre>
+
+<p>測試代碼：</p>
+
+<pre><code class="language-python"># test code :
+originImg = cv2.imread(&quot;./img/cloud.jpg&quot;, cv2.IMREAD_GRAYSCALE)
+# load image
+complexMartixReal,complexMartixImag,fourierImg=Fourier(originImg);
+# tmp of complex martix, fourier img to load
+fourierInverseImg=InverseFourier(fourierImg,complexMartixReal,complexMartixImag);
+
+cv2.imshow(&quot;origin&quot;,originImg)
+cv2.imshow(&quot;fourier&quot;,fourierImg)
+cv2.imshow(&quot;new&quot;,fourierInverseImg)
+cv2.waitKey()
+</code></pre>
+
+<h2 id="測試結果">測試結果</h2>
+
+<p><img src="/pics/fourier/01.png" alt="" /></p>
+
+<h2 id="寫在最後">寫在最後</h2>
+
+<ol>
+<li><p>numpy有提供fft、fft2（專門用於圖像變換的<strong>快速傅里葉變換</strong>的函數庫）</p></li>
+
+<li><p>測試代碼時候不要使用太大的圖片（建議100px^2^以內），時間複雜度導致運算時間增長驚人</p></li>
+
+<li><p>傅里葉變換的思路（特征分頻過濾）在抵抗DOS方面是否有可以借鑒的思路</p></li>
+</ol>
+
+<h1 id="相關資料">相關資料</h1>
+
+<ol>
+<li><p><a href="http://gr.xjtu.edu.cn/c/document_library/get_file?p_l_id=1722675&amp;folderId=2083076&amp;name=DLFE-58002.pdf">傅里叶分析之掐死教程（完整版）</a></p></li>
+
+<li><p><a href="https://www.youtube.com/watch?v=spUNpyF58BY">3Blue1Brown Fourier visual introduction</a></p></li>
+
+<li><p><a href="https://www.bilibili.com/video/av19141078">3Blue1Brown Fourier visual introduction 中文版</a></p></li>
+
+<li><p><a href="https://www.wikiwand.com/en/Fourier_transform">傅里葉變換 wiki</a></p></li>
+
+<li><p><a href="https://www.wikiwand.com/zh/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F">歐拉公式 wiki</a></p></li>
+
+<li><p><a href="http://wiki.opencv.org.cn/index.php/%E9%A6%96%E9%A1%B5">opencv及相關資料</a></p></li>
+
+<li><p><a href="https://www.amazon.cn/dp/B00513FBZK">課本教材：數字圖像處理第三版</a></p></li>
+</ol>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:0"><a href="https://www.jianshu.com/p/7dfe02fa34a9">傅里葉公式集 簡介(簡書)</a>
+ <a class="footnote-return" href="#fnref:0"><sup>[return]</sup></a></li>
+<li id="fn:1"><a href="https://blog.csdn.net/abcjennifer/article/details/7622228">資料引用出處1</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2"><a href="https://www.zhihu.com/question/20460630/answer/105888045">資料引用出處2</a>
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="m4.73135 3.3795002q0-.5597-.39604-.9557-.39604-.3961-.95577-.3961-.55974 0-.95578.3961-.39604.396-.39604.9557 0 .5598.39604.9558.39604.3961.95578.3961.55973 0 .95577-.3961.39604-.396.39604-.9558zm11.26865 6.0832q0 .5596998-.39076.9504998l-5.18548 5.196q-.41188.3908-.9610504.3908-.55974 0-.9505-.3908l-7.5511496-7.5616998q-.40132-.3907-.68119-1.0666-.27987-.6759-.27987-1.2357v-4.3934q0-.54920004.40132-.95050004.40132-.4013.9505-.4013h4.39339q.55974 0 1.23565.2799.67591.2798 1.07723.6812l7.55115 7.54060004q.39076.4118.39076.961z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link" href="/tags/python/" rel="tag">python</a></li>
+		<li class="tags__item"><a class="tags__link" href="/tags/opencv/" rel="tag">opencv</a></li>
+		<li class="tags__item"><a class="tags__link" href="/tags/%E5%9C%96%E5%83%8F%E8%99%95%E7%90%86/" rel="tag">圖像處理</a></li>
+	</ul>
+</div>
+
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="visn Z avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About visn Z</span>
+	</div>
+	<div class="authorbox__description">
+		(()=&gt;console.log(&#39;hello world!&#39;))()
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/post/hkxma/" rel="prev"><span class="post-nav__caption">«Previous</span><p class="post-nav__post-title">香港XM Anomaly摸魚兩日遊</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/post/gists/" rel="next"><span class="post-nav__caption">Next»</span><p class="post-nav__post-title">VSCode記 Gists同步部署生產環境(Atom&amp;Vim)</p></a>
+	</div>
+</nav>
+
+	
+</main>
+
+<aside class="sidebar" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="//google.com/search">
+		<label>
+			<span class="screen-reader-text">Search for:</span>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/tcpdump-py/">python调用tcpdump监管流量去向</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/arch-i8so/">~~Arch~~ Linux 簡單記錄</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/docker/">docker上手 生产环境大搬家</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/systemd/">Systemd 扎記</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/ovtr/">OVTR 視覺化tracert 日好幾把炫酷（然並卵）</a></li>
+		</ul>
+	</div>
+</div>
+
+	
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/visnz" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:visn0518@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>visn0518@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget__link widget__link--taglist" href="/tags/adobe" title="adobe">adobe</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ae" title="ae">ae</a>
+		<a class="widget__link widget__link--taglist" href="/tags/bilibili" title="bilibili">bilibili</a>
+		<a class="widget__link widget__link--taglist" href="/tags/c&#43;&#43;" title="c&#43;&#43;">c&#43;&#43;</a>
+		<a class="widget__link widget__link--taglist" href="/tags/docker" title="docker">docker</a>
+		<a class="widget__link widget__link--taglist" href="/tags/gamejam" title="gamejam">gamejam</a>
+		<a class="widget__link widget__link--taglist" href="/tags/github" title="github">github</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ingress" title="ingress">ingress</a>
+		<a class="widget__link widget__link--taglist" href="/tags/java" title="java">java</a>
+		<a class="widget__link widget__link--taglist" href="/tags/javascript" title="javascript">javascript</a>
+		<a class="widget__link widget__link--taglist" href="/tags/linux" title="linux">linux</a>
+		<a class="widget__link widget__link--taglist" href="/tags/mac" title="mac">mac</a>
+		<a class="widget__link widget__link--taglist" href="/tags/nodejs" title="nodejs">nodejs</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ntfs" title="ntfs">ntfs</a>
+		<a class="widget__link widget__link--taglist" href="/tags/opencv" title="opencv">opencv</a>
+		<a class="widget__link widget__link--taglist" href="/tags/prores" title="prores">prores</a>
+		<a class="widget__link widget__link--taglist" href="/tags/puppeteer" title="puppeteer">puppeteer</a>
+		<a class="widget__link widget__link--taglist" href="/tags/python" title="python">python</a>
+		<a class="widget__link widget__link--taglist" href="/tags/systemd" title="systemd">systemd</a>
+		<a class="widget__link widget__link--taglist" href="/tags/tracert" title="tracert">tracert</a>
+		<a class="widget__link widget__link--taglist" href="/tags/vscode" title="vscode">vscode</a>
+		<a class="widget__link widget__link--taglist" href="/tags/windows" title="windows">windows</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e4%b8%8a%e6%99%ba%e5%a4%a7%e5%ad%a6" title="上智大学">上智大学</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e4%ba%92%e8%81%94%e7%bd%91" title="互联网">互联网</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9b%a2%e9%98%9f%e4%b8%9a%e5%8a%a1" title="团队业务">团队业务</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9b%be%e7%89%87" title="图片">图片</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9c%96%e5%83%8f%e8%99%95%e7%90%86" title="圖像處理">圖像處理</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%ad%97%e5%b9%95" title="字幕">字幕</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%b4%a9%e5%9d%8f3" title="崩坏3">崩坏3</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%b7%a5%e5%85%b7" title="工具">工具</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%bd%b1%e8%a7%86" title="影视">影视</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%bd%b1%e8%a7%86%e5%90%8e%e6%9c%9f" title="影视后期">影视后期</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%89%8b%e5%86%8a" title="手冊">手冊</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%96%87%e4%bb%b6" title="文件">文件</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%97%a5%e6%9b%86" title="日曆">日曆</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%97%a5%e6%9c%ac" title="日本">日本</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%9c%8d%e5%8b%99%e5%99%a8" title="服務器">服務器</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%9d%82%e5%ad%a6%e5%8a%a8%e7%89%a9" title="杂学动物">杂学动物</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%b5%aa" title="浪">浪</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%b8%b8%e6%88%8f%e5%88%86%e6%9e%90" title="游戏分析">游戏分析</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%a6%8f%e8%a2%8b" title="福袋">福袋</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%ae%a1%e7%90%86" title="管理">管理</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bb%8f%e6%b5%8e%e5%ad%a6" title="经济学">经济学</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bc%96%e7%a0%81" title="编码">编码</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bc%96%e7%a8%8b%e6%80%9d%e7%bb%b4" title="编程思维">编程思维</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%a1%8c%e7%a8%8b%e8%a1%a8" title="行程表">行程表</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%a8%88%e7%ae%97%e6%a9%9f" title="計算機">計算機</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%ae%a1%e7%ae%97%e6%9c%ba" title="计算机">计算机</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%be%be%e8%8a%ac%e5%a5%87" title="达芬奇">达芬奇</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e9%81%8a%e8%a8%98" title="遊記">遊記</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e9%a6%99%e6%b8%af" title="香港">香港</a>
+	</div>
+</div>
+</aside>
+
+	</div>
+		<footer class="footer" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+			<div class="container container-inner">
+				<p class="footer__copyright">&copy; 2018 * IN SHADOW. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad theme</a>.</span></p>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

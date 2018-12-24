@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Posts</title>
+<meta name="description" content="visn`s Personal blog about fucking daily chaos :L ">
+<meta name="generator" content="Hugo 0.52" />
+<meta property="og:title" content="Posts" />
+<meta property="og:description" content="visn`s Personal blog about fucking daily chaos :L " />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/post/" />
+<meta property="og:updated_time" content="2018-12-22T00:00:00&#43;00:00"/>
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="dns-prefetch" href="//fonts.gstatic.com" />
+<link rel="alternate" type="application/rss+xml" title="* IN SHADOW Feed" href="/post/index.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700" type="text/css" media="all" />
+<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
+<script type="text/javascript" src="/js/scripts.js"></script>
+<link rel="shortcut icon" href="/favicon.ico">
+
+</head>
+<body class="body body-left-sidebar mobile" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+	<div class="container container-outer">
+		<header class="header" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+			<div class="container container-inner clearfix">
+				<div class="logo" role="banner" itemscope="itemscope" itemtype="http://schema.org/Brand">
+					<a class="logo__link" href="/" title="* IN SHADOW" rel="home">
+						<h1 class="logo__title">* IN SHADOW</h1>
+						
+					</a>
+				</div>
+			</div>
+			
+<nav class="menu" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+	<ul class="menu__list">
+		<li class="menu__item"><a class="menu__link" href="/post/%E6%B8%B8%E8%AE%B0/">浪了个浪</a></li>
+		<li class="menu__item"><a class="menu__link" href="/about/">关于</a></li>
+	</ul>
+</nav>
+
+		</header>
+		<div class="wrapper clearfix">
+
+	<main class="main-content list content" role="main">
+		<header class="page-header">
+			<h1 class="page-header__title">Posts</h1>
+		</header><article class="list__item post clearfix">
+	<figure class="list__thumbnail">
+		<a href="/post/tcpdump-py/">
+			<img src="/pics/tcpdump-py/icon.jpg" alt="python调用tcpdump监管流量去向" />
+		</a>
+	</figure>
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h3 class="list__title post__title ">
+				<a href="/post/tcpdump-py/" rel="bookmark">python调用tcpdump监管流量去向</a>
+			</h3>
+			<div class="list__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="list__meta-date" datetime="2018-12-22T00:00:00">December 22, 2018</time>
+			</div>
+		</header>
+		<div class="list__excerpt">
+			冬至到了先给大家拜个晚年（说完就开起了风扇）
+# 请广东尊重一下冬天
+问题 偶尔会有访问到alphabet系列网站的时候被recaptcha识别为危险链接
+纳了闷儿了平时也没D谷歌啊莫不是流量被什么邪恶势力拦截了。想借个练手的机会试一下python脚本套用tcpdump做一些简单的运维工作。
+分析 tcpdump读取流量 有可能被识别为危险流量大概是过于频繁发送流量。由于使用的流量代理，几个朋友也会同时用这台服务器代理过去访问，而且还有几个是油管通，产生大量流量也正常。
+先使用tcpdump筛选出出口网卡的发包： tcpdump -i ens3 -t -nn 'src &lt;server-public-ip-address&gt;'
+其中-i指示网卡，可以通过ifconfig或者cat /proc/net/dev查询。-t去除时间，-nn不显示域名直接显示ip地址
+tcpdump已经给了基础的格式化，使用awk截断可以获取目标地址，并丢到文件里做记录：|awk '{print $4}' 1&gt; /tmp/test.log
+多线程、log截断、计数、保存记录 多线程：因为tcpdump调用是持续占用stdout的，而且包流量也比较大，在python里使用双线程一路调用tcpdump，另一路专门做定时的截断、统计、记录。
+log截断：将文件移动到新的名字（指定）造成记录截断，就可以不用暂停tcpdump的输出结果持续统计无漏
+计数：每间隔一段时间截断刚刚由tcpdump产生的文件，使用collections的Counter对文件里的地址进行统计，以地址为key计数。
+保存记录：毕竟总不能一直盯着terminal看，就保存到文件里以后再统一分析吧，构建了专门用于record的方法，以便统一指定输出方式
+从ip地址到地理地址 geoip-database是一个IP到国家的关系映射数据库，geoip是一套用于查询的库与工具。arch上包为geoip，debian系为geoip-bin
+使用geoiplookup &lt;ip-address&gt;对ip地址进行地理寻址（愣
+python代码 第一部分获取网卡、地址并生成用于并发线程调用的命令
+netdev=os.popen(&quot;cat /proc/net/dev|grep en|awk -F ':' '{print $1}'&quot;).read().split('\n')[0] # 指定网卡，可以使用/proc/net/dev与ifconfig查看 src_ban=&quot; src &quot;+os.popen(&quot;ifconfig &quot;+netdev+&quot; |grep inet|grep -v inet6|awk '{print $2}'&quot;).read().split('\n')[0] # 获取该网卡使用的地址，在tcpdump中只检查该源地址发出的包 # 函数提供一个对目标地址的过滤参数接口，可以不对某些终点地址进行过滤 def tcpdumppy(*dst_ban): cmd=&quot;sudo tcpdump -i &quot;+netdev+&quot; -t -nn ' &quot;+src_ban for i in dst_ban: cmd+=&quot; and !
+		</div>
+	</div>
+</article>
+<article class="list__item post clearfix">
+	<figure class="list__thumbnail">
+		<a href="/post/arch-i8so/">
+			<img src="/pics/arch.png" alt="~~Arch~~ Linux 簡單記錄" />
+		</a>
+	</figure>
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h3 class="list__title post__title ">
+				<a href="/post/arch-i8so/" rel="bookmark">~~Arch~~ Linux 簡單記錄</a>
+			</h3>
+			<div class="list__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="list__meta-date" datetime="2018-12-22T00:00:00">December 22, 2018</time>
+			</div>
+		</header>
+		<div class="list__excerpt">
+			记录下平时可能会用到的（查阅用）
+18.12.22 DNSMasq服务使用本地做DNS缓存：echo &quot;listen-address=127.0.0.1&quot; &gt;&gt; /etc/dnsmasq.conf
+添加本地解析：/etc/resolv.conf在最开头添加本地解析为最先
+防止篡改：sudo chattr +i /etc/resolv.conf
+18.12.20 dig所在软件包dnsutils
+systemd图形化界面包systemd-ui
+steam 冬季大促销 泼皮买了个linux上能跑的，可爱，想玩
+包名：steam steam-native-runtime(multilib)
+报了找不到~/.local/share/Steam/ubuntu12_32/steam-runtime/run.sh的错
+補了包：fontconfig lib32-fontconfig nvidia-dkms nvidia-utils lib32-nvidia-utils
+（nvidia与nvidia-dkms冲突，慎）
+18.12.17 libvirt虚拟机 基于KVM，libvirt提供一系列虚拟机服务的集合（包括virt-manager图形化界面、命令控制工具virsh、守护进程libvirtd）
+依赖firewalld、ebtables、dnsmasq
+安装后手动启动libvirtd、firewalld守护进程开始使用
+libvirt没有载入default网络，位置在/etc/libvirt/qemu/networks/default.xml sudo virsh net-define /etc/libvirt/qemu/networks/default.xml载入服务并重启守护进程。
+virsh net-autostart default标记自动启动
+18.12.15 git 指定密钥登陆 ./.ssh/config
+Host github.com HostName github.com IdentityFile ~/.ssh/$priviteKey User git Host new.visn.online HostName new.visn.online IdentityFile ~/.ssh/archlinux Port 20069 User visn  其中$priviteKey为登记在github setting中的公密钥对的密钥
+sshd端口修改 指定端口：echo 'Port=20069' &gt;&gt; /etc/ssh/sshd_config
+		</div>
+	</div>
+</article>
+<article class="list__item post clearfix">
+	<figure class="list__thumbnail">
+		<a href="/post/docker/">
+			<img src="/pics/docker/icon.png" alt="docker上手 生产环境大搬家" />
+		</a>
+	</figure>
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h3 class="list__title post__title ">
+				<a href="/post/docker/" rel="bookmark">docker上手 生产环境大搬家</a>
+			</h3>
+			<div class="list__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="list__meta-date" datetime="2018-12-16T00:00:00">December 16, 2018</time>
+			</div>
+		</header>
+		<div class="list__excerpt">
+			起因 帮 viktorika的项目 学习打包的时候，写了个脚本手抖把个目录给删了，不得不重装系统，经过深思熟虑之后决定做以下三件事
+ 拆分/home、/
+ timeshift定期备份
+ 使用docker创建测试环境
+  拆分目录 意外怀孕炸机头疼莫过于平时丢在/home/里杂乱的工作文件没有搜集起来（特别是多人用户机系统崩溃时），所以不如直接把根目录拆分出来（根治），如debian安装引导的时候说的“高级玩法”
+至于在/etc下配置文件以及多平台同步生产环境等问题：
+ [ ] dotfile repo of mine ： setup require
+ [x] 多平台生产环境：Chromium+vscode setting sync就是我的生产力
+  在重装系统的时候将原有的/dev/sdd3分割成40G跟175G
+按照原先的顺序先挂根目录到/mnt，再创建/mnt/boot、/mnt/home。
+原本是想/var跟/usr跟/opt也一起拆了的，后来感觉分太多也麻烦没必要，杂乱文件也很多，毕竟每次出问题只格/dev/sdd4一件重装软件效果体验更佳（只要家在就行）
+TimeShift定期备份 用了一把梭打包TimeShift定期备份，还好系统不大，不然得活生生把根目录给吃掉
+TimeShift支持快照迁移到心的电脑上，在恢复快照之前，TimeShift会询问你是不是需要保存现有的应用设置，并且选择保存哪一个。TimeShift需要GRUB 2启动进入快照恢复。
+一分钟不到就备份好了，不过没有尝试做容灾测试（可不敢手贱再把目录删一次了）
+部署本地docker  什么是docker
+ 为什么是docker
+ docker的基本使用
+  一来是不直接在现有的环境上动手，风险也不小。
+二是有通用的测试平台，有标准衡量与足够的试错机会。
+# 换国内阿里云源 sudo echo '{&quot;registry-mirrors&quot;: [&quot;https://dftbcros.mirror.aliyuncs.com&quot;]}'&gt;&gt;/etc/docker/daemon.json # 启动服务 sudo systemctl daemon-reload &amp;&amp; sudo systemctl enable docker --now # 获取镜像 sudo docker pull debian sudo docker pull ubuntu  由镜像创建实例：
+		</div>
+	</div>
+</article>
+<article class="list__item post clearfix">
+	<figure class="list__thumbnail">
+		<a href="/post/systemd/">
+			<img src="/pics/systemd/icon.png" alt="Systemd 扎記" />
+		</a>
+	</figure>
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h3 class="list__title post__title ">
+				<a href="/post/systemd/" rel="bookmark">Systemd 扎記</a>
+			</h3>
+			<div class="list__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="list__meta-date" datetime="2018-12-15T00:00:00">December 15, 2018</time>
+			</div>
+		</header>
+		<div class="list__excerpt">
+			簡述 # sell my underpant to systemd #
+ systemd(System Daemon, 系統守護進程)：是一個Linux的系統與服務管理器，由systemctl進行控制，支援系統快照與回復系統狀態，支持自動掛載等。已完美取代sysvinit
+ 系統啓動過程：
+ BIOS/UEFI啓動 GRUB引導啓動 尋找/boot(GSP分區)並載入內核 CPUIDLE與內核初始化(PID=0) /sbin/init（systemd啓動，PID=1） fork啓動systemd註冊的基層服務  不同進程工具檢出PID=1的進程不一樣，systemd（pstree -Apn檢出結果）或是/sbin/init（ps -aux檢出結果）
+$ ls -al /sbin/init lrwxrwxrwx 1 root root 22 Nov 26 21:35 /sbin/init -&gt; ../lib/systemd/systemd   基本使用  systemctl：進入主界面
+ systemctl --failed查看启动失败的单元
+ systemctl start/enable/disable/stop/restart/mask/unmask &lt;Unit&gt;：相應地對一個unit進行操作
+ systemctl daemon-reload：掃描新的有變動的單元，通常更新配置後需要使用
+ 圖形化管理界面：systemd-ui
+ 遠程管理：systemctl -H root@example
+ systemctl list-unit-files --type=service：列出可用單元及其情況（指定service類型）
+ systemd-*系列也提供了許多方便實用的工具
+ systemd-analyze blame：分析啓動時花費的時間
+		</div>
+	</div>
+</article>
+<article class="list__item post clearfix">
+	<figure class="list__thumbnail">
+		<a href="/post/ovtr/">
+			<img src="/pics/ovtr/04.jpeg" alt="OVTR 視覺化tracert 日好幾把炫酷（然並卵）" />
+		</a>
+	</figure>
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h3 class="list__title post__title ">
+				<a href="/post/ovtr/" rel="bookmark">OVTR 視覺化tracert 日好幾把炫酷（然並卵）</a>
+			</h3>
+			<div class="list__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="list__meta-date" datetime="2018-12-14T00:00:00">December 14, 2018</time>
+			</div>
+		</header>
+		<div class="list__excerpt">
+			 開始 在某大佬博客（忘了哪位）看到用ping且召喚出了地圖可視化，大概是像這種
+1
+感覺：
+一路找下來發現一款好老的開源軟件Open Visual Traceroute（基於Java、MAXMIND GeoIP2 DB）
+在線追蹤的可以使用IPIP可以選擇全球300多線路發送ICMP tracert測試
+安裝 archlinuxcn/openvisualtraceroute，安裝後可以在菜單裏找到相應名字
+由於第一次使用需要初始化GeoIP DB，不知道是否線路問題無法下載
+命令行代理啓動sudo proxychains ovtr初始化DB，以後就在Desktop啓動就OK啦
+Enjoy！
+ http://www.mantingfeng.com/?p=618 [return]   
+		</div>
+	</div>
+</article>
+<article class="list__item post clearfix">
+	<figure class="list__thumbnail">
+		<a href="/post/cal-fwd/">
+			<img src="/pics/cal-fwd/icon.png" alt="Google Calendar nodejs作轉發服務器 媽媽再也不擔心看不到我" />
+		</a>
+	</figure>
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h3 class="list__title post__title ">
+				<a href="/post/cal-fwd/" rel="bookmark">Google Calendar nodejs作轉發服務器 媽媽再也不擔心看不到我</a>
+			</h3>
+			<div class="list__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="list__meta-date" datetime="2018-12-07T00:00:00">December 07, 2018</time>
+			</div>
+		</header>
+		<div class="list__excerpt">
+			問題  心繫家庭，將自己的行程表分享給家人，不失爲加強聯絡的一個方法。
+ 世界上最遠的距離不是6881公里，而是分享 Google Calendar 日程表到媽媽的手機裏
+  解決  因爲設置了cal的公開地址，寫個轉發服務器即可。
+ 因爲不是谷歌服務的體系，沒有實施更新與推送，只能自己做心跳同步。
+ 想借機搭建一下https服務器的看了大廠ca價格就軟了，Let&rsquo;s Encrypt開源證書玩一下下 -&gt; 開源證書安裝教程
+ SSL提供安全套接層，在HTTP傳輸數據時提供非對稱加密。通常需要申請第三方認證機構獲取CA證書，年費多分佈在四位數到五位數，按域名算加成，需要定期續費。加密原理簡介
+ Let&rsquo;s Encrypt進行域名認證，要求在生成認證的時候在服務器上指定用於訪問獲取的指定隨機文件，用於驗證。
+   ssl方面 # server openssl genrsa 4096 &gt; account.key openssl genrsa 4096 &gt; domain.key # 創建用戶key 域名key openssl req -new -sha256 -key domain.key -subj &quot;/CN=example.com&quot; &gt; domain.csr # 驗證域名 mkdir /var/www/html/.well-known/ mkdir /var/www/html/.well-known/acme-challenge/ # 用了無腦爆炸的apache2驗證方式，創建等會驗證時候訪問的目錄 # 嗯僅作嘗試，正規驗證千萬別這樣 wget https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py python acme_tiny.py --account-key .
+		</div>
+	</div>
+</article>
+<article class="list__item post clearfix">
+	<figure class="list__thumbnail">
+		<a href="/post/linux/">
+			<img src="/pics/linux/icon.png" alt="Linux 筆記大整理 &amp; 工具備忘錄" />
+		</a>
+	</figure>
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h3 class="list__title post__title ">
+				<a href="/post/linux/" rel="bookmark">Linux 筆記大整理 &amp; 工具備忘錄</a>
+			</h3>
+			<div class="list__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="list__meta-date" datetime="2018-12-07T00:00:00">December 07, 2018</time>
+			</div>
+		</header>
+		<div class="list__excerpt">
+			基本工具  df、fdisk、fdisk等基本硬盤查看工具
+ ls：基本是自帶--color=auto這個地燈設置。
+ -al列出隱藏與詳細信息
+ -Csh着色、大小顯示
+ -R超詳細目錄信息
+  tty查看当前 tty 终端=&gt;/dev/pts/*，可以用于重定向输出
+ init * runlevel
+ &amp;丢后台
+ 后台任务检查jobs任务管理器top/htop、ps -ax
+ 内存检查free
+ 端口占用检查netstat -anp|grep [port]、lsof -i
+ 变量修改：export LANG=zh_CN.UTF-8变量追加：export LANG=$LANG:en_US.UTF-8
+ sudo组：echo &quot;%sudoer ALL=(ALL:ALL) ALL&quot;&gt;&gt; /etc/sudoers
+ dd if=* of=* bs=1M count=200
+ 查看查找：file、type、whereis
+ locate：查找，使用 mlocate 包，使用 updatedb 更新数据库
+ chattr設置文件安全屬性（lsattr現實）
+ A atime訪問時間不會因爲訪問而修改（隱藏讀取痕跡）
+ S 數據立即寫入，不參與緩存（適合重要數據寫入，防止斷電丟失）
+ a append追加寫入權限（適用於log、passwd文件）
+ c 壓縮加密文件，以時間換空間（長時間一次的大文件讀寫存儲等）
+		</div>
+	</div>
+</article>
+<article class="list__item post clearfix">
+	<figure class="list__thumbnail">
+		<a href="/post/gists/">
+			<img src="/pics/vscode/vscode.png" alt="VSCode記 Gists同步部署生產環境(Atom&amp;Vim)" />
+		</a>
+	</figure>
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h3 class="list__title post__title ">
+				<a href="/post/gists/" rel="bookmark">VSCode記 Gists同步部署生產環境(Atom&amp;Vim)</a>
+			</h3>
+			<div class="list__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="list__meta-date" datetime="2018-12-05T00:00:00">December 05, 2018</time>
+			</div>
+		</header>
+		<div class="list__excerpt">
+			問題描述  擁有不止一個生產環境，而且這些生產環境也不一定持久的情況下（隨時有可能一鍵重裝、部署新機器），不同生產環境要求有相同的配置（同步需求）
+ 有隨時隨地看到好 extensions 就想 install 的壞習慣
+ 作為生產力工具，需要快速、自動化、可管理的部署以減少不必要損失（包括不限於擴展配置）
+  解決 使用較為小型的私人代碼在線託管服務（大型網路里專門用於管理配置的配置服務器），將配置代碼上傳託管，按需獲取。有安全需求可自建機器與認證。
+VSCode VSCode 中有一個提供 Setting Sync Anywhere 的擴展，使用 Github 提供的 Gists 服務，短代碼在線託管（允許版本管理）
+Setting Sync 基本步驟如下：
+ github里生成gist token（用於身份分離認證 複製保存好）
+ vscode中使用setting sync擴展進行同步：upload，產生一個公開的以Username、gistID為依據的網頁（每次更新配置都會產生新的gistID，注意保存）
+ 獲取gist ID（可以在github gists 服務里找到URL最後一個便是），同步的時候使用gistID、token獲得
+  詳細操作步驟參考
+Atom Atom裏也有支持設置同步的sync-settings
+apm install sync-setting
+也需要提供gist token 不過需要自己手動在gists上創建一個gist
+將gistID在設置中設置
+vim vim方面寫了個js腳本來完成下載 上傳就懶得寫了直接webpage edit一下得了（懶
+const https=require(&quot;https&quot;) const fs = require('fs'); const gistID=&quot;------------------------------------&quot; const remoteFilename=&quot;--------------&quot; const filepath=&quot;------------------------&quot; download(gistID,remoteFilename,filepath) //提供指定gistID，遠程文件名（嗯目前只支持了一個），以及保存的地方 function download(gistID,remoteFilename,filepath){ //調用github api，獲取指定gist的相關信息 //需要附上headers https.
+		</div>
+	</div>
+</article>
+<article class="list__item post clearfix">
+	<figure class="list__thumbnail">
+		<a href="/post/fourier/">
+			<img src="/pics/fourier/fourier.webp" alt="數字圖像處理結課課題 二維離散傅里葉頻譜（正逆變換）" />
+		</a>
+	</figure>
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h3 class="list__title post__title ">
+				<a href="/post/fourier/" rel="bookmark">數字圖像處理結課課題 二維離散傅里葉頻譜（正逆變換）</a>
+			</h3>
+			<div class="list__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="list__meta-date" datetime="2018-11-23T00:00:00">November 23, 2018</time>
+			</div>
+		</header>
+		<div class="list__excerpt">
+			相關知識 傅里葉 理論基礎：任何函數都可以表示成正弦函數的線性組合形式。 應用簡介：將信號從時域或空域轉換到頻域，使用頻域關係來保存對信號的描述。音頻應用方面可用於分頻，均衡器、濾波等。二維離散（圖像）引用方面可以用於圖像分析、增強、降噪等。
+簡單的傅里葉音頻解析原理圖
+在圖像應用上，RGB色彩模式下，圖像亮度與數值成正比，通過計算一定範圍內的一系列數值，來計算光暗變化的頻率，進而將全圖的頻率掃描映射到頻域，并將映射的結果保存在頻譜圖像上。
+二維離散傅里葉變換公式
+1
+2
+在變換出來的圖像中，每一個像素點代表一個頻率值（縱橫方向），亮度代表頻率出現的多少。最中間亮點代表直流分量（不隨空間變化的量，頻率為0），可以看到圖像聚焦于中間一橫。其表達意義在於：圖像僅有在橫向上存在變化的變化率，在垂直方向上變化率幾乎為0。
+更多關於頻譜圖的解讀
+圖像應用上用於解析、修復條紋： 3
+頻譜圖的亮度分佈越集中，畫面越柔和，則原圖畫面越平緩。若亮點四散分佈，則畫面又較強條幅、亮度差異等情況。
+工具使用 python  opencv-python (import: cv2)
+ numpy (快速運算矩陣)
+   opencv 基本使用
+cv2.imshow('imageName1',cv2.imread(&quot;./img/cloud.jpg&quot;))顯示圖像
+cv2.waitKey()imshow配套使用，阻塞線程
+cv2.imwrite('imageName.png',img)寫入圖像
+ 導入包：
+import math import cv2;# package: opencv-python import numpy as np;  傅里葉變換：
+def Fourier(originImg): # this function offer a O(n^4) method to load gray pixel one-by-one # to calculate Fourier image of param image # : param originImg: offer an image read by gray uint8(default) width, height = originImg.
+		</div>
+	</div>
+</article>
+<article class="list__item post clearfix">
+	<figure class="list__thumbnail">
+		<a href="/post/hkxma/">
+			<img src="/pics/hkxma/icon.png" alt="香港XM Anomaly摸魚兩日遊" />
+		</a>
+	</figure>
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h3 class="list__title post__title ">
+				<a href="/post/hkxma/" rel="bookmark">香港XM Anomaly摸魚兩日遊</a>
+			</h3>
+			<div class="list__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="list__meta-date" datetime="2018-11-17T00:00:00">November 17, 2018</time>
+			</div>
+		</header>
+		<div class="list__excerpt">
+			緣起&amp;雜事  鹹魚回歸（全身VR滯銷找個機會浪費下）
+ 找個機會出門休息下（瞎忙到一個段落）
+ 愛上了自由行這一種破費多事的去別人呆膩了的地方呆一下，之前許多想去沒去的地方，遺憾可適當彌補
+ 用上了 Calendar 嘗試用來安排旅行行程（詳見Google Calendar 左手日記 右手咕咕）
+  計劃  計劃總覽：參加XMA+香港遊玩 地點：香港中環、香港大學、尖沙咀區域 時間：2018年11月16日下午~11月18日晚上  具體行程： - 太平山+杜莎夫人蠟像館 - 夜訪香港 - 香港大學/香港理工大學到訪 - 尖沙咀xma主戰場 - MissionDay 維多利亞港南岸繞行 - 尖沙咀代購
+出行 通勤  高鐵從廣州南往深圳北+深圳北往西九龍 = 150元（50分鐘+換乘等待） 高鐵直達西九龍 = 220元（50分鐘）  因為是新列車看起來要更高級舒適一些。
+遊覽 杜莎夫人蠟像館在一個商業廣場裡面是沒想到的，曾經以為是單獨的一棟大建築。裡面結構也是沒想到的，一條路像迷宮一樣通到底
+“纵观世界风云，风景这边更好” ——趙本山
+香港理工大學要比幾年前來的時候感覺更活躍。因為趕上了畢業季，學習的人、慶祝的人都有。因為學校沒有圍墻，我們徑直穿過了學校
+從香港理工大學走出到了一個十分繁盲的十字路口
+香港大學以長條狀盤山而居（師兄說來了半年還不怎麼認路），而且也沒有校園圍欄，經常分不清哪裡是里外。房屋大多是架空樓閣，半座學校嵌入山林，有流水，空氣清新。適逢動漫社不知道在做啥活動。
+XMA XMA報名后帶著電子票到現場簽到
+雖然不管怎麼看來現場也是有一點點中二的（蹲
+港藍很厲害（給大佬遞茶）大半夜2點多還毒了我的床po，早上起床尖沙咀已經做了個大針包，全線變藍
+11點多前去控毒，12點多沒吃早餐午餐就直接開杠了，需要Portal Battle占點（Portal會有顯示分值）。
+基本屬於防守方，狂充電+上AXA，被攻破也是一秒內的事情。中途試毒還浪費了幾個綠毒（嗯不怕）
+在這麼強烈的戰火下，除了手速要快充電，偶爾沒事也插一下旁邊沒有計分的點，一秒一個1250（WTMSB）
+大局已定。除了Portal Battle 還有link的分數（link盡可能遠），還有遊園會（比賽時間內重算戰區UPV）。後來打到累了換人我就帶著@魔術師小姐姐一起過去遊園丟人地發卡（國際丟人了
+以及在大戰後半段因為東西不夠而瘋狂補倉 由於不看每次補倉數量導致爆倉 導致大戰結束后upv都是八腳當糖
+藍綠和諧藍綠和諧，放下手機就是朋友
+		</div>
+	</div>
+</article>
+
+
+		
+<div class="pagination clearfix">
+	<span class="pagination__item pagination__item--current">1/4</span>
+	<a class="pagination__item pagination__item--next" href="/post/page/2/">»</a>
+</div>
+
+	</main>
+
+<aside class="sidebar" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="//google.com/search">
+		<label>
+			<span class="screen-reader-text">Search for:</span>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/tcpdump-py/">python调用tcpdump监管流量去向</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/arch-i8so/">~~Arch~~ Linux 簡單記錄</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/docker/">docker上手 生产环境大搬家</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/systemd/">Systemd 扎記</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/ovtr/">OVTR 視覺化tracert 日好幾把炫酷（然並卵）</a></li>
+		</ul>
+	</div>
+</div>
+
+	
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/visnz" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:visn0518@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>visn0518@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget__link widget__link--taglist" href="/tags/adobe" title="adobe">adobe</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ae" title="ae">ae</a>
+		<a class="widget__link widget__link--taglist" href="/tags/bilibili" title="bilibili">bilibili</a>
+		<a class="widget__link widget__link--taglist" href="/tags/c&#43;&#43;" title="c&#43;&#43;">c&#43;&#43;</a>
+		<a class="widget__link widget__link--taglist" href="/tags/docker" title="docker">docker</a>
+		<a class="widget__link widget__link--taglist" href="/tags/gamejam" title="gamejam">gamejam</a>
+		<a class="widget__link widget__link--taglist" href="/tags/github" title="github">github</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ingress" title="ingress">ingress</a>
+		<a class="widget__link widget__link--taglist" href="/tags/java" title="java">java</a>
+		<a class="widget__link widget__link--taglist" href="/tags/javascript" title="javascript">javascript</a>
+		<a class="widget__link widget__link--taglist" href="/tags/linux" title="linux">linux</a>
+		<a class="widget__link widget__link--taglist" href="/tags/mac" title="mac">mac</a>
+		<a class="widget__link widget__link--taglist" href="/tags/nodejs" title="nodejs">nodejs</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ntfs" title="ntfs">ntfs</a>
+		<a class="widget__link widget__link--taglist" href="/tags/opencv" title="opencv">opencv</a>
+		<a class="widget__link widget__link--taglist" href="/tags/prores" title="prores">prores</a>
+		<a class="widget__link widget__link--taglist" href="/tags/puppeteer" title="puppeteer">puppeteer</a>
+		<a class="widget__link widget__link--taglist" href="/tags/python" title="python">python</a>
+		<a class="widget__link widget__link--taglist" href="/tags/systemd" title="systemd">systemd</a>
+		<a class="widget__link widget__link--taglist" href="/tags/tracert" title="tracert">tracert</a>
+		<a class="widget__link widget__link--taglist" href="/tags/vscode" title="vscode">vscode</a>
+		<a class="widget__link widget__link--taglist" href="/tags/windows" title="windows">windows</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e4%b8%8a%e6%99%ba%e5%a4%a7%e5%ad%a6" title="上智大学">上智大学</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e4%ba%92%e8%81%94%e7%bd%91" title="互联网">互联网</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9b%a2%e9%98%9f%e4%b8%9a%e5%8a%a1" title="团队业务">团队业务</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9b%be%e7%89%87" title="图片">图片</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9c%96%e5%83%8f%e8%99%95%e7%90%86" title="圖像處理">圖像處理</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%ad%97%e5%b9%95" title="字幕">字幕</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%b4%a9%e5%9d%8f3" title="崩坏3">崩坏3</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%b7%a5%e5%85%b7" title="工具">工具</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%bd%b1%e8%a7%86" title="影视">影视</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%bd%b1%e8%a7%86%e5%90%8e%e6%9c%9f" title="影视后期">影视后期</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%89%8b%e5%86%8a" title="手冊">手冊</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%96%87%e4%bb%b6" title="文件">文件</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%97%a5%e6%9b%86" title="日曆">日曆</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%97%a5%e6%9c%ac" title="日本">日本</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%9c%8d%e5%8b%99%e5%99%a8" title="服務器">服務器</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%9d%82%e5%ad%a6%e5%8a%a8%e7%89%a9" title="杂学动物">杂学动物</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%b5%aa" title="浪">浪</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%b8%b8%e6%88%8f%e5%88%86%e6%9e%90" title="游戏分析">游戏分析</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%a6%8f%e8%a2%8b" title="福袋">福袋</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%ae%a1%e7%90%86" title="管理">管理</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bb%8f%e6%b5%8e%e5%ad%a6" title="经济学">经济学</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bc%96%e7%a0%81" title="编码">编码</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bc%96%e7%a8%8b%e6%80%9d%e7%bb%b4" title="编程思维">编程思维</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%a1%8c%e7%a8%8b%e8%a1%a8" title="行程表">行程表</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%a8%88%e7%ae%97%e6%a9%9f" title="計算機">計算機</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%ae%a1%e7%ae%97%e6%9c%ba" title="计算机">计算机</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%be%be%e8%8a%ac%e5%a5%87" title="达芬奇">达芬奇</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e9%81%8a%e8%a8%98" title="遊記">遊記</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e9%a6%99%e6%b8%af" title="香港">香港</a>
+	</div>
+</div>
+</aside>
+
+	</div>
+		<footer class="footer" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+			<div class="container container-inner">
+				<p class="footer__copyright">&copy; 2018 * IN SHADOW. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad theme</a>.</span></p>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《崩坏3》浅层分析</title>
+<meta name="description" content="visn`s Personal blog about fucking daily chaos :L ">
+<meta name="generator" content="Hugo 0.52" />
+<meta property="og:title" content="《崩坏3》浅层分析" />
+<meta property="og:description" content="全文9000字（更新中），约18分钟。
+前70%为较为表层分析主要内容
+较为重点为较后部分的 非理性细节引导的分析
+ 架构  陈述性系统结构
+ 主要游戏资源
+ 推进单元与关卡设计
+ 游戏副本
+  改进性系统结构
+ 角色获得
+ 角色养成
+ 武器与圣痕
+ 宿舍与基地
+ 舰团系统
+  核心循环
+ 战斗节奏  运营系统
+ 玩家回归手段
+ 引导消费
+ 奖励模式
+   游戏经济系统  时间入口
+ P&amp;E资源流向
+ P&amp;P交易手段
+ 数值平衡
+  总体体验  题材
+ 世界观
+ 浸入式程度
+ 音乐与视觉
+  其他  战略推测" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/bbb3/" /><meta property="article:published_time" content="2018-06-06T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-06-06T00:00:00&#43;00:00"/>
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700" type="text/css" media="all" />
+<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
+<script type="text/javascript" src="/js/scripts.js"></script>
+<link rel="shortcut icon" href="/favicon.ico">
+
+</head>
+<body class="body body-left-sidebar mobile" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+	<div class="container container-outer">
+		<header class="header" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+			<div class="container container-inner clearfix">
+				<div class="logo" role="banner" itemscope="itemscope" itemtype="http://schema.org/Brand">
+					<a class="logo__link" href="/" title="* IN SHADOW" rel="home">
+						<h1 class="logo__title">* IN SHADOW</h1>
+						
+					</a>
+				</div>
+			</div>
+			
+<nav class="menu" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+	<ul class="menu__list">
+		<li class="menu__item"><a class="menu__link" href="/post/%E6%B8%B8%E8%AE%B0/">浪了个浪</a></li>
+		<li class="menu__item"><a class="menu__link" href="/about/">关于</a></li>
+	</ul>
+</nav>
+
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main-content content" role="main" itemprop="mainContentOfPage">
+	<article class="post">
+		<header class="post__header clearfix">
+			<h1 class="post__title">《崩坏3》浅层分析</h1>
+			<p class="post__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="post__meta-date" datetime="2018-06-06T00:00:00">June 06, 2018</time>
+			</p>
+		</header>
+		<div class="post__content clearfix">
+			<figure class="post__thumbnail">
+				<img src="/pics/bbb/IMG_0602.jpg" alt="《崩坏3》浅层分析">
+			</figure>
+			
+
+<blockquote>
+<p>全文9000字（更新中），约18分钟。</p>
+
+<p>前70%为较为表层分析主要内容</p>
+
+<p>较为重点为较后部分的 <a href="#非理性细节引导">非理性细节引导</a>的分析</p>
+</blockquote>
+
+<h5 id="架构-游戏系统架构"><a href="#游戏系统架构">架构</a></h5>
+
+<ul>
+<li><p><a href="#陈述性系统结构">陈述性系统结构</a></p>
+
+<ul>
+<li><p><a href="#主要游戏资源">主要游戏资源</a></p></li>
+
+<li><p><a href="#推进单元与关卡设计">推进单元与关卡设计</a></p></li>
+
+<li><p><a href="#游戏副本">游戏副本</a></p></li>
+</ul></li>
+
+<li><p><a href="#改进性系统结构">改进性系统结构</a></p>
+
+<ul>
+<li><p><a href="#角色获得">角色获得</a></p></li>
+
+<li><p><a href="#角色养成">角色养成</a></p></li>
+
+<li><p><a href="#武器与圣痕">武器与圣痕</a></p></li>
+
+<li><p><a href="#宿舍与基地">宿舍与基地</a></p></li>
+
+<li><p><a href="#舰团系统">舰团系统</a></p></li>
+</ul></li>
+
+<li><p><a href="#核心循环">核心循环</a></p>
+
+<ul>
+<li><a href="#战斗节奏">战斗节奏</a></li>
+</ul></li>
+
+<li><p><a href="#运营系统">运营系统</a></p>
+
+<ul>
+<li><p><a href="#玩家回归手段">玩家回归手段</a></p></li>
+
+<li><p><a href="#引导消费">引导消费</a></p></li>
+
+<li><p><a href="#奖励模式">奖励模式</a></p></li>
+</ul></li>
+</ul>
+
+<h5 id="游戏经济系统-游戏经济系统"><a href="#游戏经济系统">游戏经济系统</a></h5>
+
+<ul>
+<li><p><a href="#时间入口">时间入口</a></p></li>
+
+<li><p><a href="#P&amp;E资源流向">P&amp;E资源流向</a></p></li>
+
+<li><p><a href="#P&amp;P交易手段">P&amp;P交易手段</a></p></li>
+
+<li><p><a href="#数值平衡">数值平衡</a></p></li>
+</ul>
+
+<h5 id="总体体验-总体体验"><a href="#总体体验">总体体验</a></h5>
+
+<ul>
+<li><p><a href="#题材">题材</a></p></li>
+
+<li><p><a href="#世界观">世界观</a></p></li>
+
+<li><p><a href="#浸入式程度">浸入式程度</a></p></li>
+
+<li><p><a href="#音乐与视觉">音乐与视觉</a></p></li>
+</ul>
+
+<h5 id="其他-其他"><a href="#其他">其他</a></h5>
+
+<ul>
+<li><p><a href="#战略推测">战略推测</a></p></li>
+
+<li><p><a href="#玩家群体细分">玩家群体细分</a></p></li>
+
+<li><p><a href="#玩家反馈及争议">玩家反馈及争议</a></p></li>
+</ul>
+
+<h5 id="非理性细节引导-非理性细节引导"><a href="#非理性细节引导">非理性细节引导</a></h5>
+
+<h5 id="详细参考资料-详细参考资料"><a href="#详细参考资料">详细参考资料</a></h5>
+
+<h2 id="介绍">介绍</h2>
+
+<p><img src="/pics/bbb/b3.jpg" alt="" /></p>
+
+<p>崩坏3是由上海米哈游公司于2016年10月推出的ACG动作游戏，以打击感、角色、剧情及3D渲染塑造的IP。</p>
+
+<h2 id="架构">架构</h2>
+
+<h3 id="陈述性系统结构">陈述性系统结构</h3>
+
+<h4 id="主要游戏资源">主要游戏资源</h4>
+
+<ul>
+<li><p>角色资源：同一名字不同装备状态的女武神</p></li>
+
+<li><p>流通资源：金币、钻石、体力</p></li>
+
+<li><p>藏富资源：装备、圣痕</p></li>
+
+<li><p>间接资源：升级材料若干（经验、技能、装备、圣痕、基地建筑、宿舍升级、女武神碎片各有不同）</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0543.jpg" alt="" /></p>
+
+<h4 id="推进单元与关卡设计">推进单元与关卡设计</h4>
+
+<p><img src="/pics/bbb/IMG_0544.jpg" alt="" /></p>
+
+<ul>
+<li><p>游戏没有大地图，整个进程的推进都在游戏副本。游戏的推进单元在于<strong>关卡内装载剧情</strong>，一定程度上断裂了剧情的完整性和体验感。其次是关卡内的剧情对话是类似指挥官对话（包括关卡内面对面对话），使得代入感降低（当然我承认这种对话类型很装逼，有一定的代入效果），连贯性下降。</p></li>
+
+<li><p>宏观的推进单元是<strong>角色的获取（主线副本）、熟悉操作（活动、外传、困难副本）、毕业装备的获取（开箱）、<del>卸载游戏</del></strong> ，根据不同的角色定位，玩家分为不同的阶段。</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0539.jpg" alt="" /></p>
+
+<ul>
+<li><p><strong>关卡内设计（玩法内容）</strong> ，动作游戏设计是<strong>角色对抗的操作过程</strong>，移动探索、技能使用、道具获取，这些是辅助对抗的过程。由此也衍生出了单独BOSS、搜集材料等玩法。</p></li>
+
+<li><p><strong>关卡外设计（玩法架构）</strong> ，是设计不同的奖励获取路线，结合不同类型的关卡赋予不同的奖励。（其实可以看到关卡内设计已经疲惫，崩坏这段时间的更新都是基于关卡外设计的游戏更新）。</p></li>
+</ul>
+
+<h4 id="游戏副本">游戏副本</h4>
+
+<ul>
+<li><strong>主线剧情的关卡</strong>（分多难度及丰厚奖励）、<strong>活动改进副本</strong>（每日材料、肝武器、储存经验）、<strong>活动竞争副本</strong>（小型天梯赛）、<strong>外传副本</strong>（提供主线以外，对某个女武神的传记、开放世界）</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0549.jpg" alt="" /></p>
+
+<ul>
+<li><p>游戏的开始给了基础三个女武神，主线剧情的通关定位是<strong>了解操作</strong>，通关剧情后才开启游戏的主要内容。要提高自己的战斗力，而主线剧情后开放的困难难度的三个小目标15钻石是主要的<strong>萌新毕业后十连抽的收入来源</strong>（钻石提升部分在经济系统中讲到），其设计的定位是<strong>熟悉操作</strong>。</p></li>
+
+<li><p>活动改进副本提供了提升玩家能力的材料，包括但不限于金币、武器材料、稀有武器，早期确实成为玩家的一个望穿秋水坐等周末的材料来源，玩法相对主线有了些许不同（化身、飞机大战等），每日轮换，但后期是资源上的负担。毕竟是为了控制产出，也不应该过多设计。</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0547.jpg" alt="" /></p>
+
+<ul>
+<li>活动竞争副本比如每周两次更新的小型天梯赛，满足玩家竞技的目标的同时也维持了一定的活跃度（虽然是PVE天梯赛，天梯高了还有阴险道具，娱乐性增加）。<strong>由于没办法爆肝，没时间玩只能掉段</strong>，而且到后面没有使用氪金角色也很难玩下去。设计目的也是给爆氪爆肝程度的玩家一些必要的奖励时应该的（贡献DAU，保持活跃度）。活动副本是游戏中主要的<strong>关卡玩法内容上的创新</strong>。</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0545.jpg" alt="" /></p>
+
+<ul>
+<li><p>外传关卡的类型很多，是游戏中主要的<strong>关卡玩法架构的改变</strong>，包括9关3级别为一个单位的小副本集（玩家钻石来源之一+剧情附加）、提供一整张开放地图（樱色轮回世界，提供委托任务，消耗积累多余体力，世界提供物品搜集，可以兑换专门的晋升道具）、记忆战场提供了单挑BOSS+丰厚奖励，还有最近出的律者档案（超强boss）与全境突袭（分小队限时击杀小boss），都属于<strong>玩法架构上的创新</strong>。</p></li>
+
+<li><p>游戏副本提供了主要的挑战与反馈，是整个游戏核心架构主要的挑战、压力和晋升渠道的来源。活动副本与外传副本提升了游戏丰富度，增加游戏产出。</p></li>
+</ul>
+
+<h3 id="改进性系统结构">改进性系统结构</h3>
+
+<h4 id="角色获得">角色获得</h4>
+
+<p><img src="/pics/bbb/IMG_0550.jpg" alt="" /></p>
+
+<ul>
+<li><p>角色收集：三类角色的定位是很清晰的：<strong>标配（下水道）、靠肝（一般）、靠氪（强）</strong>。一开始只有三个角色来说，玩家早期是希望获得更多角色的，这时就开放了靠肝可以得到的相对较厉害角色的碎片副本。当玩家到后期的时候，（这个是官方角色数据设计的原因）发现再怎么提升也不如靠氪抽出来的角色，进行消费刺激。<a href="http://www.gamedog.cn/news/20180307/2341230.html">附2.1角色强度表</a></p></li>
+
+<li><p>皮肤和临时关卡：活动不定期送皮肤，并开放一个临时关卡允许你全面<del>观赏</del>欣赏新皮肤。更多是，活动你得到了皮肤但你还没角色，为了刺激玩家获得该角色，而获得角色如果不是普通角色（靠肝），就只能靠抽卡（靠氪）了。不过定位还算比较明朗，<strong>靠肝角色的皮肤，你可以肝出来，靠氪角色的皮肤，你只能继续氪</strong>。（皮肤是收入的一重大支柱，二次元果然靠卖衣服赚钱）</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0540.jpg" alt="" /></p>
+
+<ul>
+<li>开放新角色的时候也会出临时关卡，<del>只给看不给摸</del> 让你体验一下新角色的 <del>手感</del> 操作感</li>
+</ul>
+
+<h4 id="角色养成">角色养成</h4>
+
+<ul>
+<li>女武神的战斗力由自身等级、评级（B/A/S/SS/SSS）、武器、圣痕、技能共同决定。</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0552.jpg" alt="" /></p>
+
+<ul>
+<li>在设计上，评级决定高级技能的开放，评级会成为当前技能升级的一个瓶颈，这也促使了<strong>刷碎片</strong>以回收体力值的日常。等级因为有经验碎片，使得等级差异不明显，玩家可以通过升级快速拉近距离，玩家培养新角色的速度加快。对女武神战斗力影响最大的是<strong>武器和圣痕</strong>，这才是本作<del>敛财</del>收入的主要来源。（开箱子为收入的另一重大支柱，上了赌桌你就不知道白天黑夜）</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0554.jpg" alt="" /></p>
+
+<ul>
+<li><p>角色的技能系统乏善可陈，就是简单的6个技能（队长、被动、闪避、攻击、分支、大招）+各自辅助提升，通过消耗<strong>随时间恢复的技能点和钱</strong>进行提升。角色技能提升是游戏中期主要的金币回收手段。</p>
+
+<h4 id="武器与圣痕">武器与圣痕</h4></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0514.jpg" alt="" /></p>
+
+<ul>
+<li>武器带有属性和技能，每个圣痕有自己的属性+随机的属性+组合的属性。武器通常就是抽到即毕业，培养就好。圣痕就带来更多的组合可能，技能上的配合等等。武器和圣痕同时是大规模的升级材料、金币的回收手段。</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0556.jpg" alt="" /></p>
+
+<ul>
+<li>升级5星武器的材料“崩坏结晶”肝的成本相当高。所以设计了武器也可以分解，并且必然分出这个“崩坏结晶”，相当于给玩家一次重新选择的机会…嗯牺牲一把加工过的武器以及沉没成本。</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0558.jpg" alt="" /></p>
+
+<ul>
+<li>圣痕属性可以刷，随机的。消耗材料进行资源回收同时给你一个随机的结果，赌坊效应。</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0560.jpg" alt="" /></p>
+
+<ul>
+<li>当然，最好的武器（包括不限于毕业武器）、限定圣痕、高级圣痕，通常没办法靠肝，<strong>只能靠氪</strong>（或者你积累2800十连抽保个底）。结合运营限时供给指定的圣痕，可以说玩家为了集齐一套圣痕是操碎了心。（当然，崩坏官方提供了许愿池，只要你达到条件，靠肝是可以的）至于为什么这样设计你也明白。</li>
+</ul>
+
+<h4 id="宿舍与基地">宿舍与基地</h4>
+
+<p><img src="/pics/bbb/IMG_0561.jpg" alt="" /></p>
+
+<ul>
+<li>宿舍的内容是家具摆放、Q版女武神的展现地（需要完成指定任务才能添加新的女武神），眼球收费点，也提供了辅助提升的功能</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0562.jpg" alt="" /></p>
+
+<ul>
+<li>基地：包括一系列对女武神能力、金币积累、派遣任务、技能点上限、好友上限等游戏数据的提升，基地提升受玩家等级限制，且玩家通过有限的崩坏能对提升内容进行取舍。</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0564.jpg" alt="" /></p>
+
+<ul>
+<li>基地和宿舍在界面的设计上可圈可点，不论是宿舍的Q版女武神的互动、剧情和触发的小动作，还是基地分配崩坏能面板的样式展示。</li>
+</ul>
+
+<h4 id="舰团系统">舰团系统</h4>
+
+<p><img src="/pics/bbb/IMG_0564.jpg" alt="" /></p>
+
+<ul>
+<li><p>公会、家族等等有不同的称呼，就是玩家的聚集地。提供了声望、奖章的物品，以委托任务、探索舰团地图、强敌入侵等玩法以运营该系统。舰团有内部排行榜激励玩家，也可以交换玩家需要的材料等。</p>
+
+<h3 id="核心循环">核心循环</h3>
+
+<h4 id="战斗节奏">战斗节奏</h4></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0576.jpg" alt="" /></p>
+
+<ul>
+<li><p>角色动作的连贯性+配音真实性+摄像机震动效果都算是<strong>较有打击感</strong>的游戏体验</p></li>
+
+<li><p>怪物护盾：破盾后临时虚弱，造成的伤害增加，是一个<strong>正反馈加速战斗节奏</strong>的设计。</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0582.jpg" alt="" /></p>
+
+<ul>
+<li><p>女武神技能释放的操作明朗，<strong>简单易上手</strong>。队长被动（开始之前选择）、队长技能（按钮）、普通攻击（按钮）、分支攻击（按钮的间隔触发）、大招（按钮）、QTE（按钮）、闪避（按钮）。定位不像王者荣耀等MMORPG游戏通过一个按钮展位一个技能，明朗了定位了动作类出招表。技能精简降低了玩家的学习成本。</p></li>
+
+<li><p>摄像机的移动效果灵活(虽然被诟病，就我个人玩的时候问题不算很大)</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0574.jpg" alt="" /></p>
+
+<ul>
+<li>时空裂缝（疑似贝姐？）：一些角色在闪避时可以触发时空裂缝，使周围动作全部减缓，此时可以快速转移位置或进行输出。这个设定很好的地方在于：我此后玩其他一些动作游戏时候的闪避，周围敌人没有变慢，都不确定我有没有闪避成功。<strong>当崩坏3降低了我对闪避结果的认知成本，会形成惯性，慢慢地会不习惯闪避认知成本高的游戏。这一点是崩坏3的一个竞争力。</strong>（当然这个设置不只是崩坏3有，像尼尔也有，只是我个人第一次接触到是在崩坏3）</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0593.jpg" alt="" /></p>
+
+<ul>
+<li>战斗人员冗余：每次可以出战多个成员，并根据需要切换。这使QTE连招成为可能，研究连招也成为该游戏的一大时间消耗。</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0577.jpg" alt="" /></p>
+
+<ul>
+<li>属性克制：加强三个女武神配置的选择空间，比如组建机械队伍、或均衡队伍。还有根据属性克制设计的关卡。</li>
+</ul>
+
+<h3 id="运营系统">运营系统</h3>
+
+<h4 id="玩家回归手段">玩家回归手段</h4>
+
+<ul>
+<li><p>恢复速度控制：包括体力恢复（也提供了溢出存储，取出量跟宿舍能源挂钩）、技能点恢复、宿舍能源恢复等</p></li>
+
+<li><p>种田玩法：技能点、武器经验、圣痕经验、基地金矿、基地升级等</p></li>
+
+<li><p>以上两种给了玩家短期回归的理由，但是对于长期不玩而回归的玩家，奖励并没有变化，一层面刺激玩家<strong>不要长时间不回归</strong>，另一层面对于长久不回归玩家并没有刺激作用。</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0588.jpg" alt="" /></p>
+
+<ul>
+<li>每日任务的奖励、每日的独特活动、充值了的月卡</li>
+</ul>
+
+<h4 id="引导消费">引导消费</h4>
+
+<p><img src="/pics/bbb/IMG_0586.jpg" alt="" /></p>
+
+<ul>
+<li><p>就前面所提到的，开箱子的赌博模式和皮肤销售成为两个主要的收入来源。其次是钻石的使用可以深入到游戏的各方各面，关卡重置、技能点补充、材料补充、体力补充。</p></li>
+
+<li><p>充值层面也提供了首充双倍、月卡的吸引手段。月卡是吸引玩家持续投入的一大利器。</p></li>
+</ul>
+
+<h4 id="奖励模式">奖励模式</h4>
+
+<p><img src="/pics/bbb/IMG_0589.jpg" alt="" /></p>
+
+<ul>
+<li><p>每月签到与活动签到奖励</p></li>
+
+<li><p>指定活动会有奖励指定的货币，这种货币只能兑换活动期间开放的活动商店的指定道具</p></li>
+
+<li><p>新角色的开放，活动会开放新角色试玩（获得试玩的徽章）</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0608.jpg" alt="" />
+<img src="/pics/bbb/IMG_0609.jpg" alt="" /></p>
+
+<ul>
+<li>在每次更新的大型活动（如天火圣裁、突入天命总部）或平时的记忆战场，都采用了<strong>排名（最终活动结束时结算奖励）与积分积累（玩家单人获得一定积分就有一定奖励）</strong> ，这样设计的目的是为了让愿意参加竞争排名的玩家可以获得额外奖励，不愿意参加竞争排名的玩家，有一个自己的目标。</li>
+</ul>
+
+<h2 id="游戏经济系统">游戏经济系统</h2>
+
+<h3 id="时间入口">时间入口</h3>
+
+<ul>
+<li>游戏副本的战斗是主要的时间投入入口，是游戏的主循环</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0595.jpg" alt="" /></p>
+
+<ul>
+<li><p>女武神的技能圣痕武器的提升、圣痕的挑选与配合所花的时间、看技能说明并尝试等</p></li>
+
+<li><p>每日的奖励、每日的日常任务比如购买、收金币等</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0590.jpg" alt="" /></p>
+
+<ul>
+<li><p>商店有13个之多（目前版本），同一资源有不同兑换方式，肝帝们会花很多时间</p></li>
+
+<li><p>自2.0废了老婆之后，挂机加好感也是一个时间入口</p></li>
+
+<li><p>（有人挂着就是为了看老婆，包括宿舍）</p></li>
+</ul>
+
+<h3 id="p-e资源流向">P&amp;E资源流向</h3>
+
+<ul>
+<li>游戏唯一的可以大规模使用的通用货币就是钻石（获得途径有氪金和游戏关卡的奖励），也明说了你不靠肝就只能氪</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0592.jpg" alt="" /></p>
+
+<ul>
+<li>通用货币分化程度极高，每次活动的货币只能购买每次指定的内容</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0553.jpg" alt="" /></p>
+
+<ul>
+<li><p>从关卡中产出的材料，以不可取出的方式输送到比如基地的建筑升级、宿舍升级、角色的技能升级，资源投入就无法返回；或以低价取出的方式输送到装备、圣痕中，不满意的时候还可以分解以获得少量道具</p></li>
+
+<li><p>体力 -&gt; 金币、钻石、材料 -&gt; 建筑、装备、加工费</p></li>
+</ul>
+
+<h3 id="p-p交易手段">P&amp;P交易手段</h3>
+
+<ul>
+<li><p>由于玩家与玩家之间不存在交易媒介（当然如果你认为舰团里的互相帮助算交易媒介的话），无法通过线上或线下交易实现金币或钻石的转移，就<strong>使得游戏设计只需要注重玩家跟系统之间的资源关系构建，而不用考虑玩家与玩家之间产生的通货关系及产生的通货膨胀</strong></p></li>
+
+<li><p>卖号也是有的…但听闻的不多（毕竟来玩的都把她们视为老婆，更何况这是个没钱主肝的游戏）</p></li>
+</ul>
+
+<h3 id="数值平衡">数值平衡</h3>
+
+<p><img src="/pics/bbb/IMG_0594.jpg" alt="" /></p>
+
+<ul>
+<li><p>在角色归类上已经体现了严重的数据不平衡：只要氪金就有输出高打得爽的角色（这大概是没有出PVP系统的一个原因）</p></li>
+
+<li><p>关卡的怪物能力也是存在动态平衡，避免了过度割草的可能（尽管他不是所有关卡都用动态）。</p></li>
+
+<li><p>目前金币供给较足，偶尔会更新大规模撒币活动以满足玩家金币不够的情况（底部关于早期问题有提到）</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0596.jpg" alt="" /></p>
+
+<ul>
+<li><p>同样的就是爆率和出货率的问题，现在不知道有没有做更新（在底部早期问题有提到）</p>
+
+<h2 id="总体体验">总体体验</h2>
+
+<h3 id="题材">题材</h3></li>
+
+<li><p>题材选择了当时较为火的“美少女”+“动作”，在崩坏2本身的群众基础上进行规模用户迁移。（无奈崩坏2粘性实在大，至今仍有大规模崩坏2不愿迁移）前市场情形催生下做了非常明确的定位，续作延续定位，在二次元玩家市场进行规模扩散。</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0591.jpg" alt="" /></p>
+
+<ul>
+<li>当然其还在游戏中引入二次元“老婆”的动作交互，友好地击中一部分玩家的痒点（同时也击中了广电）。（当然现在你老婆们只剩草履虫能动了）</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0597.jpg" alt="" /></p>
+
+<ul>
+<li>崩坏3在题材塑造上（女武神的形象、动作），集中打中了东方审美，也是针对市场的一个应变。</li>
+</ul>
+
+<h3 id="世界观">世界观</h3>
+
+<ul>
+<li>采用架空世界观，主观指出像中世纪黑死病浪潮的原因是一种“崩坏事件”（无法证伪），进而引出周期性崩坏的世界宿命，成为游戏推动剧情的核心世界观中的挑战。此后的剧情、活动、道具，都由此展开。在此架空的原因一部分是历史遗留，同时也为剧情扩展保留更多空间。</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0600.jpg" alt="" /></p>
+
+<ul>
+<li>架空世界观也有其难以控制的风险（详见《创世学》第二版），以至于一开始有心想了解崩坏剧情时，被其一开始的（黑人问号）中二剧情劝退。当然后面紫鸢篇关注了一下，也把深度给造足了。</li>
+</ul>
+
+<h3 id="浸入式程度">浸入式程度</h3>
+
+<ul>
+<li><p>这个恐怕是最受争议的点了。</p></li>
+
+<li><p>剧情的连贯性、角色和关卡之间的衔接不连贯严重影响浸入感。尽管在题材、美术和打击感备受好评，但作为一个想要融入剧情的ACT游戏来说，这一点真的是最难把控的（且不讨论ACT是否应引入剧情）。</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0604.jpg" alt="" /></p>
+
+<ul>
+<li><p>在操作上优化了功能，优化了文字和渲染，也调整过关卡的顺序，但是在角色衔接上和代入感上并没有做出太大改进。关卡进入的对话上（通讯对话）、关卡的结算动作、跳出战斗页面的关卡计算都是打断浸入感的。</p></li>
+
+<li><p>其次是新玩家的加入对于世界观设定并不清晰，剧情描述是相当考验导演的设计功力的。而老玩家也要磨合崩坏2与崩坏3之间设定的差异。而在剧情描述上采用的CG、动态信息、通讯对话可以交代的内容及其有限，玩家不得不依靠漫画和小说进行世界观完善。</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0603.jpg" alt="" /></p>
+
+<ul>
+<li>玩家的第一人称代入（舰长）并不是时常的，在进行游戏的时候其实已经脱离了作为一个指挥官的身份，变成一个控制角色的人，也一定程度上造成了断裂。</li>
+</ul>
+
+<h3 id="音乐与视觉">音乐与视觉</h3>
+
+<ul>
+<li><p>BGM上主界面使用略带静谧而带有节奏的电子乐，准备战斗界面使用较为急促的电子乐。根据关卡的不同用不同的战斗背景乐，有较为急促的现代街道配合的战斗音乐，也有崩坏3官方主题曲配以boss战。关卡之中SE音效明显大于BGM，包括人物CV的语音和技能动作的声音，更突出人物本身的动作以提升浸入感。</p></li>
+
+<li><p>音乐总体的感觉是中规中矩的战斗ACT类游戏的音乐</p></li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0605.jpg" alt="" /></p>
+
+<ul>
+<li>依靠其架空的世界观，题材视觉上采用较为广阔的元素范围，建筑的风格包括了从古代建筑、野外、学园、日式村落、现代军事建筑、近代工厂等，服饰的风格包括日式服饰、现代机械、军服、现代服饰、修女服、古装等。武器的名字来源据网友说有得考证，圣痕则是取自历史上的名人或虚构的人物名，以立绘进行表现。</li>
+</ul>
+
+<p><img src="/pics/bbb/IMG_0607.jpg" alt="" /></p>
+
+<p><img src="/pics/bbb/IMG_0606.jpg" alt="" /></p>
+
+<ul>
+<li>平面设计方面都采用扁平化的方框小圆角+非衬线字体。许多部分的字和外框采用偏斜的形式，增加了画面的总体活力。图案为主引导的界面按钮具现代性，主界面的图标按钮也会随着活动有不同的变化。整体的感觉带有科技感与活力。</li>
+</ul>
+
+<h2 id="其他">其他</h2>
+
+<h3 id="战略推测">战略推测</h3>
+
+<ol>
+<li><p>从崩坏学园到崩坏学园2再到崩坏3，IP的积攒是一步一步走过来的。同时也渐渐地在IP培养过程中找到了用户定位，碰上手游迸发的时代和开箱玩法的大流行，崩坏3算是以自己的努力赶上了时代浪潮。</p></li>
+
+<li><p>作为崩坏学园2后的蓄力之作，本身的功能就是延续IP跟巩固定位。大量的流水也让公司有了充足的资金可以在崩坏及其衍生产品继续用力，塑造一个完整的IP生态圈。</p></li>
+
+<li><p>从崩坏3自身的优秀质量而言，一方面体现了国内手游制作水准，另一方面其也承载着时代的使命：崩坏3正在用自己的设计和技术创造一个时代标签。当然他自身牵引着一个团体的审美，也是有责任去维护好这个圈子的审美水平以推到更高水平</p></li>
+</ol>
+
+<h3 id="玩家群体细分">玩家群体细分</h3>
+
+<ol>
+<li><p>根据资源获取手段分，基本分为肝玩家、氪玩家、氪肝玩家</p></li>
+
+<li><p>根据目的性分，厨玩家、收集玩家、刷图玩家、竞技玩家</p></li>
+
+<li><p>根据时长、登录间隙分，日活玩家、签到玩家、AFK玩家、休闲玩家、修仙玩家</p></li>
+</ol>
+
+<h3 id="玩家反馈及争议">玩家反馈及争议</h3>
+
+<ul>
+<li><p>角色毕业速度过慢</p></li>
+
+<li><p>如今出货率控制依然受争议</p></li>
+
+<li><p>敌人类型单一缺乏新鲜感</p></li>
+
+<li><p>成就系统的扩展性</p></li>
+
+<li><p>活动货币局限过大，玩家无法形成市场</p></li>
+
+<li><p>操作技术瓶颈大，后期只拼装备，没PVP，技术操作不是重点</p></li>
+
+<li><p>动作深度不足</p></li>
+
+<li><p>玩家之间的隔离感过强</p></li>
+
+<li><p>情怀消费程度</p></li>
+
+<li><p>控到死或秒秒秒，或反之</p></li>
+</ul>
+
+<h3 id="非理性细节引导">非理性细节引导</h3>
+
+<ul>
+<li>机会暂留的成本再结算：位面徽章</li>
+</ul>
+
+<blockquote>
+<p>每日材料副本有两次机会（每次消耗6个）、或经验副本的一次机会（每次消耗12个）。如果当日没去打副本，则会被结算成“位面徽章”，并通过<strong>邮件方式</strong>寄送。同时，位面徽章的上限为30个（除了副本无其他用途）</p>
+
+<p>这种结算的好处在于</p>
+
+<ol>
+<li><p>当日没时间打副本的人可以积累副本机会（最多30个），并且在有需要的时候进行分配。</p></li>
+
+<li><p>对于即将流失的用户，没打每日副本并不会感觉机会流失，而结算<strong>以邮件寄送物品</strong>提醒了玩家并给予玩家重新分配的机会（造成一种<strong>分配负担</strong>）。到达上限后不能再领取，<strong>期限只有几天的邮件会在邮箱中等待销毁</strong>，刺激玩家的“便宜谁也不能便宜官方”的消费位面徽章的想法。<strong>为了使自己的利益达到最大化，进而去消化已经积累的位面徽章</strong></p></li>
+
+<li><p>而实际上这些副本的内容没有太多新的玩法，也抑制了玩家过度消费位面徽章，抑制了产出物过多，但玩家<strong>为了不亏，哪怕无聊我也玩</strong>的心态。而产出物则成为新的一种<strong>分配负担</strong>（用于升级装备、圣痕），刺激下一个环节</p></li>
+</ol>
+</blockquote>
+
+<ul>
+<li>惊叹号引导</li>
+</ul>
+
+<blockquote>
+<p>对于即将流失的玩家或刚入坑的新玩家，惊叹号是最有效的引导手段。也是提醒<strong>分配负担</strong>的一个重要手段。</p>
+
+<p>通常惊叹号引导到<strong>需要收割</strong>或<strong>需要分配</strong>的地方，以非理性引导的手段（比如在相对对玩家利益不大的分配地方长时间标注惊叹号，引导玩家投入到低回报的地方，严重的<strong>心理暗示</strong>）引导玩家行为。</p>
+
+<p>除了每日任务的基本引导（其实感觉任务项过多，一开始奖励蛮，后期容易成为负担）<strong>如果玩家可以自定义惊叹号的引导，比如设置自己“想要商店里的xxx，每天需要收集多少材料，叫系统监督我”，毕竟每日任务的目标（三十钻）并不如一个自选的究极圣痕更能吸引玩家，在我不知道打开游戏要做些什么的时候。能够一定程度上减缓流失速度。</strong></p>
+</blockquote>
+
+<ul>
+<li>降低消费成本以增加负担的奖励</li>
+</ul>
+
+<blockquote>
+<p>如果公司出1000住房补贴让我在公司旁边租2000的房子，我有可能回租。但是公司直接让我租一个1000的房子我可能就不租。
+第一是成本没变，但心理认知是成本相对降低了。第二是“不赚白不赚”，哪怕让第三方赚了也要让自己获得公司给的好处。</p>
+
+<p>体现第一点的是每日打开游戏的基础奖励“任务从新的一天开始 +5”。</p>
+
+<p>体现第二点的是限时的探索力补给包</p>
+
+<p>这一点旨在<strong>通过降低玩家在某一目标上的消费成本，而让玩家投入更多隐性成本</strong>（包括时间和钱）</p>
+</blockquote>
+
+<ul>
+<li>点击“领取”的快感而不在乎内容</li>
+</ul>
+
+<blockquote>
+<p>每日任务之多与种田玩法之多，使得平均收益的减少，任务的“领取”点击反而成为快感的主要来源。</p>
+
+<p>尽管过多的刺激感转移加快了玩家麻木的速度，降低了玩家对收获内容的敏感度，反而可以更好地去计划<strong>奖励内容中的惊喜成分</strong></p>
+</blockquote>
+
+<ul>
+<li>非理性供求关系的价格定位：皮肤</li>
+</ul>
+
+<blockquote>
+<p>首先崩坏3没有市场，其次是皮肤除了是官方定价（包括现金价格、或者时间成本价格）</p>
+
+<p>当摆放在同一商店，与其他商品比价时，出现严重的价格失衡。并不是每个经济参与者都是理性人（理性人假设），基于活动标志（大力度宣传）和非理性因素的影响下，皮肤存在的价值基本由官方决定。</p>
+
+<p>当然官方也可以试一下，<strong>每次活动最多供给十万份皮肤，皮肤价格随供给减少而增长，或者你可以去找其他玩家购买</strong>（如果官方敢来玩这么一手的话我是佩服的）。</p>
+</blockquote>
+
+<ul>
+<li>区域性指定货币吸收隐性成本</li>
+</ul>
+
+<blockquote>
+<p>阶段性活动会推出只能兑换这次活动奖励的<strong>阶段性指定货币</strong>，过期收回。没有完全参与的玩家也可以通过活动后期的钻石换这种<strong>指定货币</strong>，在活动结束后，继续购买活动的奖励。</p>
+
+<p>平常的时候会有一些<strong>常用指定货币</strong>，比如游骑兵徽章只能在一个商店里兑换，皮肤券只能在一个商店那里兑换。尽管很明确地规定了使用范围，而且获取手段也比较单一，但也造成了权衡空间的减少。</p>
+
+<p>区域性的指定货币，比如琉炎玉，提供可以在多个商店之间不同商品的兑换（只能买不能卖），造成了<strong>常用指定货币</strong>可以买到的东西与<strong>区域性指定货币</strong>可以买到的东西的一个不等价权衡，但又因为信息不对称，使得玩家需要投入大量的隐性成本去比较哪一个更划算。</p>
+</blockquote>
+
+<h4 id="详细参考资料">详细参考资料</h4>
+
+<ol>
+<li><p><a href="http://bbs.gameres.com/thread_805290_1_1.html">《崩坏3》评测：游戏设计中整体性和利用率分析</a></p></li>
+
+<li><p><a href="https://space.bilibili.com/15097472/#/article">rosoo崩坏3分析列表一览</a></p></li>
+
+<li><p><a href="http://bbs.gameres.com/thread_795976_1_1.html">从系统、数值、活动等角度分析《崩坏3》</a></p></li>
+
+<li><p><a href="https://www.zhihu.com/question/64707313/answer/223436424">崩坏三作死历史 - 知乎</a></p></li>
+
+<li><p><a href="https://book.douban.com/review/4935319/">读物 《可预见的非理性》</a></p></li>
+</ol>
+
+<hr />
+
+<h3 id="更新信息">更新信息</h3>
+
+<p>2018.6.6 基本稿</p>
+
+<p>2018.6.8 更新了游戏中关于非理性细节引导的分析</p>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="m4.73135 3.3795002q0-.5597-.39604-.9557-.39604-.3961-.95577-.3961-.55974 0-.95578.3961-.39604.396-.39604.9557 0 .5598.39604.9558.39604.3961.95578.3961.55973 0 .95577-.3961.39604-.396.39604-.9558zm11.26865 6.0832q0 .5596998-.39076.9504998l-5.18548 5.196q-.41188.3908-.9610504.3908-.55974 0-.9505-.3908l-7.5511496-7.5616998q-.40132-.3907-.68119-1.0666-.27987-.6759-.27987-1.2357v-4.3934q0-.54920004.40132-.95050004.40132-.4013.9505-.4013h4.39339q.55974 0 1.23565.2799.67591.2798 1.07723.6812l7.55115 7.54060004q.39076.4118.39076.961z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link" href="/tags/%E5%B4%A9%E5%9D%8F3/" rel="tag">崩坏3</a></li>
+		<li class="tags__item"><a class="tags__link" href="/tags/%E6%B8%B8%E6%88%8F%E5%88%86%E6%9E%90/" rel="tag">游戏分析</a></li>
+	</ul>
+</div>
+
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="visn Z avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About visn Z</span>
+	</div>
+	<div class="authorbox__description">
+		(()=&gt;console.log(&#39;hello world!&#39;))()
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/post/davinci-track/" rel="prev"><span class="post-nav__caption">«Previous</span><p class="post-nav__post-title">DaVinci/Fusion 节点式效果软件初体验:Tracker跟踪效果</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/post/flvnmkv2mp4/" rel="next"><span class="post-nav__caption">Next»</span><p class="post-nav__post-title">flv/mkv文件提取pr可导入格式</p></a>
+	</div>
+</nav>
+
+	
+</main>
+
+<aside class="sidebar" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="//google.com/search">
+		<label>
+			<span class="screen-reader-text">Search for:</span>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/tcpdump-py/">python调用tcpdump监管流量去向</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/arch-i8so/">~~Arch~~ Linux 簡單記錄</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/docker/">docker上手 生产环境大搬家</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/systemd/">Systemd 扎記</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/ovtr/">OVTR 視覺化tracert 日好幾把炫酷（然並卵）</a></li>
+		</ul>
+	</div>
+</div>
+
+	
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/visnz" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:visn0518@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>visn0518@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget__link widget__link--taglist" href="/tags/adobe" title="adobe">adobe</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ae" title="ae">ae</a>
+		<a class="widget__link widget__link--taglist" href="/tags/bilibili" title="bilibili">bilibili</a>
+		<a class="widget__link widget__link--taglist" href="/tags/c&#43;&#43;" title="c&#43;&#43;">c&#43;&#43;</a>
+		<a class="widget__link widget__link--taglist" href="/tags/docker" title="docker">docker</a>
+		<a class="widget__link widget__link--taglist" href="/tags/gamejam" title="gamejam">gamejam</a>
+		<a class="widget__link widget__link--taglist" href="/tags/github" title="github">github</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ingress" title="ingress">ingress</a>
+		<a class="widget__link widget__link--taglist" href="/tags/java" title="java">java</a>
+		<a class="widget__link widget__link--taglist" href="/tags/javascript" title="javascript">javascript</a>
+		<a class="widget__link widget__link--taglist" href="/tags/linux" title="linux">linux</a>
+		<a class="widget__link widget__link--taglist" href="/tags/mac" title="mac">mac</a>
+		<a class="widget__link widget__link--taglist" href="/tags/nodejs" title="nodejs">nodejs</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ntfs" title="ntfs">ntfs</a>
+		<a class="widget__link widget__link--taglist" href="/tags/opencv" title="opencv">opencv</a>
+		<a class="widget__link widget__link--taglist" href="/tags/prores" title="prores">prores</a>
+		<a class="widget__link widget__link--taglist" href="/tags/puppeteer" title="puppeteer">puppeteer</a>
+		<a class="widget__link widget__link--taglist" href="/tags/python" title="python">python</a>
+		<a class="widget__link widget__link--taglist" href="/tags/systemd" title="systemd">systemd</a>
+		<a class="widget__link widget__link--taglist" href="/tags/tracert" title="tracert">tracert</a>
+		<a class="widget__link widget__link--taglist" href="/tags/vscode" title="vscode">vscode</a>
+		<a class="widget__link widget__link--taglist" href="/tags/windows" title="windows">windows</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e4%b8%8a%e6%99%ba%e5%a4%a7%e5%ad%a6" title="上智大学">上智大学</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e4%ba%92%e8%81%94%e7%bd%91" title="互联网">互联网</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9b%a2%e9%98%9f%e4%b8%9a%e5%8a%a1" title="团队业务">团队业务</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9b%be%e7%89%87" title="图片">图片</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9c%96%e5%83%8f%e8%99%95%e7%90%86" title="圖像處理">圖像處理</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%ad%97%e5%b9%95" title="字幕">字幕</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%b4%a9%e5%9d%8f3" title="崩坏3">崩坏3</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%b7%a5%e5%85%b7" title="工具">工具</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%bd%b1%e8%a7%86" title="影视">影视</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%bd%b1%e8%a7%86%e5%90%8e%e6%9c%9f" title="影视后期">影视后期</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%89%8b%e5%86%8a" title="手冊">手冊</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%96%87%e4%bb%b6" title="文件">文件</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%97%a5%e6%9b%86" title="日曆">日曆</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%97%a5%e6%9c%ac" title="日本">日本</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%9c%8d%e5%8b%99%e5%99%a8" title="服務器">服務器</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%9d%82%e5%ad%a6%e5%8a%a8%e7%89%a9" title="杂学动物">杂学动物</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%b5%aa" title="浪">浪</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%b8%b8%e6%88%8f%e5%88%86%e6%9e%90" title="游戏分析">游戏分析</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%a6%8f%e8%a2%8b" title="福袋">福袋</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%ae%a1%e7%90%86" title="管理">管理</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bb%8f%e6%b5%8e%e5%ad%a6" title="经济学">经济学</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bc%96%e7%a0%81" title="编码">编码</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bc%96%e7%a8%8b%e6%80%9d%e7%bb%b4" title="编程思维">编程思维</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%a1%8c%e7%a8%8b%e8%a1%a8" title="行程表">行程表</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%a8%88%e7%ae%97%e6%a9%9f" title="計算機">計算機</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%ae%a1%e7%ae%97%e6%9c%ba" title="计算机">计算机</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%be%be%e8%8a%ac%e5%a5%87" title="达芬奇">达芬奇</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e9%81%8a%e8%a8%98" title="遊記">遊記</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e9%a6%99%e6%b8%af" title="香港">香港</a>
+	</div>
+</div>
+</aside>
+
+	</div>
+		<footer class="footer" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+			<div class="container container-inner">
+				<p class="footer__copyright">&copy; 2018 * IN SHADOW. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad theme</a>.</span></p>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on * IN SHADOW</title>
+    <link>/tags/windows/</link>
+    <description>Recent content in Windows on * IN SHADOW</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 02 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Windows10工作站远程桌面连接：frp内网穿透映射RDP服务</title>
+      <link>/post/rdpbyfrp/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/rdpbyfrp/</guid>
+      <description>背景 问题  小作坊影视后期，素材量大，传输不方便。
+ 有一台核心工作站，协同工作者不集中，其各自设备不给力
+ 想办法让协同工作者能够远程参与到工作站中
+  构思 开放工作站多用户协作，远程连接端口，允许其他网络协同工作者连接进来
+优点：协同工作者彼此之间不需要复制多份大文件素材，不用过多考虑素材传输 问题、设备负载 问题。整理素材、粗剪、精剪等工作可以同时进行。
+缺点：需要有流畅网速保障（公网服务器、自身分发速度、协同工作者的下载速度），剪辑预览的时候更需要有网速保障（通常本地工作站不需要考虑这些）。
+所需工具  Windows10桌面开放连接：RDP Wrapper
+ 端口映射工具：frp
+ 本地工作站，能负载多用户登录
+ 一台中继服务器，国内外皆可，需要保证其上下行速度流畅（记得打开你阿里的port ban列表）
+  配置 多用户登录 先创建新用户和密码，把用户放入Remote Desktop Users组 允许你的电脑接受远程连接 Windows登录某个用户就会挤下线另一个用户，首先允许你的工作站实现多用户同时登录：RDPWrap-&amp;gt;install.bat（记得关闭你的360、某安全管家）
+后可使用RDPConf.exe配置具体内容 无法[fully supported]的可以尝试update.bat更新
+使用RDPCheck.exe对本地多用户登录进行测试 多会话冲突 测试过程出现过多会话访问，工作站拒绝连接。原因是Windows系统防范过多会话连接。可在cmd-&amp;gt;gpedit.msc-&amp;gt;管理模板- Windows组件-&amp;gt;远程桌面服务-&amp;gt;远程桌面主机会话中，会话时间限制、连接等进行限制。
+自定义最高连接数、设置断开连接后的会话生存时间等等。详细一些操作可自行搜索 配置服务器：frps 服务器上直接下载RDP Wrapper对应版本，修改frps.ini。可以简单按照RDP文档的示例配置一个监听接口，安全一点可以引入stcp等。
+./frps -c ./frps.ini启动
+至于需要配置systemd service和crontab的请自行配置
+配置工作站：frpc 下载RDP Wrapper对应版本修改frpc.ini。
+简单配置做测试
+[common] server_addr = 你服务器地址 server_port = 7000 服务器的穿透端口（frps.ini中指定的端口） [RDP] type = tcp local_ip = 0.</description>
+    </item>
+    
+  </channel>
+</rss>

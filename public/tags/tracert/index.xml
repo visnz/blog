@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tracert on * IN SHADOW</title>
+    <link>/tags/tracert/</link>
+    <description>Recent content in Tracert on * IN SHADOW</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 14 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/tracert/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>OVTR 視覺化tracert 日好幾把炫酷（然並卵）</title>
+      <link>/post/ovtr/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/ovtr/</guid>
+      <description> 開始 在某大佬博客（忘了哪位）看到用ping且召喚出了地圖可視化，大概是像這種
+1
+感覺：
+一路找下來發現一款好老的開源軟件Open Visual Traceroute（基於Java、MAXMIND GeoIP2 DB）
+在線追蹤的可以使用IPIP可以選擇全球300多線路發送ICMP tracert測試
+安裝 archlinuxcn/openvisualtraceroute，安裝後可以在菜單裏找到相應名字
+由於第一次使用需要初始化GeoIP DB，不知道是否線路問題無法下載
+命令行代理啓動sudo proxychains ovtr初始化DB，以後就在Desktop啓動就OK啦
+Enjoy！
+ http://www.mantingfeng.com/?p=618 [return]   </description>
+    </item>
+    
+  </channel>
+</rss>

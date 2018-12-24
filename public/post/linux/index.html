@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux 筆記大整理 &amp; 工具備忘錄</title>
+<meta name="description" content="visn`s Personal blog about fucking daily chaos :L ">
+<meta name="generator" content="Hugo 0.52" />
+<meta property="og:title" content="Linux 筆記大整理 &amp; 工具備忘錄" />
+<meta property="og:description" content="基本工具  df、fdisk、fdisk等基本硬盤查看工具
+ ls：基本是自帶--color=auto這個地燈設置。
+ -al列出隱藏與詳細信息
+ -Csh着色、大小顯示
+ -R超詳細目錄信息
+  tty查看当前 tty 终端=&gt;/dev/pts/*，可以用于重定向输出
+ init * runlevel
+ &amp;丢后台
+ 后台任务检查jobs任务管理器top/htop、ps -ax
+ 内存检查free
+ 端口占用检查netstat -anp|grep [port]、lsof -i
+ 变量修改：export LANG=zh_CN.UTF-8变量追加：export LANG=$LANG:en_US.UTF-8
+ sudo组：echo &quot;%sudoer ALL=(ALL:ALL) ALL&quot;&gt;&gt; /etc/sudoers
+ dd if=* of=* bs=1M count=200
+ 查看查找：file、type、whereis
+ locate：查找，使用 mlocate 包，使用 updatedb 更新数据库
+ chattr設置文件安全屬性（lsattr現實）
+ A atime訪問時間不會因爲訪問而修改（隱藏讀取痕跡）
+ S 數據立即寫入，不參與緩存（適合重要數據寫入，防止斷電丟失）
+ a append追加寫入權限（適用於log、passwd文件）
+ c 壓縮加密文件，以時間換空間（長時間一次的大文件讀寫存儲等）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/linux/" /><meta property="article:published_time" content="2018-12-07T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-12-07T00:00:00&#43;00:00"/>
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700" type="text/css" media="all" />
+<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
+<script type="text/javascript" src="/js/scripts.js"></script>
+<link rel="shortcut icon" href="/favicon.ico">
+
+</head>
+<body class="body body-left-sidebar mobile" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+	<div class="container container-outer">
+		<header class="header" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+			<div class="container container-inner clearfix">
+				<div class="logo" role="banner" itemscope="itemscope" itemtype="http://schema.org/Brand">
+					<a class="logo__link" href="/" title="* IN SHADOW" rel="home">
+						<h1 class="logo__title">* IN SHADOW</h1>
+						
+					</a>
+				</div>
+			</div>
+			
+<nav class="menu" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+	<ul class="menu__list">
+		<li class="menu__item"><a class="menu__link" href="/post/%E6%B8%B8%E8%AE%B0/">浪了个浪</a></li>
+		<li class="menu__item"><a class="menu__link" href="/about/">关于</a></li>
+	</ul>
+</nav>
+
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main-content content" role="main" itemprop="mainContentOfPage">
+	<article class="post">
+		<header class="post__header clearfix">
+			<h1 class="post__title">Linux 筆記大整理 &amp; 工具備忘錄</h1>
+			<p class="post__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="post__meta-date" datetime="2018-12-07T00:00:00">December 07, 2018</time>
+			</p>
+		</header>
+		<div class="post__content clearfix">
+			<figure class="post__thumbnail">
+				<img src="/pics/linux/icon.png" alt="Linux 筆記大整理 &amp; 工具備忘錄">
+			</figure>
+			
+
+<h2 id="基本工具">基本工具</h2>
+
+<ol>
+<li><p><code>df</code>、<code>fdisk</code>、<code>fdisk</code>等基本硬盤查看工具</p></li>
+
+<li><p>ls：基本是自帶<code>--color=auto</code>這個地燈設置。</p>
+
+<ul>
+<li><p><code>-al</code>列出隱藏與詳細信息</p></li>
+
+<li><p><code>-Csh</code>着色、大小顯示</p></li>
+
+<li><p><code>-R</code>超詳細目錄信息</p></li>
+</ul></li>
+
+<li><p><code>tty</code>查看当前 tty 终端=&gt;<code>/dev/pts/*</code>，可以用于重定向输出</p></li>
+
+<li><p><code>init *</code> runlevel</p></li>
+
+<li><p><code>&amp;</code>丢后台</p></li>
+
+<li><p>后台任务检查<code>jobs</code>任务管理器<code>top/htop</code>、<code>ps -ax</code></p></li>
+
+<li><p>内存检查<code>free</code></p></li>
+
+<li><p>端口占用检查<code>netstat -anp|grep [port]</code>、<strong><code>lsof -i</code></strong></p></li>
+
+<li><p>变量修改：<code>export LANG=zh_CN.UTF-8</code>变量追加：<code>export LANG=$LANG:en_US.UTF-8</code></p></li>
+
+<li><p>sudo组：<code>echo &quot;%sudoer ALL=(ALL:ALL) ALL&quot;&gt;&gt; /etc/sudoers</code></p></li>
+
+<li><p><code>dd if=* of=* bs=1M count=200</code></p></li>
+
+<li><p>查看查找：<code>file</code>、<code>type</code>、<code>whereis</code></p></li>
+
+<li><p><code>locate</code>：查找，使用 mlocate 包，使用 updatedb 更新数据库</p></li>
+
+<li><p><code>chattr</code>設置文件安全屬性（<code>lsattr</code>現實）</p>
+
+<ul>
+<li><p>A atime訪問時間不會因爲訪問而修改（隱藏讀取痕跡）</p></li>
+
+<li><p>S 數據立即寫入，不參與緩存（適合重要數據寫入，防止斷電丟失）</p></li>
+
+<li><p>a append追加寫入權限（適用於log、passwd文件）</p></li>
+
+<li><p>c 壓縮加密文件，以時間換空間（長時間一次的大文件讀寫存儲等）</p></li>
+
+<li><p>i 文件不能刪改、不能鏈接</p></li>
+
+<li><p>s 文件徹底刪除（適合重要數據）</p></li>
+
+<li><p>u 文件刪除的話，只隱藏文件訪問，可以找回</p></li>
+</ul></li>
+
+<li><p><code>chsh -s /bin/bash username</code>切換默認shell</p></li>
+
+<li><p><code>bc</code>基本計算器</p></li>
+
+<li><p><code>time</code>測試軟件運行時間</p></li>
+</ol>
+
+<h3 id="目录结构">目录结构</h3>
+
+<ul>
+<li><p>通常/作为根目录，/usr（unix software resource 用户软件库）,/home（用户家目录）,/var（服务目录）会单独规划。</p>
+
+<ul>
+<li><p>/usr里会有单独的bin sbin lib lib64 share local</p></li>
+
+<li><p>/usr/share/doc 程序文档，man 将访问</p></li>
+
+<li><p>/usr/local //软件源码编译安装的附加软件库</p></li>
+
+<li><p>/usr/bin   实现系统 扩展功能 的可执行文件（应用启动，与开机和内核操作无关）</p></li>
+
+<li><p>/usr/share 结构独立的数据/文件储存器，DE的desktop文件在這裏</p></li>
+
+<li><p>/usr/include（c/c++中的include文件，以tarball安装时候，会用到不少）</p></li>
+
+<li><p>/usr/lib[64] （应用程序的库文件）</p></li>
+
+<li><p>/usr/local（本机管理员自己下载的程序）</p></li>
+
+<li><p>/var/log 里有 log 文件</p></li>
+
+<li><p>/var/cache 网络访问或本地程序访问产生的暂存文件</p></li>
+
+<li><p>/var/lib 动态数据相关操作会使用到的库</p></li>
+</ul></li>
+
+<li><p>/boot   #系统启动需要的文件（内核）,grub信息在這裏</p></li>
+
+<li><p>/swap</p>
+
+<ul>
+<li><p>内存&lt;4G，设置二倍。</p></li>
+
+<li><p>内存&gt;4G，swap分区大小等于物理内存。</p></li>
+</ul></li>
+
+<li><p>/bin 系统基本命令 /sbin 系统相关命令 /lib[64] 库（内核模块在这） /media  挂载媒体</p></li>
+
+<li><p>/opt 第三方软件</p></li>
+
+<li><p>/etc 配置文件</p>
+
+<ul>
+<li><p><a href="https://wiki.archlinux.org/index.php/Resolv.conf_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">/etc/resolv.conf</a> 域名服務相關</p></li>
+
+<li><p><del>/etc/init.d/ 服务启动/停止的脚本</del>Selling my underpants to systemd</p></li>
+
+<li><p>/etc/X11/ XWindow相关配置</p></li>
+</ul></li>
+
+<li><p>/dev pts 终端 null 空 random 随机</p></li>
+
+<li><p>/proc  #伪文件系统，内核参数的映射文件</p>
+
+<ul>
+<li><p>/proc/version 內核版本號</p></li>
+
+<li><p>/proc/net/dev 查看網卡詳細信息</p></li>
+</ul></li>
+
+<li><p>/sys   #伪文件系统，系统硬件参数的映射文件</p></li>
+</ul>
+
+<h3 id="文件操作">文件操作</h3>
+
+<ol>
+<li><p>文件时间：使用touch更新文件三个时间，可以用于获取新的sshkey</p>
+
+<ul>
+<li><p>mtime：内容修改时间</p></li>
+
+<li><p>ctime：权限修改时间</p></li>
+
+<li><p>atime：文件访问时间</p></li>
+</ul></li>
+
+<li><p>命令位置查詢：<code>whereis</code>（比find快，比which多）可用locate（mlocate）</p></li>
+
+<li><p>文件類型：<code>file</code></p></li>
+
+<li><p>find：全盘查找工具<code>sudo find / -name &quot;hello.*&quot;</code></p>
+
+<ul>
+<li><p>-name [regex]</p></li>
+
+<li><p>-size +50k</p></li>
+
+<li><p>-type d目录、p管道等</p></li>
+
+<li><p>-perm 模式</p></li>
+</ul></li>
+
+<li><p>linux文件系統：ext3 ext4 xfs</p></li>
+</ol>
+
+<h3 id="shell腳本">shell腳本</h3>
+
+<ol>
+<li><p>判斷文件夾是否存在，若存在並進入<code>[ $1 ] &amp;&amp; cd $1</code></p></li>
+
+<li><p>判斷文件是否存在，不存在則創建<code>if [ ! -f $1 ];then `touch $1` fi</code></p></li>
+
+<li><p>羣組變量：<code>sites1=(&quot;163.com&quot; &quot;ustc.edu.cn&quot; &quot;aliyun.com&quot;)</code>聚合羣組變量：<code>all=(${sites1[@]} ${sites2[@]})</code></p></li>
+
+<li><p>遍歷./文件：<code>for var in `ls -1` do ... done</code></p></li>
+</ol>
+
+<h3 id="旁門">旁門</h3>
+
+<ul>
+<li><p><code>echo {a,b,c}{d,e,f}</code> =&gt; <code>ad ae af bd be bf cd ce cf</code></p></li>
+
+<li><p>图片藏种技术： <code>cat file1 file2&gt;file3</code></p></li>
+</ul>
+
+<h2 id="雜七雜八工具使用">雜七雜八工具使用</h2>
+
+<ol>
+<li><p>樹狀圖展示，僅展開1層<code>tree -L 2</code></p>
+
+<ul>
+<li><p><code>-sh</code>附帶大小</p></li>
+
+<li><p><code>-p</code>附帶權限</p></li>
+
+<li><p><code>-P [regex]</code>只顯示適配文件（會包含文件夾）</p></li>
+
+<li><p><code>-C</code>色彩表示</p></li>
+</ul></li>
+
+<li><p>备份工具：<code>dump</code>备份 <code>restore</code>恢复</p></li>
+
+<li><p>打包工具：<code>tar/gzip/zcat/bzip2/compress/7z</code></p></li>
+
+<li><p>C家工具：<code>gcc/g++</code>编译器<code>gdb</code>调试器</p></li>
+
+<li><p>git：<code>git config --global user.</code> 設置用戶信息</p></li>
+
+<li><p>虛擬機：<code>qemu</code>、<code>xen</code>、<code>kvm</code></p></li>
+</ol>
+
+<h3 id="桌面工具">桌面工具</h3>
+
+<ul>
+<li><p><code>pitivi</code>、<code>shotcut</code>：影片编辑软件</p></li>
+
+<li><p><code>shotwell</code>：图片管理器</p></li>
+
+<li><p><code>gimp</code>、<code>Pixlr</code>：Linux下的图片编辑工具（PS）</p></li>
+
+<li><p><code>Scribus</code>：對標Adobe InDesign</p></li>
+
+<li><p><code>Inkscape</code>：對標Adobe Illustrator</p></li>
+
+<li><p><code>darktable</code>：對標Adobe Lightroom</p></li>
+
+<li><p><code>Black Magic Fusion</code>：Nuke 節點式後期效果合成，現已與davinci合併</p></li>
+
+<li><p><code>blender</code>：3D建模（python腳本）</p></li>
+
+<li><p><code>gitkarken</code>：开源且免费的 git 可视化管理工具（官方推荐）</p></li>
+
+<li><p><code>LibreOffice</code>：office</p></li>
+
+<li><p><code>openvisualtraceroute</code><sup>aur</sup>：跨平臺的traceroute視覺化展示（基於java）</p></li>
+</ul>
+
+<p><img src="/pics/linux/01.png" alt="" /></p>
+
+<h2 id="運維相關">運維相關</h2>
+
+<ol>
+<li><p>用戶登錄信息：<code>last</code></p></li>
+
+<li><p>查看-修改時區：<code>date -R; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></p></li>
+
+<li><p>用戶運行狀態：<code>w</code>、<code>uptime</code></p></li>
+
+<li><p>實時滾動的log：<code>tail -f [file]</code></p></li>
+
+<li><p>魂歸垃圾桶：<code>&gt;/dev/null 2&gt;&amp;1</code></p></li>
+
+<li><p>网卡信息：<code>、etc/sysconfig/network-scripts/</code></p></li>
+
+<li><p><code>route -n</code>   #查看路由表</p></li>
+
+<li><p><code>/etc/resolv.conf</code>  #dns的全局配置文件</p></li>
+
+<li><p>例行工作：<code>crontab</code>（/etc/crontab）</p>
+
+<ul>
+<li><p>分 时 日 月 周（周和月、日调用有冲突）</p></li>
+
+<li><p><code>* * * * * reboot</code>每分钟重启一次</p></li>
+
+<li><p><code>*/2 * * * * reboot</code>每两分钟重启一次</p></li>
+
+<li><p><code>20,50 9-20/3 * * * reboot</code>每天9到20点每三小时的20分，50分各执行一次</p></li>
+
+<li><p><code>0 0 * * * pacman -Syu</code>每天自动滚包一次</p></li>
+</ul></li>
+
+<li><p>權限相關</p>
+
+<ul>
+<li><p>useradd 用戶新增 -m創建家目錄</p></li>
+
+<li><p>usermod 用戶修改</p></li>
+
+<li><p>groupadd 組增加</p></li>
+
+<li><p>groupmod 組修改</p></li>
+
+<li><p>chmod 改變文件權限</p></li>
+
+<li><p>chown 改變文件所有者</p></li>
+
+<li><p>chgrp 改變文件組所有</p></li>
+</ul></li>
+
+<li><p>隨機密碼產生器：<code>cat /dev/urandom</code>cat隨機數<code>od -x</code>轉換爲十六進制<code>head -n 20</code>獲取頭20行<code>tr -d ' '</code>去掉空格<code>md5sum</code>獲取驗證碼<code>awk '{print $1}'</code>獲取校驗和</p></li>
+
+<li><p>腳本設密碼：<code>echo &quot;user:pswd&quot; &gt; tmp &amp;&amp; cat tmp | chpasswd</code></p></li>
+
+<li><p><code>echo 'PermitRootLogin without-password' &gt;&gt; /etc/ssh/sshd_config</code>root免密登陸。通常是<code>echo 'PermitRootLogin no' &gt;&gt; /etc/ssh/sshd_config</code>來禁止以root登陸</p></li>
+</ol>
+
+<h2 id="摘录">摘录</h2>
+
+<h3 id="后台工作与服务">后台工作与服务</h3>
+
+<blockquote>
+<ul>
+<li>两种daemon的工作模式
+
+<ul>
+<li>super daemon：一个特殊的daemon，用于管理daemon监听和请求，接受到新请求，会向指定的daemon发起激活。通常用于响应大量的通用服务。
+
+<ul>
+<li>多线程响应：一个服务对于多个服务进程，同时响应多个服务对象</li>
+<li>单线程响应：服务模型类似一个多路复用器。</li>
+</ul></li>
+<li>stand alone：单独的一个持续运行的daemon，通常用于响应特殊服务。
+
+<ul>
+<li>信号响应：一旦有信号就立即响应</li>
+<li>间隔响应：每隔一段时间响应。</li>
+</ul></li>
+</ul></li>
+<li>stand alone
+
+<ul>
+<li><code>/etc/services</code>记录着对大部分接口的服务监听。</li>
+<li><code>/etc/init.d/</code>目录保存daemon启动脚本，stand alone启动</li>
+<li><code>/etc/systemd/</code>各种服务的初始化环境配置文件</li>
+<li><code>/etc/</code>各种服务的配置文件</li>
+<li><code>/var/lib/</code>各服务产生数据的记录目录</li>
+<li>service：对服务进行控制，替代对/etc/init.d/的控制</li>
+</ul></li>
+<li>super daemon
+
+<ul>
+<li>该服务由xinetd管理，配置文件位于<code>/etc/xinetd.conf</code>（里面也记录面对同一个服务最多提供多少链接、面对同一个来源用户提供多少链接等信息）</li>
+</ul></li>
+</ul>
+</blockquote>
+
+<h3 id="进程管理">进程管理</h3>
+
+<ul>
+<li><p><code>fork()</code>创建子进程，0表示当前的子进程，大于0时为父进程PID，-1为创建失败</p></li>
+
+<li><p>函数调用一次单产生两个返回值，一个返回给子进程一个返回给父进程</p></li>
+</ul>
+
+<pre><code class="language-c">pid=fork();
+if(!pid)printf(&quot;child process\n&quot;);
+else if(pid&gt;0)printf(&quot;parent process\n&quot;);
+else printf(&quot;fork fail\n&quot;, );
+</code></pre>
+
+<p>## 设计原则</p>
+
+<p>Linux设计原则：</p>
+
+<ol>
+<li><p>单一目的的小工具组成</p></li>
+
+<li><p>一切皆文件</p></li>
+
+<li><p>尽量避免与用户交互</p></li>
+
+<li><p>所有的配置文件都保存为纯文本格式</p></li>
+</ol>
+
+<h2 id="网站资源">网站资源</h2>
+
+<p>常用的国外Linux资源：</p>
+
+<ul>
+<li><p><a href="lwn.net">来自Linux和开放源代码界的新闻</a></p></li>
+
+<li><p><a href="www.freshmeat.net">最齐全的Linux/UNIX软件库</a></p></li>
+
+<li><p><a href="www.justlinux.com">信息最全的Linux学习网站</a></p></li>
+
+<li><p><a href="www.kernel.org Linux">内核的官方网站</a></p></li>
+
+<li><p><a href="www.linux.com">提供全方位的Linux信息</a></p></li>
+
+<li><p><a href="www.linuxhq.com">提供内核信息和补丁的汇总</a></p></li>
+
+<li><p><a href="www.linuxtoday.com">非常完整的Linux新闻站点</a></p></li>
+</ul>
+
+<p>国内的Linux的资源：</p>
+
+<ul>
+<li><p><a href="www.chinaunix.net">国内最大的Linux/UNIX技术社区网站</a></p></li>
+
+<li><p><a href="www.linuxeden.com">Linux伊甸园，最大的中文开源资讯门户网站</a></p></li>
+
+<li><p><a href="www.linuxfans.org">中国Linux公社，拥有自己的Linux发行版本</a></p></li>
+
+<li><p><a href="www.linuxsir.org">提供各种Linux资源、包括资讯、软件、手册等</a></p></li>
+</ul>
+
+<p><a href="/files/拼客笔记.md">一分大大佬早期的学习笔记</a></p>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="m4.73135 3.3795002q0-.5597-.39604-.9557-.39604-.3961-.95577-.3961-.55974 0-.95578.3961-.39604.396-.39604.9557 0 .5598.39604.9558.39604.3961.95578.3961.55973 0 .95577-.3961.39604-.396.39604-.9558zm11.26865 6.0832q0 .5596998-.39076.9504998l-5.18548 5.196q-.41188.3908-.9610504.3908-.55974 0-.9505-.3908l-7.5511496-7.5616998q-.40132-.3907-.68119-1.0666-.27987-.6759-.27987-1.2357v-4.3934q0-.54920004.40132-.95050004.40132-.4013.9505-.4013h4.39339q.55974 0 1.23565.2799.67591.2798 1.07723.6812l7.55115 7.54060004q.39076.4118.39076.961z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link" href="/tags/%E8%A8%88%E7%AE%97%E6%A9%9F/" rel="tag">計算機</a></li>
+		<li class="tags__item"><a class="tags__link" href="/tags/linux/" rel="tag">Linux</a></li>
+		<li class="tags__item"><a class="tags__link" href="/tags/%E6%89%8B%E5%86%8A/" rel="tag">手冊</a></li>
+	</ul>
+</div>
+
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="visn Z avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About visn Z</span>
+	</div>
+	<div class="authorbox__description">
+		(()=&gt;console.log(&#39;hello world!&#39;))()
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/post/gists/" rel="prev"><span class="post-nav__caption">«Previous</span><p class="post-nav__post-title">VSCode記 Gists同步部署生產環境(Atom&amp;Vim)</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/post/cal-fwd/" rel="next"><span class="post-nav__caption">Next»</span><p class="post-nav__post-title">Google Calendar nodejs作轉發服務器 媽媽再也不擔心看不到我</p></a>
+	</div>
+</nav>
+
+	
+</main>
+
+<aside class="sidebar" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="//google.com/search">
+		<label>
+			<span class="screen-reader-text">Search for:</span>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/tcpdump-py/">python调用tcpdump监管流量去向</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/arch-i8so/">~~Arch~~ Linux 簡單記錄</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/docker/">docker上手 生产环境大搬家</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/systemd/">Systemd 扎記</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/ovtr/">OVTR 視覺化tracert 日好幾把炫酷（然並卵）</a></li>
+		</ul>
+	</div>
+</div>
+
+	
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/visnz" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:visn0518@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>visn0518@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget__link widget__link--taglist" href="/tags/adobe" title="adobe">adobe</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ae" title="ae">ae</a>
+		<a class="widget__link widget__link--taglist" href="/tags/bilibili" title="bilibili">bilibili</a>
+		<a class="widget__link widget__link--taglist" href="/tags/c&#43;&#43;" title="c&#43;&#43;">c&#43;&#43;</a>
+		<a class="widget__link widget__link--taglist" href="/tags/docker" title="docker">docker</a>
+		<a class="widget__link widget__link--taglist" href="/tags/gamejam" title="gamejam">gamejam</a>
+		<a class="widget__link widget__link--taglist" href="/tags/github" title="github">github</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ingress" title="ingress">ingress</a>
+		<a class="widget__link widget__link--taglist" href="/tags/java" title="java">java</a>
+		<a class="widget__link widget__link--taglist" href="/tags/javascript" title="javascript">javascript</a>
+		<a class="widget__link widget__link--taglist" href="/tags/linux" title="linux">linux</a>
+		<a class="widget__link widget__link--taglist" href="/tags/mac" title="mac">mac</a>
+		<a class="widget__link widget__link--taglist" href="/tags/nodejs" title="nodejs">nodejs</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ntfs" title="ntfs">ntfs</a>
+		<a class="widget__link widget__link--taglist" href="/tags/opencv" title="opencv">opencv</a>
+		<a class="widget__link widget__link--taglist" href="/tags/prores" title="prores">prores</a>
+		<a class="widget__link widget__link--taglist" href="/tags/puppeteer" title="puppeteer">puppeteer</a>
+		<a class="widget__link widget__link--taglist" href="/tags/python" title="python">python</a>
+		<a class="widget__link widget__link--taglist" href="/tags/systemd" title="systemd">systemd</a>
+		<a class="widget__link widget__link--taglist" href="/tags/tracert" title="tracert">tracert</a>
+		<a class="widget__link widget__link--taglist" href="/tags/vscode" title="vscode">vscode</a>
+		<a class="widget__link widget__link--taglist" href="/tags/windows" title="windows">windows</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e4%b8%8a%e6%99%ba%e5%a4%a7%e5%ad%a6" title="上智大学">上智大学</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e4%ba%92%e8%81%94%e7%bd%91" title="互联网">互联网</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9b%a2%e9%98%9f%e4%b8%9a%e5%8a%a1" title="团队业务">团队业务</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9b%be%e7%89%87" title="图片">图片</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9c%96%e5%83%8f%e8%99%95%e7%90%86" title="圖像處理">圖像處理</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%ad%97%e5%b9%95" title="字幕">字幕</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%b4%a9%e5%9d%8f3" title="崩坏3">崩坏3</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%b7%a5%e5%85%b7" title="工具">工具</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%bd%b1%e8%a7%86" title="影视">影视</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%bd%b1%e8%a7%86%e5%90%8e%e6%9c%9f" title="影视后期">影视后期</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%89%8b%e5%86%8a" title="手冊">手冊</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%96%87%e4%bb%b6" title="文件">文件</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%97%a5%e6%9b%86" title="日曆">日曆</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%97%a5%e6%9c%ac" title="日本">日本</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%9c%8d%e5%8b%99%e5%99%a8" title="服務器">服務器</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%9d%82%e5%ad%a6%e5%8a%a8%e7%89%a9" title="杂学动物">杂学动物</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%b5%aa" title="浪">浪</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%b8%b8%e6%88%8f%e5%88%86%e6%9e%90" title="游戏分析">游戏分析</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%a6%8f%e8%a2%8b" title="福袋">福袋</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%ae%a1%e7%90%86" title="管理">管理</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bb%8f%e6%b5%8e%e5%ad%a6" title="经济学">经济学</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bc%96%e7%a0%81" title="编码">编码</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bc%96%e7%a8%8b%e6%80%9d%e7%bb%b4" title="编程思维">编程思维</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%a1%8c%e7%a8%8b%e8%a1%a8" title="行程表">行程表</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%a8%88%e7%ae%97%e6%a9%9f" title="計算機">計算機</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%ae%a1%e7%ae%97%e6%9c%ba" title="计算机">计算机</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%be%be%e8%8a%ac%e5%a5%87" title="达芬奇">达芬奇</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e9%81%8a%e8%a8%98" title="遊記">遊記</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e9%a6%99%e6%b8%af" title="香港">香港</a>
+	</div>
+</div>
+</aside>
+
+	</div>
+		<footer class="footer" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+			<div class="container container-inner">
+				<p class="footer__copyright">&copy; 2018 * IN SHADOW. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad theme</a>.</span></p>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>

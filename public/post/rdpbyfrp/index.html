@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windows10工作站远程桌面连接：frp内网穿透映射RDP服务</title>
+<meta name="description" content="visn`s Personal blog about fucking daily chaos :L ">
+<meta name="generator" content="Hugo 0.52" />
+<meta property="og:title" content="Windows10工作站远程桌面连接：frp内网穿透映射RDP服务" />
+<meta property="og:description" content="背景 问题  小作坊影视后期，素材量大，传输不方便。
+ 有一台核心工作站，协同工作者不集中，其各自设备不给力
+ 想办法让协同工作者能够远程参与到工作站中
+  构思 开放工作站多用户协作，远程连接端口，允许其他网络协同工作者连接进来
+优点：协同工作者彼此之间不需要复制多份大文件素材，不用过多考虑素材传输 问题、设备负载 问题。整理素材、粗剪、精剪等工作可以同时进行。
+缺点：需要有流畅网速保障（公网服务器、自身分发速度、协同工作者的下载速度），剪辑预览的时候更需要有网速保障（通常本地工作站不需要考虑这些）。
+所需工具  Windows10桌面开放连接：RDP Wrapper
+ 端口映射工具：frp
+ 本地工作站，能负载多用户登录
+ 一台中继服务器，国内外皆可，需要保证其上下行速度流畅（记得打开你阿里的port ban列表）
+  配置 多用户登录 先创建新用户和密码，把用户放入Remote Desktop Users组 允许你的电脑接受远程连接 Windows登录某个用户就会挤下线另一个用户，首先允许你的工作站实现多用户同时登录：RDPWrap-&gt;install.bat（记得关闭你的360、某安全管家）
+后可使用RDPConf.exe配置具体内容 无法[fully supported]的可以尝试update.bat更新
+使用RDPCheck.exe对本地多用户登录进行测试 多会话冲突 测试过程出现过多会话访问，工作站拒绝连接。原因是Windows系统防范过多会话连接。可在cmd-&gt;gpedit.msc-&gt;管理模板- Windows组件-&gt;远程桌面服务-&gt;远程桌面主机会话中，会话时间限制、连接等进行限制。
+自定义最高连接数、设置断开连接后的会话生存时间等等。详细一些操作可自行搜索 配置服务器：frps 服务器上直接下载RDP Wrapper对应版本，修改frps.ini。可以简单按照RDP文档的示例配置一个监听接口，安全一点可以引入stcp等。
+./frps -c ./frps.ini启动
+至于需要配置systemd service和crontab的请自行配置
+配置工作站：frpc 下载RDP Wrapper对应版本修改frpc.ini。
+简单配置做测试
+[common] server_addr = 你服务器地址 server_port = 7000 服务器的穿透端口（frps.ini中指定的端口） [RDP] type = tcp local_ip = 0." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/rdpbyfrp/" /><meta property="article:published_time" content="2018-05-02T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-05-02T00:00:00&#43;00:00"/>
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700" type="text/css" media="all" />
+<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
+<script type="text/javascript" src="/js/scripts.js"></script>
+<link rel="shortcut icon" href="/favicon.ico">
+
+</head>
+<body class="body body-left-sidebar mobile" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+	<div class="container container-outer">
+		<header class="header" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+			<div class="container container-inner clearfix">
+				<div class="logo" role="banner" itemscope="itemscope" itemtype="http://schema.org/Brand">
+					<a class="logo__link" href="/" title="* IN SHADOW" rel="home">
+						<h1 class="logo__title">* IN SHADOW</h1>
+						
+					</a>
+				</div>
+			</div>
+			
+<nav class="menu" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+	<ul class="menu__list">
+		<li class="menu__item"><a class="menu__link" href="/post/%E6%B8%B8%E8%AE%B0/">浪了个浪</a></li>
+		<li class="menu__item"><a class="menu__link" href="/about/">关于</a></li>
+	</ul>
+</nav>
+
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main-content content" role="main" itemprop="mainContentOfPage">
+	<article class="post">
+		<header class="post__header clearfix">
+			<h1 class="post__title">Windows10工作站远程桌面连接：frp内网穿透映射RDP服务</h1>
+			<p class="post__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="post__meta-date" datetime="2018-05-02T00:00:00">May 02, 2018</time>
+			</p>
+		</header>
+		<div class="post__content clearfix">
+			<figure class="post__thumbnail">
+				<img src="/pics/RDP.png" alt="Windows10工作站远程桌面连接：frp内网穿透映射RDP服务">
+			</figure>
+			
+
+<h2 id="背景">背景</h2>
+
+<h3 id="问题">问题</h3>
+
+<ul>
+<li><p>小作坊影视后期，素材量大，传输不方便。</p></li>
+
+<li><p>有一台核心工作站，协同工作者不集中，其各自设备不给力</p></li>
+
+<li><p>想办法让协同工作者能够远程参与到工作站中</p></li>
+</ul>
+
+<h3 id="构思">构思</h3>
+
+<p>开放工作站多用户协作，远程连接端口，允许其他网络协同工作者连接进来</p>
+
+<p><img src="/pics/RDP/RDP.png" alt="" /></p>
+
+<p>优点：协同工作者彼此之间不需要复制多份大文件素材，不用过多考虑<strong>素材传输</strong> 问题、<strong>设备负载</strong> 问题。整理素材、粗剪、精剪等工作可以同时进行。</p>
+
+<p>缺点：需要有<strong>流畅网速保障</strong>（公网服务器、自身分发速度、协同工作者的下载速度），剪辑预览的时候更需要有网速保障（通常本地工作站不需要考虑这些）。</p>
+
+<h2 id="所需工具">所需工具</h2>
+
+<ul>
+<li><p>Windows10桌面开放连接：<a href="https://github.com/stascorp/rdpwrap">RDP Wrapper</a></p></li>
+
+<li><p>端口映射工具：<a href="https://github.com/fatedier/frp">frp</a></p></li>
+
+<li><p>本地工作站，能负载多用户登录</p></li>
+
+<li><p>一台中继服务器，国内外皆可，需要保证其上下行速度流畅（记得打开你阿里的port ban列表）</p></li>
+</ul>
+
+<h2 id="配置">配置</h2>
+
+<h3 id="多用户登录">多用户登录</h3>
+
+<p>先创建新用户和密码，把用户放入<code>Remote Desktop Users</code>组
+<img src="/pics/RDP/RDP00.0.png" alt="" /></p>
+
+<p>允许你的电脑接受远程连接
+<img src="/pics/RDP/RDP00.1.png" alt="" /></p>
+
+<p>Windows登录某个用户就会挤下线另一个用户，首先允许你的工作站实现多用户同时登录：RDPWrap-&gt;<code>install.bat</code>（记得关闭你的360、某安全管家）</p>
+
+<p>后可使用<code>RDPConf.exe</code>配置具体内容
+<img src="/pics/RDP/RDP00.png" alt="" /></p>
+
+<p>无法<code>[fully supported]</code>的可以尝试<code>update.bat</code>更新</p>
+
+<p>使用<code>RDPCheck.exe</code>对本地多用户登录进行测试
+<img src="/pics/RDP/RDP01.png" alt="" /></p>
+
+<h3 id="多会话冲突">多会话冲突</h3>
+
+<p>测试过程出现过多会话访问，工作站拒绝连接。原因是Windows系统防范过多会话连接。可在cmd-&gt;<code>gpedit.msc</code>-&gt;管理模板- Windows组件-&gt;远程桌面服务-&gt;远程桌面主机会话中，会话时间限制、连接等进行限制。</p>
+
+<p>自定义最高连接数、设置断开连接后的会话生存时间等等。详细一些操作可自行搜索
+<img src="/pics/RDP/RDP02.png" alt="" /></p>
+
+<h3 id="配置服务器-frps">配置服务器：frps</h3>
+
+<p>服务器上直接下载<a href="https://github.com/stascorp/rdpwrap">RDP Wrapper</a>对应版本，修改<code>frps.ini</code>。可以简单按照<a href="https://github.com/fatedier/frp/blob/master/README_zh.md">RDP文档的示例</a>配置一个监听接口，安全一点可以引入<code>stcp</code>等。</p>
+
+<p><code>./frps -c ./frps.ini</code>启动</p>
+
+<p>至于需要配置<code>systemd service</code>和<code>crontab</code>的请自行配置</p>
+
+<p><img src="/pics/RDP/RDP03.png" alt="" /></p>
+
+<h3 id="配置工作站-frpc">配置工作站：frpc</h3>
+
+<p>下载<a href="https://github.com/stascorp/rdpwrap">RDP Wrapper</a>对应版本修改<code>frpc.ini</code>。</p>
+
+<p>简单配置做测试</p>
+
+<pre><code class="language-ini">[common]
+server_addr = 你服务器地址
+server_port = 7000  服务器的穿透端口（frps.ini中指定的端口）
+
+[RDP]
+type = tcp
+local_ip = 0.0.0.0  监听本地
+local_port = 3389   RDP的端口，RDPConf.exe中指定
+remote_port = 6000  在服务器上提供连接到local_port的服务端口
+</code></pre>
+
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> 过后补充相对安全配置文件</label></li>
+</ul>
+
+<p><img src="/pics/RDP/RDP04.png" alt="" /></p>
+
+<p><code>frpc -c ./frpc.ini</code>启动，可看到<strong>服务器显示有连接接入</strong></p>
+
+<p><img src="/pics/RDP/RDP05.png" alt="" /></p>
+
+<h3 id="连接测试">连接测试</h3>
+
+<p>运行<code>mstsc</code>，连接到<code>服务器地址:6000（务器的服务端口）</code></p>
+
+<p><img src="/pics/RDP/RDP06.png" alt="" /></p>
+
+<p>在保持网速上下行的情况下，可流畅执行工作站任务（测试两机分别位于不同校园网，2M网速已可以完成基本操作）</p>
+
+<p>RDP根据设置可以重定向音频，不过会有折损。色彩只需要考虑屏幕显色差异。相对来说会比较适合<strong>需要大计算量</strong>和<strong>信息同步需要</strong>的协同工作，比如3d建模的分散作业、调色、筛选素材、渲染等。</p>
+
+<h2 id="结束">结束</h2>
+
+<ul>
+<li><p>记得时刻留意你的任务管理器（性能、用户面板）</p></li>
+
+<li><p>Linux协同工作不需要这么麻烦的，您可以考虑一下Linux+Lightwork+Davinci+Blender+Nuke</p></li>
+
+<li><p>直接暴露RDP端口到公网也是不安全的，配置stcp或者做好安全监控措施</p></li>
+
+<li><p>可以随时随地登录内网工作站，像极了IronMan维罗妮卡？</p></li>
+
+<li><p>Mac貌似还无法连接？</p></li>
+</ul>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="icon icon-tag" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="m4.73135 3.3795002q0-.5597-.39604-.9557-.39604-.3961-.95577-.3961-.55974 0-.95578.3961-.39604.396-.39604.9557 0 .5598.39604.9558.39604.3961.95578.3961.55973 0 .95577-.3961.39604-.396.39604-.9558zm11.26865 6.0832q0 .5596998-.39076.9504998l-5.18548 5.196q-.41188.3908-.9610504.3908-.55974 0-.9505-.3908l-7.5511496-7.5616998q-.40132-.3907-.68119-1.0666-.27987-.6759-.27987-1.2357v-4.3934q0-.54920004.40132-.95050004.40132-.4013.9505-.4013h4.39339q.55974 0 1.23565.2799.67591.2798 1.07723.6812l7.55115 7.54060004q.39076.4118.39076.961z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link" href="/tags/windows/" rel="tag">Windows</a></li>
+		<li class="tags__item"><a class="tags__link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a></li>
+	</ul>
+</div>
+
+	</article>
+	
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="visn Z avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About visn Z</span>
+	</div>
+	<div class="authorbox__description">
+		(()=&gt;console.log(&#39;hello world!&#39;))()
+	</div>
+</div>
+	
+<nav class="post-nav row clearfix" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+	<div class="post-nav__item post-nav__item--prev col-1-2">
+		<a class="post-nav__link" href="/post/nodejscpp/" rel="prev"><span class="post-nav__caption">«Previous</span><p class="post-nav__post-title">c&#43;&#43;结合V8模块扩展nodejs功能，用c&#43;&#43;处理复杂计算</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next col-1-2">
+		<a class="post-nav__link" href="/post/pupeteer/" rel="next"><span class="post-nav__caption">Next»</span><p class="post-nav__post-title">Puppeteer初体验 &amp; 爬网课视频</p></a>
+	</div>
+</nav>
+
+	
+</main>
+
+<aside class="sidebar" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+	
+<div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="//google.com/search">
+		<label>
+			<span class="screen-reader-text">Search for:</span>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/tcpdump-py/">python调用tcpdump监管流量去向</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/arch-i8so/">~~Arch~~ Linux 簡單記錄</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/docker/">docker上手 生产环境大搬家</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/systemd/">Systemd 扎記</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/ovtr/">OVTR 視覺化tracert 日好幾把炫酷（然並卵）</a></li>
+		</ul>
+	</div>
+</div>
+
+	
+	
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/visnz" target="_blank">
+				<svg class="widget-social__link-icon icon-github" viewBox="0 0 384 374" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:visn0518@gmail.com">
+				<svg class="widget-social__link-icon icon-mail" viewBox="0 0 416 288" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>visn0518@gmail.com</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget__link widget__link--taglist" href="/tags/adobe" title="adobe">adobe</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ae" title="ae">ae</a>
+		<a class="widget__link widget__link--taglist" href="/tags/bilibili" title="bilibili">bilibili</a>
+		<a class="widget__link widget__link--taglist" href="/tags/c&#43;&#43;" title="c&#43;&#43;">c&#43;&#43;</a>
+		<a class="widget__link widget__link--taglist" href="/tags/docker" title="docker">docker</a>
+		<a class="widget__link widget__link--taglist" href="/tags/gamejam" title="gamejam">gamejam</a>
+		<a class="widget__link widget__link--taglist" href="/tags/github" title="github">github</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ingress" title="ingress">ingress</a>
+		<a class="widget__link widget__link--taglist" href="/tags/java" title="java">java</a>
+		<a class="widget__link widget__link--taglist" href="/tags/javascript" title="javascript">javascript</a>
+		<a class="widget__link widget__link--taglist" href="/tags/linux" title="linux">linux</a>
+		<a class="widget__link widget__link--taglist" href="/tags/mac" title="mac">mac</a>
+		<a class="widget__link widget__link--taglist" href="/tags/nodejs" title="nodejs">nodejs</a>
+		<a class="widget__link widget__link--taglist" href="/tags/ntfs" title="ntfs">ntfs</a>
+		<a class="widget__link widget__link--taglist" href="/tags/opencv" title="opencv">opencv</a>
+		<a class="widget__link widget__link--taglist" href="/tags/prores" title="prores">prores</a>
+		<a class="widget__link widget__link--taglist" href="/tags/puppeteer" title="puppeteer">puppeteer</a>
+		<a class="widget__link widget__link--taglist" href="/tags/python" title="python">python</a>
+		<a class="widget__link widget__link--taglist" href="/tags/systemd" title="systemd">systemd</a>
+		<a class="widget__link widget__link--taglist" href="/tags/tracert" title="tracert">tracert</a>
+		<a class="widget__link widget__link--taglist" href="/tags/vscode" title="vscode">vscode</a>
+		<a class="widget__link widget__link--taglist" href="/tags/windows" title="windows">windows</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e4%b8%8a%e6%99%ba%e5%a4%a7%e5%ad%a6" title="上智大学">上智大学</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e4%ba%92%e8%81%94%e7%bd%91" title="互联网">互联网</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9b%a2%e9%98%9f%e4%b8%9a%e5%8a%a1" title="团队业务">团队业务</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9b%be%e7%89%87" title="图片">图片</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%9c%96%e5%83%8f%e8%99%95%e7%90%86" title="圖像處理">圖像處理</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%ad%97%e5%b9%95" title="字幕">字幕</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%b4%a9%e5%9d%8f3" title="崩坏3">崩坏3</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%b7%a5%e5%85%b7" title="工具">工具</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%bd%b1%e8%a7%86" title="影视">影视</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e5%bd%b1%e8%a7%86%e5%90%8e%e6%9c%9f" title="影视后期">影视后期</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%89%8b%e5%86%8a" title="手冊">手冊</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%96%87%e4%bb%b6" title="文件">文件</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%97%a5%e6%9b%86" title="日曆">日曆</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%97%a5%e6%9c%ac" title="日本">日本</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%9c%8d%e5%8b%99%e5%99%a8" title="服務器">服務器</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%9d%82%e5%ad%a6%e5%8a%a8%e7%89%a9" title="杂学动物">杂学动物</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%b5%aa" title="浪">浪</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e6%b8%b8%e6%88%8f%e5%88%86%e6%9e%90" title="游戏分析">游戏分析</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%a6%8f%e8%a2%8b" title="福袋">福袋</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%ae%a1%e7%90%86" title="管理">管理</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bb%8f%e6%b5%8e%e5%ad%a6" title="经济学">经济学</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bc%96%e7%a0%81" title="编码">编码</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e7%bc%96%e7%a8%8b%e6%80%9d%e7%bb%b4" title="编程思维">编程思维</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%a1%8c%e7%a8%8b%e8%a1%a8" title="行程表">行程表</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%a8%88%e7%ae%97%e6%a9%9f" title="計算機">計算機</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%ae%a1%e7%ae%97%e6%9c%ba" title="计算机">计算机</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e8%be%be%e8%8a%ac%e5%a5%87" title="达芬奇">达芬奇</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e9%81%8a%e8%a8%98" title="遊記">遊記</a>
+		<a class="widget__link widget__link--taglist" href="/tags/%e9%a6%99%e6%b8%af" title="香港">香港</a>
+	</div>
+</div>
+</aside>
+
+	</div>
+		<footer class="footer" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+			<div class="container container-inner">
+				<p class="footer__copyright">&copy; 2018 * IN SHADOW. <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad theme</a>.</span></p>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+</body>
+</html>
