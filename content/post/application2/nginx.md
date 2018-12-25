@@ -92,6 +92,18 @@ tips可要记得把``user``填上。因为这个忽略饶了不少弯路
 
 ![](/pics/nginx/01.png)
 
+修正补充<sup>18.12.25</sup>
+
+npm提供live-server工具，支持快速实现本地文件系统对外映射
+
+不过就是没有``hugo server``方便，不是每按一次^S就自动渲染的
+
+tips是记得把``config.toml``里的baseURL改成``/``
+
+![](/pics/nginx/04.png)
+
+live-server也集成了类似``live-reload``浏览器自动重载功能，本地的网页等内容修改，保存可以及时同步到浏览器做调试。（只是遇上了hugo是要md渲染web的嗯）
+
 ## 配置对外文件服务
 
 主要应用场景比如用作服务器的时候，离线下载的任务丢上去，过段时间就可以打开网页直接下载
@@ -125,6 +137,30 @@ htpasswd -D <dir> <username>          #删除用户
 
 基本完成
 
+# 一些补充记录<sup>18.12.25</sup>
+
+功能与对应配置：
+
+1. 访问转发
+
+    ```bash
+    location / {
+        proxy_pass https://www.google.com/;
+        # 转发请求到别的网站去
+        # 请求头转发参考proxy_set_header
+    }
+    ```
+
+2. 提供一个地址监控nginx的状态
+
+    ```bash
+    location /NginxStatus {
+        stub_status on;
+        access_log on;
+    }
+    ```
+
+
 # 写在最后
 nginx的功能相当强大，目前也只是根据自己需要订制了一些简单的服务实现，以后还会有更大的用场。
 
@@ -136,3 +172,5 @@ nginx：我也只是做了一点微小的工作
 1. [十分钟-Nginx入门到上线](https://juejin.im/post/58846fceb123db7389d2b70e)
 
 2. [w3cschool Nginx 入门指南](https://www.w3cschool.cn/nginx/)
+
+3. [【小哥哥, 跨域要不要了解下】NGINX 反向代理](https://juejin.im/post/5c0e6d606fb9a049f66bf246)
