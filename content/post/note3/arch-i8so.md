@@ -14,7 +14,7 @@ featuredImage: "/pics/oldicon/arch.png"
 
 ---
 
-# 18.12.22
+# DNSMasq<sup>18.12.22</sup>
 
 [DNSMasq](https://wiki.archlinux.org/index.php/Dnsmasq_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))服务使用本地做DNS缓存：``echo "listen-address=127.0.0.1" >> /etc/dnsmasq.conf``
 
@@ -22,15 +22,24 @@ featuredImage: "/pics/oldicon/arch.png"
 
 防止篡改：``sudo chattr +i /etc/resolv.conf``
 
+配合create_ap组件给子网提供dns服务，在``/etc/dnsmasq.conf里``的``listen-address``中添加子网中的网关地址``127.0.0.1,10.0.0.1`` 
+
+默认dnsmasq关闭了DHCP功能：
+```bash
+# /etc/dnsmasq.conf
+interface=<LAN-NIC>
+bind-interfaces
+dhcp-range=10.0.0.2,10.0.0.50,12h
+dhcp-host=aa:bb:cc:dd:ee:ff,10.0.0.1
+```
+
 ![](/pics/arch/01.png)
 
-# 18.12.20
+systemd图形化界面包``systemd-ui``<sup>18.12.21</sup>
 
-dig所在软件包``dnsutils``
+dig所在软件包``dnsutils``<sup>18.12.20</sup>
 
-systemd图形化界面包``systemd-ui``
-
-## steam 冬季大促销
+## steam 冬季大促销<sup>18.12.19</sup>
 
 泼皮买了个linux上能跑的，~~可爱，想玩~~
 
@@ -42,11 +51,10 @@ systemd图形化界面包``systemd-ui``
 
 （nvidia与nvidia-dkms冲突，慎）
 
-
 ---
 # 18.12.17
 
-## libvirt虚拟机
+## libvirt虚拟机<sup>18.12.17</sup>
 
 基于[KVM](https://wiki.archlinux.org/index.php/KVM_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))，[libvirt](https://wiki.archlinux.org/index.php/Libvirt_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))提供一系列虚拟机服务的集合（包括virt-manager图形化界面、命令控制工具virsh、守护进程libvirtd）
 
