@@ -1,6 +1,6 @@
 ---
 title: "Arch Linux 札记"
-date: 2018-12-22
+date: 2018-12-27
 #date: 2018-01-20
 type: ["笔记"]
 weight: 1
@@ -14,7 +14,7 @@ featuredImage: "/pics/oldicon/arch.png"
 
 ---
 
-# 18.12.22
+# DNSMasq<sup>18.12.22</sup>
 
 [DNSMasq](https://wiki.archlinux.org/index.php/Dnsmasq_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))服务使用本地做DNS缓存：``echo "listen-address=127.0.0.1" >> /etc/dnsmasq.conf``
 
@@ -22,15 +22,24 @@ featuredImage: "/pics/oldicon/arch.png"
 
 防止篡改：``sudo chattr +i /etc/resolv.conf``
 
+配合create_ap组件给子网提供dns服务，在``/etc/dnsmasq.conf里``的``listen-address``中添加子网中的网关地址``127.0.0.1,10.0.0.1`` 
+
+默认dnsmasq关闭了DHCP功能：<sup>18.12.26</sup>
+```bash
+# /etc/dnsmasq.conf
+interface=<LAN-NIC>
+bind-interfaces
+dhcp-range=10.0.0.2,10.0.0.50,12h
+dhcp-host=aa:bb:cc:dd:ee:ff,10.0.0.1
+```
+
 ![](/pics/arch/01.png)
 
-# 18.12.20
+systemd图形化界面包``systemd-ui``<sup>18.12.21</sup>
 
-dig所在软件包``dnsutils``
+dig所在软件包``dnsutils``<sup>18.12.20</sup>
 
-systemd图形化界面包``systemd-ui``
-
-## steam 冬季大促销
+## steam 冬季大促销<sup>18.12.19</sup>
 
 泼皮买了个linux上能跑的，~~可爱，想玩~~
 
@@ -42,27 +51,23 @@ systemd图形化界面包``systemd-ui``
 
 （nvidia与nvidia-dkms冲突，慎）
 
-
 ---
-# 18.12.17
 
-## libvirt虚拟机
+## libvirt虚拟机<sup>18.12.17</sup>
 
-基于[KVM](https://wiki.archlinux.org/index.php/KVM_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))，[libvirt](https://wiki.archlinux.org/index.php/Libvirt_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))提供一系列虚拟机服务的集合（包括virt-manager图形化界面、命令控制工具virsh、守护进程libvirtd）
+基于[KVM](https://wiki.archlinux.org/index.php/KVM_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))，[libvirt](https://wiki.archlinux.org/index.php/Libvirt_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))提供一系列虚拟机服务的集合（包括命令控制工具virsh、守护进程libvirtd）
 
-依赖firewalld、ebtables、dnsmasq
+virt-manager图形化界面<sup>18.12.29</sup>
 
-安装后手动启动libvirtd、firewalld守护进程开始使用
+依赖firewalld、ebtables、dnsmasq，安装后手动启动libvirtd、firewalld守护进程开始使用
 
 libvirt没有载入default网络，位置在/etc/libvirt/qemu/networks/default.xml
 ``sudo virsh net-define /etc/libvirt/qemu/networks/default.xml``载入服务并重启守护进程。
 
 ``virsh net-autostart default``标记自动启动
 
----
-# 18.12.15
 
-## git 指定密钥登陆
+## git 指定密钥登陆<sup>18.12.15</sup>
 
 ``./.ssh/config``
 
@@ -82,16 +87,15 @@ Host new.visn.online
 
 其中$priviteKey为登记在github setting中的公密钥对的密钥
 
-## sshd端口修改
+## sshd端口修改<sup>18.12.13</sup>
 
 指定端口：``echo 'Port=20069' >> /etc/ssh/sshd_config``
 
 ``systemctl daemon-reload && sudo systemctl restart sshd``
 
 ---
-# 18.11.31
 
-## 免密登陸
+## 免密登陸<sup>18.11.31</sup>
 
 1. 生成key pair: ``ssh-keygen -t rsa``默認會存儲在``~/.ssh/``下包含一個``id_rsa``/``id_rsa.pub``
 
