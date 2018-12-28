@@ -1,6 +1,6 @@
 ---
 title: "Arch Linux 札记"
-date: 2018-12-27
+date: 2018-12-28
 #date: 2018-01-20
 type: ["笔记"]
 weight: 1
@@ -13,7 +13,20 @@ featuredImage: "/pics/oldicon/arch.png"
 记录下平时可能会用到的（查阅用）
 
 ---
+# youtube-dl<sup>18.12.28</sup>
+命令行下载油管视频工具（[github](https://github.com/rg3/youtube-dl)）
 
+提供了列表抓取、代理、regex表达式、filter过滤器、重定向、视频多格式、安全认证等功能
+
+![](/pics/arch/02.jpg)
+
+# flameshot<sup>18.12.27</sup>
+提供接近[snipaste](https://www.snipaste.com/)功能的截图工具（[github](https://github.com/lupoDharkael/flameshot)）
+
+![](https://github.com/lupoDharkael/flameshot/raw/master/img/preview/animatedUsage.gif
+)
+
+KDE桌面``alt + space``调用延时截图``sleep 1 && flameshot gui``
 # DNSMasq<sup>18.12.22</sup>
 
 [DNSMasq](https://wiki.archlinux.org/index.php/Dnsmasq_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))服务使用本地做DNS缓存：``echo "listen-address=127.0.0.1" >> /etc/dnsmasq.conf``
