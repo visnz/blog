@@ -13,21 +13,27 @@ featuredImage: "/pics/oldicon/arch.png"
 记录下平时可能会用到的（查阅用）
 
 ---
-# youtube-dl<sup>18.12.28</sup>
-命令行下载油管视频工具（[github](https://github.com/rg3/youtube-dl)）
+<link rel="stylesheet" type="text/css" href="/css/tag.css"> 
+轻量思维导图工具 freemind<sup>19.01.07</sup> 
+[mindmapp](https://mindmapp.org/)<sup>aur</sup><tag>npmwarn</tag> 
+
+## youtube-dl & you-get <sup>18.12.28</sup>
+youtube-dl命令行下载油管视频工具（[github](https://github.com/rg3/youtube-dl)）
 
 提供了列表抓取、代理、regex表达式、filter过滤器、重定向、视频多格式、安全认证等功能
 
 ![](/pics/arch/02.jpg)
 
-# flameshot<sup>18.12.27</sup>
+[you-get](https://github.com/soimort/you-get) 在pip3库中，是一个开源的用于抓取各种网站视频图片资源的工具，包括不限于油管、vimeo、推特、Ins、niconico、bilibili、163music、acfun、新浪、音悦Tai、youku、腾讯、芒果。
+
+## flameshot<sup>18.12.27</sup>
 提供接近[snipaste](https://www.snipaste.com/)功能的截图工具（[github](https://github.com/lupoDharkael/flameshot)）
 
 ![](https://github.com/lupoDharkael/flameshot/raw/master/img/preview/animatedUsage.gif
 )
 
 KDE桌面``alt + space``调用延时截图``sleep 1 && flameshot gui``
-# DNSMasq<sup>18.12.22</sup>
+## DNSMasq<sup>18.12.22</sup>
 
 [DNSMasq](https://wiki.archlinux.org/index.php/Dnsmasq_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))服务使用本地做DNS缓存：``echo "listen-address=127.0.0.1" >> /etc/dnsmasq.conf``
 
@@ -70,12 +76,12 @@ dig所在软件包``dnsutils``<sup>18.12.20</sup>
 
 基于[KVM](https://wiki.archlinux.org/index.php/KVM_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))，[libvirt](https://wiki.archlinux.org/index.php/Libvirt_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))提供一系列虚拟机服务的集合（包括命令控制工具virsh、守护进程libvirtd）
 
-virt-manager图形化界面<sup>18.12.29</sup>
+virt-manager图形化界面，qemu-kvm基础包<sup>18.12.29</sup>
 
-依赖firewalld、ebtables、dnsmasq，安装后手动启动libvirtd、firewalld守护进程开始使用
+依赖firewalld、ipset、ebtables、dnsmasq，安装后手动启动libvirtd、firewalld守护进程开始使用
 
 libvirt没有载入default网络，位置在/etc/libvirt/qemu/networks/default.xml
-``sudo virsh net-define /etc/libvirt/qemu/networks/default.xml``载入服务并重启守护进程。
+``sudo virsh net-define /etc/libvirt/qemu/networks/default.xml``载入``libvirtd``服务并重启守护进程。
 
 ``virsh net-autostart default``标记自动启动
 
