@@ -15,6 +15,10 @@ featuredImage: "/pics/blockchain/icon.jpg"
 
 另外，npm包不够干净。本来确实想在生产环境上安装的，一看到以太坊清一色npm果断考虑扔docker里
 
+### TL;DR
+> 本文简述了在Linux平台上使用Docker对以太坊工具geth的基础环境搭建与测试，后记录了创建私有链的过程，包括创世区块、节点部署、链接节点、产生交易、编写部署合约，以及最后web3组件对geth进行更多的扩展开发尝试。
+
+
 ## 初步构建与测试
 
 ### 1. 系统安装
@@ -25,9 +29,9 @@ debian系的gpgkey有点小问题不嫌麻烦可以手动解决。
 构建镜像并进入``docker run -dit base/archlinux`` 
 
 ```sh
-pacman -Syu git nodejs npm geth
+pacman -Sy python2 npm geth
 # 同步并安装必要包
-npm install -g web3
+npm install -g solc
 ```
 
 tips: 完成后可以``docker commit``成快照
@@ -258,7 +262,7 @@ geth --identity "node1" --rpc --rpcport 1111 --rpccorsdomain "*" --datadir "/roo
     ```
 
 ### 7. 编译、部署合约
-可以使用solc编译（npm: solcjs）
+可以使用solc编译（npm: solc）
 
 0.5.0版本以后有memory相关的语法要求，在上面代码里在参数里补充了memory参数。
 
@@ -385,6 +389,10 @@ function setInfo(_name,_age){
 本篇简单记录了从基本构建私有链、创世区块、部署节点、控制节点，到交易的实现、合约的编写编译部署，到最后实现合约的调用。
 
 基于此我们得到了一个基础的框架，我们可以封装好这些底层节点并在此之上可以编写合约完成更多的功能
+
+本篇长文部分资料来自蚁米链播学院，引用特此声明
+
+![](/pics/blockchain/teacher.jpg)
 
 ---
 
