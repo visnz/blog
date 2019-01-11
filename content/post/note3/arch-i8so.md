@@ -13,9 +13,14 @@ featuredImage: "/pics/oldicon/arch.png"
 记录下平时可能会用到的（查阅用）
 
 ---
+
+## 思维导图工具<sup>19.01.07</sup> 
 <link rel="stylesheet" type="text/css" href="/css/tag.css"> 
-轻量思维导图工具 freemind<sup>19.01.07</sup> 
-[mindmapp](https://mindmapp.org/)<sup>aur</sup><tag>npmwarn</tag> 
+
+轻量思维导图工具 
+
+- freemind<tag>awtwarn</tag> 
+- [mindmapp](https://mindmapp.org/)<sup>aur</sup><tag>npmwarn</tag> 
 
 ## youtube-dl & you-get <sup>18.12.28</sup>
 youtube-dl命令行下载油管视频工具（[github](https://github.com/rg3/youtube-dl)）
