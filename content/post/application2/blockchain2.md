@@ -4,7 +4,7 @@ date: 2019-01-08
 type: ["应用"]
 weight: 1
 tags: ["区块链","计算机","服务器","Linux"]
-categories: ["服务器","服务器","计算机"]
+categories: ["运维","服务器","计算机"]
 description: "在Linux平台上使用Docker创建节点，使用geth基础工具与web3.js基本框架实现区块链的基础设施搭建"
 featuredImage: "/pics/blockchain/icon.jpg"
 ---
@@ -34,7 +34,7 @@ pacman -Sy python2 npm geth
 npm install -g solc
 ```
 
-tips: 完成后可以``docker commit``成快照
+tips: 完成后可以``docker commit``成快照，下一篇文章会讲
 
 ### 2. 节点启动与用户创建
 
@@ -399,5 +399,5 @@ function setInfo(_name,_age){
 参考阅读
 
 1. [课程设计之Linux Docker构建区块链1：基本概念](https://visnz.github.io/post/application2/blockchain1/)
-2. [课程设计之Linux Docker构建区块链3：部署到生产环境](https://visnz.github.io/post/application2/blockchain3/)
+2. [课程设计之Linux Docker构建区块链3：环境docker打包与部署](https://visnz.github.io/post/application2/blockchain3/)
 3. [geth搭建以太坊私有链](https://github.com/TTY-00/Blog/issues/6)
