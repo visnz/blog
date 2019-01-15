@@ -1,6 +1,6 @@
 ---
 title: "Arch Linux 札记"
-date: 2018-12-27
+date: 2018-12-28
 #date: 2018-01-20
 type: ["笔记"]
 weight: 1
@@ -13,8 +13,47 @@ featuredImage: "/pics/oldicon/arch.png"
 记录下平时可能会用到的（查阅用）
 
 ---
+## time<sup>19.01.15</sup> 
+> 1. atime(access time)是在读取文件或执行文件时更改，也可以认为是文件最后一次被读取的时间。
+> 2. ctime（change time)是在写入文件，随更改所有者、权限时而更改，也就是文件状态最后一次被改变的时间。（索引节点改变）
+> 3. mtime(modify time)：写入文件时随文件的内容更改而更改，可以理解为是文件内容最后一次被修改的时间。[^1]
 
-# DNSMasq<sup>18.12.22</sup>
+[^1]: [Linux中ctime mtime atime文件时间的区别](http://www.voidcn.com/article/p-kbngkkhc-uv.html)
+
+1. cat会改变atime（pick Linux中国某篇一发即删的文章）
+    > relatime属性
+    >   从kernel2.6.29开始，默认集成了一个 relatime的属性。使用这个特性来挂装文件系统后，只有当mtime比atime更新的时候，才会更新atime。
+    > 
+    > 使用场景：
+    > 在文件读操作很频繁的系统中，atime更新所带来的开销很大，所以在挂装文件系统的时候使用noatime属性来停止更新atime。但是有些程序需要根据atime进行一些判断和操作，这个时候relatime特性就派上用场了。其实在事实上，这个时候atime和mtime已经是同一个time，所以可以理解这个选项就是为了实现对atime的兼容才推出的，并不是一个新的时间属性。[^1]
+
+2. ctime是文件在文件系统层面的改变（权限、写入等），mtime是文件自身内容的修改
+
+## 思维导图工具<sup>19.01.07</sup> 
+<link rel="stylesheet" type="text/css" href="/css/tag.css"> 
+
+轻量思维导图工具 
+
+- freemind<tag>awtwarn</tag> 
+- [mindmapp](https://mindmapp.org/)<sup>aur</sup><tag>npmwarn</tag> 
+
+## youtube-dl & you-get <sup>18.12.28</sup>
+youtube-dl命令行下载油管视频工具（[github](https://github.com/rg3/youtube-dl)）
+
+提供了列表抓取、代理、regex表达式、filter过滤器、重定向、视频多格式、安全认证等功能
+
+![](/pics/arch/02.jpg)
+
+[you-get](https://github.com/soimort/you-get) 在pip3库中，是一个开源的用于抓取各种网站视频图片资源的工具，包括不限于油管、vimeo、推特、Ins、niconico、bilibili、163music、acfun、新浪、音悦Tai、youku、腾讯、芒果。
+
+## flameshot<sup>18.12.27</sup>
+提供接近[snipaste](https://www.snipaste.com/)功能的截图工具（[github](https://github.com/lupoDharkael/flameshot)）
+
+![](https://github.com/lupoDharkael/flameshot/raw/master/img/preview/animatedUsage.gif
+)
+
+KDE桌面``alt + space``调用延时截图``sleep 1 && flameshot gui``
+## DNSMasq<sup>18.12.22</sup>
 
 [DNSMasq](https://wiki.archlinux.org/index.php/Dnsmasq_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))服务使用本地做DNS缓存：``echo "listen-address=127.0.0.1" >> /etc/dnsmasq.conf``
 
@@ -35,9 +74,8 @@ dhcp-host=aa:bb:cc:dd:ee:ff,10.0.0.1
 
 ![](/pics/arch/01.png)
 
-systemd图形化界面包``systemd-ui``<sup>18.12.21</sup>
 
-dig所在软件包``dnsutils``<sup>18.12.20</sup>
+## dig``dnsutils``<sup>18.12.20</sup>
 
 ## steam 冬季大促销<sup>18.12.19</sup>
 
@@ -57,12 +95,12 @@ dig所在软件包``dnsutils``<sup>18.12.20</sup>
 
 基于[KVM](https://wiki.archlinux.org/index.php/KVM_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))，[libvirt](https://wiki.archlinux.org/index.php/Libvirt_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87))提供一系列虚拟机服务的集合（包括命令控制工具virsh、守护进程libvirtd）
 
-virt-manager图形化界面<sup>18.12.29</sup>
+virt-manager图形化界面，qemu-kvm基础包<sup>18.12.29</sup>
 
-依赖firewalld、ebtables、dnsmasq，安装后手动启动libvirtd、firewalld守护进程开始使用
+依赖firewalld、ipset、ebtables、dnsmasq，安装后手动启动libvirtd、firewalld守护进程开始使用
 
 libvirt没有载入default网络，位置在/etc/libvirt/qemu/networks/default.xml
-``sudo virsh net-define /etc/libvirt/qemu/networks/default.xml``载入服务并重启守护进程。
+``sudo virsh net-define /etc/libvirt/qemu/networks/default.xml``载入``libvirtd``服务并重启守护进程。
 
 ``virsh net-autostart default``标记自动启动
 
@@ -132,18 +170,15 @@ echo $2 >> /home/$1/.ssh/authorized_keys
 - arch 使用 cronie(systemd) 管理計劃任務（disable），可以使用``crontab -e``編輯文件。三連擊``daemon-reload enable restart``
 
 
-## fcitx in chromium & vscode
-arch只裝了個最小包，安裝上fcitx後，生成配置文件
-
-~/.xprofile
+## fcitx
 ```bash
+# ~/.xprofile
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 ```
-
-補上安裝：fcitx-qt4 fcitx-qt5 fcitx-gtk3 fcitx-gtk2 
-KDE补上：kcm-fcitx
+補上安裝：fcitx-im (fcitx-qt4 fcitx-qt5 fcitx-gtk3 fcitx-gtk2)
+KDE图形配置程序：kcm-fcitx fcitx-configtool
 
 chromium vscode裏可以使用
 
