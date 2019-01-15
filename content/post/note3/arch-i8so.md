@@ -13,6 +13,21 @@ featuredImage: "/pics/oldicon/arch.png"
 记录下平时可能会用到的（查阅用）
 
 ---
+## time<sup>19.01.15</sup> 
+> 1. atime(access time)是在读取文件或执行文件时更改，也可以认为是文件最后一次被读取的时间。
+> 2. ctime（change time)是在写入文件，随更改所有者、权限时而更改，也就是文件状态最后一次被改变的时间。（索引节点改变）
+> 3. mtime(modify time)：写入文件时随文件的内容更改而更改，可以理解为是文件内容最后一次被修改的时间。[^1]
+
+[^1]: [Linux中ctime mtime atime文件时间的区别](http://www.voidcn.com/article/p-kbngkkhc-uv.html)
+
+1. cat会改变atime（pick Linux中国某篇一发即删的文章）
+    > relatime属性
+    >   从kernel2.6.29开始，默认集成了一个 relatime的属性。使用这个特性来挂装文件系统后，只有当mtime比atime更新的时候，才会更新atime。
+    > 
+    > 使用场景：
+    > 在文件读操作很频繁的系统中，atime更新所带来的开销很大，所以在挂装文件系统的时候使用noatime属性来停止更新atime。但是有些程序需要根据atime进行一些判断和操作，这个时候relatime特性就派上用场了。其实在事实上，这个时候atime和mtime已经是同一个time，所以可以理解这个选项就是为了实现对atime的兼容才推出的，并不是一个新的时间属性。[^1]
+
+2. ctime是文件在文件系统层面的改变（权限、写入等），mtime是文件自身内容的修改
 
 ## 思维导图工具<sup>19.01.07</sup> 
 <link rel="stylesheet" type="text/css" href="/css/tag.css"> 
@@ -59,9 +74,8 @@ dhcp-host=aa:bb:cc:dd:ee:ff,10.0.0.1
 
 ![](/pics/arch/01.png)
 
-systemd图形化界面包``systemd-ui``<sup>18.12.21</sup>
 
-dig所在软件包``dnsutils``<sup>18.12.20</sup>
+## dig``dnsutils``<sup>18.12.20</sup>
 
 ## steam 冬季大促销<sup>18.12.19</sup>
 
@@ -156,18 +170,15 @@ echo $2 >> /home/$1/.ssh/authorized_keys
 - arch 使用 cronie(systemd) 管理計劃任務（disable），可以使用``crontab -e``編輯文件。三連擊``daemon-reload enable restart``
 
 
-## fcitx in chromium & vscode
-arch只裝了個最小包，安裝上fcitx後，生成配置文件
-
-~/.xprofile
+## fcitx
 ```bash
+# ~/.xprofile
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 ```
-
-補上安裝：fcitx-qt4 fcitx-qt5 fcitx-gtk3 fcitx-gtk2 
-KDE补上：kcm-fcitx
+補上安裝：fcitx-im (fcitx-qt4 fcitx-qt5 fcitx-gtk3 fcitx-gtk2)
+KDE图形配置程序：kcm-fcitx fcitx-configtool
 
 chromium vscode裏可以使用
 
