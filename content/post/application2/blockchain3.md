@@ -2,7 +2,7 @@
 title: "课程设计之Linux Docker构建区块链3：环境docker打包与部署"
 date: 2019-01-10
 type: ["应用"]
-weight: 1
+weight: 6
 tags: ["区块链","计算机","服务器","Linux"]
 categories: ["运维","服务器","计算机"]
 description: "简单记录镜像制作到打包到部署，以及一个小功能的实现"

@@ -2,7 +2,7 @@
 title: "阿里云订制个人团队邮箱"
 date: 2018-01-27
 type: ["日常"]
-weight: 10
+weight: 19
 tags: ["团队业务"]
 categories: ["日常"]
 description: "帮团队注册了域名，不少云服务提供商也提供了一站式邮箱服务"

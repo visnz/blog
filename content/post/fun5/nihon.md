@@ -2,7 +2,7 @@
 title: "日本访学12日游"
 date: 2018-08-06
 type: ["娱乐"]
-weight: 5
+weight: 13
 tags: ["日本","娱乐","上智大学"]
 categories: ["游记"]
 description: "出国访学去了曾经喜欢的日本，收获颇多"

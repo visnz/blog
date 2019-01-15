@@ -2,7 +2,7 @@
 title: "Puppeteer初体验 & 爬网课视频"
 date: 2018-05-09
 type: ["应用"]
-weight: 2
+weight: 7
 tags: ["计算机","爬虫","NODEJS","PUPPETTEER"]
 categories: ["运维"]
 description: "nodejs使用headless浏览器爬虫对网络课程资源进行爬取"

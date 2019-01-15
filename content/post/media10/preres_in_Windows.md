@@ -2,7 +2,7 @@
 title: "FFmpeg+AnotherGUI实现Windows上进行ProRes 422编码"
 date: 2018-05-21
 type: ["影视"]
-weight: 10
+weight: 9
 tags: ["计算机","影视","编码"]
 categories: ["影视"]
 description: "Windows不支持原生ProRes422编码，使用一些工具来完成编码输出"

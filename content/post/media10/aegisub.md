@@ -2,7 +2,7 @@
 title: "PSD批量制作字母与aegisub初体验"
 date: 2018-02-18
 type: ["影视"]
-weight: 10
+weight: 9
 tags: ["影视","ADOBE"]
 categories: ["影视"]
 description: "后期字幕制作踩过的坑和比较推荐的做法"

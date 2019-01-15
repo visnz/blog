@@ -2,7 +2,7 @@
 title: "Nodejs接入C++扩展"
 date: 2018-02-17
 type: ["应用"]
-weight: 2
+weight: 7
 tags: ["计算机","NODEJS","c++"]
 categories: ["运维"]
 description: "c++结合V8模块扩展nodejs功能，用c++处理复杂计算"

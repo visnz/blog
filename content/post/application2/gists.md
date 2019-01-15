@@ -2,7 +2,7 @@
 title: "VSCode記 Gists同步部署生產環境(Atom&Vim)"
 date: 2018-12-05
 type: ["应用"]
-weight: 2
+weight: 7
 tags: ["计算机","GITHUB","VSCODE"]
 categories: ["运维"]
 description: "使用gists将生产工具配置进行同步与开发"

@@ -3,7 +3,7 @@ title: "Arch Linux 札记"
 date: 2018-12-28
 #date: 2018-01-20
 type: ["笔记"]
-weight: 1
+weight: 6
 tags: ["LINUX","计算机"]
 categories: ["笔记","最近"]
 description: "18年初入坑arch，当年不懂事又刷了别家。如今长大后悔了，我一定好好对待你"

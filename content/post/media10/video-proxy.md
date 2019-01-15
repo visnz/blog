@@ -2,7 +2,7 @@
 title: "pr素材代理与简单应用"
 date: 2018-03-13
 type: ["影视"]
-weight: 10
+weight: 16
 tags: ["影视","ADOBE"]
 categories: ["影视"]
 description: "代理素材使得在低性能机器上可以实现 大素材打包分发剪辑 && 高计算量剪辑"

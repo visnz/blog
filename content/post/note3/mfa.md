@@ -2,7 +2,7 @@
 title: "Authy进行网络账户安全认证"
 date: 2018-12-25
 type: ["笔记"]
-weight: 1
+weight: 7
 tags: ["计算机","MFA","笔记"]
 categories: ["笔记","最近"]
 description: "不要绑定手机不要实名！使用基于otpauth的身份验证器启用验证码登陆"

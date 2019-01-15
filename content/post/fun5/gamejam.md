@@ -2,7 +2,7 @@
 title: "GameJam广州站摸鱼组一日游*2 游记"
 date: 2018-01-28
 type: ["娱乐"]
-weight: 5
+weight: 13
 tags: ["GameJam","浪"]
 categories: ["游记"]
 description: "第一次亲身参与到独立游戏社群，尽管只是作为观众"

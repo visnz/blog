@@ -2,7 +2,7 @@
 title: "使用FRP实现公网映射工作站RDP远程服务"
 date: 2018-05-02
 type: ["应用"]
-weight: 2
+weight: 7
 tags: ["WINDOWS","计算机","服务器","RDP","FRP"]
 categories: ["运维"]
 description: "Windows10工作站远程桌面连接：frp内网穿透映射RDP服务"

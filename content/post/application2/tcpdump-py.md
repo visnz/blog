@@ -2,7 +2,7 @@
 title: "python调用tcpdump监管流量去向"
 date: 2018-12-22
 type: ["应用"]
-weight: 1
+weight: 7
 tags: ["LINUX","计算机","PYTHON","TCPDUMP","服务器"]
 categories: ["运维","最近"]
 description: "python与tcpdump配合shell基础文本工具，完成对流量去向的简单监控"
