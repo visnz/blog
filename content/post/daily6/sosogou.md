@@ -1,16 +1,17 @@
 ---
-title: "sugou个人词库导入fcitx让输入法不再智障"
-date: 2018-12-14
+title: "fcitx词库初打包 sunpinyin词库扩充"
+date: 2019-01-15
 type: ["日常"]
 weight: 6
-tags: ["LINUX","计算机","tracert"]
+tags: ["LINUX","词库","fcitx","sqlite"]
 categories: ["日常"]
-description: "尝试一些看起来比较炫酷的工具（虽然并不知道意义何在）"
-featuredImage: "/pics/ovtr/04.jpeg"
+description: "fcitx自带那么多工具，就没料到孙拼音用了sqlite把我整得跟孙子似的"
+featuredImage: "/pics/sosogou/icon.png"
 ---
 # 基本单元
 
 词库的基本单元：编码、符号、词频
+
 > 如：gou'li'guo'jia'sheng'si'yi 苟利国家生死矣 233
 
 次要结构如编码的分隔符（上例是``'``），换行符[^1]、单元间隔等等。
@@ -24,16 +25,24 @@ sudo pacman -S fcitx-table-other fcitx-ui-light
 
 ## 不同格式
 
-后缀|形式|描述|
----|---|---|---
+格式|形式|描述
+---|---|---
 scel|经修改带偏移的编码方式的文本|搜狗词库|
 bin|二进制|搜狗用户词库
 org|文本（编码(``'``) 符号）|拼音通用文本形式|
 mb|二进制或文本|fcitx使用该格式作为词库|
+db|数据库|sunpinyin使用这个
+
+
 
 fcitx词库位于``/usr/share/fcitx/pinyin/``或``~/.config/fcitx/pinyin/``
+![](/pics/sosogou/00.png)
+
+![](/pics/sosogou/01.png)
 
 在arch下fcitx-tools在fcitx，包含了createPYMB, readPYBase, readPYMB, mb2org, scel2org多个格式转换工具
+
+![](/pics/sosogou/05.png)
 
 
 # 导入细胞词库scel
@@ -42,7 +51,11 @@ fcitx词库位于``/usr/share/fcitx/pinyin/``或``~/.config/fcitx/pinyin/``
 scel2org sogou官方词库.scel > sogou官方.org
 ```
 
+![](/pics/sosogou/02.png)
+
+
 org是文本词库，基本格式如下：
+
 > gou'li'guo'jia'sheng'si'yi 苟利国家生死矣
 
 有scel直接转mb格式的工具：sg2fcitx [教程](http://www.mintos.org/skill/fcitx-sougou.html)
@@ -62,11 +75,11 @@ sort mix.org > mix.sort.org
 
 > createPYMB \<PinyinFile\> \<PhraseFile\>
 > 
-> Pinyin File
-> > Pinyin File is a file with pinyin and one character per line, separated with space. One available file is in the source of fcitx, named gbkpy.org.
+> - Pinyin File
+>   - Pinyin File is a file with pinyin and one character per line, separated with space. One available file is in the source of fcitx, named gbkpy.org.
 > 
-> Phrase File
-> > Phrase File is a file with full pinyin separated with ' and the corresponding phrase. The default phrase file of fcitx can be downloaded at http://fcitx.googlecode.com/files/pinyin.tar.gz.
+> - Phrase File
+>   - Phrase File is a file with full pinyin separated with ' and the corresponding phrase. The default phrase file of fcitx can be downloaded at http://fcitx.googlecode.com/files/pinyin.tar.gz.
 
 第一个参数是提供一个拼音映射表，``gbkpy.org``是``编码 符号``格式的通用文本词库，可以参考[这个](https://github.com/pkg-ime/fcitx/blob/master/data/gbkpy.org)
 
@@ -88,8 +101,10 @@ sudo cp ./pybase.mb /usr/share/fcitx/pinyin/
 ## 导入个人词库bin
 
 sogou输入法7.1版以后个人词库只道出bin格式
+![](/pics/sosogou/04.jpg)
 
-bin格式转换为其他格式：[深蓝词库转换（Windows）](https://github.com/studyzy/imewlconverter)(>=2.4)，将其转换为org格式。
+bin格式转换为其他格式：[深蓝词库转换（Windows）](https://github.com/studyzy/imewlconverter)(>=2.4)，将其转换为org格式。(支持格式自定义)
+![](/pics/sosogou/03.jpg)
 
 # sunpinyin词库
 
@@ -123,6 +138,7 @@ CREATE INDEX index_0 ON dict (len, i0, i1, i2, i3, i4, i5);
 select * from dict where i0==0 limit 10;
 ```
 通过筛选得知映射表如下：
+
 声母|数字|韵母|数字|韵母|数字
 ---|---|---|---|---|---
 a|0||0|uo|24
@@ -156,6 +172,7 @@ w|23|ua|23
 
 ## 写在最后
 
+![](/pics/sosogou/end.jpg)
 
 ---
 参考资料
