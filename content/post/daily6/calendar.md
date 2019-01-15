@@ -2,7 +2,7 @@
 title: "Google Calendar行程表 左手日記 右手咕咕"
 date: 2018-11-04
 type: ["日常"]
-weight: 6
+weight: 12
 tags: ["日常","行程表"]
 categories: ["日常"]
 description: "从markdown的todolist模式转向日程表安排，容纳安排的事情与体验大有不同"

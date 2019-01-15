@@ -2,7 +2,7 @@
 title: "DaVinci Resolve 用iPad低配虚拟工作台"
 date: 2018-03-25
 type: ["影视"]
-weight: 10
+weight: 13
 tags: ["影视","达芬奇"]
 categories: ["影视"]
 description: "嗯你其实知道达芬奇实体控制台那种呲溜溜的手感是给土豪体验的"

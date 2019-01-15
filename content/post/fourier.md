@@ -2,7 +2,7 @@
 title: "二維離散傅里葉頻譜（正逆變換）"
 date: 2018-11-23
 type: ["笔记"]
-weight: 1
+weight: 7
 tags: ["PYTHON","OPENCV","图像处理"]
 categories: ["笔记","最近"]
 description: "数字图像处理的结课课题任务，附带前后学习笔记与实验代码"

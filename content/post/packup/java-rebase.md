@@ -2,7 +2,7 @@
 title: "Java Rebase"
 date: 2018-01-26
 type: ["笔记"]
-weight: 3
+weight: 8
 tags: ["JAVA","计算机"]
 thumbnail: "http://blog.experts-exchange.com/wp-content/uploads/2012/02/java1.jpg"
 draft: true

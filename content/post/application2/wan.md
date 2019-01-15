@@ -2,7 +2,7 @@
 title: "Linux上调用ffmpeg组件压制字幕"
 date: 2018-12-28
 type: ["应用"]
-weight: 1
+weight: 9
 tags: ["Linux","计算机","影视"]
 categories: ["计算机","影视"]
 description: "小丸顶层mp4box，底层封装包括不限于x264与ffmpeg，在Linux上直接调用ffmpeg完成在字幕压制"

@@ -2,7 +2,7 @@
 title: "经济学课程 结课笔记"
 date: 2018-06-04
 type: ["笔记"]
-weight: 3
+weight: 12
 tags: ["经济学"]
 categories: ["笔记"]
 description: "分支课程学习笔记（兴趣）"

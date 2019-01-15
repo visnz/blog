@@ -2,7 +2,7 @@
 title: "DaVinci/Fusion 节点式效果软件初体验:Tracker跟踪效果"
 date: 2018-06-03
 type: ["影视"]
-weight: 10
+weight: 9
 tags: ["影视","达芬奇"]
 categories: ["影视"]
 description: "节点式影视效果软件尝试，实现了一个最基础的跟踪效果"

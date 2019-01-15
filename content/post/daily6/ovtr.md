@@ -2,7 +2,7 @@
 title: "OVTR 視覺化tracert 日好幾把炫酷（然並卵）"
 date: 2018-12-14
 type: ["日常"]
-weight: 6
+weight: 12
 tags: ["LINUX","计算机","tracert"]
 categories: ["日常"]
 description: "尝试一些看起来比较炫酷的工具（虽然并不知道意义何在）"

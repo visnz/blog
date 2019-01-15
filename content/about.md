@@ -14,35 +14,35 @@ featuredImage: "/pics/oldicon/avater.jpg"
 
 @visnZ
 
-22歲，是個綠軍
-
-广州蜗居，广州大学四年生
+22歲，广州大学四年生
 
 ## Tags
 
 \# 专业 \# 
 
-Chrome|Linux|~~JavaScript~~|Python & Shell|Server|Docker
----|---|---|---|---|---
+Chrome|Linux|Docker
+---|---|---
 
 \# 生活 \# 
 
-手冲|手作|炸物|Enlightened
----|---|---|---|
+手冲学习者|炸物|Enl|浪
+---|---|---|---
 
 \# 历史技能 \# 
 
-Davinci Resolve & After Effect|~~摄影~~拍照修图|~~电脑维修~~
+Davinci & AE|~~摄影~~拍照修图|~~电脑维修~~
 ---|---|---
 
 \# 其余属性 \# 
 
-任豚&PC|背锅侠|Reol & Aimer
+任豚 & Steam|~~背锅侠~~|Reol & Aimer
 ---|---|---
 
 ## Contact Me
 
-Email: visn0518@gmail.com & visnz@guediao.cn
+main Email: visn0518@gmail.com
+
+backup Email: visnz@guediao.cn
 
 Github: [@visnz](https://github.com/visnz)
 

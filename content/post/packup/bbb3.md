@@ -2,7 +2,7 @@
 title: "《崩坏3》浅层分析"
 date: 2018-06-06
 type: ["娱乐"]
-weight: 7
+weight: 13
 tags: ["崩坏3","娱乐"]
 draft: true
 featuredImage: "pics/bbb/IMG_0602.jpg"

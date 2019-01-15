@@ -2,7 +2,7 @@
 title: "docker上手 生产环境本当大搬家"
 date: 2018-12-16
 type: ["应用"]
-weight: 2
+weight: 7
 tags: ["计算机","DOCKER"]
 categories: ["运维"]
 description: "拆分目录与备份，为自己创建docker生产环境"

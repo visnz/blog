@@ -2,7 +2,7 @@
 title: "课程设计之Linux Docker构建区块链1：基本概念"
 date: 2019-01-04
 type: ["应用"]
-weight: 1
+weight: 8
 tags: ["区块链","计算机","服务器","Linux"]
 categories: ["运维","服务器","计算机"]
 description: "课程设计捕获关于区块链的学习机会x1，由于篇幅过长按内容分篇发布。此篇阐述基础概念"

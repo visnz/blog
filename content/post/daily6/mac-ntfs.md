@@ -2,7 +2,7 @@
 title: "MAC系统手动挂载读写NTFS文件系统"
 date: 2018-09-02
 type: ["日常"]
-weight: 6
+weight: 12
 tags: ["计算机","MAC","NTFS"]
 categories: ["日常"]
 description: "解决MAC系统上自动挂载的NTFS外接磁盘无法写入文件操作的问题"

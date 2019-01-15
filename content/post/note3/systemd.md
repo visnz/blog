@@ -2,7 +2,7 @@
 title: "Systemd 扎記"
 date: 2018-12-15
 type: ["笔记"]
-weight: 1
+weight: 8
 tags: ["LINUX","SYSTEMD","笔记"]
 categories: ["笔记","最近"]
 description: "System的一些基础概念、使用与备忘"
