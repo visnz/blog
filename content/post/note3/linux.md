@@ -8,7 +8,15 @@ categories: ["笔记","最近"]
 description: "找了个机会把文件系统里从入门到入坑的大部分可能还能用得上的Linux知识给整理了一下"
 featuredImage: "/pics/linux/icon.png"
 ---
-
+## 新的学习笔记<sup>19.01.15</sup>
+1. ``pacman -Ss fcitx|grep "^[^ ]"|awk -F"/" '{print $2}'``查询软件包并隐藏描述与库归属
+2. ``find ./ ! -name "*.md" -size -1K|xargs cat -n``递归寻找并展示出当前目录下的非md、小于1K的文件内容
+3. ``:> test.txt``清空文件内容
+4. ``sort unsort.md|uniq -c`` 排序、统计次数
+5. ``cat README.md|tr '[:lower:]' '[:upper:]'``把文章小写字母全换成大写
+6. ``du -sh `ls` ``查看当前文件夹各文件与文件夹大小
+7. ``lsof``：list open file,``-c``查看指定进程、``-i:80``查看连接情况
+8. ``ldd``：List Dynamic Dependencies，用于查询程序的依赖哭
 ## 基本工具
 
 1. ``df``、``fdisk``、``fdisk``等基本硬盤查看工具
