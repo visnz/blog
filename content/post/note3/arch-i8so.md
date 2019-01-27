@@ -13,6 +13,13 @@ featuredImage: "/pics/oldicon/arch.png"
 记录下平时可能会用到的（查阅用）
 
 ---
+## [x2go](https://wiki.archlinux.org/index.php/X2Go_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))<sup>19.01.27</sup> 
+1. 为云端vps提供安全桌面访问（by ssh）
+2. 云端安装x2goserver和[与其兼容的桌面系统](https://wiki.x2go.org/doku.php/doc:de-compat)
+3. 本地安装x2goclient
+
+参考文章：[如何在 Linux 上使用 x2go 设置远程桌面](https://linux.cn/article-5708-1.html)
+
 ## time<sup>19.01.15</sup> 
 > 1. atime(access time)是在读取文件或执行文件时更改，也可以认为是文件最后一次被读取的时间。
 > 2. ctime（change time)是在写入文件，随更改所有者、权限时而更改，也就是文件状态最后一次被改变的时间。（索引节点改变）
