@@ -1,18 +1,31 @@
 ---
 title: "Arch Linux 札记"
-date: 2018-12-28
+date: 2019-01-27
 #date: 2018-01-20
 type: ["笔记"]
 weight: 6
 tags: ["LINUX","计算机"]
 categories: ["笔记","最近"]
-description: "18年初入坑arch，当年不懂事又刷了别家。如今长大后悔了，我一定好好对待你"
+description: "一系列arch使用过程的小笔记"
 featuredImage: "/pics/oldicon/arch.png"
 ---
 
 记录下平时可能会用到的（查阅用）
 
 ---
+## [x2go](https://wiki.archlinux.org/index.php/X2Go_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))<sup>19.01.27</sup> 
+1. 为云端vps提供安全桌面访问（by ssh）
+2. 云端安装x2goserver和[与其兼容的桌面系统](https://wiki.x2go.org/doku.php/doc:de-compat)
+3. 本地安装x2goclient
+
+参考文章：[如何在 Linux 上使用 x2go 设置远程桌面](https://linux.cn/article-5708-1.html)
+
+## Mac上Arch<sup>19.01.19</sup> 
+1. 如果全舍弃macos而不是双系统，要更容易装一些（via. [archwiki](https://wiki.archlinux.org/index.php/Mac_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))）。安装跟平时PC等安装步骤一致。
+2. 硬件可能有些小麻烦，无线网卡不一定arch带驱动，有无线网卡或USB/雷电转RJ45会方便很多
+3. linux-macbook<sup>archlinuxcn</sup>一些内核组件
+4. 盖上本本休眠的功能，手动设置一下ACPI相关内容
+
 ## time<sup>19.01.15</sup> 
 > 1. atime(access time)是在读取文件或执行文件时更改，也可以认为是文件最后一次被读取的时间。
 > 2. ctime（change time)是在写入文件，随更改所有者、权限时而更改，也就是文件状态最后一次被改变的时间。（索引节点改变）
