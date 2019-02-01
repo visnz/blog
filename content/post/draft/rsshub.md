@@ -57,8 +57,9 @@ RSS是基于xml文件的一个标准
 
 ## 添加云析社区[^4]
 
+## 添加运维派[^5]
 
-
+## [IBM中国](https://www.ibm.com/developerworks/cn/topics/)
 
 
 ## 其他
@@ -70,3 +71,4 @@ RSS是基于xml文件的一个标准
 [^2]: https://zhangqi007.iteye.com/blog/1940719
 [^3]: http://www.gzhu.edu.cn/
 [^4]: https://yq.aliyun.com/
+[^5]: http://www.yunweipai.com/
