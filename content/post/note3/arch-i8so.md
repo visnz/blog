@@ -13,6 +13,15 @@ featuredImage: "/pics/oldicon/arch.png"
 记录下平时可能会用到的（查阅用）
 
 ---
+## Notable<sup>19.02.27</sup> <sup>AUR</sup>  
+
+一款简单美观的markdown笔记管理器，目前支持打tag、附件（文件系统里会在运行目录下，创建打上tag的副本），有简单的导出功能，但还不支持**图片**与**注脚**。
+
+貌似仅识别markdown文件。
+
+![](/pics/arch/03.jpg)
+
+
 ## [x2go](https://wiki.archlinux.org/index.php/X2Go_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))<sup>19.01.27</sup> 
 1. 为云端vps提供安全桌面访问（by ssh）
 2. 云端安装x2goserver和[与其兼容的桌面系统](https://wiki.x2go.org/doku.php/doc:de-compat)
