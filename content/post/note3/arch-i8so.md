@@ -13,6 +13,14 @@ featuredImage: "/pics/oldicon/arch.png"
 记录下平时可能会用到的（查阅用）
 
 ---
+
+## [艾老师](https://axionl.me/)打的两个包<sup>19.03.01</sup>
+
+- baidupcs([baidupcs-go-bin](https://aur.archlinux.org/packages/baidupcs-go-bin/))：[linux下的百度云终端版](https://github.com/iikira/BaiduPCS-Go)（go版本）
+- musicbox([netease-musicbox ](https://aur.archlinux.org/packages/netease-musicbox/))：[linux下的网易云终端版](https://github.com/darknessomi/musicbox)
+
+![](/pics/arch/04.png)
+
 ## Notable<sup>19.02.27</sup> <sup>AUR</sup>  
 
 一款简单美观的markdown笔记管理器，目前支持打tag、附件（文件系统里会在运行目录下，创建打上tag的副本），有简单的导出功能，但还不支持**图片**与**注脚**。
