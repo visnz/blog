@@ -14,23 +14,27 @@ featuredImage: "/pics/oldicon/avater.jpg"
 
 @visnZ
 
-22歲，广州大学四年生
+水桶
+
+22歲，广大四年生
 
 ## Tags
 
-\# 专业 \# 
+\# 学习 \# 
 
 Chrome|Linux|Docker
 ---|---|---
 
+Java入门 Js/Py/Go略懂
+
 \# 生活 \# 
 
-手冲学习者|炸物|Enl|浪
+咖啡手冲|炸物|AFK_ENL|电子垃圾收集者
 ---|---|---|---
 
 \# 历史技能 \# 
 
-Davinci & AE|~~摄影~~拍照修图|~~电脑维修~~
+Davinci & AE|拍照修图|电脑维修
 ---|---|---
 
 \# 其余属性 \# 
@@ -40,7 +44,7 @@ Davinci & AE|~~摄影~~拍照修图|~~电脑维修~~
 
 ## Contact Me
 
-main Email: visn0518@gmail.com
+Email: visn0518@gmail.com
 
 backup Email: visnz@guediao.cn
 
@@ -48,7 +52,16 @@ Github: [@visnz](https://github.com/visnz)
 
 Telegram: [@visnZ](https://t.me/visnZ)
 
-~~GitBook: [visnz](https://www.gitbook.com/@visnz)~~
+Telegram 频道：[一个水桶的日常瞎看](https://t.me/visnview)
+
+Wechat：zy002244
 
 ~~Twitter: [@ZeoVisn](https://twitter.com/ZeoVisn)~~
 
+## Friends
+
+- [初等記憶體](axionl.github.io)
+
+- [overload1997强](blog.csdn.net/overload1997)
+
+- [GT4404GB](http://gt4404gb.top/)
