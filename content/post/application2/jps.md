@@ -128,8 +128,8 @@ docker run --name jms_guacamole -d -p 8081:8081 -e JUMPSERVER_SERVER=http://$Ser
 ##  Luna
 wget https://github.com/jumpserver/luna/releases/download/1.4.8/luna.tar.gz
 mv luna.tar.gz /opt/luna.tar.gz
-tar xf /opt/luna.tar.gz
-chown -R root:root luna
+tar -zxvf /opt/luna.tar.gz
+chown -R root:root /opt/luna
 
 ## Nginx
 apt-get -y install curl gnupg2 ca-certificates lsb-release
