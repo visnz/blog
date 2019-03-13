@@ -2,9 +2,7 @@
 title: "使用git简单合并pr多版本，剪辑与调色同期进行"
 date: 2019-01-14
 type: ["影视"]
-weight: 3
-originweight: 9
-hidetime: 2019-02-14
+weight: 9
 tags: ["影视","ADOBE"]
 categories: ["影视"]
 description: ""

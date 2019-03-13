@@ -142,4 +142,25 @@ WantedBy=multi-user.target
 - 靜候幾分鐘後即可同步訂閱日曆到媽媽手機
 
 
+## nginx一行反代版
+2019年3月13日修订
 
+使用nginx一行反代即可完成以上工作：
+```sh
+# /etc/nginx/nginx.conf
+user root;
+events{}
+http{
+    include /etc/nginx/mime.types; 
+    server {
+        listen 13334;
+        location / {
+            proxy_pass https://calendar.google.com/calendar/ical/visn0518%40gmail.com/public/basic.ics;
+        }
+    }
+}
+```
+一行命令即可
+```sh
+docker run -dit -p 13334:13334 -v /etc/nginx/nginx-cfs.conf:/etc/nginx/nginx.conf nginx
+```

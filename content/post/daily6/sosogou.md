@@ -2,9 +2,7 @@
 title: "fcitx词库初打包 sunpinyin词库扩充"
 date: 2019-01-15
 type: ["日常"]
-weight: 3
-originweight: 7
-hidetime: 2019-02-14
+weight: 7
 tags: ["LINUX","词库","fcitx","sqlite"]
 categories: ["日常"]
 description: "fcitx自带那么多工具，就没料到孙拼音用了sqlite把我整得跟孙子似的"
