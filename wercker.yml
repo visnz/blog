@@ -18,10 +18,10 @@ deploy-gitea:
         - add-to-known_hosts:
             hostname: $HOSTNAME
         - mktemp:
-            envvar: PRIVATEKEY_PATH
+            envvar: $PRIVATEKEY_FILE
         - create-file:
             name: write key
-            filename: $PRIVATEKEY_PATH
+            filename: $PRIVATEKEY_FILE
             content: $Deploy_to_Guediao_PRIVATE
             overwrite: true
         - deogracia/scp-deploy:
