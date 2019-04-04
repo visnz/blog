@@ -13,6 +13,8 @@ deploy:
             repo: visnz/visnz.github.io
 deploy-gitea:
     steps:
+        - install-packages:
+            packages: openssh-client
         - deogracia/scp-deploy:
             host: guediao.top
             destination: /var/www/blog/
