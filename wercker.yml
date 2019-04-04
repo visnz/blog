@@ -18,7 +18,7 @@ deploy-gitea:
         - add-to-known_hosts:
             hostname: $HOSTNAME
         - mktemp:
-            envvar: $PRIVATEKEY_PATH
+            envvar: PRIVATEKEY_PATH
         - create-file:
             name: write key
             filename: $PRIVATEKEY_PATH
