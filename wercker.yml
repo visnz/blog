@@ -24,9 +24,17 @@ deploy-gitea:
             filename: $PRIVATEKEY_FILE
             content: $Deploy_to_Guediao_PRIVATE
             overwrite: true
-        - deogracia/scp-deploy:
-            host: $HOSTNAME
-            destination: $DEPLOY_PATH
-            user: $DEPLOY_USER
-            sshprivatekey: $PRIVATEKEY_FILE
-            source: "${WERCKER_OUTPUT_DIR}/public"
+        - script:
+            name: remove old files
+            code: ssh -i $PRIVATEKEY_FILE -l $USER -o UserKnownHostsFile=/dev/null \ 
+                -o StrictHostKeyChecking=no $HOSTNAME rm -rf $DEPLOY_PATH/*
+        - script:
+            name: transfer application
+            code: |
+                scp -r -i $PRIVATEKEY_FILE public/* $USER@$HOSTNAME:$DEPLOY_PATH/
+#        - deogracia/scp-deploy:
+#            host: $HOSTNAME
+#            destination: $DEPLOY_PATH
+#            user: $DEPLOY_USER
+#            sshprivatekey: $PRIVATEKEY_FILE
+#            source: "${WERCKER_OUTPUT_DIR}/public"
