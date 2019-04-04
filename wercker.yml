@@ -13,7 +13,7 @@ deploy:
             repo: visnz/visnz.github.io
 deploy-gitea:
     steps:
-        - git-push:
+        - leipert/git-push:
             gh_oauth: $GITEA_TOKEN
             host: guediao.top:10080
             gh_pages_domain: visnz/visnz.github.io
