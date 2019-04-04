@@ -16,7 +16,7 @@ deploy-gitea:
         - leipert/git-push:
             gh_oauth: $GITEA_TOKEN
             host: guediao.top:10080
-            gh_pages_domain: visnz/visnz.github.io
-            domain: blog.guediao.top
+            gh_pages_domain: blog.guediao.top
             basedir: public
+            repo: visnz/visnz.github.io
             gh_pages: true
