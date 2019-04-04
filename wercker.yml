@@ -14,7 +14,7 @@ deploy:
 deploy-gitea:
     steps:
         - deogracia/scp-deploy:
-            host:guediao.top
+            host: guediao.top
             destination: /var/www/blog/
-            user:root
-            sshprivatekey:$PRIVATEKEY_FILE
+            user: root
+            sshprivatekey: $PRIVATEKEY_FILE
