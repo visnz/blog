@@ -29,3 +29,4 @@ deploy-gitea:
             destination: $DEPLOY_PATH
             user: $DEPLOY_USER
             sshprivatekey: $PRIVATEKEY_FILE
+            source: "${WERCKER_OUTPUT_DIR}/public"
