@@ -13,11 +13,10 @@ deploy:
             repo: visnz/visnz.github.io
 deploy-gitea:
     steps:
-        - install-packages:
-            packages: git ssh-client
-        - lukevivier/gh-pages:
-            token: $GITEA_TOKEN
+        - git-push:
+            gh_oauth: $GITEA_TOKEN
             host: guediao.top:10080
-            repo: visnz/visnz.github.io
+            gh_pages_domain: visnz/visnz.github.io
             domain: blog.guediao.top
             basedir: public
+            gh_pages: true
