@@ -13,6 +13,8 @@ deploy:
             repo: visnz/visnz.github.io
 deploy-gitea:
     steps:
+        - install-packages:
+            packages: openssh-client
         - add-to-known_hosts:
             hostname: $HOSTNAME
         - mktemp:
@@ -22,8 +24,6 @@ deploy-gitea:
             filename: $PRIVATEKEY_PATH
             content: $Deploy_to_Guediao_PRIVATE
             overwrite: true
-        - install-packages:
-            packages: openssh-client
         - deogracia/scp-deploy:
             host: $HOSTNAME
             destination: $DEPLOY_PATH
