@@ -4,7 +4,7 @@ build-ghpage:
         - arjen/hugo-build
 build-guediao:
     steps:
-        - arjen/hugo-build
+        - arjen/hugo-build: 
             config: config.guediao.toml
 deploy:
     steps:
