@@ -6,7 +6,7 @@ weight: 6
 tags: ["区块链","计算机","服务器","Linux"]
 categories: ["运维","服务器","计算机"]
 description: "简单记录镜像制作到打包到部署，以及一个小功能的实现"
-featuredImage: "/pics/blockchain/icon.jpg"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/icon.jpg"
 ---
 
 ## 准备镜像
@@ -95,7 +95,7 @@ history -c
 
 docker层结构，只推送新增的层即可：
 
-![](/pics/blockchain/09.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/09.png)
 
 tips: 建议在境外机器上完成镜像构建，国内push速度感天动地
 
@@ -112,7 +112,7 @@ tips: 建议在境外机器上完成镜像构建，国内push速度感天动地
     # 用写好的两个脚本直接运行
     cd && ./geth.init
     ```
-    ![](/pics/blockchain/10.png)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/10.png)
 
 ## 写一个啥功能好呢
 
@@ -142,7 +142,7 @@ contract Repeat{
 
 html网页代码、js动态改写不赘述，相关的调用在上一篇也都讲到了。最后的效果如下：
 
-![](/pics/blockchain/11.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/11.png)
 
 ## 写在最后
 1. 服务器配置不够的话就别跑私有链了，除了费电/占资源，不少云服务商也有CPU利用率做基准限制，标着xeon的核也跑不满基本没效率。

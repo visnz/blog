@@ -6,7 +6,7 @@ weight: 6
 tags: ["区块链","计算机","服务器","Linux"]
 categories: ["运维","服务器","计算机"]
 description: "在Linux平台上使用Docker创建节点，使用geth基础工具与web3.js基本框架实现区块链的基础设施搭建"
-featuredImage: "/pics/blockchain/icon.jpg"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/icon.jpg"
 ---
 ## 写在前面
 课程设计给了一个机会接触分布式技术以太坊的基本部署。由于老师给的软件多是 Windows 平台，自己 Linux 还用FRP只有命令行，没有图形界面，操作也难跟老师同步。
@@ -44,19 +44,19 @@ tips: 完成后可以``docker commit``成快照，下一篇文章会讲
 geth [--testnet]
 ```
 
-![](/pics/blockchain/01.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/01.png)
 
 geth创建账户测试与数据结构：``geth  --testnet account new``
 默认是全网，记得加``--testnet``
 
-![](/pics/blockchain/02.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/02.png)
 
 账户的唯一认证是密码（没有账户名）
 创建后会产生一个地址值（如图）就是账户的唯一识别
 
 在``dir=~/.ethash/testnet/keystore/``下会保存刚刚的账户信息，包括这个地址值、创建时间等信息。注意保护好。
 
-![](/pics/blockchain/03.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/03.png)
 
 查询所在账户：
 ``geth --testnet account list``
@@ -118,7 +118,7 @@ geth init ~/blockchain/private-chain/node1/genesis.json --datadir ~/blockchain/p
 
 其中指定了节点的创世区块与节点的数据存储位置，使用``geth init``完成初始化
 
-![](/pics/blockchain/04.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/04.png)
 
 ### 2. 部署节点
 ```sh
@@ -162,7 +162,7 @@ geth --identity "node1" --rpc --rpcport 1111 --rpccorsdomain "*" --datadir "/roo
 查看某个区块下的所有哈希|eth.getBlock(2).transactions
 获取交易|eth.getTransaction(交易哈希)
 
-![](/pics/blockchain/05.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/05.png)
 
 1. 转帐需要有链上的矿工在工作才允许发生。
 2. 因为创建了私有链，再使用geth查询的是早期创建在本地的公网和测试网的账户
@@ -181,7 +181,7 @@ geth --identity "node1" --rpc --rpcport 1111 --rpccorsdomain "*" --datadir "/roo
     > admin.addPeer("enode://9c79b5<此处省略120位>70@127.0.0.1:8545")
     ```
 
-![](/pics/blockchain/06.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/06.png)
 
 可以看到刚刚创建的第二个节点从第40个区块快速同步到了第3200左右区块
 
@@ -210,7 +210,7 @@ geth --identity "node1" --rpc --rpcport 1111 --rpccorsdomain "*" --datadir "/roo
     ``"0x90c16925146392e91bc0ac76f84ff9e2189e6bb9818836b872d0cdc5accb4bb1"``
     刚刚试验的是在不同节点之间（不同的创世区块）进行交易，在同一NetworkID即可。
 
-![](/pics/blockchain/07.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/07.png)
 
 3. 创建合约的部署交易：json字段如下：
 
@@ -294,7 +294,7 @@ geth --identity "node1" --rpc --rpcport 1111 --rpccorsdomain "*" --datadir "/roo
 //如果地址返回undefined，说明还没被打包进区块，记得开启矿工工作
 ```
 
-![](/pics/blockchain/08.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/08.png)
 
 ### 8. geth控制台调用合约
 
@@ -391,7 +391,7 @@ function setInfo(_name,_age){
 
 本篇部分资料来自蚁米链播学院，引用特此声明
 
-![](/pics/blockchain/teacher.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/teacher.jpg)
 
 ---
 

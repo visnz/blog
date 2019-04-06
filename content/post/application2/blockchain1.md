@@ -6,7 +6,7 @@ weight: 8
 tags: ["区块链","计算机","服务器","Linux"]
 categories: ["运维","服务器","计算机"]
 description: "课程设计捕获关于区块链的学习机会x1，由于篇幅过长按内容分篇发布。此篇阐述基础概念"
-featuredImage: "/pics/blockchain/icon.jpg"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/icon.jpg"
 ---
 
 ## 写在前面
@@ -29,7 +29,7 @@ featuredImage: "/pics/blockchain/icon.jpg"
 
 ### 区块的基本数据结构
 
-![](/pics/blockchain/区块结构.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/区块结构.jpg)
 
 1. 区块大小信息（每个区块在 1MB 以内）
 2. 区块头（包含前一个节点的 hash. 版本. 时间戳. Nonce随机数. Bits难度目标. Merkle Root 哈希树根）
@@ -85,7 +85,7 @@ featuredImage: "/pics/blockchain/icon.jpg"
 3. 中本聪挑衅当期财政与货币系统(~~你自己不是崩得更厉害~~)
 4. 没有余额的概念（通过之前的交易记录来验证，转入与转出的钱计算做你的余额，不用管理余额有效性）
 
-![](/pics/blockchain/以太坊.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/以太坊.jpg)
 
 ## 以太坊
 可编程区块链，相比比特币的“全球账簿”，以太坊是“全球计算机”。可以在上面部署服务（称为合约）。
@@ -129,7 +129,7 @@ EOA账户由一对公密钥决定，密钥为实质的凭证，公钥后20位为
 交易单位：
 1. 以太币（EOA账户的交易单位）
 2. Gas（用于指示工作量的单位，如一次交易消耗21000，一个合约消耗万到百万级），用Gas Price表明想要支付给矿工的价格。
-![gas消费表](/pics/blockchain/gas消费.png)[^3]
+![gas消费表](https://raw.githubusercontent.com/visnz/blog/master/static/pics/blockchain/gas消费.png)[^3]
 
 交易参数：
 
