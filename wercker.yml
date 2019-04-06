@@ -30,7 +30,7 @@ deploy-gitea:
 #                scp -r -i $PRIVATEKEY_FILE public/* $USER@$HOSTNAME:$DEPLOY_PATH/
         - sh4pe/rsync-deploy:
                 destination: $DEPLOY_PATH
-                source: ./
+                source: ./public/*
                 sshkey: $PRIVATEKEY_FILE
                 user: $DEPLOY_USER
                 host: $HOSTNAME
