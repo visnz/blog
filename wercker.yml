@@ -8,13 +8,13 @@ deploy:
             packages: git ssh-client
         - lukevivier/gh-pages:
             token: $GITHUB_TOKEN
-            domain: visnz.github.io
+            domain: visnz.guediao.top
             basedir: public
             repo: visnz/visnz.github.io
 deploy-gitea:
     steps:
         - install-packages:
-            packages: openssh-client
+            packages: openssh-client rsync
         - add-to-known_hosts:
             hostname: $HOSTNAME
         - mktemp:
@@ -24,13 +24,13 @@ deploy-gitea:
             filename: $PRIVATEKEY_FILE
             content: $Deploy_to_Guediao_PRIVATE
             overwrite: true
-        - script:
-            name: transfer application
-            code: |
-                scp -r -i $PRIVATEKEY_FILE public/* $USER@$HOSTNAME:$DEPLOY_PATH/
-#        - deogracia/scp-deploy:
-#            host: $HOSTNAME
-#            destination: $DEPLOY_PATH
-#            user: $DEPLOY_USER
-#            sshprivatekey: $PRIVATEKEY_FILE
-#            source: "${WERCKER_OUTPUT_DIR}/public"
+#        - script:
+#            name: transfer application
+#            code: |
+#                scp -r -i $PRIVATEKEY_FILE public/* $USER@$HOSTNAME:$DEPLOY_PATH/
+        - sh4pe/rsync-deploy:
+                destination: $DEPLOY_PATH
+                source: ./
+                sshkey: $PRIVATEKEY_FILE
+                user: $DEPLOY_USER
+                host: $HOSTNAME
