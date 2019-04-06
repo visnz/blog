@@ -6,7 +6,7 @@ weight: 9
 tags: ["影视","达芬奇","NODEJS"]
 categories: ["影视"]
 description: "Davinci 导出剪辑表的时候，存在剪辑表偏差，使用nodejs读取xml修改剪辑表内容"
-featuredImage: "/pics/dvcxmlfix/logo.png"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/dvcxmlfix/logo.png"
 ---
 
 ## 背景
@@ -16,14 +16,14 @@ featuredImage: "/pics/dvcxmlfix/logo.png"
 
 达芬奇提供**场景侦测自动分切**的功能：
 
-![](/pics/dvcxmlfix/03.png)
-![](/pics/dvcxmlfix/04.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/dvcxmlfix/03.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/dvcxmlfix/04.png)
 
 图片一目了然，根据画面变化率进行分辨对视频进行逆向分析（所以一些渐变效果需要自己手动调整右边的时间切段）
 
 下面的紫色的线条可以上下拖动调整变化率敏感度
 
-![](/pics/dvcxmlfix/05.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/dvcxmlfix/05.png)
 
 将分切好的素材全选生成一个对应序列，在剪辑板块直接导出XML文件（因为需要跟pr接驳，直接用了标准XML）
 
@@ -38,7 +38,7 @@ AB,A,ABC,AB,A
 
 即：剪辑点是对的，但素材的起始点不对，全部回到素材的起始点了
 
-![](/pics/dvcxmlfix/06.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/dvcxmlfix/06.png)
 
 ### 分析
 
@@ -52,11 +52,11 @@ AB,A,ABC,AB,A
 
 剪辑表的格式是普通的xml格式，用一些在线阅读器可以更明朗地观看：
 
-![](/pics/dvcxmlfix/02.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/dvcxmlfix/02.png)
 
 而其中出现问题的就在每一个素材剪辑段的标签内：
 
-![](/pics/dvcxmlfix/01.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/dvcxmlfix/01.png)
 
 要做的就是**筛选出指定标签里的剪辑点同步到素材出入点上**
 

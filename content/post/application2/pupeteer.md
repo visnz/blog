@@ -6,17 +6,17 @@ weight: 7
 tags: ["计算机","爬虫","NODEJS","PUPPETTEER"]
 categories: ["运维"]
 description: "nodejs使用headless浏览器爬虫对网络课程资源进行爬取"
-featuredImage: "/pics/pup/title.png"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/pup/title.png"
 ---
 ## 背景
 手痒点了Coursera课程试听，忘了这回事直到PayPal提示我一笔60美元的支出（心如刀割）。想想认真听课要不把它录下来，以后可以看。一个一个抓太麻烦…索性写个爬虫把视频都爬下来好了…
 
 ### 分析
 日常万能抓的``Video Downloader professional``抓不了
-![](/pics/pup/01.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/pup/01.png)
 
 网页源码里却如此露骨，还是静态的
-![](/pics/pup/02.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/pup/02.png)
 
 未注册访问Coursera是可以访问到（我所购买课程）的所有课程，视频所在网址如``https://www.coursera.org/learn/daoyan-siwei-weiyingren/lecture/0W13U/fen-jing-tou-jiao-ben``，中间有一个五位``/[A-z0-9]/``防爬的文本，禁止爬虫直接根据名字爬到视频页面。
 
@@ -45,7 +45,7 @@ async function getPic() {
 
 ### 模拟点击
 因为视频页面需要点击播放，视频区域才会被替换成视频链接，所以使用puppeteer本身浏览器模拟点击的API
-![](/pics/pup/04.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/pup/04.png)
 通过css选择器找到点击的区域，调用``page.click("选择器的复制内容")``即可
 
 ### 最终
@@ -75,8 +75,8 @@ require("child_process").exec(`axel -n 10 \"`+result["ad"]+`\" -o ./`+addr["key"
 ```
 
 运行结果
-![](/pics/pup/03.png)
-![](/pics/pup/05.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/pup/03.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/pup/05.png)
 
 ### 遇到的问题
 

@@ -6,7 +6,7 @@ weight: 9
 tags: ["影视","ADOBE"]
 categories: ["影视"]
 description: "后期字幕制作踩过的坑和比较推荐的做法"
-featuredImage: "/pics/aegisub/aegisub.png"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/aegisub/aegisub.png"
 ---
 简单列一下之前自己在制作视频字幕踩过的坑：
 
@@ -116,27 +116,27 @@ Dialogue: 0,0:03:06.29,0:03:09.62,opjp,NTP,0000,0000,0000,,{\fad(50,50)}人は�
 
 - 上手：简单
 
-![](/pics/aegisub/zimu1.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/aegisub/zimu1.png)
 
-![](/pics/aegisub/zimu2.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/aegisub/zimu2.png)
 
-![](/pics/aegisub/zimu3.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/aegisub/zimu3.png)
 
-![](/pics/aegisub/zimu4.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/aegisub/zimu4.png)
 
 该位置可以居中，后统一在pr中寻找位置
 
-![](/pics/aegisub/zimu5.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/aegisub/zimu5.png)
 
-![](/pics/aegisub/zimu6.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/aegisub/zimu6.png)
 
-![](/pics/aegisub/zimu7.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/aegisub/zimu7.png)
 
-![](/pics/aegisub/zimu8.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/aegisub/zimu8.png)
 
-![](/pics/aegisub/zimu9.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/aegisub/zimu9.png)
 
-![](/pics/aegisub/zimu10.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/aegisub/zimu10.png)
 
 由此在pr中导入psd文件手动按时间线排序即可。中英双字幕则分开制作，步骤一致。
 

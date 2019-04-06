@@ -6,7 +6,7 @@ weight: 13
 tags: ["影视","达芬奇"]
 categories: ["影视"]
 description: "嗯你其实知道达芬奇实体控制台那种呲溜溜的手感是给土豪体验的"
-featuredImage: "/pics/davinci/logo.png"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/davinci/logo.png"
 ---
 世界级调色软件Blackmagic公司出品的Davinci，做后期调色的时候通常有软硬件套装，软件是``DaVinci Resolve[ Studio]``，硬件部分如下图：
 
@@ -16,9 +16,9 @@ featuredImage: "/pics/davinci/logo.png"
 
 当然，硬件调色台不是必须的，（由于穷~~（其实是装逼）~~）细节辅助调节等小需求基于折腾地去尝试了一下
 
-![效果图](/pics/davinci/dvc.jpg)
+![效果图](https://raw.githubusercontent.com/visnz/blog/master/pics/davinci/dvc.jpg)
 
-[实现效果视频](/pics/davinci/dvc.mp4)
+[实现效果视频](https://raw.githubusercontent.com/visnz/blog/master/pics/davinci/dvc.mp4)
 
 1. iPad上安装element-Vs，打开后需要和主机进行连接（主从式WiFi首选，pc上开wifi）
 

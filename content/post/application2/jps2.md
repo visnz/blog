@@ -8,12 +8,12 @@ hidetime: 2019-05-09
 tags: ["计算机","JUMPSERVER","LINUX","CDN","SSL"]
 categories: ["运维","服务器"]
 description: "把堡垒机所在服务器丢到CDN反代保护，写了个脚本实现SSL注册+重新激活"
-featuredImage: "/pics/jps/logo.png"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/jps/logo.png"
 ---
 
 前文：[Ubuntu搭建Jumpserver 脚本整理与问题解决](https://visnz.github.io/post/application2/jps/)。在构建了一台管理资产的堡垒机，本身的安全很重要。在域名上使用SSL验证域名与服务器反代来加强安全。
 
-![](/pics/jps2/1.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps2/1.png)
 
 # SSL
 有一些网站是提供免费证书试用，通常的商用证书年费也是千元级以上，这里用[Let’s Encrypt](https://letsencrypt.org/)的免费证书。网上关于如何申请Let’s Encrypt证书的教程太多了（移步谷歌），出于``定时激活``跟``多台服务器多个域名``，就整理成一个脚本。
@@ -102,12 +102,12 @@ echo '已注册自动事件，请勿删除脚本'
 
 
 脚本执行完基本是这样
-![](/pics/jps2/01.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps2/01.jpg)
 
 # nginx.conf
 
 主要修改有两个，一个是指定服务通过443端口访问且开启ssl验证。另一个是将到80的流量重定向URL到443。
-![](/pics/jps2/02.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps2/02.png)
 左为新文件，右为原文件
 ```sh
 # 重启
@@ -116,12 +116,12 @@ systemctl reload nginx;
 # CDN加速
 CDN加速原理约等于机房缓存，按一定淘汰算法淘汰（一般来说访问量越多，网站越快）。国外知名Cloudflare在国内表现不佳，就直接使用了自家阿里云的CDN全站加速了
 
-![](/pics/jps2/03.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps2/03.jpg)
 
 
 域名原本解析到IP地址，由CDN接管后，域名使用CNAME直接解析到CDN为你分配的节点即可：
-![](/pics/jps2/04.png)
-![](/pics/jps2/05.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps2/04.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps2/05.png)
 
 # 最后
 

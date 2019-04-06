@@ -6,7 +6,7 @@ weight: 7
 tags:  ["计算机","服务器","NGINX"]
 categories: ["服务器","最近"]
 description: "应对业务需求上手nginx，将机器自身文件系统映射到公开网络"
-featuredImage: "/pics/nginx/icon.jpg"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/nginx/icon.jpg"
 ---
 
 # 笔记
@@ -90,7 +90,7 @@ http{
 
 tips可要记得把``user``填上。因为这个忽略饶了不少弯路
 
-![](/pics/nginx/01.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/nginx/01.png)
 
 修正补充<sup>18.12.25</sup>
 
@@ -100,7 +100,7 @@ npm提供live-server工具，支持快速实现本地文件系统对外映射
 
 tips是记得把``config.toml``里的baseURL改成``/``
 
-![](/pics/nginx/04.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/nginx/04.png)
 
 live-server也集成了类似``live-reload``浏览器自动重载功能，本地的网页等内容修改，保存可以及时同步到浏览器做调试。（只是遇上了hugo是要md渲染web的嗯）
 
@@ -122,7 +122,7 @@ live-server也集成了类似``live-reload``浏览器自动重载功能，本地
 ```
 有一个经典用来生成这类访问密码的工具``htpasswd``，被放在了``archlinuxcn/apache-tools``（苦笑.jpg)
 
-![](/pics/nginx/02.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/nginx/02.png)
 
 生成一个与用户名对应的哈希，输入时候检查
 
@@ -133,7 +133,7 @@ htpasswd -b <dir> <username> <passwd> #修改密码用户
 htpasswd -D <dir> <username>          #删除用户
 ```
 
-![](/pics/nginx/03.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/nginx/03.png)
 
 基本完成
 

@@ -6,7 +6,7 @@ weight: 9
 tags: ["影视","ADOBE"]
 categories: ["影视"]
 description: ""
-featuredImage: "/pics/prgit/icon.jpg"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/icon.jpg"
 ---
 
 ## 缘起
@@ -26,43 +26,43 @@ featuredImage: "/pics/prgit/icon.jpg"
 ## 开始
 
 1. prporj实质上是使用gz打包压缩的xml文件，创建文件后保存解压即可看到
-    ![](/pics/prgit/01.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/01.jpg)
     左边为prproj文件，gz压缩格式的二进制，右边是解压后的工程文件
-    ![](/pics/prgit/02.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/02.jpg)
 
 2. 在工程文件夹构建git版本管理器、提交初始版本
-    ![](/pics/prgit/03.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/03.jpg)
     可以看到第一次提交的有prproj以及解压出来的文件这两个
-    ![](/pics/prgit/04.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/04.jpg)
 
 3. 创建并签出分支，开始导入素材，保存并解压获得一个拥有素材的xml文件
-    ![](/pics/prgit/05.jpg)
-    ![](/pics/prgit/06.jpg)
-    ![](/pics/prgit/07.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/05.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/06.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/07.jpg)
 
 4. 添加完素材开始多人同步工作：签出剪辑、调色两个分支
 
 5. 简单对素材进行调色，并保存
-    ![](/pics/prgit/08.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/08.jpg)
     git发现prproj有变化，将其解压出xml。
     解压出来的xml文件会直接覆盖原文件，在版本管理工具里可以看到修改的内容：其中多了几行对素材文件的追踪与历史记录的内容
-    ![](/pics/prgit/09.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/09.jpg)
     提交即可看到新的提交
-    ![](/pics/prgit/10.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/10.jpg)
 
 6. 签出到剪辑分支，做一个简单剪辑
-    ![](/pics/prgit/11.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/11.jpg)
     解压后也可以看到新增了对于剪辑的描述
-    ![](/pics/prgit/12.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/12.jpg)
     提交确认后可以看到从素材分支叉开了两个分支：
-    ![](/pics/prgit/13.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/13.jpg)
     工程结构上这两个结构是解耦的，但是pr……
-    ![](/pics/prgit/14.jpg)
-    ![](/pics/prgit/15.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/14.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/15.jpg)
 
 7. 喵的pr你的底层引用结构我服
-    ![](/pics/prgit/16.jpg)
-    ![](/pics/prgit/17.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/16.jpg)
+    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/17.jpg)
 
 
 ## 写在最后
@@ -84,7 +84,7 @@ featuredImage: "/pics/prgit/icon.jpg"
 - 没有内建版本管理，签出基本靠复制工程对象，造成空间时间浪费
 - 没有提供脚本编写器应对批量素材处理等工具
 
-![](/pics/prgit/end.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/prgit/end.jpg)
 
 pr作为一款入门到准专业级都适用的``剪辑集成工具``，已经是相当优秀的了（相比其他同等定位），带我走进了一行走出了一行。
 

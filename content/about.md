@@ -5,7 +5,7 @@ type: ["about"]
 weight: 1
 description: "More about me"
 displayInMenu: true
-featuredImage: "/pics/oldicon/avater.jpg"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon/avater.jpg"
 ---
 
 “嗨这世界。”

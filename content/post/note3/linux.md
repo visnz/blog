@@ -6,7 +6,7 @@ weight: 8
 tags: ["计算机","Linux"]
 categories: ["笔记","最近"]
 description: "找了个机会把文件系统里从入门到入坑的大部分可能还能用得上的Linux知识给整理了一下"
-featuredImage: "/pics/linux/icon.png"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/static/pics/linux/icon.png"
 ---
 ## 新的学习笔记<sup>19.01.15</sup>
 1. ``pacman -Ss fcitx|grep "^[^ ]"|awk -F"/" '{print $2}'``查询软件包并隐藏描述与库归属
@@ -218,7 +218,7 @@ featuredImage: "/pics/linux/icon.png"
 
 - ``openvisualtraceroute``<sup>aur</sup>：跨平臺的traceroute視覺化展示（基於java）
 
-![](/pics/linux/01.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/linux/01.png)
 
 ## 運維相關
 

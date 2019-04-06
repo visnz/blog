@@ -6,7 +6,7 @@ weight: 9
 tags: ["计算机","影视","编码"]
 categories: ["影视"]
 description: "Windows不支持原生ProRes422编码，使用一些工具来完成编码输出"
-featuredImage: "/pics/prores/ffmpeg.png"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/prores/ffmpeg.png"
 ---
 ## 方法来源
 
@@ -27,29 +27,29 @@ featuredImage: "/pics/prores/ffmpeg.png"
 ## 过程
 
 - FFmpeg解压，执行文件``ffmpeg.exe``在``/bin``中
-![](/pics/prores/01.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/prores/01.png)
 
 - AnotherGUI安装也是一把梭，画面简洁明了，常用英语
-![](/pics/prores/02.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/prores/02.png)
 
 - AnotherGUI有指定FFmpeg，会在Path下寻找（但官方没找到Setup for Windows，会找不到），可以直接在Executables里重定向：
-![](/pics/prores/03.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/prores/03.png)
 （注：第一次打开默认Path都是空白的，上图为过程演示）
 
 - 转码模式选择
-![](/pics/prores/04.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/prores/04.png)
 
 - 添加源文件（可直接拖拽），并在右边的输出文件夹选择
-![](/pics/prores/06.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/prores/06.png)
 
 - Go
-![](/pics/prores/07.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/prores/07.png)
 
 - 输出文件
-![](/pics/prores/08.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/prores/08.png)
 
 直接用QQ影音（自我反省）打开听到一大堆撕裂声音，直接用QuickTime打开
-![](/pics/prores/05.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/prores/05.png)
 
 ## 结尾
 

@@ -6,21 +6,21 @@ weight: 13
 tags: ["bilibili","福袋","娱乐"]
 categories: ["日常"]
 description: "运气一般般，开出了最爱的33娘抱枕～感谢卢老总送的生日礼物！"
-featuredImage: "/pics/bili/logo.jpg"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/bili/logo.jpg"
 ---
 
 前几天生日，挚友啥都没交代直接给我送了个哔哩哔哩的福袋……
-![](/pics/bili/01.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/01.png)
 
 嗯在我不知情的情况下，**快递小哥跟我说，太大了放不下**，加上挚友说的**看你运气**，让我一度怀疑：是等身抱枕ヽ(#`Д´)ﾉ
-![](/pics/bili/02.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/02.jpg)
 
-![](/pics/bili/02.1.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/02.1.jpg)
 当然收到的时候确实蛮意外的
 
 官网上贴出了有可能抽到的东西：
-![](/pics/bili/03.jpg)
-![](/pics/bili/04.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/03.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/04.jpg)
 
 （捂脸）真是营销到了新高度啊 数学期望怎么算也不会比均价低全靠人品的开箱模式23333
 
@@ -28,32 +28,32 @@ featuredImage: "/pics/bili/logo.jpg"
 
 ## 开箱
 
-[全程开箱视频](/pics/bili/开箱.mov)
+[全程开箱视频](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/开箱.mov)
 
 拍照
 
 传说中的福袋 真的是个袋子：
-![](/pics/bili/05.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/05.jpg)
 可以当书包用嗯
 
 鼠标垫！之前看中的！
-![](/pics/bili/06.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/06.jpg)
 
 小电视棉毯（可现在是夏天耶
-![](/pics/bili/09.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/09.jpg)
 
 二二娘官方本子哈哈哈哈哈哈
-![](/pics/bili/10.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/10.jpg)
 
 还开出了一个神秘物品：
-![](/pics/bili/07.jpg)
-![](/pics/bili/08.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/07.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/08.jpg)
 
 这才是最重要的！！三三娘抱枕
-![](/pics/bili/11.jpg)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/11.jpg)
 
 当然这个产品售后卡很讨巧，为了这个图案，有问题都不舍得找售后了
-![](/pics/bili/12.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/bili/12.png)
 
 ## 总结
 (〃'▽'〃)真真的很嗨心，感谢我的好基友

@@ -6,7 +6,7 @@ weight: 7
 tags: ["NODEJS","计算机","服务器"]
 categories: ["服务器","最近"]
 description: "将行程表缓存并映射提供大陆网路访问，同步谷歌行程表"
-featuredImage: "/pics/cal-fwd/icon2.png"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/cal-fwd/icon2.png"
 ---
 
 ## 問題

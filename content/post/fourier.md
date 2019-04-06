@@ -6,7 +6,7 @@ weight: 7
 tags: ["PYTHON","OPENCV","图像处理"]
 categories: ["笔记","最近"]
 description: "数字图像处理的结课课题任务，附带前后学习笔记与实验代码"
-featuredImage: "/pics/fourier/fourier.webp"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/fourier/fourier.webp"
 ---
 
 # 相關知識
@@ -33,7 +33,7 @@ featuredImage: "/pics/fourier/fourier.webp"
 [更多關於頻譜圖的解讀](https://zhuanlan.zhihu.com/p/29442552)
 
 圖像應用上用於解析、修復條紋：
-![圖像傅里葉應用](/pics/fourier/01.png)[^2]
+![圖像傅里葉應用](https://raw.githubusercontent.com/visnz/blog/master/pics/fourier/01.png)[^2]
 
 頻譜圖的亮度分佈越集中，畫面越柔和，則原圖畫面越平緩。若亮點四散分佈，則畫面又較強條幅、亮度差異等情況。
 
@@ -133,7 +133,7 @@ cv2.waitKey()
 
 ## 測試結果
 
-![](/pics/fourier/01.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/fourier/01.png)
 
 ## 寫在最後
 

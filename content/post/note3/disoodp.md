@@ -6,7 +6,7 @@ weight: 8
 tags: ["编程思维","计算机"]
 categories: ["笔记"]
 description: "早期学习面向对象设计，不免遇到一些局限，偶然看到关于对OOP的一些反思与突破"
-featuredImage: "/pics/oldicon/oodp.jpg"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon/oodp.jpg"
 ---
 
 # 跳出面向对象思想

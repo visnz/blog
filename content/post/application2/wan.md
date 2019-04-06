@@ -6,7 +6,7 @@ weight: 9
 tags: ["Linux","计算机","影视"]
 categories: ["计算机","影视"]
 description: "小丸顶层mp4box，底层封装包括不限于x264与ffmpeg，在Linux上直接调用ffmpeg完成在字幕压制"
-featuredImage: "/pics/wan/icon.png"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/wan/icon.png"
 ---
 
 ## 背景
@@ -20,7 +20,7 @@ N久之前帮人拍字幕送去审查，这都9102年了才送回来反馈。
 
 在Windows系统盘``HOST_WIN10/Program Files (x86)/MarukoToolbox/logs/``搜出来一份小丸的log文件，可在log中找到小丸的底层调用：
 
-![](/pics/wan/00.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/wan/00.png)
 
 > "C:\Program Files (x86)\MarukoToolbox\tools\ffmpeg.exe" -i H:\201-5.mp4 -vn -sn -c:a copy -y -map 0:a :0 "C:\Program Files (x86)\MarukoToolbox\temp\201-5_atemp.aac" 
 
@@ -74,11 +74,11 @@ N久之前帮人拍字幕送去审查，这都9102年了才送回来反馈。
         output/$1_rend.mp4      # 指定输出视频位置
     ```
 
-![](/pics/wan/01.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/wan/01.png)
 
 可以运行，输出也是正确的，十六核满爆输出
 
-![](/pics/wan/02.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/wan/02.png)
 
 
 附上[脚本文件](/files/ffmpeg.sh)

@@ -8,7 +8,7 @@ hidetime: 2019-05-05
 tags: ["计算机","JUMPSERVER","LINUX"]
 categories: ["运维"]
 description: "整理了自己搭建过程中，根据官方做的脚本整合，与问题解决记录"
-featuredImage: "/pics/jps/logo.png"
+featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/jps/logo.png"
 ---
 # 写在前面
 官方没有提供一键脚本，原本以为按照官方文档能够快速安装，实践过程中发生了诸多问题得手动解决，在这里做一些整合与简单记录
@@ -52,7 +52,7 @@ apt update && apt -y upgrade
 apt -y install wget gcc libffi-dev git python-pip language-pack-zh-hans  mysql-server libmysqlclient-dev python3-pip python3-dev python3-venv  redis-server
 ```
 redis设置的时候可能会出错
-![](/pics/jps/01.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps/01.png)
 因为尝试对IPv6的地址进行监听，如果服务器不提供的话，会一直卡住。
 
 ```sh
@@ -103,7 +103,7 @@ sed -i "s/DB_PASSWORD: /DB_PASSWORD: $DB_PASSWORD/g" $jumpserver_path/config.yml
 $jumpserver_path/jms start all -d 
 # 此处使用stop、restart等完成控制
 ```
-![](/pics/jps/02.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps/02.png)
 ## 对外接口
 ```sh
 ## docker安装
@@ -152,14 +152,14 @@ echo -e "\033[31m 你的服务器IP是 $Server_IP \033[0m"
 ```
 # 问题记录
 除了上面redis与IPv6、pip3的wheel，还有一个就是nginx反代开启之后的css丢失：
-![](/pics/jps/03.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps/03.png)
 网页下载的时候是css文件被识别为``text/plain``
-![](/pics/jps/04.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps/04.png)
 curl获取的header也是显示nginx对于css文件也采用``text/plain``
-![](/pics/jps/05.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps/05.png)
 
 查找一些文档之后，了解到nginx里有一个文件``/etc/nginx/mime.types``，通过后缀把请求打上MIME类型标签
-![](/pics/jps/06.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps/06.png)
 
 故整合官方给的nginx配置+导入这个文件后配置如下：
 ```
@@ -220,7 +220,7 @@ http{
     }
 }
 ```
-![](/pics/jps/07.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/jps/07.png)
 尽情享用
 # 宕机重启
 ```sh
