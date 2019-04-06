@@ -1,14 +1,18 @@
 box: debian
-build:
+build-ghpage:
     steps:
         - arjen/hugo-build
+build-guediao:
+    steps:
+        - arjen/hugo-build
+            config: config.guediao.toml
 deploy:
     steps:
         - install-packages:
             packages: git ssh-client
         - lukevivier/gh-pages:
             token: $GITHUB_TOKEN
-            domain: visnz.guediao.top
+            domain: visn.online
             basedir: public
             repo: visnz/visnz.github.io
 deploy-gitea:

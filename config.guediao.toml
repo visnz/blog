@@ -1,5 +1,5 @@
 staticDir = ["static"]
-baseurl = "https://visn.online/"
+baseurl = "https://guediao.cn/"
 title = "* sairen"
 languageCode = "zh-cn"
 paginate = "10" # Number of posts per page
