@@ -1,5 +1,5 @@
 staticDir = ["static"]
-baseurl = "https://guediao.cn/"
+baseurl = "http://blog.guediao.top/"
 title = "* sairen"
 languageCode = "zh-cn"
 paginate = "10" # Number of posts per page
