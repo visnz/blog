@@ -41,7 +41,6 @@ deploy-gitea:
 build-push:
     steps:
     - internal/docker-push:
-        image-name: visn-online
         username: $USERNAME
         password: $PASSWORD 
         tag: latest
