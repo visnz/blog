@@ -38,3 +38,11 @@ deploy-gitea:
                 sshkey: $PRIVATEKEY_FILE
                 user: $DEPLOY_USER
                 host: $HOSTNAME
+build-push:
+    steps:
+    - internal/docker-push:
+        image-name: visn-online
+        username: $USERNAME
+        password: $PASSWORD 
+        tag: latest
+        repository: visnz/blog
