@@ -8,6 +8,7 @@ build-push:
     docker: true
     steps:
         - internal/docker-build
+            image-name: myblog
         - internal/docker-push:
             username: $USERNAME
             password: $PASSWORD
