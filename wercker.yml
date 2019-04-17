@@ -4,9 +4,9 @@ build-guediao:
         - arjen/hugo-build: 
             config: config.guediao.toml
 build-push:
+    docker: true
     steps:
-        - jakubriedl/docker-build:
-            tag: latest
+        - jakubriedl/docker-build
         - jakubriedl/docker-push:
             image: visnz/blog:latest
             email: $EMAIL
