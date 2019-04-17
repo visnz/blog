@@ -7,7 +7,7 @@ build-push:
     box: alpine
     docker: true
     steps:
-        - jakubriedl/docker-build
+        - internal/docker-build
         - internal/docker-push:
             username: $USERNAME
             password: $PASSWORD
