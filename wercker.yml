@@ -1,10 +1,11 @@
-# box: debian
 build-guediao:
+    box: debian
     steps:
         - arjen/hugo-build: 
             config: config.guediao.toml
 build-push:
-    # docker: true
+    box: alpine
+    docker: true
     steps:
         - jakubriedl/docker-build
         - internal/docker-push:
