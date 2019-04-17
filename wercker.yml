@@ -13,11 +13,13 @@ build-push:
         - internal/docker-build:
             image-name: myblog
         - internal/docker-push:
+            image-name: myblog
             username: $USERNAME
             password: $PASSWORD
             repository: visnz/blog
 
 deploy:
+    box: debian
     steps:
         - install-packages:
             packages: git ssh-client
