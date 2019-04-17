@@ -1,8 +1,11 @@
-build-guediao:
+build-ghpage:
     box: debian
     steps:
-        - arjen/hugo-build: 
-            config: config.guediao.toml
+        - arjen/hugo-build
+# build-guediao:
+#     steps:
+#         - arjen/hugo-build: 
+#             config: config.guediao.toml
 build-push:
     box: alpine
     docker: true
@@ -13,3 +16,36 @@ build-push:
             username: $USERNAME
             password: $PASSWORD
             repository: visnz/blog
+
+deploy:
+    steps:
+        - install-packages:
+            packages: git ssh-client
+        - lukevivier/gh-pages:
+            token: $GITHUB_TOKEN
+            domain: visn.online
+            basedir: public
+            repo: visnz/visnz.github.io
+#deploy-gitea:
+#    steps:
+#        - install-packages:
+#            packages: openssh-client rsync
+#        - add-to-known_hosts:
+#            hostname: $HOSTNAME
+#        - mktemp:
+#            envvar: PRIVATEKEY_FILE
+#        - create-file:
+#            name: write key
+#            filename: $PRIVATEKEY_FILE
+#            content: $Deploy_to_Guediao_PRIVATE
+#            overwrite: true
+##        - script:
+##            name: transfer application
+##            code: |
+##                scp -r -i $PRIVATEKEY_FILE public/* $USER@$HOSTNAME:$DEPLOY_PATH/
+#        - sh4pe/rsync-deploy:
+#                destination: $DEPLOY_PATH
+#                source: ./public/
+#                sshkey: $PRIVATEKEY_FILE
+#                user: $DEPLOY_USER
+#                host: $HOSTNAME
