@@ -1,6 +1,6 @@
 staticDir = ["static"]
 baseurl = "https://visn.online/"
-title = "* sairen"
+title = "* 白楽園"
 languageCode = "zh-cn"
 paginate = "10" # Number of posts per page
 theme = "aether"

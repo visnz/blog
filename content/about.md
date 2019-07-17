@@ -7,16 +7,20 @@ description: "More about me"
 displayInMenu: true
 featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon/avater.jpg"
 ---
+  
 
-“嗨这世界。”
+“我在，嗨这世界。”
+<br />"am Online, Hello World"
 
 ---
 
 @visnZ
 
-水桶
+水桶<sup> [履历页](visn.online/resume/)</sup>
 
-23歲，广大四年生
+23歲，广大毕业生
+
+
 
 ## Tags
 
@@ -34,7 +38,6 @@ icon|\# 日常 \#
 🍹|咖啡手冲 & 冷饮|
 🗑|电子垃圾收集者|
 🍽|Ingress AFK_ENL|
-💸|相声爱好者|
 🎥|电影相关|
 ✂️|~~手工作物~~|
 🐬|任豚 & Steam|
@@ -49,9 +52,13 @@ Email: visn0518@gmail.com & visnz@guediao.cn
 
 Github: [@visnz](https://github.com/visnz)
 
+[微信](https://raw.githubusercontent.com/visnz/blog/master/pics/wechat.me.jpg)
+
 Telegram: [@visnZ](https://t.me/visnZ)
 
-Telegram 频道：[一个水桶的日常瞎看](https://t.me/visnview)
+[Telegram 频道](https://t.me/visnview)
+
+[粿条青年 团队主页](http://guediao.top)
 
 ~~Twitter: [@ZeoVisn](https://twitter.com/ZeoVisn)~~
 
@@ -62,3 +69,5 @@ Telegram 频道：[一个水桶的日常瞎看](https://t.me/visnview)
 - [overload1997强](blog.csdn.net/overload1997)
 
 - [GT4404GB](http://gt4404gb.top/)
+
+- [lijiayuan](http://lijiayuan.top/)

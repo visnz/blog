@@ -2,8 +2,7 @@
 title: "Dockerfile多阶构建带nginx的Hexo站点镜像（？"
 date: 2019-04-11
 type: ["应用"]
-weight: 2
-originweight: 7
+weight: 7
 tags: ["Dockerfile","nginx","hexo","多阶构建","FRP"]
 categories: ["运维"]
 description: "Dockerfile多阶构建，节点免node依赖部署hexo站点"

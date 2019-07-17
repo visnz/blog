@@ -218,7 +218,7 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/static/pics/
 
 - ``openvisualtraceroute``<sup>aur</sup>：跨平臺的traceroute視覺化展示（基於java）
 
-![](https://raw.githubusercontent.com/visnz/blog/master/static/pics/linux/01.png)
+![](https://raw.githubusercontent.com/visnz/blog/master/pics/linux/01.png)
 
 ## 運維相關
 
