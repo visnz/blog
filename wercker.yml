@@ -1,22 +1,24 @@
 build-ghpage:
     box: debian
     steps:
-        - arjen/hugo-build
+        - arjen/hugo-build@1.24.0
 # build-guediao:
 #     steps:
 #         - arjen/hugo-build: 
 #             config: config.guediao.toml
-build-push:
-    box: alpine
-    docker: true
-    steps:
-        - internal/docker-build:
-            image-name: myblog
-        - internal/docker-push:
-            image-name: myblog
-            username: $USERNAME
-            password: $PASSWORD
-            repository: visnz/blog
+
+## this part will push to registry.guediao.top
+#build-push:
+#    box: alpine
+#    docker: true
+#    steps:
+#        - internal/docker-build:
+#            image-name: myblog
+#        - internal/docker-push:
+#            image-name: myblog
+#            username: $USERNAME
+#            password: $PASSWORD
+#            repository: visnz/blog
 
 deploy:
     box: debian
