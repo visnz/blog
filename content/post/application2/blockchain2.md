@@ -1,5 +1,5 @@
 ---
-title: "课程设计之Linux Docker构建区块链2：基础设施搭建"
+title: "课程设计Linux Docker构建区块链2：基础设施搭建"
 date: 2019-01-08
 type: ["应用"]
 weight: 6
@@ -9,22 +9,17 @@ description: "在Linux平台上使用Docker创建节点，使用geth基础工具
 featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/blockchain/icon.jpg"
 ---
 ## 写在前面
-课程设计给了一个机会接触分布式技术以太坊的基本部署。由于老师给的软件多是 Windows 平台，自己 Linux 还用FRP只有命令行，没有图形界面，操作也难跟老师同步。
-
-好处也在这里，虽然Mist客户端一键管理和部署，自己却只能面对Geth的CLI，但是学到的更多是底层的原理和对基础设施部署的理解，也为后面使用docker部署到多台云服务器上的问题状况有了准备。
-
-另外，npm包不够干净。本来确实想在生产环境上安装的，一看到以太坊清一色npm果断考虑扔docker里
-
+由于一些工作原因，没法使用到老师的一键部署工具。课程设计给了一个机会接触分布式技术以太坊的基本部署
 ### TL;DR
-> 本文简述了在Linux平台上使用Docker对以太坊工具geth的基础环境搭建与测试，后记录了创建私有链的过程，包括创世区块、节点部署、链接节点、产生交易、编写部署合约，以及最后web3组件对geth进行更多的扩展开发尝试。
+> 本文简述了在Linux平台上使用Docker构建以太坊工具geth的基础环境，后记录了创建私有链的过程，包括创世区块、节点部署、链接节点、产生交易、编写部署合约，以及最后web3组件对geth进行更多的扩展开发尝试。
 
 
 ## 初步构建与测试
-
+一开始先进入容器熟悉部署环境，最后再使用Dockerfile整理。
 ### 1. 系统安装
-这次选了``base/archlinux``的镜像因为community里直接就有打包好的``go-ethereum``（连[官方安装文档](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)都有arch支持）。
+这次选了``base/archlinux``的镜像因为community里直接就有打包好的``go-ethereum``（[官方安装文档](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)有arch支持）。
 
-debian系的gpgkey有点小问题不嫌麻烦可以手动解决。
+debian系貌似gpgkey有点小问题可以手动解决。
 
 构建镜像并进入``docker run -dit base/archlinux`` 
 
@@ -34,12 +29,14 @@ pacman -Sy python2 npm geth
 npm install -g solc
 ```
 
-tips: 完成后可以``docker commit``成快照，下一篇文章会讲
+可以``docker commit``成快照，相当于dockerfile的一个阶段构建
 
 ### 2. 节点启动与用户创建
 
 调用``geth``启动节点。``--testnet``进入全网的测试网。
-测试网的数据会同步在``dir=~/.ethash/testnet``下（不带testnet的话连入公网，当前公网数据大约需要下载2天）
+测试网的数据会同步在``~/.ethash/testnet``下
+
+不带testnet的话连入公网，当前公网数据大约需要下载2天（老师原话，未告知网速）
 ```sh
 geth [--testnet]
 ```
@@ -389,9 +386,10 @@ function setInfo(_name,_age){
 
 基于此我们得到了一个基础的框架，我们可以封装好这些底层节点并在此之上可以编写合约完成更多的功能
 
-本篇部分资料来自蚁米链播学院，引用特此声明
+本篇部分资料来自蚁米链播学院，引用声明
 
 ![](https://raw.githubusercontent.com/visnz/blog/master/pics/blockchain/teacher.jpg)
+
 
 ---
 

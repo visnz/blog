@@ -1,5 +1,5 @@
 ---
-title: "Google Calendar nodejs作cal轉發服務器"
+title: "Google Calendar nodejs作cal轉發服務器（nginx后）"
 date: 2018-12-07
 type: ["应用"]
 weight: 7
@@ -14,6 +14,11 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/cal-fwd
 - 心繫家庭，將自己的行程表分享給家人，不失爲加強聯絡的一個方法。
 
 - 世界上最遠的距離不是6881公里，而是分享 Google Calendar 日程表到媽媽的手機裏
+
+## TL;DR
+- 用境外服务器定时缓存，或者转发获取
+- nodejs我的蠢办法请继续阅读
+- nginx聪明方法拉到最后
 
 ## 解決
 
@@ -155,7 +160,7 @@ http{
     server {
         listen 13334;
         location / {
-            proxy_pass https://calendar.google.com/calendar/ical/visn0518%40gmail.com/public/basic.ics;
+            proxy_pass https://calendar.google.com/calendar/ical/------%40gmail.com/public/basic.ics;
         }
     }
 }

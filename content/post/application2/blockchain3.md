@@ -1,5 +1,5 @@
 ---
-title: "课程设计之Linux Docker构建区块链3：环境docker打包与部署"
+title: "课程设计Linux Docker构建区块链3：环境docker打包与部署"
 date: 2019-01-10
 type: ["应用"]
 weight: 6
@@ -10,11 +10,11 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/blockch
 ---
 
 ## 准备镜像
-为了使得部署更简便（其实也是不想污染环境），可以在之前的基础上打包一个安装了基本geth环境的镜像便于多点部署。
+为了使得部署更简便，可以在之前的基础上打包一个安装了基本geth环境的Docker镜像便于多点部署。
 
 ### 1. docker构建镜像并安装
 
-创建镜像，这里采用了上一篇说到的archlinux镜像
+使用上一篇的archlinux构建，这一篇记录了再docker里操作熟悉环境的过程，Dockerfile在结尾
 
 ```bash
 ➜  ~ sudo docker pull base/archlinux
@@ -76,12 +76,12 @@ history -c
 
 ### 2. 推送节点镜像
 
-1. 首先得有dockerhub帐号
+1. 使用dockerhub
     ```bash
     sudo docker login
     ```
     登陆的话认真信息保存在``/root/.docker/config.json``，妥善保管
-2. 创建repo，repo会产生一个``<username>/<reponame>``格式的镜像名，将作为整个dockerhub唯一的识别符（gitlike）
+2. 创建repo，repo会产生一个``<username>/<reponame>``格式的镜像名，将作为整个dockerhub唯一的识别符
 
 3. 打包镜像、打tag
     ```bash
@@ -97,7 +97,7 @@ docker层结构，只推送新增的层即可：
 
 ![](https://raw.githubusercontent.com/visnz/blog/master/pics/blockchain/09.png)
 
-tips: 建议在境外机器上完成镜像构建，国内push速度感天动地
+tips: 建议在境外机器上完成镜像构建，国内push速度
 
 ### 3. 部署节点镜像
 
@@ -143,15 +143,6 @@ contract Repeat{
 html网页代码、js动态改写不赘述，相关的调用在上一篇也都讲到了。最后的效果如下：
 
 ![](https://raw.githubusercontent.com/visnz/blog/master/pics/blockchain/11.png)
-
-## 写在最后
-1. 服务器配置不够的话就别跑私有链了，除了费电/占资源，不少云服务商也有CPU利用率做基准限制，标着xeon的核也跑不满基本没效率。
-
-2. 国内还开始抓区块链实名制，大概明天就能收到阿里云一通电话问我干啥呢（此次于公网部署实例已下线）
-
-3. 其实打包了镜像现在走哪部署到哪，可以比较灵活进行部署组建私有链。（本次课程设计docker恐成最大赢家）
-
-4. 感觉solidity在走javascript老路，从早期混沌到秩序的过程，需要有更多的业务场景跟程序标准。
 
 ---
 参考资料
