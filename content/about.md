@@ -38,7 +38,7 @@ icon|\# 日常 \#
 🎥|电影相关|
 ✂️|~~手工作物~~|
 🐬|任豚 & Steam|
-🎧|Reol女神 & 黑屋乐队|
+🎧|Reol|
 💊|Google深度依赖者|
 🐧|Linux User|
 
