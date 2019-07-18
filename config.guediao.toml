@@ -1,6 +1,6 @@
 staticDir = ["static"]
-baseurl = "http://blog.guediao.top/"
-title = "* sairen"
+baseurl = "https://blog.guediao.top/"
+title = "* 白楽園"
 languageCode = "zh-cn"
 paginate = "10" # Number of posts per page
 theme = "aether"
