@@ -1,7 +1,7 @@
 FROM orus/hugo-builder
 RUN git clone https://github.com/visnz/blog
 WORKDIR /blog/
-RUN hugo --config config.guediao.toml
+RUN hugo --config static/config.toml
 
 FROM nginx:alpine
 ENV BLOG_NAME=blog
