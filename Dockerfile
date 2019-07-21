@@ -1,14 +1,6 @@
-FROM orus/hugo-builder
+FROM alpine
 RUN git clone https://github.com/visnz/blog
+ENV OSS_SECRET=$OSS_SECRET
 WORKDIR /blog/
-RUN hugo --config static/config.toml \
-    && wget http://gosspublic.alicdn.com/ossutil/1.6.5/ossutil64 && chmod +x ossutil64 \
-    && echo $OSS_SECRET 
-
-
-FROM nginx:alpine
-ENV BLOG_NAME=blog
-WORKDIR /$BLOG_NAME/
-COPY --from=0 /blog/public /$BLOG_NAME
-RUN echo "user root;events{}http{include /etc/nginx/mime.types;server{listen 80;location / {root /$BLOG_NAME/;}}}" > /etc/nginx/nginx.conf
-EXPOSE 80
+RUN wget http://gosspublic.alicdn.com/ossutil/1.6.5/ossutil64 && chmod +x ossutil64 \
+    && echo "see here "$OSS_SECRET 
