@@ -1,5 +1,6 @@
-FROM orus/hugo-builder
-RUN git clone https://github.com/visnz/blog
+FROM archlinux/base
+RUN pacman -Sy --noconfirm hugo git\
+    && git clone https://github.com/visnz/blog
 WORKDIR /blog/
 RUN hugo --config static/config.toml
 
