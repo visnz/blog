@@ -1,0 +1,1 @@
+./`ls|grep ossutil` cp -r pics/ oss://visnonline/pics
