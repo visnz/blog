@@ -9,6 +9,9 @@
 
 - content源码
 
-- pics图片（寄送到oss，由dockerfile经过wercker同步）
+- pics图片（寄送到oss，由脚本同步）
+
+2. 打包docker
+- wercker使用archlinux安装hugo打包，多阶构建Nginx对外暴露web端口
 
 2. ghpage：在[visnz.github.io](https://github.com/visnz/visnz.github.io)项目储存，由[https://visn.online](https://visn.online)访问
