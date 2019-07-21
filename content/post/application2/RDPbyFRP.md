@@ -6,7 +6,7 @@ weight: 7
 tags: ["WINDOWS","计算机","服务器","RDP","FRP"]
 categories: ["运维"]
 description: "Windows10工作站远程桌面连接：frp内网穿透映射RDP服务"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon/RDP.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/oldicon/RDP.png"
 ---
 
 ## 背景
@@ -21,7 +21,7 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon
 
 开放工作站多用户协作，远程连接端口，允许其他网络协同工作者连接进来
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/RDP/RDP.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/RDP/RDP.png)
 
 优点：协同工作者彼此之间不需要复制多份大文件素材，不用过多考虑**素材传输** 问题、**设备负载** 问题。整理素材、粗剪、精剪等工作可以同时进行。
 
@@ -40,26 +40,26 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon
 ## 配置
 ### 多用户登录
 先创建新用户和密码，把用户放入``Remote Desktop Users``组
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/RDP/RDP00.0.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/RDP/RDP00.0.png)
 
 允许你的电脑接受远程连接
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/RDP/RDP00.1.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/RDP/RDP00.1.png)
 
 Windows登录某个用户就会挤下线另一个用户，首先允许你的工作站实现多用户同时登录：RDPWrap->``install.bat``（记得关闭你的360、某安全管家）
 
 后可使用``RDPConf.exe``配置具体内容
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/RDP/RDP00.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/RDP/RDP00.png)
 
 无法``[fully supported]``的可以尝试``update.bat``更新
 
 使用``RDPCheck.exe``对本地多用户登录进行测试
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/RDP/RDP01.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/RDP/RDP01.png)
 
 ### 多会话冲突
 测试过程出现过多会话访问，工作站拒绝连接。原因是Windows系统防范过多会话连接。可在cmd->``gpedit.msc``->管理模板- Windows组件->远程桌面服务->远程桌面主机会话中，会话时间限制、连接等进行限制。
 
 自定义最高连接数、设置断开连接后的会话生存时间等等。详细一些操作可自行搜索
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/RDP/RDP02.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/RDP/RDP02.png)
 
 ### 配置服务器：frps
 服务器上直接下载[RDP Wrapper](https://github.com/stascorp/rdpwrap)对应版本，修改``frps.ini``。可以简单按照[RDP文档的示例](https://github.com/fatedier/frp/blob/master/README_zh.md)配置一个监听接口，安全一点可以引入``stcp``等。
@@ -68,7 +68,7 @@ Windows登录某个用户就会挤下线另一个用户，首先允许你的工�
 
 至于需要配置``systemd service``和``crontab``的请自行配置
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/RDP/RDP03.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/RDP/RDP03.png)
 
 ### 配置工作站：frpc
 下载[RDP Wrapper](https://github.com/stascorp/rdpwrap)对应版本修改``frpc.ini``。
@@ -88,17 +88,17 @@ remote_port = 6000  在服务器上提供连接到local_port的服务端口
 
 - [ ] 过后补充相对安全配置文件
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/RDP/RDP04.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/RDP/RDP04.png)
 
 ``frpc -c ./frpc.ini``启动，可看到**服务器显示有连接接入**
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/RDP/RDP05.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/RDP/RDP05.png)
 
 ### 连接测试
 
 运行``mstsc``，连接到``服务器地址:6000（务器的服务端口）``
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/RDP/RDP06.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/RDP/RDP06.png)
 
 在保持网速上下行的情况下，可流畅执行工作站任务（测试两机分别位于不同校园网，2M网速已可以完成基本操作）
 

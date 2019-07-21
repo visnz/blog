@@ -6,7 +6,7 @@ weight: 16
 tags: ["影视"]
 categories: ["影视"]
 description: "屡次被问flv跟mkv格式为什么不能导入pr，以及如何解决"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/flv/shuoshu.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/flv/shuoshu.png"
 ---
 
 ### FLV
@@ -28,11 +28,11 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/flv/shu
 
 2. 抽出视频（含外壳）+抽出音频，再手动封装
 
-![小丸工具箱](https://raw.githubusercontent.com/visnz/blog/master/pics/flv/02.png)
+![小丸工具箱](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/flv/02.png)
 
 （支持批量）
 
-![对比图](https://raw.githubusercontent.com/visnz/blog/master/pics/flv/01.png)
+![对比图](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/flv/01.png)
 
 ### MKV
 
@@ -41,7 +41,7 @@ mkv（Matroska格式的一种）提供容器格式，用于存放多条视频、
 不能拉入pr的原因是包含多个黏在一起的视频、音频、字幕等，而无法作为一个单独的素材导入，故需要提取
 
 小丸工具箱自带抽取工具（以及第三方抽取工具）
-![小丸工具箱](https://raw.githubusercontent.com/visnz/blog/master/pics/flv/03.png)
+![小丸工具箱](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/flv/03.png)
 
 同时在封装版面也提供了mkv封装
 
@@ -51,12 +51,12 @@ mkv（Matroska格式的一种）提供容器格式，用于存放多条视频、
 
 同时可以安装上“硕鼠转换”，可以直接转换flv到mp4（暂无mov？），不过没有参数可调，而且压缩得很惨
 
-![硕鼠](https://raw.githubusercontent.com/visnz/blog/master/pics/flv/05.png)
+![硕鼠](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/flv/05.png)
 
 (最后89M被压剩14M)
 
 
 另外在bilibili大视频会分片，以及番剧没办法在“kanbilibli”直接找到（可以去kanbilibili上搜索，依然可以找到），硕鼠可以直接根据番剧地址下载
 
-![硕鼠](https://raw.githubusercontent.com/visnz/blog/master/pics/flv/06.png)
+![硕鼠](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/flv/06.png)
 同时提供了“硕鼠合并”，可以直接只能拼合（不会删除原分片）

@@ -6,20 +6,20 @@ weight: 12
 tags: ["计算机","MAC","NTFS"]
 categories: ["日常"]
 description: "解决MAC系统上自动挂载的NTFS外接磁盘无法写入文件操作的问题"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/mac-ntfs/logo.jpg"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/mac-ntfs/logo.jpg"
 ---
 
 ## 背景
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/mac-ntfs/01.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/mac-ntfs/01.png)
 
 由于一些历史原因，Mac操作系统上插入NTFS（微软开发）的磁盘时，只能读取而不能写入。
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/mac-ntfs/02.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/mac-ntfs/02.png)
 
 无法新建文件夹、删除等操作
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/mac-ntfs/03.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/mac-ntfs/03.png)
 
 Paragon等磁盘工具的收费版有提供写入的功能。而实际操作系统并没有这个限制，可以手动开启。
 
@@ -45,8 +45,8 @@ sudo mount -t ntfs -o rw,auto,nobrowse $devs $newdevs
 sudo ln -s $newdevs ~/Desktop/WriteableNTFSDisk
 ```
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/mac-ntfs/04.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/mac-ntfs/04.png)
 
 在桌面就出现重新挂载过的硬盘啦
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/mac-ntfs/05.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/mac-ntfs/05.png)
 可以读写

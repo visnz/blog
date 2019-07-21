@@ -6,7 +6,7 @@ weight: 7
 tags: ["Dockerfile","nginx","hexo","多阶构建","FRP"]
 categories: ["运维"]
 description: "Dockerfile多阶构建，节点免node依赖部署hexo站点"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/dockerfile-multi/logo.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/dockerfile-multi/logo.png"
 ---
 
 

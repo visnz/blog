@@ -6,7 +6,7 @@ weight: 7
 tags: ["计算机","GITHUB","VSCODE"]
 categories: ["运维"]
 description: "使用gists将生产工具配置进行同步与开发"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/vscode/vscode.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/vscode/vscode.png"
 ---
 ## 問題描述
 

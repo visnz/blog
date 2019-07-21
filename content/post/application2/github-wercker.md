@@ -6,7 +6,7 @@ weight: 2
 tags: ["计算机","GITHUB","Wercker","CICD"]
 categories: ["运维"]
 description: "Github当图床，图片字体整顿瘦身，Wercker自动部署双源站"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/github-wercker/logo.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/github-wercker/logo.png"
 --- 
 # 缘起
 许早之前参照[大佬 Wercker+Hugo+Github Pages 搭建並自動部署博客](https://axionl.me/2017/12/25/wercker-%E8%A9%A6%E6%B0%B4/)部署的博客，关于wercker CICD方面一直没有时间搞搞，现因毕业设计等大坑的缘故便开始学习起来。
@@ -18,18 +18,18 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/github-
 # TL;DR
 简单描述CICD部署结构：
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/github-wercker/01.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/github-wercker/01.png)
 
 瘦身方面将博客内的图片、css中的font链接都换成了Blog项目里的``raw.githubusercontent.com``地址，由于经``hugo-build``不携带巨量图片、字体文件，渲染生成的静态博客文件从130M直降到5.2M。故图片、字体存在Blog项目中，博客文件引用自Blog项目。
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/github-wercker/02.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/github-wercker/02.png)
 
 # 关于瘦身
 尽管找了一些公用免费图床（国内又拍、七牛，大佬自建sm.ms），以及开源自建图床[Lychee](https://github.com/electerious/Lychee)，想想还是感觉不放心的样子。毕竟想到万一哪里崩溃了也得迁移麻烦，而且跟项目分开了整理起来也麻烦。
 
 所以索性丢到blog项目里吧不管了（你们墙内看不到就看不到吧哼）
 
-把pics从static里移出来+所有md把相对路径``/pics/``改成github提供用户存储的``https://raw.githubusercontent.com/visnz/blog/master/pics/``
+把pics从static里移出来+所有md把相对路径``/pics/``改成github提供用户存储的``https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/``
 
 # CI/CD
 关于CICD的解释网文已经有很多，简单来说就是使用一套自动化系统，定义一系列的执行流程，以达到从代码提交实现环境建设、测试、渲染、部署、报告的功能。如上一节插图所示，不少CICD系统支持通过github使用webhook触发，根据项目目录下的自动化操作配置文件，进行操作。
@@ -85,7 +85,7 @@ deploy-gitea:
 ```
 尽量不要在配置文件中硬编码，在wercker的环境变量（或分步骤的单独变量）中，可以进行灵活调整而不需要修改配置文件。以上所引用到的变量配置如下：
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/github-wercker/03.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/github-wercker/03.png)
 
 前两行是通过右下角``Generate SSH Keys``生成，记得将``PUBLIC``公钥添加到 $DEPLOY_USER 下``~/.ssh/authorized_keys``之中，rsync才可以登陆访问
 
@@ -93,11 +93,11 @@ deploy-gitea:
 
 因为博客baseurl问题，配置了两个config.toml以及两个工作流来完成多路部署：
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/github-wercker/04.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/github-wercker/04.png)
 
 一次push之后即可自动完成从``hugo-build``到``rsync``、``hugo-build``到``gh-page``两个工作流
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/github-wercker/05.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/github-wercker/05.png)
 
 剩下的配置访问就自己搞搞啦
 

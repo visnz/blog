@@ -6,7 +6,7 @@ weight: 2
 tags: ["集群","Docker Swarm","Docker"]
 categories: ["运维"]
 description: "使用Docker技术栈，构建代码托管与CI/CD系统、集群，实现基本从提交到滚动更新"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/dockerswarm/logo.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/dockerswarm/logo.png"
 ---
 # 前言
 毕业设计选题不慎走选上了SRE的技术栈，不得已开始折腾一些新的框架内容。另一面是自己的服务器群确实需要一些冗余方案，借机了解一下。

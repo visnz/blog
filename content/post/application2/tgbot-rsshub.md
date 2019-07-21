@@ -8,7 +8,7 @@ hidetime: 2019-03-01
 tags: ["LINUX","计算机","RSS","RSSHub","服务器","Docker"]
 categories: ["服务器","最近"]
 description: "官方RSSHubBot匿了 自己搭一个"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/tgbot-rsshub/icon.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/tgbot-rsshub/icon.png"
 ---
 
 ## 背景
@@ -31,11 +31,11 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/tgbot-r
 Bot后台使用了大佬iovxw的[rssbot](https://github.com/iovxw/rssbot)，直接Release下载即可
 
 丢到systemd里，rssfile用于储存一个订阅列表，后接上token
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/tgbot-rsshub/02.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/tgbot-rsshub/02.png)
 
 ## TG Bot
 按规矩找 [@BotFather](https://telegram.me/BotFather) 申请bot并保留Token
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/tgbot-rsshub/01.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/tgbot-rsshub/01.png)
 
 按官方文档``/setcommands``设置命令
 
@@ -60,6 +60,6 @@ sudo docker run -dit -p 172.17.0.1:1200:1200 diygod/rsshub
 
 直接按内网地址，通过RSSHub订阅即可
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/tgbot-rsshub/03.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/tgbot-rsshub/03.png)
 
 - [订阅参考文档](https://docs.rsshub.app/)

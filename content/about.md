@@ -5,7 +5,7 @@ type: ["about"]
 weight: 1
 description: "More about me"
 displayInMenu: true
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon/avater.jpg"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/oldicon/avater.jpg"
 ---
   
 
@@ -52,7 +52,7 @@ Email: visn0518@gmail.com & visnz@guediao.cn
 
 Github: [@visnz](https://github.com/visnz)
 
-[微信](https://raw.githubusercontent.com/visnz/blog/master/pics/wechat.me.jpg)
+[微信](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/wechat.me.jpg)
 
 Telegram: [@visnZ](https://t.me/visnZ)
 

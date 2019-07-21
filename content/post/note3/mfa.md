@@ -6,7 +6,7 @@ weight: 7
 tags: ["计算机","MFA","笔记"]
 categories: ["笔记","最近"]
 description: "不要绑定手机不要实名！使用基于otpauth的身份验证器启用验证码登陆"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/mfa/icon.jpg"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/mfa/icon.jpg"
 ---
 # 简述
 
@@ -40,11 +40,11 @@ MFA是种老生常谈的认证方式：
 
 3. **身份验证器**，在设备上下载一个身份验证器（应用软件，遵循一套算法生成密码进行认证）。会出现一个二维码，可以用身份验证器扫描添加。
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/mfa/02.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/mfa/02.png)
 
 身份验证器的种类不少，这里使用[Authy](https://authy.com/)，在里面添加新的账户
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/mfa/03.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/mfa/03.png)
 
 二维码的内容为：``otpauth://totp/Google%3Avisn0518%40gmail.com?secret=icm5pgwxi4mzf00000000000000000&issuer=Google``
 
@@ -52,7 +52,7 @@ MFA是种老生常谈的认证方式：
 
 再次登陆的时候就有要求使用身份验证器的认证啦
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/mfa/01.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/mfa/01.png)
 
 其实同理，不少网站现在也慢慢支持了MFA。我现在自己Authy里使用的有：
 

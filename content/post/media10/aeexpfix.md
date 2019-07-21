@@ -6,7 +6,7 @@ weight: 9
 tags: ["ADOBE","影视","计算机"]
 categories: ["影视"]
 description: "After Effect顶层使用javascript做脚本，中英模板之前差异常出现引用丢失的问题"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/aeexpfix/ae.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/aeexpfix/ae.png"
 ---
 
 # 背景
@@ -37,19 +37,19 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/aeexpfi
 
 7. 3D 点 = 3DPoint
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/aeexpfix/01.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/aeexpfix/01.png)
 
 通过提示直接查找每一个错误的引用，将引用（在图层里，通常是红色代表出错）的表达式里的英文，转成对应的中文
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/aeexpfix/02.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/aeexpfix/02.png)
 
 发现错误，找到表达式如下：
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/aeexpfix/03.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/aeexpfix/03.png)
 
 打开“Your Text”图层，效果如下
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/aeexpfix/04.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/aeexpfix/04.png)
 
 将“Fast Blur”改为“快速模糊（旧版）” 提示仍有错误，根据提示将“Blurriness”改为“模糊度”，成功改正错误
 
@@ -61,7 +61,7 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/aeexpfi
 
 改动常见的语言错误如下图。（中英对应解决方案1中的中英映射）
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/aeexpfix/05.jpg)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/aeexpfix/05.jpg)
 
 之后 reload AE 即可
 

@@ -6,7 +6,7 @@ weight: 6
 tags: ["区块链","计算机","服务器","Linux"]
 categories: ["运维","服务器","计算机"]
 description: "简单记录镜像制作到打包到部署，以及一个小功能的实现"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/blockchain/icon.jpg"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/blockchain/icon.jpg"
 ---
 
 ## 准备镜像
@@ -95,7 +95,7 @@ history -c
 
 docker层结构，只推送新增的层即可：
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/blockchain/09.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/blockchain/09.png)
 
 tips: 建议在境外机器上完成镜像构建，国内push速度
 
@@ -112,7 +112,7 @@ tips: 建议在境外机器上完成镜像构建，国内push速度
     # 用写好的两个脚本直接运行
     cd && ./geth.init
     ```
-    ![](https://raw.githubusercontent.com/visnz/blog/master/pics/blockchain/10.png)
+    ![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/blockchain/10.png)
 
 ## 写一个啥功能好呢
 
@@ -142,7 +142,7 @@ contract Repeat{
 
 html网页代码、js动态改写不赘述，相关的调用在上一篇也都讲到了。最后的效果如下：
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/blockchain/11.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/blockchain/11.png)
 
 ---
 参考资料

@@ -5,5 +5,5 @@ type: ["about"]
 weight: 100
 description: "关于我的履历记录"
 displayInMenu: true
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon/avater.jpg"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/oldicon/avater.jpg"
 ---

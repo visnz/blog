@@ -7,7 +7,7 @@ weight: 7
 tags: ["计算机","DOCKER"]
 categories: ["运维"]
 description: "拆分目录与备份，为自己创建docker生产环境"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/docker/icon.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/docker/icon.png"
 ---
 
 ## 起因
@@ -31,7 +31,7 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/docker/
 
 在重装系统的时候将原有的/dev/sdd3分割成40G跟175G
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/docker/01.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/docker/01.png)
 
 按照原先的顺序先挂根目录到``/mnt``，再创建``/mnt/boot``、``/mnt/home``。
 
@@ -41,7 +41,7 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/docker/
 
 用了一把梭打包TimeShift定期备份，还好系统不大，不然得活生生把根目录给吃掉
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/docker/02.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/docker/02.png)
 
 TimeShift支持快照迁移到心的电脑上，在恢复快照之前，TimeShift会询问你是不是需要保存现有的应用设置，并且选择保存哪一个。TimeShift需要GRUB 2启动进入快照恢复。
 

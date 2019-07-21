@@ -7,7 +7,7 @@ weight: 6
 tags: ["LINUX","计算机"]
 categories: ["笔记","最近"]
 description: "一系列arch使用过程的小笔记"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon/arch.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/oldicon/arch.png"
 ---
 
 记录下平时可能会用到的（查阅用）
@@ -19,7 +19,7 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon
 - baidupcs([baidupcs-go-bin](https://aur.archlinux.org/packages/baidupcs-go-bin/))：[linux下的百度云终端版](https://github.com/iikira/BaiduPCS-Go)（go版本）
 - musicbox([netease-musicbox ](https://aur.archlinux.org/packages/netease-musicbox/))：[linux下的网易云终端版](https://github.com/darknessomi/musicbox)
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/arch/04.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/arch/04.png)
 
 ## Notable<sup>19.02.27</sup> <sup>AUR</sup>  
 
@@ -27,7 +27,7 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon
 
 貌似仅识别markdown文件。
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/arch/03.jpg)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/arch/03.jpg)
 
 
 ## [x2go](https://wiki.archlinux.org/index.php/X2Go_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))<sup>19.01.27</sup> 
@@ -72,7 +72,7 @@ youtube-dl命令行下载油管视频工具（[github](https://github.com/rg3/yo
 
 提供了列表抓取、代理、regex表达式、filter过滤器、重定向、视频多格式、安全认证等功能
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/arch/02.jpg)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/arch/02.jpg)
 
 [you-get](https://github.com/soimort/you-get) 在pip3库中，是一个开源的用于抓取各种网站视频图片资源的工具，包括不限于油管、vimeo、推特、Ins、niconico、bilibili、163music、acfun、新浪、音悦Tai、youku、腾讯、芒果。
 
@@ -102,7 +102,7 @@ dhcp-range=10.0.0.2,10.0.0.50,12h
 dhcp-host=aa:bb:cc:dd:ee:ff,10.0.0.1
 ```
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/arch/01.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/arch/01.png)
 
 
 ## dig``dnsutils``<sup>18.12.20</sup>

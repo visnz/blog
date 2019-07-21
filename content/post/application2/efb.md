@@ -6,7 +6,7 @@ weight: 2
 tags: ["计算机","WechatBot","Telegram","Docker-Compose"]
 categories: ["服务器"]
 description: "在telegram可以直连微信，注册TgBot获取token，在服务器上用docker部署WechatBot"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/efb/logo.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/efb/logo.png"
 --- 
 # 简介
 在tg上申请一个bot，该bot连接到服务器后台的efb（微信web托管程序），bot负责转发你的指令（比如chat、link等）到后台的efb，efb将信息转发到微信。
@@ -18,7 +18,7 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/efb/log
 
 完成后，他会给一个``HTTP API``的token，保存之（[efb-config](#efb-config)中需要用到）。
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/efb/01.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/efb/01.png)
 
 ``/setprivacy``来指定私有性，disable的话，可以添加某个人（使用link）到某个tg群组，发到群组里的消息也会发到那个人那里。
 

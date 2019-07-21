@@ -6,7 +6,7 @@ weight: 7
 tags: ["LINUX","计算机","PYTHON","TCPDUMP","服务器"]
 categories: ["运维","最近"]
 description: "python与tcpdump配合shell基础文本工具，完成对流量去向的简单监控"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/tcpdump-py/icon.jpg"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/tcpdump-py/icon.jpg"
 ---
 
 冬至到了先给大家拜个晚年（说完就开起了风扇）
@@ -17,7 +17,7 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/tcpdump
 
 偶尔会有访问到[alphabet系列网站](https://www.wikiwand.com/zh/Alphabet)的时候被[recaptcha](https://www.wikiwand.com/zh-hant/ReCAPTCHA)识别为危险链接
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/tcpdump-py/01.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/tcpdump-py/01.png)
 
 纳了闷儿了平时也没D谷歌啊莫不是流量被什么~~邪恶势力~~拦截了。想借个练手的机会试一下python脚本套用tcpdump做一些简单的运维工作。
 
@@ -32,7 +32,7 @@ featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/tcpdump
 
 其中``-i``指示网卡，可以通过``ifconfig``或者``cat /proc/net/dev``查询。``-t``去除时间，``-nn``不显示域名直接显示ip地址
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/tcpdump-py/02.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/tcpdump-py/02.png)
 
 tcpdump已经给了基础的格式化，使用awk截断可以获取目标地址，并丢到文件里做记录：``|awk '{print $4}' 1> /tmp/test.log``
 
@@ -52,7 +52,7 @@ log截断：将文件移动到新的名字（指定）造成记录截断，就�
 
 使用``geoiplookup <ip-address>``对ip地址进行地理寻址（愣
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/tcpdump-py/03.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/tcpdump-py/03.png)
 
 ## python代码
 
@@ -146,7 +146,7 @@ count.join()
 
 ### 最终运行结果
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/tcpdump-py/04.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/tcpdump-py/04.png)
 
 可以直观看到这一段时间间隔内流量包的发送情况（没有全部排除转发终点）
 

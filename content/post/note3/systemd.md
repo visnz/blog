@@ -6,12 +6,12 @@ weight: 8
 tags: ["LINUX","SYSTEMD","笔记"]
 categories: ["笔记","最近"]
 description: "System的一些基础概念、使用与备忘"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/systemd/icon.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/systemd/icon.png"
 ---
 
 ## 簡述
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/systemd/01.jpg)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/systemd/01.jpg)
 
 \# sell my underpant to systemd \#
 

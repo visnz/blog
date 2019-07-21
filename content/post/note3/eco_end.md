@@ -6,7 +6,7 @@ weight: 12
 tags: ["经济学"]
 categories: ["笔记"]
 description: "分支课程学习笔记（兴趣）"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/eco/eco.jpg"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/eco/eco.jpg"
 ---
 
 家庭缘故，接触经济与金融较早，耳濡目染中对行业有兴趣，平时会关注国内和世界经济状况，无奈专业能力不足，对许多分析评论只听半懂。半年左右挖坑终于把坑填上了，弥补了多年来对该领域关注但从未学基础的遗憾。

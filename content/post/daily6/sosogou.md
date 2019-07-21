@@ -6,7 +6,7 @@ weight: 7
 tags: ["LINUX","词库","fcitx","sqlite"]
 categories: ["日常"]
 description: "fcitx自带那么多工具，就没料到孙拼音用了sqlite把我整得跟孙子似的"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/sosogou/icon.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/sosogou/icon.png"
 ---
 # 基本单元
 
@@ -36,13 +36,13 @@ db|数据库|sunpinyin使用这个
 
 
 fcitx词库位于``/usr/share/fcitx/pinyin/``或``~/.config/fcitx/pinyin/``
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/sosogou/00.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/sosogou/00.png)
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/sosogou/01.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/sosogou/01.png)
 
 在arch下fcitx-tools在fcitx，包含了createPYMB, readPYBase, readPYMB, mb2org, scel2org多个格式转换工具
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/sosogou/05.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/sosogou/05.png)
 
 
 # 导入细胞词库scel
@@ -51,7 +51,7 @@ fcitx词库位于``/usr/share/fcitx/pinyin/``或``~/.config/fcitx/pinyin/``
 scel2org sogou官方词库.scel > sogou官方.org
 ```
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/sosogou/02.png)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/sosogou/02.png)
 
 
 org是文本词库，基本格式如下：
@@ -101,10 +101,10 @@ sudo cp ./pybase.mb /usr/share/fcitx/pinyin/
 ## 导入个人词库bin
 
 sogou输入法7.1版以后个人词库只道出bin格式
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/sosogou/04.jpg)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/sosogou/04.jpg)
 
 bin格式转换为其他格式：[深蓝词库转换（Windows）](https://github.com/studyzy/imewlconverter)(>=2.4)，将其转换为org格式。(支持格式自定义)
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/sosogou/03.jpg)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/sosogou/03.jpg)
 
 # sunpinyin词库
 
@@ -172,7 +172,7 @@ w|23|ua|23
 
 ## 写在最后
 
-![](https://raw.githubusercontent.com/visnz/blog/master/pics/sosogou/end.jpg)
+![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/sosogou/end.jpg)
 
 ---
 参考资料

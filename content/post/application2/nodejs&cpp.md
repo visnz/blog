@@ -6,7 +6,7 @@ weight: 7
 tags: ["计算机","NODEJS","c++"]
 categories: ["运维"]
 description: "c++结合V8模块扩展nodejs功能，用c++处理复杂计算"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/oldicon/V8.jpg"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/oldicon/V8.jpg"
 ---
 我团队在年底举办的青年实践活动“粿奔计划”中，线下游戏RPG采用Nodejs+cpp+html完成业务逻辑。
 

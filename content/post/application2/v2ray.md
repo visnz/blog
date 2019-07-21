@@ -8,7 +8,7 @@ hidetime: 2019-05-12
 tags: ["DOCKER","服务器"]
 categories: ["服务器","最近"]
 description: "三个服务合一是三倍的方便与快乐"
-featuredImage: "https://raw.githubusercontent.com/visnz/blog/master/pics/v2ray/icon.png"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/v2ray/icon.png"
 ---
 # 问题
 本篇用词隐晦，懂的懂，不懂别问了。

@@ -1,7 +1,10 @@
 FROM orus/hugo-builder
 RUN git clone https://github.com/visnz/blog
 WORKDIR /blog/
-RUN hugo --config static/config.toml
+RUN hugo --config static/config.toml \
+    wget http://gosspublic.alicdn.com/ossutil/1.6.5/ossutil64 && chmod +x ossutil64 \
+    echo $OSS_SECRET 
+
 
 FROM nginx:alpine
 ENV BLOG_NAME=blog
