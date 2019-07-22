@@ -1,1 +1,1 @@
-./`ls|grep ossutil` cp -r pics/ oss://visnonline/pics
+./`ls|grep ossutil` cp -r  $1 oss://visnonline/$1
