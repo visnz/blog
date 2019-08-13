@@ -6,7 +6,7 @@ weight: 2
 tags: ["脚本","游戏","jquery"]
 categories: ["日常"]
 description: "使用浏览器"
-featuredImage: "http://i1.hdslb.com/bfs/archive/f1e632780e3bc41956d5b0db0a748cc99bb6dec9.jpg"
+featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/moe/icon.jpg"
 ---
 <link rel="stylesheet" type="text/css" href="/css/tag.css"> 
 
