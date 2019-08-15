@@ -30,7 +30,7 @@ featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/moe/icon.jp
      - 使用``$("#ELEMENT_ID").text()``获取内容，返回字符串，可以用于判断
      - 使用``$("#ELEMENT_ID").click()``模拟点击
      - 更多功能参考[jquery手册](https://www.w3school.com.cn/jquery/jquery_reference.asp)
-5. 使用``async``回调来设置异步事件：
+5. 使用``async``回调来设置异步事件(原理层面的解释)：
     ```js
     // 设置一个0延迟的异步回调，相当于一个新的并行线程
     setTimeout(async()=>{
@@ -58,6 +58,13 @@ setTimeout(async()=>{
 ```
 
 ![](https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/moe/04.png)
+
+或者换用更简便的``setInterval(callback,ms)``,上文可以改写为:
+
+```js
+// 设置一个0延迟的异步回调，相当于一个新的并行线程
+setInterval(()=>{$("#fastHuntContainerCount").click()},100000)
+```
 
 在控制台里粘贴执行即可
 
