@@ -5,7 +5,7 @@ type: ["日常"]
 weight: 2
 tags: ["脚本","游戏","jquery"]
 categories: ["日常"]
-description: "使用浏览器"
+description: "使用浏览器调试功能撰写自动执行脚本"
 featuredImage: "https://visnonline.oss-cn-shenzhen.aliyuncs.com/pics/moe/icon.jpg"
 ---
 <link rel="stylesheet" type="text/css" href="/css/tag.css"> 
